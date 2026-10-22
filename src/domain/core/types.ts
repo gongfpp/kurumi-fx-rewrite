@@ -158,8 +158,69 @@ export interface GameState {
   emotionPressure?: EmotionPressure;
   effects?: Effect[];
   family?: Family;
+  loan?: Loan;
+  lottery?: LotteryState;
+  lifestyle?: LifestyleState;
+  consumptionLedger?: ConsumptionRow[];
+  livingPaid?: number;
+  dailySupplies?: DailySupplies;
   livingDiscount?: number;
   dailyLeverageUnlocked?: boolean;
+}
+
+export interface Loan {
+  outstanding: number;
+  borrowed: number;
+  repaid: number;
+  limit: number;
+  dailyRate: number;
+  interestPaid: number;
+  interestAccrued: number;
+  lastInterestDay: number;
+  borrowCount?: number;
+}
+
+export interface LotteryTicket {
+  id: string;
+  number: string;
+  kind: 'normal' | 'cheat';
+  purchaseDay: number;
+  drawDay: number;
+  rulesId: string;
+  cost: number;
+  status: 'pending' | 'settled';
+  result: { tier: number; prize: number; forced: boolean } | null;
+  settledDay: number | null;
+}
+
+export interface LotteryState {
+  version: number;
+  tickets: LotteryTicket[];
+  drawsWithoutTop3: number;
+  cheatRedeemed: boolean;
+}
+
+export interface ConsumptionRow {
+  id: string;
+  day: number;
+  kind: string;
+  label: string;
+  amount: number;
+  timestamp?: number | null;
+}
+
+export interface LifestyleState {
+  version: number;
+  id: string;
+  selectedDay: number;
+}
+
+export interface DailySupplies {
+  version: number;
+  mealCreditDay: number | null;
+  eyeMaskPending: boolean;
+  uses: { id: string; day: number; cost: number }[];
+  noteUsedDay: number | null;
 }
 
 export interface Family {
@@ -246,4 +307,8 @@ export interface DayReport {
   livingCost: number;
   pendingLivingCost: number;
   mood: string;
+  closedTradeNet?: number;
+  interestPaid?: number;
+  interestAccrued?: number;
+  interestRate?: number;
 }

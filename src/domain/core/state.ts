@@ -1,4 +1,6 @@
 import { NUMERICS } from '../../content/config/numerics';
+import { historyCandles } from '../market/history';
+import { planDay } from '../market/sources/simulated';
 import { equity } from '../trading/account';
 import type { GameState, Mode, Performance, StaminaState } from './types';
 
@@ -91,9 +93,9 @@ export function createGame(seed: number = Date.now(), opts: CreateOptions = {}):
     equityTrail: [startingCapital],
 
     performance: newPerformance(startingCapital),
-    candles: [],
+    candles: historyCandles(s),
     marketBook: undefined,
-    script: null,
+    script: planDay(s, 1, NUMERICS.START_PRICE),
     pending: null,
     lastEvent: null,
     lastTrade: null,
