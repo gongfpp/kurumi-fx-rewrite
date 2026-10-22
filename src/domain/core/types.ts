@@ -153,6 +153,51 @@ export interface GameState {
   completedCandles: number;
 
   stamina: StaminaState;
+
+  tradingTrauma?: TradingTrauma;
+  emotionPressure?: EmotionPressure;
+  effects?: Effect[];
+  family?: Family;
+  livingDiscount?: number;
+  dailyLeverageUnlocked?: boolean;
+}
+
+export interface Family {
+  unlocked?: boolean;
+  outstanding?: number;
+  discovered?: boolean;
+  informed?: boolean;
+  repaid?: number;
+  trust?: number;
+  withdrawal?: { amount: number };
+}
+
+export interface TradingTrauma {
+  version: number;
+  mode: Mode;
+  seed: number;
+  runId: string | null;
+  severity: number;
+  peakRealized: number;
+  realized: number;
+  seenCloses: number;
+  hitTick: number;
+  hitDay: number;
+  recoveryUnits: number;
+  recentLosses: { loss: number; day: number; liquidation: boolean }[];
+}
+
+export interface EmotionPressure {
+  context: string;
+  direction: 'ecstatic' | 'despair';
+  taps: number;
+  target: number;
+  lastAt: number;
+}
+
+export interface Effect {
+  id: string;
+  remaining: number | null;
 }
 
 export interface FeeEntry {
