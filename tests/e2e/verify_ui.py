@@ -27,6 +27,13 @@ def main() -> None:
 
         page.click('button[data-act="long"]')
         page.wait_for_timeout(150)
+
+        # Persistence: a reload must restore the saved run (one open position).
+        page.reload()
+        page.wait_for_load_state("networkidle")
+        page.wait_for_selector("canvas.fx-chart")
+        persisted = "1 笔" in page.content()
+
         page.click('button[data-act="play"]')
         page.wait_for_timeout(1500)
         price_after = page.inner_text(".fx-quote-price")
@@ -44,6 +51,7 @@ def main() -> None:
         print("PRICE_BEFORE:", price_before)
         print("PRICE_AFTER:", price_after)
         print("THEME:", theme)
+        print("PERSISTED:", persisted)
         print("CONSOLE_ERRORS:", errors[:5])
         browser.close()
 

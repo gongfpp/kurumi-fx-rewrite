@@ -11,6 +11,7 @@ import { closeOrders } from '../domain/trading/close';
 import { placeOrder, previewOrder, type StopPips } from '../domain/trading/order';
 import { layoutCandles } from '../view/charts/candles';
 import { DEFAULT_THEME, THEME_IDS, themeTokens, type ThemeId } from '../view/styles/tokens';
+import { loadGame, saveGame } from './persistence/save';
 
 let state: GameState = createGame(Date.now() >>> 0, { mode: 'story' });
 let theme: ThemeId = DEFAULT_THEME;
@@ -39,6 +40,14 @@ function stopTimer(): void {
   }
 }
 
+function persist(): void {
+  try {
+    saveGame(state);
+  } catch {
+    /* storage unavailable — play continues in memory */
+  }
+}
+
 function startTimer(): void {
   stopTimer();
   timer = window.setInterval(() => {
@@ -48,6 +57,7 @@ function startTimer(): void {
       if (state.phase !== 'playing') {
         stopTimer();
         checkEnding();
+        persist();
       }
       render();
     } catch (error) {
@@ -210,6 +220,7 @@ function newGame(): void {
   stopTimer();
   log.length = 0;
   state = createGame(Date.now() >>> 0, { mode: 'story' });
+  persist();
   render();
 }
 
@@ -251,12 +262,19 @@ function onAction(act: string): void {
   } catch (error) {
     log.unshift((error as Error).message);
   }
+  persist();
   render();
 }
 
 export function start(): void {
   const app = document.getElementById('app');
   if (!app) return;
+  try {
+    const loaded = loadGame('story');
+    if (loaded.state) state = loaded.state;
+  } catch {
+    /* fresh run */
+  }
   document.documentElement.dataset.theme = theme;
   app.addEventListener('click', (e) => {
     const target = e.target as HTMLElement;
