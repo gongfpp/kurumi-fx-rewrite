@@ -5,9 +5,11 @@ Run with the helper so the preview server lifecycle is managed:
       --server "npm run preview -- --port 4173 --strictPort" --port 4173 \
       -- python3 tests/e2e/verify_ui.py
 """
+import os
+
 from playwright.sync_api import sync_playwright
 
-URL = "http://localhost:4173/kurumi-fx-rewrite/"
+URL = os.environ.get("FX_URL", "http://localhost:4173/kurumi-fx-rewrite/")
 
 
 def main() -> None:

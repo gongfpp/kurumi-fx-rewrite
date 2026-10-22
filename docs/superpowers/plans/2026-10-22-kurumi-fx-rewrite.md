@@ -580,3 +580,38 @@ const CopyLine = z.object({ id: z.string(), from: z.string(), text: z.string(), 
 2. **行内执行** — 在当前会话按阶段分批执行，带检查点复查。
 
 你希望用哪种方式？
+---
+
+# Part F — 实现进度与部署（交付记录）
+
+## F.1 实际完成度
+
+| 阶段 | 状态 | 说明 |
+| --- | --- | --- |
+| 0 脚手架 + 数值冻结 | 完成 | TS+Vite+Vitest；`numerics.json` 全量常量 |
+| 1 领域核心 | 完成 | rng/clock/account/position/order/close(risk)/mind(sanity·mood·pressure·trauma·effects)/body(stamina)/market(quote-grid·news·planDay·history)/economy(credit·lottery·living·supplies·work)/progress(achievements·ending)/story/core(day 状态机) |
+| 2 内容数据化 | 完成 | 24 新闻链 + 8 黑天鹅 + 18 成就 + 10 结局 + 8 道具 + 打工/放松/晚餐 + 序章 8 页 + 7 剧情事件（均 JSON，含来源标注） |
+| 3 持久化与服务 | 完成 | 命名空间存储 + 存档编解码 + 迁移/备份键；排行榜/遥测可降级（未配置即离线） |
+| 4 视图与美术 | 完成 | 三主题（漫画/CRT/赛博）+ 设计令牌 + Canvas K 线 + 可玩单页 UI + 剧情/道具/打工/结局/名人堂/分享 |
+| 5 编排/无障碍/开发者/E2E | 完成 | aria-live/role/aria-pressed、键盘可操作；开发者模式（15 分钟会话 + 永久 taint）；Playwright 冒烟 |
+
+## F.2 质量数据
+
+- 单元测试：**86 项全绿**（domain/view/app）。
+- 类型检查：`tsc --noEmit` 干净（strict + noUnused*）。
+- 构建：`vite build` 产出 `dist/`（JS ≈ 70KB / gzip ≈ 32KB，CSS ≈ 3.3KB）。
+- E2E：Playwright 对本地与**线上**站点均通过，控制台零错误。
+
+## F.3 部署
+
+- 站点：**https://gongfpp.github.io/kurumi-fx-rewrite/**
+- 方式：`main` 推送触发 `.github/workflows/deploy.yml`（build → test → 产物推送 `gh-pages` 分支）。
+- 绕过点：`POST /pages` 需 `pages=write` **和** `administration=write`；本 token 仅有前者，故改用「推送 `gh-pages` 分支」由 GitHub 自动启用 Pages（`build_type: legacy`），无需 admin 权限。
+- 主题可在页面右上角切换（漫画交易室 / CRT 投机终端 / 像素赛博 Tokyo），并记忆选择。
+
+## F.4 后续可选增强（未阻塞交付）
+
+- 原作漫画/四格阅读器（现有 `content/manga` 占位结构）。
+- 实时行情（biquote 指示价）与共享回放。
+- 情绪锁可视化连点动画、强平序列与音频包络。
+- 更细的排行榜排序面板与匿名编号说明页。
