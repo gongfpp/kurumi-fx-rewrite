@@ -6,6 +6,7 @@ import { advanceQuote, beginPlay, beginRest, finalizeDayLiving, nextDay, settleD
 import { createGame, tradingProfit } from '../domain/core/state';
 import type { GameState } from '../domain/core/types';
 import { useSupply } from '../domain/economy/supplies';
+import { doWork, LIFE_WORK_JOBS } from '../domain/economy/work';
 import type { DayScript } from '../domain/market/quote-grid';
 import { mood, moodLabel } from '../domain/mind/mood';
 import { restrictions } from '../domain/mind/sanity';
@@ -119,6 +120,12 @@ function storyOverlay(): string {
     </div>`;
 }
 
+function workRow(): string {
+  return `<div class="fx-actions" style="margin-top:8px">
+    ${LIFE_WORK_JOBS.slice(0, 3).map((j) => `<button data-act="work:${j.id}" title="${j.label} · 收入 ${yen(j.income)} · 体力 ${j.staminaCost}">${j.label}</button>`).join('')}
+  </div>`;
+}
+
 function supplyRow(): string {
   const items = ITEMS.filter((i) => i.id !== 'father').slice(0, 6);
   return `<div class="fx-actions" style="margin-top:8px">
@@ -217,7 +224,7 @@ function render(): void {
           ${state.phase === 'resting' ? `<button data-act="next">进入明天</button>` : ''}
           ${state.phase === 'decision' || state.phase === 'day_end' ? `<button data-act="walkaway">收手离场</button>` : ''}
         </div>
-        ${state.phase !== 'ending' ? supplyRow() : ''}
+        ${state.phase !== 'ending' ? supplyRow() + workRow() : ''}
         <div class="fx-log" aria-live="polite">
           ${log.slice(0, 6).map((l) => `<div>· ${l}</div>`).join('')}
         </div>
@@ -324,6 +331,13 @@ function onAction(act: string): void {
     if (act.startsWith('supply:')) {
       const r = useSupply(state, act.split(':')[1] as string);
       log.unshift(r.applied ? `使用了 ${r.id}` : `无法使用：${r.reason}`);
+      persist();
+      render();
+      return;
+    }
+    if (act.startsWith('work:')) {
+      const r = doWork(state, act.split(':')[1] as string);
+      log.unshift(r.applied ? `打工：+${yen(r.income)}（体力 -${r.staminaCost}）` : `无法打工：${r.reason}`);
       persist();
       render();
       return;
