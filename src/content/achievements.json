@@ -1,0 +1,20 @@
+[
+  {"id":"first-profit","name":"第一桶金","description":"完成第一笔盈利交易。","badge":"¥","sourceNote":"游戏原创","goal":1},
+  {"id":"liquidated","name":"强平体验","description":"被强制平仓一次。","badge":"✕","sourceNote":"游戏原创","goal":1},
+  {"id":"hold-loss","name":"不肯认输","description":"浮亏超过保证金一半仍不主动平仓。","badge":"↓","sourceNote":"游戏原创","goal":1},
+  {"id":"hundred-times","name":"一百次下单","description":"累计下单 100 笔。","badge":"100","sourceNote":"游戏原创","goal":100},
+  {"id":"father-funds","name":"父亲的柜子","description":"动用父亲柜中存款。","badge":"柜","sourceNote":"基于原作桥段改编","goal":1},
+  {"id":"fully-repaid","name":"全部还清","description":"把父亲的存款全部归还。","badge":"✓","sourceNote":"游戏原创","goal":1},
+  {"id":"accept-stop","name":"学会止损","description":"使用止损并成功保住本金。","badge":"止","sourceNote":"游戏原创","goal":1},
+  {"id":"mochiko-warning","name":"萌智子的提醒","description":"触发朋友事件并接受建议。","badge":"友","sourceNote":"基于原作角色改编","goal":1},
+  {"id":"saved-at-last","name":"绝处逢生","description":"保证金率低于 60% 后把收益拉回正数。","badge":"↺","sourceNote":"游戏原创","goal":1},
+  {"id":"walkaway","name":"见好就收","description":"在盈利状态下主动收手离场。","badge":"门","sourceNote":"游戏原创","goal":1},
+  {"id":"twenty-million","name":"两千万","description":"达成章节目标净收益。","badge":"2000万","sourceNote":"游戏原创","goal":1},
+  {"id":"lottery-first-win","name":"手气不错","description":"第一次中彩票。","badge":"福","sourceNote":"游戏原创","goal":1},
+  {"id":"lottery-top-three","name":"头奖","description":"中得前三等奖。","badge":"★","sourceNote":"游戏原创","goal":1},
+  {"id":"trauma-survivor","name":"缓过来了","description":"经历交易重创后恢复。","badge":"❤","sourceNote":"游戏原创","goal":1},
+  {"id":"debt-free","name":"无债一身轻","description":"在没有负债的情况下结束一天。","badge":"零","sourceNote":"游戏原创","goal":1},
+  {"id":"thirty-days","name":"三十天","description":"存活 30 个交易日。","badge":"30","sourceNote":"游戏原创","goal":30},
+  {"id":"high-leverage","name":"百倍心跳","description":"使用 100× 杠杆完成一次交易。","badge":"100×","sourceNote":"游戏原创","goal":1},
+  {"id":"onsen","name":"泡个温泉","description":"压力过大时去泡温泉放松。","badge":"♨","sourceNote":"游戏原创","goal":1}
+]

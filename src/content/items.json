@@ -1,0 +1,10 @@
+[
+  {"id":"dailyDrink","name":"盯盘饮料","price":300,"stamina":10,"stress":0,"mood":"ecstatic","meal":false,"effect":"当日 50×/100× 免连点","sourceNote":"游戏原创"},
+  {"id":"takeaway","name":"外卖","price":1200,"stamina":20,"stress":0,"mood":"calm","meal":true,"effect":"情绪靠向平静，抵扣一餐","sourceNote":"游戏原创"},
+  {"id":"noodles","name":"泡面","price":150,"stamina":8,"stress":0,"mood":null,"meal":true,"effect":"抵扣一餐","sourceNote":"游戏原创"},
+  {"id":"energy","name":"魔爪能量饮料","price":300,"stamina":25,"stress":0,"mood":"ecstatic","meal":false,"effect":"情绪更亢奋，当日破限免连点","sourceNote":"游戏原创"},
+  {"id":"chocolate","name":"巧克力","price":200,"stamina":5,"stress":0,"mood":"calm","meal":false,"effect":"低落时靠向平静","sourceNote":"游戏原创"},
+  {"id":"eyeMask","name":"睡眠眼罩","price":500,"stamina":0,"stress":0,"mood":null,"meal":false,"effect":"下次睡眠额外 +15 体力","sourceNote":"游戏原创"},
+  {"id":"tradingNotes","name":"交易笔记","price":0,"stamina":0,"stress":-5,"mood":"focused","meal":false,"effect":"压力 -5","sourceNote":"游戏原创"},
+  {"id":"father","name":"父亲的柜中存款","price":0,"stamina":0,"stress":8,"mood":null,"meal":false,"effect":"计入欠款，未还清时压力 +8","sourceNote":"基于原作桥段改编"}
+]

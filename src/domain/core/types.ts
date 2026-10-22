@@ -164,8 +164,29 @@ export interface GameState {
   consumptionLedger?: ConsumptionRow[];
   livingPaid?: number;
   dailySupplies?: DailySupplies;
+  itemsUsed?: Record<string, boolean>;
+  story?: StoryState;
+  ending?: EndingState;
   livingDiscount?: number;
   dailyLeverageUnlocked?: boolean;
+}
+
+export interface StoryState {
+  seen: string[];
+  queue: string[];
+  log: { id: string; choice: string; day: number }[];
+  flags: Record<string, unknown>;
+  presentedDay: number;
+}
+
+export interface EndingState {
+  id: string;
+  baseId: string;
+  variant: string | null;
+  day: number;
+  equity: number;
+  profit: number;
+  sanity: number;
 }
 
 export interface Loan {

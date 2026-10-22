@@ -1,0 +1,12 @@
+[
+  {"id":"million","baseId":"million","title":"两千万 · 达成","description":"累计净交易收益达到章节目标。","rule":"tradingProfit >= 20000000"},
+  {"id":"walkaway","baseId":"walkaway","title":"收手离场","description":"在盈利状态下主动结束本局。","rule":"active walkaway with profit >= 0"},
+  {"id":"broke","baseId":"broke","title":"爆仓破产","description":"账户权益跌破最低限额。","rule":"equity < 1000"},
+  {"id":"crisis","baseId":"crisis","title":"心理危机","description":"承受力崩溃且权益过低。","rule":"sanity <= 5 and equity < 5000"},
+  {"id":"debt-exit","baseId":"debt-exit","title":"负债离场","description":"带着未清债务收手。","rule":"walkaway with totalDebt > 0"},
+  {"id":"paper-millionaire","baseId":"paper-millionaire","title":"纸上富贵","description":"曾浮盈巨大但最终未兑现。","rule":"peakProfit >= target and tradingProfit < target"},
+  {"id":"gave-it-back","baseId":"gave-it-back","title":"还回去了","description":"由大额盈利回吐至亏损收场。","rule":"peakProfit >= 500000 and tradingProfit < 0"},
+  {"id":"back-to-even","baseId":"back-to-even","title":"回到原点","description":"在接近本金的位置结束。","rule":"abs(tradingProfit) < 1% of principal"},
+  {"id":"debt-free","baseId":"debt-free","title":"无债一身轻","description":"在无负债状态下离场。","rule":"walkaway with totalDebt == 0"},
+  {"id":"returned-savings","baseId":"returned-savings","title":"把柜子还回去","description":"归还父亲存款后离场。","rule":"walkaway with father debt repaid"}
+]

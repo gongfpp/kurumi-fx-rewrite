@@ -1,0 +1,10 @@
+[
+  {"id":"p1","kind":"fan","text":"漫画书页：久留美翻开手机上的汇率应用，屏幕上是跳动的小数点。","sourceNote":"基于原作分镜"},
+  {"id":"p2","kind":"fan","text":"她把音量调低，又忍不住把手机挪近了一厘米。","sourceNote":"基于原作分镜"},
+  {"id":"p3","kind":"fan","text":"父亲柜子里的存款，她说过只是应急，可账户里的数字总在招手。","sourceNote":"基于原作桥段"},
+  {"id":"p4","kind":"original","text":"今天开始，你要替久留美做决定：开盘前设定仓位、杠杆和当天的目标。","sourceNote":"游戏原创衔接"},
+  {"id":"p5","kind":"original","text":"每根 K 线都会真实地吃掉她的心理承受力，盈利会让她更大胆，亏损会让她更难翻本。","sourceNote":"游戏原创"},
+  {"id":"p6","kind":"original","text":"记住：两千万是这一章的目标，但先活下来才有下一章。","sourceNote":"游戏原创"},
+  {"id":"p7","kind":"original","text":"交易日结束时，生活费、利息和心理账单会一起找上门。","sourceNote":"游戏原创"},
+  {"id":"p8","kind":"original","text":"系好安全带——今天也要回本。","sourceNote":"游戏原创"}
+]
