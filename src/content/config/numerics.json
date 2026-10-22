@@ -1,0 +1,180 @@
+{
+  "FEE_RATE": 5e-05,
+  "STOP_OUT_LEVEL": 0.5,
+  "MIN_EQUITY": 1000,
+  "TARGET_PROFIT": 20000000,
+  "STORY_START": 300000,
+  "START": 100000,
+  "START_PRICE": 150,
+  "LIVING_DAILY": 1500,
+  "FATHER_SAVINGS": 3000000,
+  "CANDLES_PER_BEAT": 4,
+  "BEATS_PER_DAY": 4,
+  "TICKS_PER_CANDLE": 6,
+  "PIP_SIZE": 0.01,
+  "TICK_MINUTES": 2.5,
+  "LEVERAGES": [
+    5,
+    10,
+    25,
+    50,
+    100
+  ],
+  "STAKES": [
+    0.1,
+    0.25,
+    0.5,
+    1
+  ],
+  "STOP_PIPS": [
+    10,
+    30,
+    50,
+    null
+  ],
+  "MARKETS": [
+    {
+      "symbol": "USD/JPY",
+      "base": "USD",
+      "name": "美元",
+      "label": "美元兑日元",
+      "startPrice": 150,
+      "seed": 0
+    },
+    {
+      "symbol": "AUD/JPY",
+      "base": "AUD",
+      "name": "澳元",
+      "label": "澳元兑日元",
+      "startPrice": 90,
+      "seed": 5352761
+    },
+    {
+      "symbol": "GBP/JPY",
+      "base": "GBP",
+      "name": "英镑",
+      "label": "英镑兑日元",
+      "startPrice": 170,
+      "seed": 7945393
+    }
+  ],
+  "CREDIT": {
+    "baseLimit": 300000,
+    "maxLimit": 3000000,
+    "baseDailyRate": 0.0005,
+    "maxDailyRate": 0.008,
+    "minBorrow": 100
+  },
+  "STAMINA": {
+    "max": 100,
+    "warning": 20,
+    "entryMinimum": 0,
+    "workCost": 20,
+    "calmDayCost": 40,
+    "observedWatchCostPerMinute": 0.03,
+    "maxObservedGapMinutes": 15
+  },
+  "ENERGY": {
+    "boostDuration": 0.25,
+    "fatigueDuration": 0.5,
+    "boostMultiplier": 0.8,
+    "fatigueMultiplier": 1.5
+  },
+  "SUPPLY": {
+    "notesStressReduction": 5,
+    "mealBudget": 300,
+    "energyPrice": 300,
+    "energyRecovery": 25,
+    "noodlesPrice": 150,
+    "noodlesRecovery": 8,
+    "takeawayPrice": 1200,
+    "takeawayRecovery": 20
+  },
+  "ONSEN": {
+    "cost": 8000,
+    "recovery": 25,
+    "stressReduction": 10
+  },
+  "HOUSING_SLEEP_RECOVERY": {
+    "basic": 40,
+    "comfortable": 45,
+    "generous": 50,
+    "premium": 55,
+    "penthouse": 60
+  },
+  "WATCH": {
+    "simulatedDayMinutes": 240,
+    "calmDayCost": 40,
+    "pressureMinimum": 1.25,
+    "pressureMaximum": 1.5
+  },
+  "TRAUMA": {
+    "hurtAt": 40,
+    "crushedAt": 70,
+    "numbAt": 85,
+    "hurtCap": 32,
+    "crushedCap": 18,
+    "numbCap": 8,
+    "survivalFloor": 6,
+    "restRecovery": 8,
+    "flatSegmentRecovery": 2,
+    "painTicks": 6,
+    "numbTicks": 14
+  },
+  "PRESSURE": {
+    "taps": 5,
+    "graceMs": 8000,
+    "decayMs": 2000,
+    "tapIntervalMs": 80
+  },
+  "STAMINA_FATIGUE": {
+    "durationMs": 2500,
+    "recovery": 15,
+    "minHours": 1,
+    "maxHours": 3
+  },
+  "LOTTERY": {
+    "ticketPrice": 300,
+    "drawMinute": 1080,
+    "guaranteeDraws": 40,
+    "cheatCode": "201402",
+    "cheatPrize": 20000000,
+    "tiers": [
+      {
+        "tier": 1,
+        "prize": 20000000,
+        "weight": 1
+      },
+      {
+        "tier": 2,
+        "prize": 2000000,
+        "weight": 4
+      },
+      {
+        "tier": 3,
+        "prize": 200000,
+        "weight": 45
+      },
+      {
+        "tier": 4,
+        "prize": 10000,
+        "weight": 50
+      },
+      {
+        "tier": 5,
+        "prize": 3000,
+        "weight": 100
+      },
+      {
+        "tier": 6,
+        "prize": 300,
+        "weight": 200
+      },
+      {
+        "tier": 0,
+        "prize": 0,
+        "weight": 600
+      }
+    ]
+  }
+}
