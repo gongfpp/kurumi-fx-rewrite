@@ -286,6 +286,11 @@ export function start(): void {
     }
   });
   render();
+  const boot = document.getElementById('boot');
+  if (boot) {
+    boot.classList.add('hide');
+    window.setTimeout(() => boot.remove(), 500);
+  }
 }
 
 function fatherTake(take: number): string {
