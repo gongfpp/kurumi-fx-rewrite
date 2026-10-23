@@ -461,3 +461,23 @@ button.on { border-color: var(--fx-accent); color: var(--fx-accent); }
 .fx-share-row { display: flex; justify-content: space-between; font-size: 13px; padding: 2px 0; }
 .fx-share-foot { font-size: 11px; color: var(--fx-muted); margin-top: 8px; }
 .fx-toast { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); background: var(--fx-panel); border: 1px solid var(--fx-up); border-radius: 8px; padding: 8px 14px; z-index: 70; }
+
+.fx-comments { border-left: 2px solid var(--fx-accent); padding-left: 8px; margin: 8px 0; }
+:root[data-frontend='pixel'] {
+  --fx-ink: #fff;
+  font-family: ui-monospace, monospace;
+}
+:root[data-frontend='pixel'] button,
+:root[data-frontend='pixel'] .fx-panel,
+:root[data-frontend='pixel'] .fx-modal {
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.45);
+  image-rendering: pixelated;
+  border-radius: 0;
+}
+:root[data-frontend='pixel'] .fx-quote-price { letter-spacing: 0.08em; }
+@media (max-width: 720px) {
+  .fx-grid { grid-template-columns: 1fr; }
+  .fx-top { flex-direction: column; align-items: flex-start; }
+  .fx-manga-grid { grid-template-columns: 1fr; }
+  .fx-modal { max-width: 100%; }
+}

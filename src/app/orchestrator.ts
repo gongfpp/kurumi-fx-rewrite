@@ -29,8 +29,10 @@ import { layoutCandles, movingAverage } from '../view/charts/candles';
 import { createAudio, type AudioController } from '../view/components/audio';
 import * as D from '../view/components/dialogs';
 import * as P from '../view/components/panels';
+import * as L from '../view/components/library-dialogs';
+import { currentComments } from '../domain/story/library';
 import { DEFAULT_THEME, THEME_IDS, themeTokens, type ThemeId } from '../view/styles/tokens';
-import { loadGame, saveGame, encodeSave } from './persistence/save';
+import { loadGame, saveGame, encodeSave, decodeSave } from './persistence/save';
 
 const THEME_KEY = 'kurumi-fx:theme';
 
@@ -43,6 +45,13 @@ let period = 15;
 let maSet: number[] = [5, 10];
 let speed = 1;
 let openingPage = 0;
+let storyBook = 0;
+let storyPage = 0;
+let pixelFrontend = false;
+let privacyOn = true;
+let devVerified = false;
+let devTainted = false;
+const DEV_PASSWORD = 'kurumi-fx';
 let timer: number | null = null;
 let modal: string | null = null;
 let leaderboard: LeaderboardEntry[] | null = null;
@@ -165,6 +174,7 @@ export function start(): void {
     /* fresh run */
   }
   document.documentElement.dataset.theme = theme;
+  document.documentElement.dataset.frontend = pixelFrontend ? 'pixel' : 'default';
   document.addEventListener('keydown', (ev) => {
     if (ev.key === 'Escape' && modal) {
       modal = null;
@@ -221,6 +231,27 @@ export function start(): void {
       stopPips = v === '' ? null : (Number(v) as StopPips);
     }
     if (field) render();
+  });
+  app.addEventListener('change', async (e) => {
+    const field = (e.target as HTMLElement).dataset.field;
+    if (field === 'restore') {
+      const input = e.target as HTMLInputElement;
+      const file = input.files?.[0];
+      if (!file) return;
+      try {
+        const text = await file.text();
+        const restored = decodeSave(text);
+        if (restored.state) {
+          state = restored.state;
+          notice = '已从备份恢复。';
+        } else {
+          notice = '备份文件无效。';
+        }
+      } catch {
+        notice = '恢复失败。';
+      }
+      render();
+    }
   });
   render();
 }
@@ -405,6 +436,51 @@ function onAction(act: string): void {
     } else if (act === 'leaderboard') {
       void loadLeaderboard();
       modal = 'leaderboard';
+    } else if (act === 'pixel') {
+      pixelFrontend = !pixelFrontend;
+    } else if (act.startsWith('charstory:') || act.startsWith('origstory:')) {
+      const parts = act.split(':');
+      const kind = parts[0];
+      if (parts[1] === 'book') {
+        storyBook = Number(parts[2]);
+        storyPage = 0;
+      } else if (parts[1] === 'next') storyPage += 1;
+      else if (parts[1] === 'prev') storyPage = Math.max(0, storyPage - 1);
+      modal = kind;
+    } else if (act === 'privacy:toggle') {
+      privacyOn = !privacyOn;
+      try {
+        localStorage.setItem('kurumi-fx:telemetry', privacyOn ? 'on' : 'off');
+      } catch {
+        /* ignore */
+      }
+    } else if (act === 'dev:verify') {
+      const input = document.querySelector('[data-field="devpass"]') as HTMLInputElement | null;
+      if (input && input.value === DEV_PASSWORD) {
+        devVerified = true;
+        devTainted = true;
+      } else {
+        log.unshift('开发者密码错误');
+      }
+    } else if (act.startsWith('dev:cash:')) {
+      state.cash = Number(act.split(':')[2]);
+      devTainted = true;
+    } else if (act.startsWith('dev:sanity:')) {
+      state.sanity = Number(act.split(':')[2]);
+      devTainted = true;
+    } else if (act === 'dev:stress:0') {
+      state.stress = 0;
+      devTainted = true;
+    } else if (act === 'save:download' || act === 'save:download-report') {
+      exportShare();
+    } else if (act === 'save:latest') {
+      try {
+        const loaded = loadGame('story');
+        if (loaded.state) state = loaded.state;
+        notice = '已载入最新存档。';
+      } catch {
+        notice = '载入失败。';
+      }
     } else if (act === 'new') {
       modal = 'restart';
     } else if (act === 'restart:confirm') {
@@ -560,6 +636,22 @@ function buildModal(): string {
       return P.shareDialog(state, themeTokens(theme));
     case 'restart':
       return D.shell('重开确认', '<div class="fx-caption">将放弃当前进度并开始新的一局。</div><div class="fx-actions"><button data-act="restart:confirm">重开韭菜人生</button><button data-act="modal:close">先等等</button></div>');
+    case 'mangalib':
+      return L.mangaLibraryDialog();
+    case 'charstory':
+      return L.characterStoryDialog(storyBook, storyPage);
+    case 'origstory':
+      return L.originalStoryDialog(storyBook, storyPage);
+    case 'comments': {
+      const c = currentComments(state);
+      return L.commentsDialog(c.investor, c.player);
+    }
+    case 'privacy':
+      return L.privacyDialog(privacyOn);
+    case 'developer':
+      return L.developerDialog(state, { active: devVerified, verified: devVerified, tainted: devTainted, password: '', note: devTainted ? '本局已被标记：不计入排行榜与成就。' : '开发者模式会话限时，修改会永久标记。' });
+    case 'save':
+      return L.saveDialog();
     default:
       return '';
   }
@@ -568,9 +660,13 @@ function buildModal(): string {
 const TOP_BUTTONS: [string, string][] = [
   ['open:mode', '模式'],
   ['open:manga', '漫画'],
+  ['open:mangalib', '原作漫画'],
+  ['open:charstory', '人物篇章'],
+  ['open:origstory', '原创剧情'],
   ['open:items', '道具'],
   ['open:life', '生活'],
   ['open:news', '快讯'],
+  ['open:comments', '短评'],
   ['open:margin', '追加保证金'],
   ['open:lottery', '彩票'],
   ['open:credit', '贷款'],
@@ -582,14 +678,19 @@ const TOP_BUTTONS: [string, string][] = [
   ['open:opening', '序章'],
   ['open:events', '事件'],
   ['open:scenes', '插画库'],
+  ['open:save', '存档'],
+  ['open:privacy', '隐私'],
+  ['open:developer', '开发者'],
   ['open:help', '玩法'],
   ['share', '战报'],
+  ['pixel', '像素版'],
 ];
 
 function render(): void {
   const app = document.getElementById('app');
   if (!app) return;
   document.documentElement.dataset.theme = theme;
+  document.documentElement.dataset.frontend = pixelFrontend ? 'pixel' : 'default';
   const t = themeTokens(theme);
   const metrics = accountMetrics(state);
   const limits = restrictions(state);
@@ -640,6 +741,7 @@ function render(): void {
         ${P.chartToolbarHtml({ period, ma: maSet, speed })}
         <canvas class="fx-chart" width="760" height="260" role="img" aria-label="交易K线"></canvas>
         <div class="fx-caption" data-act="open:news" style="cursor:pointer">📣 ${ev ? `${ev.title} · ${ev.copy}` : '等待行情'}（点击查看快讯记录）</div>
+        ${L.commentsRow(state)}
         ${P.riskAlertsHtml(state)}
       </section>
       <section class="fx-panel" aria-label="账户与下单">
