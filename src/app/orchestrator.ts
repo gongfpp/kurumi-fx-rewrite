@@ -31,6 +31,7 @@ import * as D from '../view/components/dialogs';
 import * as P from '../view/components/panels';
 import * as L from '../view/components/library-dialogs';
 import * as S from '../view/components/source-dialogs';
+import { createParticles, countUp, flashTheme, type ParticleSystem } from '../view/components/effects';
 import { parseForexite, buildHistoricalScript, historicalDayCount, candlesFromScript } from '../domain/market/sources/historical';
 import { fetchLiveQuote, applyLiveQuote, createLiveState, type LiveState } from '../domain/market/sources/live';
 import { encodeReplay, decodeReplay, replayFromLocation } from '../domain/market/sources/replay';
@@ -66,6 +67,8 @@ let historyMinutes: { t: number; o: number; h: number; l: number; c: number }[] 
 let historyDayIdx = 0;
 let live: LiveState = createLiveState();
 let liveTimer: number | null = null;
+let particles: ParticleSystem | null = null;
+let prevEquity = Number.NaN;
 let timer: number | null = null;
 let modal: string | null = null;
 let leaderboard: LeaderboardEntry[] | null = null;
@@ -191,6 +194,11 @@ export function start(): void {
   }
   document.documentElement.dataset.theme = theme;
   document.documentElement.dataset.frontend = pixelFrontend ? 'pixel' : 'default';
+  const fxCanvas = document.createElement('canvas');
+  fxCanvas.id = 'fx-particles';
+  fxCanvas.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:80';
+  document.body.append(fxCanvas);
+  particles = createParticles(fxCanvas);
   const urlReplay = replayFromLocation(globalThis.location?.search ?? '');
   if (urlReplay) applyReplay(encodeReplay(urlReplay));
   document.addEventListener('keydown', (ev) => {
@@ -217,6 +225,7 @@ export function start(): void {
     if (!el) return;
     if (el.dataset.themeSet) {
       theme = el.dataset.themeSet as ThemeId;
+      flashTheme();
       persist();
       render();
       return;
@@ -336,6 +345,7 @@ function onAction(act: string): void {
         state.heat = Math.min(5, (state.heat ?? 0) + 1);
         log.unshift('突破心理锁！本日可用更高杠杆/仓位');
         audio.playSfx('pressureRise');
+        particles?.burst(window.innerWidth * 0.25, window.innerHeight * 0.45, 'spark', 22);
       } else if (res.accepted) {
         audio.playSfx('pressureHit');
       } else {
@@ -424,6 +434,7 @@ function onAction(act: string): void {
       placeOrder(state, { type: act as OrderType, leverage, amount, stopPips });
       log.unshift(`${act === 'long' ? '做多' : '做空'} @${num(state.price, 3)}`);
       flashToast('trade', `${act === 'long' ? '做多' : '做空'}成交 ${yen(amount)} · ${leverage}×`);
+      particles?.burst(window.innerWidth * 0.75, window.innerHeight * 0.5, 'spark', 14);
       audio.playSfx('orderOpen');
     } else if (act === 'closeall') {
       closeOrders(state, 1, state.phase === 'playing' ? 'manual' : 'closing');
@@ -437,6 +448,7 @@ function onAction(act: string): void {
       settleLottery(state, { endOfDay: true });
       log.unshift('今日已结算');
       audio.playSfx((report.net ?? 0) >= 0 ? 'landProfit' : 'landLoss');
+      if ((report.net ?? 0) > 0) particles?.burst(window.innerWidth * 0.5, window.innerHeight * 0.5, 'coin', 30);
       modal = 'recap';
     } else if (act === 'rest') {
       beginRest(state);
@@ -899,7 +911,7 @@ function render(): void {
       </section>
       <section class="fx-panel" aria-label="账户与下单">
         <h2>账户与下单</h2>
-        <div class="fx-row"><span>总资产</span><b>${yen(metrics.equity)}</b></div>
+        <div class="fx-row"><span>总资产</span><b id="equity-value">${yen(metrics.equity)}</b></div>
         <div class="fx-row"><span>净资产(扣债)</span><b>${yen(metrics.equity - debt)}</b></div>
         <div class="fx-row"><span>总欠款</span><b>${yen(debt)}</b></div>
         <div class="fx-row"><span>可用保证金</span><b>${yen(metrics.availableMargin)}</b></div>
@@ -999,9 +1011,21 @@ function patchMarket(result: { price: number; exits: { type: string; pnl: number
   if (posTable) posTable.innerHTML = P.positionsTableHtml(state);
   const logEl = document.getElementById('log');
   if (logEl) logEl.innerHTML = log.slice(0, 6).map((l) => `<div>· ${l}</div>`).join('');
+  const eqEl = document.getElementById('equity-value');
+  if (eqEl) {
+    if (!Number.isFinite(prevEquity)) prevEquity = accountMetrics(state).equity;
+    countUp(eqEl, prevEquity, accountMetrics(state).equity);
+    prevEquity = accountMetrics(state).equity;
+  }
   for (const exit of result.exits) {
-    if (exit.type === 'liquidation') triggerShake(true);
-    else triggerShake(false);
+    if (exit.type === 'liquidation') {
+      triggerShake(true);
+      particles?.burst(window.innerWidth * 0.5, window.innerHeight * 0.45, 'shatter', 34);
+    } else if (exit.pnl > 0) {
+      particles?.burst(window.innerWidth * 0.7, window.innerHeight * 0.4, 'coin', 18);
+    } else {
+      triggerShake(false);
+    }
   }
   drawChart();
 }
