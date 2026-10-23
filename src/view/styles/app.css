@@ -543,3 +543,14 @@ body.fx-shake-hard { animation: fxShake .9s ease-in-out 2; }
 button { position: relative; overflow: hidden; }
 button::after { content: ''; position: absolute; left: 50%; top: 50%; width: 6px; height: 6px; border-radius: 50%; background: color-mix(in srgb, var(--fx-accent) 55%, transparent); transform: scale(0); opacity: .7; pointer-events: none; }
 button:active::after { animation: fxRipple .5s ease-out; }
+
+/* Pixeler frontend polish */
+:root[data-frontend='pixel'] * { image-rendering: pixelated; }
+:root[data-frontend='pixel'] .fx-panel,
+:root[data-frontend='pixel'] button,
+:root[data-frontend='pixel'] .fx-modal,
+:root[data-frontend='pixel'] .fx-top { border-width: 2px; box-shadow: 3px 3px 0 rgba(0,0,0,.55); }
+:root[data-frontend='pixel'] .fx-quote-price { text-shadow: 2px 2px 0 rgba(0,0,0,.5); font-weight: 900; }
+:root[data-frontend='pixel'] .fx-title { text-shadow: 2px 2px 0 var(--fx-accent); }
+:root[data-frontend='pixel'] .fx-bar { border-radius: 0; }
+:root[data-frontend='pixel'] .fx-bar > span { image-rendering: pixelated; }
