@@ -592,4 +592,4 @@ button:active::after { animation: fxRipple .5s ease-out; }
   content: ''; display: inline-block; width: 22px; height: 22px; margin-right: 6px; vertical-align: -4px;
   background-image: var(--fx-pixel-icon); background-size: contain; background-repeat: no-repeat; image-rendering: pixelated;
 }
-:root[data-frontend='pixel'] { --fx-pixel-icon: url('/kurumi-fx-rewrite/fx/pixel-assets/ui-icons-transparent.png'); }
+:root[data-frontend='pixel'] { --fx-pixel-icon: none; }

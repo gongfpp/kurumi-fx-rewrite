@@ -65,6 +65,7 @@ let rankNick = '匿名交易者';
 let rankAnon = true;
 let rankStatus = '';
 let currentSavedAt = 0;
+let conflictOpen = false;
 const DEV_PASSWORD = 'kurumi-fx';
 let marketSource: 'sim' | 'historical' | 'live' | 'replay' = 'sim';
 let historyFile: string | null = null;
@@ -108,6 +109,7 @@ function stopTimer(): void {
   }
 }
 function persist(): void {
+  if (conflictOpen) return;
   try {
     saveGame(state);
     currentSavedAt = Date.now();
@@ -203,6 +205,7 @@ export function start(): void {
   }
   document.documentElement.dataset.theme = theme;
   document.documentElement.dataset.frontend = pixelFrontend ? 'pixel' : 'default';
+  document.documentElement.style.setProperty('--fx-pixel-icon', `url("${assetUrl('pixel-assets/ui-icons-transparent.png')}")`);
   const fxCanvas = document.createElement('canvas');
   fxCanvas.id = 'fx-particles';
   fxCanvas.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:80';
@@ -237,6 +240,15 @@ export function start(): void {
       render();
     }
     if (modal) return;
+    if (ev.key === 'ArrowRight' || ev.key === 'ArrowLeft') {
+      const n = Math.min(48, state.candles.length);
+      if (n > 0) {
+        hoverIndex = Math.max(0, Math.min(n - 1, (hoverIndex < 0 ? n - 1 : hoverIndex) + (ev.key === 'ArrowRight' ? 1 : -1)));
+        hoverY = 130;
+        drawChart();
+      }
+      return;
+    }
     if (ev.key === 'ArrowUp') {
       amount = Math.min(amount + 1000, 10_000_000);
       render();
@@ -386,8 +398,10 @@ function onAction(act: string): void {
         if (loaded.state) state = loaded.state;
         notice = '已载入最新存档。';
       } catch { notice = '载入失败。'; }
+      conflictOpen = false;
       modal = null;
     } else if (act === 'conflict:overwrite') {
+      conflictOpen = false;
       persist();
       notice = '已保留本页进度并覆盖存档。';
       modal = null;
@@ -820,6 +834,7 @@ async function submitRank(): Promise<void> {
     const res = await submitScore(entry);
     rankStatus = res.status === 'ok' ? '已上榜。' : res.status === 'service-unconfigured' ? '云端未配置，已保存本地成绩。' : '上榜失败，可重试。';
     if (!leaderboard) leaderboard = [entry];
+    if (res.status === 'ok') void loadLeaderboard();
     log.unshift(rankStatus);
   } catch {
     rankStatus = '上榜失败，可重试。';
@@ -833,6 +848,7 @@ function watchStorageConflict(): void {
     if (!ev.key || ev.key !== scopedKey(saveKeyFor(state.mode))) return;
     const meta = decodeSave(ev.newValue ?? null);
     if (meta.savedAt && meta.savedAt > currentSavedAt) {
+      conflictOpen = true;
       modal = 'conflict';
       render();
     }
@@ -1105,11 +1121,12 @@ function patchMarket(result: { price: number; exits: { type: string; pnl: number
   if (posTable) posTable.innerHTML = P.positionsTableHtml(state);
   const logEl = document.getElementById('log');
   if (logEl) logEl.innerHTML = log.slice(0, 6).map((l) => `<div>· ${l}</div>`).join('');
+  const eq = accountMetrics(state).equity;
   const eqEl = document.getElementById('equity-value');
   if (eqEl) {
-    if (!Number.isFinite(prevEquity)) prevEquity = accountMetrics(state).equity;
-    countUp(eqEl, prevEquity, accountMetrics(state).equity);
-    prevEquity = accountMetrics(state).equity;
+    if (!Number.isFinite(prevEquity)) prevEquity = eq;
+    countUp(eqEl, prevEquity, eq);
+    prevEquity = eq;
   }
   for (const exit of result.exits) {
     if (exit.type === 'liquidation') {
@@ -1277,5 +1294,16 @@ function drawChart(): void {
       } else ctx.lineTo(x, y);
     });
     ctx.stroke();
+  }
+  if (maSet.length) {
+    ctx.font = '10px sans-serif';
+    let lx = vp.padding + 2;
+    for (const m of maSet) {
+      const vals = movingAverage(candles, m);
+      const lastVal = vals[vals.length - 1];
+      ctx.fillStyle = colors[m] ?? t.accent;
+      ctx.fillText(`MA${m} ${lastVal ? lastVal.toFixed(3) : '—'}`, lx, 12);
+      lx += 72;
+    }
   }
 }
