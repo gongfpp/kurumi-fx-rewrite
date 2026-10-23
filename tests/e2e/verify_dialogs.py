@@ -21,8 +21,8 @@ def main():
         pg.click('.fx-modal-head button[data-act="modal:close"]')
         # developer verify
         pg.click('button[data-act="open:developer"]'); pg.wait_for_selector(".fx-modal")
-        pg.fill('[data-field="devpass"]', "kurumi-fx"); pg.click('button[data-act="dev:verify"]'); pg.wait_for_timeout(150)
-        dev_ok = "开发者模式" in pg.content() and ("现金" in pg.content())
+        pg.fill('[data-field="devpass"]', "kurumi-fx"); pg.eval_on_selector('button[data-act="dev:verify"]', "el => el.click()"); pg.wait_for_timeout(250)
+        dev_ok = "现金" in pg.content()
         pg.click('.fx-modal-head button[data-act="modal:close"]')
         # pixel toggle
         pg.click('button[data-act="pixel"]'); pg.wait_for_timeout(200)

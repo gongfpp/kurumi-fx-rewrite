@@ -219,9 +219,14 @@ export function start(): void {
   });
   app.addEventListener('input', (e) => {
     const field = (e.target as HTMLElement).dataset.field;
-    if (field === 'amount') amount = Number((e.target as HTMLInputElement).value);
-    if (field === 'volume') audio.setVolume(Number((e.target as HTMLInputElement).value) / 100);
-    if (field) render();
+    if (field === 'amount') {
+      amount = Number((e.target as HTMLInputElement).value);
+      render();
+    } else if (field === 'volume') {
+      audio.setVolume(Number((e.target as HTMLInputElement).value) / 100);
+      render();
+    }
+    // Other fields (password / file inputs) keep their own state; do not re-render.
   });
   app.addEventListener('change', (e) => {
     const field = (e.target as HTMLElement).dataset.field;
