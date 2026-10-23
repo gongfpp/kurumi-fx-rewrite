@@ -615,3 +615,44 @@ const CopyLine = z.object({ id: z.string(), from: z.string(), text: z.string(), 
 - 实时行情（biquote 指示价）与共享回放。
 - 情绪锁可视化连点动画、强平序列与音频包络。
 - 更细的排行榜排序面板与匿名编号说明页。
+
+---
+
+# Part G — 资源复刻与功能补全（v1.1.0）
+
+## G.1 原站资源全量复刻
+从 `gongfpp/kurumi-fx-pages` 完整迁移 486 个媒体资源至 `public/fx/`（随构建部署）：
+
+| 类别 | 数量 | 用途 |
+| --- | --- | --- |
+| expressions | 23 | 角色立绘，按情绪切换（curumi-calm/nervous/exhilarated/shocked…）|
+| comics | 8 | 结局四格 + 事件四格（ending-*/event-*）|
+| homage | 3 | 原作致敬单格（demk-*）|
+| manga | 211 | 原作漫画分镜 |
+| generated | 172 | 场景插画（chapter-01/daily-life/dinner-stories/emotion-extremes/…）|
+| pixel-assets | 9 | 像素生活界面与 UI 图标 |
+| bgm | 15 | 背景音乐 |
+| sfx | 26 | 音效（下单价/成交/新闻/强平/压力/复盘…）|
+| voice | 16 | 日语原声（手动点播）|
+| history | 3 | 历史行情数据 |
+
+资源以 `src/content/assets/manifest.json` 索引，运行时经 `BASE_URL` 解析，避免硬编码文件名。
+
+## G.2 补全的界面与功能
+- 角色立绘（图片立绘随情绪切换）+ 情绪标签。
+- 漫画阅读器：每日原创四格 + 结局/事件四格 + 原作致敬 + 原作漫画图库（211 张）。
+- 插画库（172 张场景插画浏览）。
+- 道具说明与效果弹窗（价格/体力/压力/情绪/来源，含不可用原因）。
+- 生活弹窗：放松/温泉/晚餐/朋友/住房/今日消费账本。
+- 弹窗新闻：快讯 toast + 快讯记录弹窗。
+- 彩票、网络贷款、父亲的柜中存款（取用/归还）弹窗。
+- 设置：BGM 开关 + 15 曲目选择 + 音效开关 + 音量。
+- 日语原声手动点播。
+- 游戏内音效触发（下单/成交/新闻/强平/结算）。
+- 成就页、名人堂、序章、事件一览、玩法说明。
+- 日结复盘弹窗（当日四格）。
+
+## G.3 质量与部署（v1.1.0）
+- 单测 100 项全绿；`tsc` 干净；构建 dist ≈238MB（含资源），主 JS ≈117KB。
+- 线上 Playwright 验收：立绘加载、漫画图库 35 图、道具 7 项、生活 16 项、BGM 15 曲、语音 16 条、存档持久化、**控制台零错误**。
+- 站点：https://gongfpp.github.io/kurumi-fx-rewrite/

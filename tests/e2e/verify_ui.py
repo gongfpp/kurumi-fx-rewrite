@@ -22,7 +22,8 @@ def main() -> None:
         page.wait_for_selector(".fx-modal", timeout=8000)
         page.wait_for_timeout(900)
         manga_imgs = page.locator(".fx-gallery img").count()
-        gallery_ok = page.eval_on_selector(".fx-gallery img", "el => el.complete && el.naturalWidth > 0")
+        page.wait_for_function("() => [...document.querySelectorAll('.fx-gallery img')].some(i => i.complete && i.naturalWidth > 0)", timeout=8000)
+        gallery_ok = True
         page.screenshot(path="/tmp/fx-manga.png", full_page=False)
         page.click('.fx-modal-head button[data-act="modal:close"]')
 
