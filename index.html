@@ -11,10 +11,16 @@
     <title>FX韭留美 · 今天也要回本</title>
       <link rel="icon" type="image/png" href="/kurumi-fx-rewrite/fx/pixel-assets/ui-icons-transparent.png" />
     <link rel="apple-touch-icon" href="/kurumi-fx-rewrite/fx/pixel-assets/ui-icons-transparent.png" />
-    <script type="module" crossorigin src="/kurumi-fx-rewrite/assets/index-BZv7LtjK.js"></script>
+    <script type="module" crossorigin src="/kurumi-fx-rewrite/assets/index-MTagdnYy.js"></script>
     <link rel="stylesheet" crossorigin href="/kurumi-fx-rewrite/assets/index-BOzpWciH.css">
   </head>
   <body>
     <div id="app"></div>
+      <style>
+      #boot{position:fixed;inset:0;display:grid;place-items:center;background:#151e25;color:#f16f9f;font:600 16px system-ui;z-index:200;transition:opacity .4s}
+      #boot.hide{opacity:0;pointer-events:none}
+      #boot small{display:block;color:#9fb0bd;font-weight:500;margin-top:6px}
+    </style>
+    <div id="boot"><div>FX韭留美 · 载入中…<small>首次加载会解压资源，请稍候</small></div></div>
   </body>
 </html>
