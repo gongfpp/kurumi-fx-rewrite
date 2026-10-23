@@ -562,3 +562,5 @@ button:active::after { animation: fxRipple .5s ease-out; }
   animation: fxShimmer 1.5s linear infinite;
 }
 .fx-gallery img[src], .fx-face img[src] { animation-duration: 1.5s; }
+
+.fx-badge { font-size: 11px; padding: 3px 8px; border: 1px solid var(--fx-grid); border-radius: 999px; color: var(--fx-muted); white-space: nowrap; }

@@ -880,6 +880,12 @@ function render(): void {
   app.innerHTML = `
     <header class="fx-top">
       <div class="fx-title">FX韭留美 · 今天也要回本<small>FX KURUMI / 漫画交易室 · 第 ${state.day} 天 · ${state.phase}${state.mode === 'endless' ? ' · 操盘模式' : ''}</small></div>
+      <div class="fx-top-actions" role="group" aria-label="状态">
+        <span class="fx-badge">${state.mode === 'endless' ? '操盘' : '剧情'}</span>
+        <span class="fx-badge">${marketSource === 'sim' ? '模拟盘' : marketSource === 'historical' ? '历史真实' : marketSource === 'live' ? '实时真实' : '共享回放'}</span>
+        <span class="fx-badge">第 ${state.day} 天</span>
+        <span class="fx-badge">${state.phase}</span>
+      </div>
       <div class="fx-top-actions" role="group" aria-label="主题">
         ${THEME_IDS.map((id) => `<button data-theme-set="${id}" aria-pressed="${id === theme}" ${id === theme ? 'disabled' : ''}>${themeTokens(id).label}</button>`).join('')}
       </div>
@@ -1052,8 +1058,12 @@ function drawChart(): void {
   const dpr = window.devicePixelRatio || 1;
   const w = canvas.clientWidth || 760;
   const h = 260;
-  canvas.width = w * dpr;
-  canvas.height = h * dpr;
+  const targetW = Math.round(w * dpr);
+  const targetH = Math.round(h * dpr);
+  if (canvas.width !== targetW || canvas.height !== targetH) {
+    canvas.width = targetW;
+    canvas.height = targetH;
+  }
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   ctx.clearRect(0, 0, w, h);
   const candles = state.candles.slice(-48);
