@@ -1,0 +1,115 @@
+{
+  "kind": "original-synthesized-terminal-v2",
+  "generator": "tools/build-terminal-sfx-v2.py",
+  "sampleRate": 44100,
+  "targetPeakDb": -20,
+  "sourceBoundary": "No recording, sample, melody or proprietary platform WAV was copied. Event taxonomy inspiration only; not a global standard trading sound.",
+  "references": [
+    "https://www.mql5.com/en/articles/748",
+    "https://www.metatrader5.com/de/terminal/help/start_advanced/structure",
+    "https://research.titanfx.com/manuals/mt5/windows/mt5-sound-win"
+  ],
+  "validation": "All MP3s decoded and peak measured after encoding. Human listening not yet verified.",
+  "clips": [
+    {
+      "file": "tap.mp3",
+      "synthetic": true,
+      "leadInSeconds": 0.045,
+      "duration": 0.192,
+      "decodedPeakDb": -20.4,
+      "decodedMeanDb": -30.3,
+      "bytes": 3178,
+      "sha256": "e87c5bd5b5580bd50f8ada3866f39c9f2ff86dda011046cbaa9a14247a15b55f"
+    },
+    {
+      "file": "fill.mp3",
+      "synthetic": true,
+      "leadInSeconds": 0.05,
+      "duration": 0.31,
+      "decodedPeakDb": -20.4,
+      "decodedMeanDb": -27.5,
+      "bytes": 4432,
+      "sha256": "2581fdad26c9536611258ab680dd47ef2f1e71a7ac5163a01a990dab97968ef7"
+    },
+    {
+      "file": "close.mp3",
+      "synthetic": true,
+      "leadInSeconds": 0.05,
+      "duration": 0.33,
+      "decodedPeakDb": -20.4,
+      "decodedMeanDb": -27.0,
+      "bytes": 4746,
+      "sha256": "bd3d3f439aabd9d832b7d759a936986dbe29656f276db91d468a1e2ac7138ec4"
+    },
+    {
+      "file": "reject.mp3",
+      "synthetic": true,
+      "leadInSeconds": 0.06,
+      "duration": 0.41,
+      "decodedPeakDb": -20.4,
+      "decodedMeanDb": -27.8,
+      "bytes": 5686,
+      "sha256": "90a1205ae8d0204953e6eee6911863870a06f15ab5f469953d4a868c167e95e2"
+    },
+    {
+      "file": "news.mp3",
+      "synthetic": true,
+      "leadInSeconds": 0.08,
+      "duration": 0.365,
+      "decodedPeakDb": -20.4,
+      "decodedMeanDb": -28.0,
+      "bytes": 5059,
+      "sha256": "19b93079ca3db4169566a33ae3a228f3a2d7a3b47bbb870c1212ca4cda0ec36b"
+    },
+    {
+      "file": "risk.mp3",
+      "synthetic": true,
+      "leadInSeconds": 0.09,
+      "duration": 0.54,
+      "decodedPeakDb": -20.4,
+      "decodedMeanDb": -27.4,
+      "bytes": 7253,
+      "sha256": "bacce21c8b6239cc6bec6f82a793d4d2588027f6261dea0eba776f3d6ca239b0"
+    },
+    {
+      "file": "major-profit.mp3",
+      "synthetic": true,
+      "leadInSeconds": 0.12,
+      "duration": 0.92,
+      "decodedPeakDb": -20.4,
+      "decodedMeanDb": -29.5,
+      "bytes": 11955,
+      "sha256": "43380ed7d6e471669de10b556d6ddfd3f797df0386e4e11e7534c487cb8f10a0"
+    },
+    {
+      "file": "major-loss.mp3",
+      "synthetic": true,
+      "leadInSeconds": 0.14,
+      "duration": 0.78,
+      "decodedPeakDb": -20.4,
+      "decodedMeanDb": -30.6,
+      "bytes": 10075,
+      "sha256": "554a4fcc8ab450e91e1e2aead5a57a721bc4bcf9b6be611a39c6aa53f9011fc1"
+    },
+    {
+      "file": "pressure.mp3",
+      "synthetic": true,
+      "leadInSeconds": 0.045,
+      "duration": 0.21,
+      "decodedPeakDb": -20.4,
+      "decodedMeanDb": -31.3,
+      "bytes": 3492,
+      "sha256": "c669ea0571aa32e3cdf0a5c129b8efb6d380ada449abf246abce458bb57dd90d"
+    },
+    {
+      "file": "breakthrough.mp3",
+      "synthetic": true,
+      "leadInSeconds": 0.06,
+      "duration": 0.52,
+      "decodedPeakDb": -20.4,
+      "decodedMeanDb": -29.5,
+      "bytes": 6940,
+      "sha256": "e465d541cd2cb2ba2544539e94b2308e6115b98c7b4638cf7ac21acbdd377752"
+    }
+  ]
+}

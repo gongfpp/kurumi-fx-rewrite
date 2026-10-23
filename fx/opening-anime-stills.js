@@ -1,0 +1,4 @@
+// Supplemental prop view only. Original manga, page text and progress stay intact.
+const diary=Object.freeze({"id":"mothers-diary-official-hd-anime","path":"./manga/opening-anime/mothers-diary-official-hd.jpg","sha256":"5936623a08a5605ab64524b1e50f32effa6f367570284196bf3a45aa8a27dff9","dimensions":[1920,1080],"kind":"original-anime-frame","sourceURL":"https://fxkurumi-info.com/story/img/ep01/01_4.jpg","sourcePageURL":"https://fxkurumi-info.com/story/?episode=01","sourceType":"official-published-anime-still","sourceTimeSeconds":null,"sourceMetadata":"docs/opening-diary-hd-20261011/source-review.json","original":"./manga/opening-anime/mothers-diary-official-hd.jpg","imageSize":[1920,1080],"alt":"书架前，一只手拿着封面写有“FXトレード日誌”的笔记本。","synopsisURL":"https://www.b-ch.com/titles/9955/001"});
+export const OPENING_ANIME_STILLS=Object.freeze({'mothers-diary':diary});
+export function openingCompanionArt(page){return page?.id==='mothers-diary'?diary:null;}

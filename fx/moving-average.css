@@ -1,0 +1,5 @@
+.ma-legend{display:flex;flex-wrap:wrap;gap:6px;padding:6px 0}
+.ma-legend button{display:inline-flex;align-items:baseline;gap:6px;border:1px solid #716076;border-radius:7px;background:#322c3b;color:var(--ma-color,#ddd);padding:5px 8px;font-size:.74rem;font-variant-numeric:tabular-nums;white-space:nowrap;min-height:32px}
+.ma-legend button[aria-pressed="false"]{opacity:.5;text-decoration:line-through}.ma-legend button:focus-visible{outline:3px solid #fff;outline-offset:2px}.ma-legend b{font-weight:600;white-space:nowrap}
+.recap-ma-legend{display:flex;flex-wrap:wrap;gap:10px;font-size:.72rem;margin:4px 0}.recap-ma-legend span{font-variant-numeric:tabular-nums;white-space:nowrap}
+.recap-ma-legend button{background:transparent;border:1px solid currentColor;border-radius:6px;padding:4px 7px;font:inherit;min-height:30px}.recap-ma-legend button[aria-pressed="false"]{opacity:.5;text-decoration:line-through}

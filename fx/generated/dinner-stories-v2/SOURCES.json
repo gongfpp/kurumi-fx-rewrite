@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "kind": "original-fan-art",
+  "generator": "built-in image_gen",
+  "copyrightNote": "Original fan-game artwork with an independently reviewed visual continuity edit; not an original manga page.",
+  "readingOrder": "Use panelRects in array order; unchanged from the prior version.",
+  "assets": [
+    {
+      "id": "dinner-seafood-claw",
+      "file": "dinner-seafood-claw-continuity-v1.webp",
+      "sha256": "725d7a448144909a43cebde5f1ea8e01437b9ad529c22de0bcd8f71663cee47b",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "panels": 4,
+      "panelRects": [
+        [
+          5,
+          4,
+          616,
+          615
+        ],
+        [
+          637,
+          4,
+          612,
+          615
+        ],
+        [
+          5,
+          638,
+          616,
+          611
+        ],
+        [
+          637,
+          638,
+          612,
+          611
+        ]
+      ],
+      "characters": [
+        "久留美",
+        "萌智子",
+        "芽吹",
+        "安子"
+      ],
+      "people": 4,
+      "tier": "dinner-feast",
+      "cost": 30000,
+      "dialogueId": "dinner-stories-20261010:dinner-seafood-claw",
+      "contentIdentity": "sha256:83ef50e520ac23bcf0aad3726f24faaacdf336c852aeef10bd84e9750fd206a6",
+      "revision": {
+        "id": "dinner-seafood-claw-continuity-v1",
+        "kind": "reviewed-image-edit",
+        "date": "2026-10-12",
+        "basePath": "./generated/dinner-stories-v1/dinner-seafood-claw.webp",
+        "baseSha256": "83ef50e520ac23bcf0aad3726f24faaacdf336c852aeef10bd84e9750fd206a6",
+        "reviewedImageSha256": "38ce2f7fd534bec5fd95bc9c38f34dd7c949f1dfa56943f6c41c31f27bb5ba7b",
+        "generator": "built-in image_gen",
+        "visualReview": "passed",
+        "scope": "Panel three continues the opened claw from panel two; full-image resampling.",
+        "runtimeEncoding": "lossless-webp",
+        "storyCountContribution": 0
+      }
+    }
+  ]
+}

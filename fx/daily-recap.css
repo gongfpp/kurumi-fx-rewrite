@@ -1,0 +1,256 @@
+.daily-recap{--recap-intensity:0;min-width:0;text-align:left;padding:16px 0;border-top:1px solid #dec4d3;color:#392d3a}.recap-heading{display:flex;gap:16px}.recap-primary{display:grid;grid-template-columns:minmax(0,1fr) auto;width:100%;gap:5px 12px}.recap-label{grid-column:1/-1;font-size:12px;color:#876575}.recap-profit{font-size:clamp(24px,5vw,42px);line-height:1.25;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.recap-rate{align-self:center;font-size:22px;white-space:nowrap}.daily-recap[data-direction=profit] .recap-profit,.daily-recap[data-direction=profit] .recap-rate{color:#198263}.daily-recap[data-direction=loss] .recap-profit,.daily-recap[data-direction=loss] .recap-rate{color:#b52f67}.recap-cumulative,.recap-costs,.recap-clock,.recap-note,.recap-choice-hint,.recap-basis{font-size:12px;line-height:1.7;overflow-wrap:anywhere}.recap-clock{color:#886f80}.recap-stats{display:grid;grid-template-columns:1fr 1fr;margin:14px 0;font-size:13px;gap:5px 12px}.recap-stats dd{margin:0;text-align:right;font-weight:750;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}.recap-playback{position:relative;padding:14px;background:#fae7f1;border-radius:8px}.recap-step{display:block;font-size:12px;color:#8b5471}.recap-counter{display:block;font-size:clamp(22px,5vw,38px);font-variant-numeric:tabular-nums;overflow-wrap:anywhere;padding-right:75px}.recap-skip{position:absolute;right:10px;top:12px;font-size:11px;padding:6px!important;min-height:32px}.recap-candles svg,.recap-curve svg{width:100%;display:block;height:auto}.recap-candles{font-size:12px;margin-top:12px}.recap-tabs{display:flex;gap:8px;margin-top:14px}.recap-tabs button{flex:1;font-size:12px!important;padding:8px!important}.recap-tabs button[aria-pressed=true]{background:#b14679;color:#fff}.recap-curve{min-width:0}.recap-basis{margin:10px 0}.recap-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.recap-choices button{text-align:left;min-width:0;white-space:normal;display:flex;flex-direction:column;padding:12px!important;line-height:1.5}.recap-choices b{font-size:13px}.recap-choices small{font-size:11px;font-weight:400;margin-top:5px}.recap-loan{border:2px solid #b3477a!important;background:linear-gradient(115deg,#fff3db,#ffe0ed)!important}.daily-recap[data-animate=true] .recap-counter{animation:recap-count-pulse 460ms ease-in-out infinite alternate}.daily-recap[data-animate=true][data-direction=loss] .recap-playback{animation:recap-shake 180ms ease-in-out infinite alternate}.daily-recap[data-animate=true][data-direction=profit] .recap-playback{box-shadow:0 0 calc(4px + 20px * var(--recap-intensity)) #ec7da87a}.daily-recap[data-animate=true] .recap-choices button{animation:recap-button-beat 900ms ease-in-out infinite alternate}@keyframes recap-count-pulse{to{transform:scale(calc(1 + .04 * var(--recap-intensity)));transform-origin:left center}}@keyframes recap-shake{from{transform:translateX(calc(-1px - 3px * var(--recap-intensity)))}to{transform:translateX(calc(1px + 3px * var(--recap-intensity)))}}@keyframes recap-button-beat{to{transform:translateY(-2px)}}@media(max-width:480px){.recap-primary{grid-template-columns:1fr}.recap-rate{font-size:18px}.recap-choices{grid-template-columns:1fr}.recap-counter{padding-right:0;margin-top:25px}.recap-stats{font-size:12px}.recap-profit{overflow-wrap:anywhere}}@media(prefers-reduced-motion:reduce){body:not(.motion-full) .daily-recap *{animation:none!important;transition:none!important;transform:none!important}}
+
+.recap-portrait{width:96px;height:112px;object-fit:cover;object-position:top;flex-shrink:0;border-radius:8px;background:#f6dbe9}.recap-heading .recap-primary{min-width:0}.recap-heading{align-items:center}@media(max-width:480px){.recap-portrait{width:70px;height:92px}.recap-heading{gap:10px}.recap-heading .recap-profit{font-size:25px}}
+
+#day-dialog .day-total{display:none}
+
+.recap-primary,.recap-playback,.recap-stats dd{container-type:inline-size;min-width:0}.recap-profit{--amount-font:38px}.recap-counter{--amount-font:34px}.recap-stats dd{--amount-font:13px}@media(max-width:480px){.recap-profit{--amount-font:25px}.recap-counter{--amount-font:24px}}
+
+.recap-fallback-comic img{display:block;width:100%;height:auto}.recap-fallback-comic p{font-size:12px;line-height:1.6;padding:10px}.day-dialog #recap-next{margin-top:10px}.day-dialog #next-day{margin-top:24px}
+
+.recap-portrait-frame{position:relative;overflow:hidden;width:96px;height:112px;flex-shrink:0;border-radius:8px}@media(max-width:480px){.recap-portrait-frame{width:70px;height:92px}}
+.father-discovery-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.father-discovery-panel{min-width:0}.father-item-figure{margin:0}.father-art-view{position:relative;overflow:hidden}.father-art-view img{display:block;width:100%;height:auto}.father-art-crop{aspect-ratio:1}.father-art-crop img{position:absolute;max-width:none;height:auto}.father-item-figure figcaption,.father-discovery-boundary{font-size:13px;line-height:1.65}.father-item-figure figcaption{padding:10px 0}.father-discovery-panel:first-child{--panel-delay:0ms}.father-discovery-panel:nth-child(2){--panel-delay:220ms}.father-discovery-panel:nth-child(3){--panel-delay:440ms}.motion-full .father-discovery-panel{animation:father-panel-enter 500ms both;animation-delay:var(--panel-delay)}@keyframes father-panel-enter{from{opacity:.15;transform:translateY(9px)}to{opacity:1;transform:none}}.father-discovery-highlight{outline:3px solid #d587ad;outline-offset:4px}.father-discovery-highlight::after{content:'↑ 父亲的柜中存款在这里，需要时亲自取用';display:block;font-size:12px;line-height:1.5;margin-top:7px}.living-receipt{margin:18px 0;padding:15px;border:1px solid #d6bdcc;border-radius:8px;background:#fff0f7}.living-receipt h3{font-size:16px;margin:0 0 10px}.living-receipt p,.living-receipt small{font-size:12px;line-height:1.6}.living-amount{display:block;font-size:30px;font-variant-numeric:tabular-nums;color:#a34670}.father-item-figure .father-art-view{max-width:420px;margin:0 auto}@media(max-width:520px){.father-discovery-grid{grid-template-columns:1fr}.father-discovery-panel .father-art-view{max-width:300px}}@media(prefers-reduced-motion:reduce){body:not(.motion-full) .father-discovery-panel{animation:none!important;transform:none!important}}
+
+.daily-fallback-portrait{position:relative;width:min(100%,340px);margin:0 auto;overflow:hidden}.daily-fallback-portrait img{display:block;width:100%;height:auto}.daily-fallback-portrait.manga-viewport{min-height:250px}#day-story-fallback{text-align:center;margin:15px 0}
+/* Complete sheets and cropped panels have separate geometry. Dialog image
+   limits must never squeeze a 200% crop back to a single cell's width. */
+#day-story-stage .manga-context-cards,#day-story-stage .story-comic-frame{display:block;width:100%;max-width:620px;margin:18px auto}
+#day-story-stage .manga-context-cards>figure{width:100%;margin:16px auto}
+#day-story-stage .manga-card-viewport:not(.manga-viewport)>img{display:block;width:100%;max-width:100%;height:auto;object-fit:contain}
+.dialog-scroll .father-art-crop img,.dialog-scroll .revealed-comic-crop img{max-width:none}
+.dialog-scroll{scroll-padding-block-start:18px}
+#day-story-stage figure,#father-discovery-scene,.living-receipt{scroll-margin-block-start:18px}
+@media(max-width:520px){#day-story-stage .manga-context-cards,#day-story-stage .story-comic-frame{max-width:100%;margin-inline:0}.father-discovery-grid{grid-template-columns:minmax(0,1fr)}}
+
+.daily-return-values{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:flex-end;gap:4px 9px;min-width:0;max-width:100%;margin-left:auto}.daily-return-values b{display:inline-block;white-space:nowrap;word-break:normal;overflow-wrap:normal}.daily-return-values #day-pnl{--amount-font:18px}.day-return{font-size:13px;flex-shrink:0}
+
+.story-scene-image{display:block;width:min(100%,580px);margin:18px auto}.story-scene-image .father-art-view{max-width:580px}.story-scene-image img{height:auto;object-fit:contain}#living-event-art{margin:18px auto;width:min(100%,500px)}
+
+.settled-whole-sheet{width:min(100%,560px);margin:16px auto}.settled-whole-sheet img{display:block;width:100%;height:auto;max-width:100%;object-fit:contain}
+
+/* Playback controls stay separate from monetary totals; replay is presentation-only. */
+.recap-playback-controls{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:6px;margin:4px 0 10px;position:relative;z-index:2}.recap-playback-controls .recap-skip,.recap-replay{position:static;font-size:12px!important;min-height:36px;padding:7px 11px!important}.recap-counter{padding-right:0;transform-origin:left center}.recap-playback{isolation:isolate;overflow:hidden}.daily-recap[data-animate=true] .recap-counter{animation:none}.daily-recap[data-animate=true][data-direction=loss] .recap-playback{animation:none}.daily-recap[data-direction=loss] .recap-playback[data-stage=landing]{animation:recap-impact 420ms ease-out}.daily-recap[data-direction=profit] .recap-playback[data-stage=landing]{box-shadow:inset 0 0 calc(12px + 22px * var(--recap-intensity)) #efb94766}.recap-burst{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:-1}.recap-spark{position:absolute;left:var(--spark-x);top:22%;width:5px;height:9px;background:#e1a632;opacity:0;transform:rotate(var(--spark-angle))}.recap-playback[data-stage=landing] .recap-spark{animation:recap-spark-fall 650ms ease-out both;animation-delay:var(--spark-delay)}.daily-recap[data-tier=large] .recap-counter{font-weight:950}.daily-recap[data-tier=large][data-direction=loss] .recap-counter{color:#a32954}.daily-recap[data-tier=large][data-direction=profit] .recap-counter{color:#137255}
+@keyframes recap-spark-fall{0%{opacity:0;transform:translateY(-30px) rotate(var(--spark-angle))}25%{opacity:.8}100%{opacity:0;transform:translateY(170px) rotate(calc(var(--spark-angle) + 70deg))}}@keyframes recap-impact{0%,100%{transform:translateX(0)}20%{transform:translateX(calc(-1 * var(--recap-shake)))}40%{transform:translateX(var(--recap-shake))}70%{transform:translateX(calc(-.5 * var(--recap-shake)))}}
+@media(max-width:480px){.recap-counter{margin-top:3px}.recap-playback-controls{justify-content:flex-start}.recap-candle-plot{height:250px}}@media(prefers-reduced-motion:reduce){body:not(.motion-full) .daily-recap .recap-spark{display:none}body:not(.motion-full) .daily-recap .recap-playback,body:not(.motion-full) .daily-recap .recap-counter{animation:none!important;transform:none!important}}
+
+/* One staged, viewport-wide impact; no flashing loops. Both paths settle fully. */
+.daily-recap[data-animate=true] .recap-choices button{animation:none}
+.recap-screen{position:fixed;inset:0;z-index:999;pointer-events:none;overflow:hidden;visibility:hidden;contain:strict}
+.recap-screen[data-active=true]{visibility:visible}
+.recap-screen-halo,.recap-screen-ring{position:absolute;inset:0;opacity:0}
+.recap-screen[data-direction=profit] .recap-screen-halo{background:radial-gradient(ellipse at 50% 36%,transparent 30%,#dfaa3266 75%,#16765f88 100%)}
+.recap-screen[data-direction=loss] .recap-screen-halo{background:radial-gradient(ellipse at 50% 36%,transparent 25%,#52173c99 80%,#251629bb 100%)}
+.recap-screen[data-stage=anticipation] .recap-screen-halo{opacity:.22;transition:opacity 250ms ease}
+.recap-screen[data-stage=landing] .recap-screen-halo{animation:recap-screen-wash 1400ms ease-out both}
+.recap-screen-ring{inset:12vh 12vw;border:7px solid #eec45a;border-radius:50%;box-shadow:0 0 60px #efc05688}
+.recap-screen[data-stage=landing][data-direction=profit] .recap-screen-ring{animation:recap-ring-expand 1100ms ease-out both}
+.recap-screen[data-direction=loss] .recap-screen-ring{inset:0;border:none;border-radius:0;box-shadow:inset 0 0 16vw #5c183b80;background:linear-gradient(118deg,transparent 49.8%,#d36a8caa 49.9%,#d36a8caa 50.1%,transparent 50.2%),linear-gradient(36deg,transparent 49.8%,#b5587888 49.9%,#b5587888 50.1%,transparent 50.2%)}
+.recap-screen[data-stage=landing][data-direction=loss] .recap-screen-ring{animation:recap-fracture-settle 1500ms ease-out both}
+.recap-screen-coin,.recap-screen-shard{position:absolute;left:var(--x);top:var(--y);opacity:0;will-change:transform,opacity}
+.recap-screen-coin{width:9px;height:18px;border:1px solid #ffebb1;border-radius:2px;background:#d5a02a;box-shadow:0 0 10px #f1cb6177}
+.recap-screen-shard{width:3px;height:110px;background:linear-gradient(#d46a8c,transparent);transform-origin:top}
+.recap-screen[data-stage=landing] .recap-screen-coin{animation:recap-coin-explode 1500ms cubic-bezier(.16,.7,.3,1) both;animation-delay:var(--delay)}
+.recap-screen[data-stage=landing] .recap-screen-shard{animation:recap-shard-drop 1200ms ease-out both;animation-delay:var(--delay)}
+.recap-screen[data-tier=small]{display:none}.recap-screen[data-tier=medium]{opacity:.5}
+.recap-profit{transform-origin:left center;position:relative;z-index:1}
+@keyframes recap-screen-wash{0%{opacity:0}18%{opacity:1}65%{opacity:.6}100%{opacity:0}}
+@keyframes recap-ring-expand{0%{opacity:0;transform:scale(.35)}15%{opacity:.8}100%{opacity:0;transform:scale(1.8)}}
+@keyframes recap-fracture-settle{0%{opacity:0;transform:scale(1.03)}12%{opacity:.9;transform:scale(1)}70%{opacity:.5}100%{opacity:0;transform:translateY(16px)}}
+@keyframes recap-coin-explode{0%{opacity:0;transform:translate(0,90px) rotate(var(--turn)) scale(.4)}15%{opacity:1}55%{opacity:1}100%{opacity:0;transform:translate(var(--drift),-150px) rotate(calc(var(--turn) + 240deg)) scale(1.3)}}
+@keyframes recap-shard-drop{0%{opacity:0;transform:translateY(-40px) rotate(var(--turn))}15%{opacity:.85}100%{opacity:0;transform:translate(var(--drift),180px) rotate(calc(var(--turn) + 15deg))}}
+@media(max-width:480px){.recap-screen-coin{width:6px;height:13px}.recap-screen-ring{border-width:4px}.recap-screen-shard{height:75px}}
+@media(prefers-reduced-motion:reduce){body:not(.motion-full) .recap-screen{display:none!important}}
+.recap-screen[data-tier=medium][data-stage=landing]>*{animation-duration:800ms}
+
+/* A body-hosted manual popover stays viewport-sized above native dialogs. */
+.recap-screen[popover]{border:0;margin:0;padding:0;width:100vw;height:100vh;max-width:none;max-height:none;background:transparent;color:inherit}
+.recap-screen[popover]::backdrop{background:transparent;pointer-events:none}
+
+/* Daily living stays a compact paid receipt; changing plans is opt-in. */
+.living-receipt{margin:12px 0;padding:11px 13px}
+.living-receipt-summary{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 14px;min-width:0}
+.living-receipt-summary>h3,.living-receipt-summary>p{margin:0;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.living-receipt-summary>h3{font-size:14px;line-height:1.6}
+.consumption-statement>h3{margin:10px 0 3px;font-size:12px}
+.consumption-statement>p{margin:3px 0}
+.living-adjustment{margin-top:5px;min-width:0}
+.living-adjustment>summary{width:fit-content;max-width:100%;box-sizing:border-box;min-height:36px;padding:8px 0;font-size:12px;line-height:20px;color:#8e3a62;cursor:pointer}
+.living-adjustment>summary:focus-visible{outline:2px solid #a34670;outline-offset:3px;border-radius:3px}
+.living-adjustment[open]>summary{margin-bottom:3px}
+.living-adjustment>p{margin:0 0 5px}
+.living-plan-choices{display:grid;gap:7px;min-width:0}
+.living-plan-choices>.secondary{margin:0;min-height:44px;padding:9px 10px;font-size:12px;line-height:1.6;white-space:normal;overflow-wrap:anywhere;text-align:left}
+.living-adjustment>small{display:block;margin-top:8px}
+/* The replay is a foreground stage, rather than a glow behind the report. */
+.recap-playback{display:flex;flex-wrap:wrap;align-items:center;gap:5px 12px;background:radial-gradient(ellipse at 50% 0,#563350,#211b30 75%);border:2px solid #80618b;box-shadow:0 12px 32px #24162e30;color:#fff4f7;padding:18px;margin-bottom:18px;border-radius:15px;overflow:hidden;min-width:0}
+.recap-step{color:#d9c1df;flex:1 1 45%;letter-spacing:.08em;font-size:11px}
+.recap-counter{order:2;flex:1 1 100%;font-size:clamp(30px,5.7vw,58px);line-height:1.25;letter-spacing:-.045em;font-weight:950;color:#ffe5a0!important;text-shadow:0 3px 0 #0007;transform-origin:50% 50%;text-align:center;min-height:1.4em;margin:8px 0;overflow:visible;white-space:nowrap}
+.recap-playback-controls{order:8;flex:1 1 100%;margin:2px 0 0;justify-content:flex-end}.recap-playback-controls button{background:#ffffff13;color:#eadbef;border:1px solid #b090c0!important}
+.recap-phase-label{order:0;text-transform:uppercase;font-size:12px;font-weight:800;color:#ffd58a;letter-spacing:.12em}.recap-replay-clock{order:1;margin-left:auto;color:#ddcdec;font:600 14px/1.5 ui-monospace,monospace}
+.recap-stage-chart{order:3;flex:1 1 100%;width:100%;min-width:0;border-top:1px solid #ffffff18;border-bottom:1px solid #ffffff18;background:#120f1d44;border-radius:7px}.recap-stage-chart svg{display:block;width:100%;height:auto;min-height:155px}.recap-stage-chart p{font-size:12px;padding:0 12px}
+.recap-event-card{order:4;flex:1 1 100%;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 14px;border-radius:7px;border:1px solid #bb9dd04d;background:#ffffff0d;min-height:34px;font-size:12px;box-sizing:border-box}.recap-event-delta{font-size:clamp(20px,3.7vw,34px);font-variant-numeric:tabular-nums;white-space:nowrap}.recap-playback[data-event-direction=profit] .recap-event-card{border-left:5px solid #78eabb;color:#a6ffdb}.recap-playback[data-event-direction=loss] .recap-event-card{border-left:5px solid #ff779f;color:#ffb4cb}
+.recap-chart-details{font-size:12px;margin:10px 0}.recap-heading{padding:8px 0}.recap-primary .recap-profit{font-size:clamp(23px,4vw,34px)}
+.daily-recap[data-tier=large] .recap-playback{border-color:#c4965c}.daily-recap[data-tier=large][data-direction=loss] .recap-playback{border-color:#b85b83;background:radial-gradient(ellipse at 50% 0,#713044,#201827 75%)}
+.daily-recap[data-tier=small] .recap-playback{border-color:#766985}.daily-recap[data-tier=medium] .recap-counter{font-size:clamp(30px,5vw,50px)}
+.recap-digit{display:inline-block;min-width:.60em;text-align:center;transform-origin:center bottom}.recap-punctuation{display:inline-block}
+.daily-recap[data-animate=true] .recap-playback[data-stage=anticipation]{filter:contrast(1.18);box-shadow:inset 0 0 55px #f0c57530,0 0 24px #c8916840}
+.daily-recap[data-tier=large] .recap-playback[data-stage=landing] .recap-counter{color:#fff2b9!important}.daily-recap[data-direction=loss] .recap-playback[data-stage=landing] .recap-counter{color:#ffb9cc!important}
+@media(max-width:480px){.recap-playback{padding:10px;gap:5px 6px}.recap-counter{font-size:clamp(25px,8vw,38px);margin:8px 0;letter-spacing:-.055em}.recap-event-card{padding:8px;gap:6px;flex-wrap:wrap}.recap-event-delta{font-size:25px}.recap-stage-chart svg{min-height:150px}.recap-playback-controls{justify-content:flex-end}.recap-replay-clock{font-size:12px}.recap-phase-label{font-size:10px}.recap-step{font-size:10px}.recap-primary .recap-profit{font-size:24px}}
+@media(prefers-reduced-motion:reduce){body:not(.motion-full) .recap-digit{animation:none!important;transform:none!important}body:not(.motion-full) .recap-playback{filter:none!important}}
+.recap-stage-profit{order:2;flex:1 1 100%;text-align:center;font:800 clamp(18px,3vw,26px)/1.25 ui-monospace,monospace;color:#f6dce6;margin:-4px 0 10px;font-variant-numeric:tabular-nums}.daily-recap[data-tier=small] .recap-stage-profit{font-size:18px}.daily-recap[data-tier=small] .recap-counter{font-size:clamp(28px,4.6vw,44px)}
+@media(max-width:480px){.recap-stage-profit{font-size:18px;margin:0 0 8px}.recap-counter{min-height:1.25em}.recap-stage-chart svg{min-height:130px}.recap-playback{border-radius:10px}.recap-stage-chart{overflow:hidden}}
+.recap-outcome-art{display:none;position:absolute;right:12px;bottom:56px;width:min(40%,260px);max-height:55%;object-fit:contain;filter:drop-shadow(0 10px 20px #0008);pointer-events:none}.recap-playback[data-stage=landing] .recap-outcome-art{display:block;animation:recap-art-land 1500ms cubic-bezier(.2,.8,.2,1) both}@keyframes recap-art-land{0%{opacity:0;transform:translateY(70px) rotate(8deg) scale(.7)}24%{opacity:1;transform:translateY(-10px) rotate(-3deg) scale(1.05)}75%{opacity:1;transform:none}100%{opacity:0;transform:translateY(20px)}}@media(max-width:480px){.recap-outcome-art{width:44%;max-height:45%;right:8px;bottom:55px}}
+/* The sealed report is revealed after replay; it must not contradict a live count. */
+.daily-recap[data-animate=true]>:not(.recap-playback){display:none}
+/* Complete four-panel art is opt-in data, not a popup or an unreadable crop. */
+.recap-outcome-art{position:relative;order:6;flex:0 0 100%;width:100%;max-width:560px;max-height:none;right:auto;bottom:auto;margin:10px auto;object-fit:contain;border-radius:8px;filter:none}
+.recap-playback[data-stage=complete] .recap-outcome-art{display:block}
+@keyframes recap-art-land{0%{opacity:0;transform:translateY(36px) rotate(2deg) scale(.94)}35%{opacity:1;transform:translateY(-4px) rotate(-.5deg) scale(1.01)}100%{opacity:1;transform:none}}
+@media(max-width:480px){.recap-outcome-art{width:100%;max-height:none;right:auto;bottom:auto}}
+@media(max-width:690px){
+ .recap-playback{margin-bottom:10px;padding:9px;gap:4px 6px}.recap-counter{margin:5px 0}.recap-heading{padding:5px 0}.recap-primary .recap-profit{font-size:23px}.recap-event-card{padding:6px 8px}.recap-stage-profit{font-size:16px;margin-bottom:5px}.recap-stage-chart svg{min-height:120px}.recap-choices{gap:7px}.recap-choices button{padding:9px;min-height:44px}.recap-curve{margin-block:8px}.recap-tabs{gap:6px}
+}
+#day-evening-receipts{margin-block:12px;text-align:left}#day-evening-receipts>h3{font-size:15px;margin:8px 0}.evening-receipt{border:1px solid #dec6d4;border-radius:6px;margin:7px 0;background:#fff9fc}.evening-receipt summary{padding:10px;min-height:44px;box-sizing:border-box;font-size:12px;line-height:1.5;cursor:pointer}.evening-receipt-content{padding:0 10px 10px}.evening-receipt-content img{display:block;width:min(100%,420px);height:auto;margin:0 auto 10px}.evening-receipt-content p{font-size:12px;line-height:1.55;margin:6px 0}
+
+/* Certified catastrophic liquidation: a single heavy drop, held fracture and static aftermath.
+   No flashing cycles; reduced motion retains only the factual loss marker and border. */
+.recap-catastrophe-note{flex:0 0 100%;margin:4px 0 8px;padding:8px 10px;border-left:4px solid #cf6076;background:#341e2a;color:#ffdce5;font-size:13px;font-weight:700;line-height:1.6}
+.recap-catastrophe-note[hidden]{display:none}
+.daily-recap[data-direction=loss][data-loss-severity=catastrophic] .recap-playback{border:3px solid #9b4b5b;background:linear-gradient(145deg,#291e27,#171820 65%,#3a2029);box-shadow:inset 0 0 36px #05040888}
+.daily-recap[data-loss-severity=catastrophic] .recap-counter{color:#ffbdc9!important;margin-bottom:48px}
+.daily-recap[data-loss-severity=catastrophic] .recap-playback[data-stage=anticipation],.daily-recap[data-loss-severity=catastrophic] .recap-playback[data-stage=landing]{filter:saturate(.3);transition:filter 450ms ease}
+.daily-recap[data-loss-severity=catastrophic] .recap-playback[data-stage=complete]{border-color:#78424e}
+.recap-screen[data-loss-severity=catastrophic] .recap-screen-ring{box-shadow:inset 0 0 24vw #180c19bb;background:linear-gradient(118deg,transparent 49.55%,#ed9bacbb 49.7%,#ed9bacbb 50.3%,transparent 50.45%),linear-gradient(36deg,transparent 49.6%,#c9849699 49.8%,#c9849699 50.2%,transparent 50.4%),linear-gradient(77deg,transparent 49.7%,#dda2b2aa 49.85%,#dda2b2aa 50.15%,transparent 50.3%),linear-gradient(151deg,transparent 49.7%,#dda2b288 49.85%,#dda2b288 50.15%,transparent 50.3%)}
+.recap-screen[data-loss-severity=catastrophic] .recap-screen-shard{width:5px;height:180px;background:linear-gradient(#e19bad,transparent)}
+.recap-screen[data-loss-severity=catastrophic][data-stage=landing] .recap-screen-ring{animation:recap-catastrophe-fracture 2700ms ease-out both}
+.recap-screen[data-loss-severity=catastrophic][data-stage=landing] .recap-screen-halo{animation-duration:2300ms}
+@keyframes recap-catastrophe-fracture{0%{opacity:0;transform:scale(1.04)}14%,68%{opacity:.85;transform:scale(1)}100%{opacity:0;transform:translateY(20px)}}
+@media(prefers-reduced-motion:reduce){body:not(.motion-full) .daily-recap[data-loss-severity=catastrophic] .recap-playback{filter:none;transition:none}body:not(.motion-full) .recap-screen[data-loss-severity=catastrophic]{display:none!important}}
+
+/* Return explanations remain tappable beside both percentages at every width. */
+.return-formula-rate{display:inline-flex;align-items:center;gap:4px;flex-wrap:wrap;align-self:center}.return-formula{display:inline-block;vertical-align:middle;margin-left:4px}.return-formula-trigger{display:inline-flex!important;align-items:center;justify-content:center;min-width:36px!important;min-height:36px!important;padding:4px!important;border:1px solid #997286!important;border-radius:50%!important;background:#fff4fa!important;color:#593447!important;font-size:14px!important;line-height:1!important;cursor:pointer}.return-formula-trigger:focus-visible{outline:3px solid #317eb2;outline-offset:2px}.return-formula-panel{box-sizing:border-box;position:fixed;inset:0;margin:auto;width:min(370px,calc(100vw - 28px));max-height:calc(100dvh - 40px);overflow:auto;padding:16px;border:1px solid #ad7895;border-radius:12px;background:#fff8fc;color:#392d3a;font:13px/1.65 system-ui,sans-serif;white-space:normal;overflow-wrap:anywhere;box-shadow:0 8px 36px #33132a40;z-index:100}.return-formula-panel[hidden]{display:none}.return-formula-panel::backdrop{background:#24112526}.return-formula-line{display:block;margin:6px 0}.return-formula-line:first-child{font-weight:750}.return-formula-line:nth-child(3){font-variant-numeric:tabular-nums;font-weight:700}
+/* Monetary scoring stays legible and physically responsive on narrow screens.
+   Reserve scale room instead of clipping the beat or shrinking only tiny gains. */
+.recap-counter{font-family:ui-monospace,"SFMono-Regular",Consolas,monospace;font-weight:950;font-variant-numeric:tabular-nums;letter-spacing:-.065em;padding:8px 12px;box-sizing:border-box;flex-basis:100%;text-shadow:0 3px 0 #0009,0 6px 12px #0006}
+.recap-digit{min-width:.58em}.recap-stage-profit{font-size:14px;line-height:1.6;font-weight:600;overflow-wrap:anywhere}
+.recap-counter[data-direction=loss],.recap-realized-score[data-direction=loss]{color:#ffb5cb!important}.recap-counter[data-direction=profit],.recap-realized-score[data-direction=profit]{color:#aaffd8!important}
+@media(max-width:480px){.daily-recap[data-tier] .recap-counter{font-size:clamp(22px,7.1vw,34px);padding:10px 8px;margin:8px 0;min-height:1.65em}.recap-event-delta{font-size:clamp(18px,5.4vw,25px)}.recap-stage-profit,.daily-recap[data-tier=small] .recap-stage-profit{font-size:12px}}
+
+.recap-realized-score{display:block;font:900 clamp(20px,4.5vw,30px)/1.5 ui-monospace,monospace;color:#ffe1a2;transform-origin:center}.recap-asset-line{display:block;margin-top:6px;font-size:12px;font-weight:500;color:#ddcdec}
+@media(max-width:480px){.recap-realized-score{font-size:21px}.recap-asset-line{font-size:11px}}
+
+/* A brief body landing translation must not create horizontal page scrolling. */
+html:has(.daily-recap[data-animate=true]){overflow-x:clip}
+
+.recap-asset-line{font-size:14px;line-height:1.6}.recap-realized-score{font-size:clamp(20px,3.8vw,28px)}
+@media(max-width:480px){.recap-asset-line{font-size:14px}.recap-realized-score{font-size:21px}}
+
+.recap-step-group{display:flex;align-items:center;gap:6px;flex:1 1 45%;min-width:0}.recap-step-group .recap-step{flex:0 1 auto}
+
+/* Recap impact v3: monetary hierarchy, reserved type space, no opacity flashing. */
+.recap-playback{container-type:inline-size}
+.recap-counter{font-size:min(58px,calc((100cqw - 80px)/var(--recap-character-width,8)));padding:16px 8px 4px;margin:8px 0 2px;min-height:1.55em}
+.daily-recap[data-tier=small] .recap-counter{font-size:min(44px,calc((100cqw - 54px)/var(--recap-character-width,8)))}
+.recap-asset-delta{order:2;flex:1 1 100%;min-height:1.6em;text-align:center;font:700 13px/1.6 ui-monospace,monospace;color:#d9c6e5}
+.recap-asset-delta[data-direction=profit]{color:#aaffd8}.recap-asset-delta[data-direction=loss]{color:#ffb5cb}
+.recap-impact-label{position:absolute;right:16px;top:69px;font:900 11px/1.4 system-ui;color:#ffe2a0;transform:rotate(-5deg);padding:3px 7px;border-radius:3px;background:#33223c;box-shadow:0 2px 0 #08051255;pointer-events:none}
+.recap-impact-label:empty{display:none}.recap-impact-label[data-direction=loss]{color:#ffc2d2}
+.recap-stage-profit{margin-top:3px}.daily-recap[data-tier=flat] .recap-counter{color:#eadff0!important}.daily-recap[data-tier=small] .recap-burst{display:none}
+@media(max-width:480px){.daily-recap[data-tier] .recap-counter{font-size:min(36px,calc((100cqw - 48px)/var(--recap-character-width,8)));padding:14px 2px 3px;margin:6px 0 0;min-height:1.8em}.recap-impact-label{top:62px;right:8px;font-size:9px;padding:2px 4px}.recap-asset-delta{font-size:12px;min-height:1.7em}.daily-recap[data-loss-severity=catastrophic] .recap-counter{margin-bottom:30px}}
+.recap-playback{position:relative}
+.daily-recap[data-tier=small] .recap-playback[data-stage=landing],.daily-recap[data-tier=flat] .recap-playback[data-stage=landing]{animation:none}
+/* The secondary score needs the same peak-shape reservation as the main amount. */
+.recap-realized-score{font-size:min(28px,calc((100cqw - 60px)/var(--recap-score-width,12)))}
+.recap-event-delta{display:inline-block;transform-origin:right center}
+@media(max-width:480px){.recap-realized-score{font-size:min(21px,calc((100cqw - 48px)/var(--recap-score-width,12)))}.recap-event-label{flex-basis:100%}.recap-event-delta{margin-left:auto;margin-right:3px}}
+/* Keep the label out of the numeral fit budget, rather than shrinking both to tiny type. */
+.recap-realized-label{display:block;font:600 11px/1.3 system-ui;color:#d9c6e5}
+.recap-realized-value{display:block;line-height:1.35}
+
+/* 200ms entry, then 240ms stillness: the replay clock starts at 440ms. */
+.daily-recap[data-animate=true] .recap-playback[data-stage=opening]{animation:recap-entry 200ms ease-out both}
+@keyframes recap-entry{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* Approved B: one live profit-first report. Existing cue/WAAPI lifecycle owns motion. */
+#day-dialog[data-recap-layout="profit-first"]{width:min(540px,calc(100vw - 28px));border-radius:20px;background:#fffbfc;box-shadow:7px 7px 0 #f7a8c9}
+#day-dialog[data-recap-layout="profit-first"] .dialog-toolbar{position:absolute;right:0;top:0;min-height:54px;padding:6px 10px 0;background:transparent;border:0;pointer-events:none}
+#day-dialog[data-recap-layout="profit-first"] .dialog-toolbar .x-close{pointer-events:auto;width:36px;min-width:36px;height:36px;min-height:36px;flex-basis:36px;border-radius:10px;background:#f8edf3;color:#27222f}
+#day-dialog[data-recap-layout="profit-first"] .dialog-scroll{padding:0 0 22px;scrollbar-gutter:auto}
+#day-dialog[data-recap-layout="profit-first"] #day-stage-label{display:none}
+#day-dialog[data-recap-layout="profit-first"] #day-title{background:#f7a8c9;padding:18px 62px 8px 18px;margin:0;font-size:24px;line-height:1.3;color:#27222f}
+#day-dialog[data-recap-layout="profit-first"] #day-subtitle{background:#f7a8c9;padding:0 18px 4px;margin:0;color:#704657;font-size:12px;line-height:1.6}
+.daily-recap[data-layout="profit-first"]{padding:0;border:0;color:#27222f}
+.daily-recap[data-layout="profit-first"]>.recap-heading{display:none}
+.daily-recap[data-layout="profit-first"] .recap-playback{display:block;border:0;border-radius:0;padding:0;margin:0;background:none;box-shadow:none;overflow:visible;color:#27222f}
+.daily-recap[data-layout="profit-first"] .recap-profit-hero{padding:24px 18px 16px;background:#f7a8c9;text-align:center;position:relative}
+.daily-recap[data-layout="profit-first"] .recap-step-group{display:block;margin:0 auto 5px}
+.daily-recap[data-layout="profit-first"] .recap-step{font-size:14px;color:#704657;font-weight:700;letter-spacing:0}
+.daily-recap[data-layout="profit-first"] .recap-counter{display:block;color:#27222f!important;text-shadow:none;font-size:min(50px,calc((100cqw - 48px)/var(--recap-character-width,8)));padding:10px 0 4px;margin:0;min-height:1.55em;line-height:1.35;letter-spacing:-.06em;text-align:center;transform-origin:center}
+.daily-recap[data-layout="profit-first"] .recap-stage-rate-group{display:flex;align-items:center;justify-content:center;gap:3px;min-height:36px;margin:4px auto 20px}
+.daily-recap[data-layout="profit-first"] .recap-stage-rate{display:inline-block;padding:5px 16px;border-radius:20px;background:#27222f;color:#fffbfc;font:750 15px/1.5 ui-monospace,monospace}
+.daily-recap[data-layout="profit-first"] .recap-stage-rate-group .return-formula-trigger{min-width:28px!important;min-height:28px!important;background:transparent!important;border-color:#bc7897!important;font-size:12px!important}
+.daily-recap[data-layout="profit-first"] .recap-stage-profit{margin:0;padding:13px 0 0;border-top:1px solid #db89ac;text-align:left}
+.daily-recap[data-layout="profit-first"] .recap-realized-score{display:flex;align-items:baseline;justify-content:space-between;gap:12px;color:#27222f!important;font-size:23px;line-height:1.3;width:100%;min-width:0}
+.daily-recap[data-layout="profit-first"] .recap-realized-label{font:500 14px/1.5 system-ui,sans-serif;color:#27222f;flex:0 0 auto}
+.daily-recap[data-layout="profit-first"] .recap-realized-value{font-size:min(24px,calc((100cqw - 100px)/var(--recap-score-width,10)));font-weight:800;white-space:nowrap}
+.daily-recap[data-layout="profit-first"] .recap-chart-heading{margin:24px 18px 14px;font-size:17px;line-height:1.4;color:#27222f}
+.daily-recap[data-layout="profit-first"] .recap-stage-chart{width:calc(100% - 32px);margin:0 16px;border:0;border-radius:12px;background:#27222f;overflow:hidden}
+.daily-recap[data-layout="profit-first"] .recap-stage-chart svg{width:100%;height:auto;min-height:0}
+.daily-recap[data-layout="profit-first"] .recap-chart-caption{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:0 13px 11px;color:#d4c2d5}
+.daily-recap[data-layout="profit-first"] .recap-phase-label{font-size:11px;font-weight:500;letter-spacing:0;color:#d4c2d5}
+.daily-recap[data-layout="profit-first"] .recap-replay-clock{font-size:11px;color:#d4c2d5;margin:0}
+.daily-recap[data-layout="profit-first"] .recap-playback-controls{display:flex;flex-wrap:wrap;gap:8px;margin:12px 16px 0}
+.daily-recap[data-layout="profit-first"] .recap-replay{flex:1 1 100%;min-height:44px;border:0!important;border-radius:9px;background:#f6edf2;color:#27222f;font-size:14px;font-weight:700}
+.daily-recap[data-layout="profit-first"] .recap-skip{position:static;flex:0 0 auto;min-height:32px;border:0!important;background:#f6edf2;color:#704657;order:1;margin-left:auto}
+.daily-recap[data-layout="profit-first"] .recap-event-card{margin:10px 16px 0;padding:8px 10px;border:0;border-radius:8px;background:#f6edf2;color:#27222f;min-height:0;box-sizing:border-box}
+.daily-recap[data-layout="profit-first"] .recap-event-card[hidden]{display:none}
+.daily-recap[data-layout="profit-first"] .recap-playback[data-event-direction="profit"] .recap-event-card{border-left:3px solid #297e60;color:#24533f}
+.daily-recap[data-layout="profit-first"] .recap-playback[data-event-direction="loss"] .recap-event-card{border-left:3px solid #ae3d69;color:#973c5f}
+.daily-recap[data-layout="profit-first"] .recap-event-delta{font-size:18px}
+.daily-recap[data-layout="profit-first"] .recap-event-label{flex-basis:auto;font-size:11px}
+.daily-recap[data-layout="profit-first"] .recap-asset-line{margin:5px 18px;color:#704657;font-size:12px}
+.daily-recap[data-layout="profit-first"] .recap-asset-delta{position:absolute;top:156px;left:18px;right:18px;min-height:0;font-size:11px;color:#704657;pointer-events:none}
+.daily-recap[data-layout="profit-first"] .recap-impact-label{top:43px;right:14px;background:#27222f;color:#fff4f8;font-size:10px}
+.daily-recap[data-layout="profit-first"] .recap-catastrophe-note{margin:10px 16px;background:#442335;color:#ffe8f1}
+.daily-recap[data-layout="profit-first"] .recap-playback>.recap-note{margin:8px 18px;color:#704657}
+#day-dialog[data-recap-layout="profit-first"] #recap-next{display:flex;align-items:center;justify-content:space-between;width:calc(100% - 32px);margin:28px 16px 0;padding:14px 18px;border-radius:12px;background:#27222f;color:#fffbfc;font-size:17px;line-height:1.5;min-height:54px;text-align:left;box-shadow:4px 4px 0 #f7a8c9}
+#day-dialog[data-recap-layout="profit-first"] #day-share{width:calc(100% - 32px);margin:18px 16px 0;border-radius:9px;color:#704657}
+#day-recap-extras{margin:22px 18px 0;text-align:left}
+#day-recap-extras[hidden]{display:none}
+#day-dialog[data-recap-layout="profit-first"] .recap-heading{display:none}
+@media(max-width:360px){.daily-recap[data-layout="profit-first"] .recap-profit-hero{padding-left:14px;padding-right:14px}.daily-recap[data-layout="profit-first"] .recap-counter{font-size:min(43px,calc((100cqw - 40px)/var(--recap-character-width,8)))}.daily-recap[data-layout="profit-first"] .recap-realized-value{font-size:min(21px,calc((100cqw - 90px)/var(--recap-score-width,10)))}}
+@media(max-height:700px){
+ #day-dialog[data-recap-layout="profit-first"] #day-title{padding-top:14px;font-size:22px}
+ .daily-recap[data-layout="profit-first"] .recap-profit-hero{padding-top:12px;padding-bottom:12px}
+ .daily-recap[data-layout="profit-first"] .recap-counter{padding-top:4px;padding-bottom:2px;min-height:1.35em;font-size:min(42px,calc((100cqw - 48px)/var(--recap-character-width,8)))}
+ .daily-recap[data-layout="profit-first"] .recap-stage-rate-group{margin:1px auto 10px;min-height:30px}
+ .daily-recap[data-layout="profit-first"] .recap-stage-rate{padding-block:3px}
+ .daily-recap[data-layout="profit-first"] .recap-stage-profit{padding-top:10px}
+ .daily-recap[data-layout="profit-first"] .recap-chart-heading{margin-top:16px;margin-bottom:10px}
+ .daily-recap[data-layout="profit-first"] .recap-stage-chart svg{max-height:158px}
+ .daily-recap[data-layout="profit-first"] .recap-chart-caption{padding-bottom:7px}
+ #day-dialog[data-recap-layout="profit-first"] #recap-next{margin-top:18px;min-height:48px;padding-block:11px}
+}
+/* The B card owns its shell in every loss tier; loss FX keep their own layers. */
+.daily-recap[data-layout="profit-first"][data-tier][data-direction] .recap-playback{border:0;background:none;box-shadow:none}
+.daily-recap[data-layout="profit-first"] .recap-stage-chart p{color:#d4c2d5}
+.daily-recap[data-layout="profit-first"] .recap-realized-value{display:inline-block;transform-origin:right center}
+.daily-recap[data-layout="profit-first"][data-tier][data-direction] .recap-playback[data-stage] .recap-counter{color:#27222f!important}
+
+
+/* Temporary audition controls; keep all three rates until the user selects one. */
+.daily-recap[data-layout="profit-first"] .recap-speeds{display:flex;align-items:center;gap:4px;flex-wrap:wrap;order:1}
+.daily-recap[data-layout="profit-first"] .recap-speed{min-width:46px;min-height:36px;padding:5px 10px;border:1px solid #db89ac!important;border-radius:8px;background:#f6edf2;color:#704657;font:700 13px/1.4 system-ui,sans-serif}
+.daily-recap[data-layout="profit-first"] .recap-speed[aria-pressed="true"]{background:#27222f;color:#fffbfc;border-color:#27222f!important}
+.daily-recap[data-layout="profit-first"] .recap-speed:focus-visible{outline:2px solid #ae3d69;outline-offset:2px}
+
+.living-plan-label{display:block;font-weight:700}
+.living-plan-effect,.living-pending-arrangement{display:block;font-size:11px;line-height:1.5;font-weight:400;margin-top:3px}
+.living-pending-arrangement{color:#704057;font-weight:600}
+.living-choice-details{margin-top:8px;min-width:0;font-size:11px;line-height:1.6}
+.living-choice-details>summary{cursor:pointer;width:fit-content;max-width:100%;min-height:32px;padding:5px 0;box-sizing:border-box;color:#8e3a62}
+.living-choice-details>summary:focus-visible{outline:2px solid #a34670;outline-offset:3px;border-radius:3px}
+.living-choice-details p{margin:5px 0;overflow-wrap:anywhere}
+
+/* The percentage and its help travel together into the pixel account drawer. */
+.day-return-group{display:inline-flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:4px;min-width:0;max-width:100%}.day-return-group .return-formula{margin-left:0}.day-return-group .return-formula-trigger{min-width:28px!important;min-height:28px!important}.day-return-group .day-return{max-width:100%;white-space:normal;overflow-wrap:anywhere}

@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "kind": "generated-game-art",
+  "scope": "two reviewed full four-panel life relaxation scenes",
+  "dialogueOrigin": "existing Gemini game dialogue; source IDs and four lines unchanged",
+  "generatedImages": [
+    {
+      "id": "life-relax-river-01",
+      "sourceId": "life-action-20261012:relax:river",
+      "file": "river-stone-ripples-v1.webp",
+      "sha256": "7471fb63c1aaf0fecf7fd245ed267de4922950a282034795b647fa094275beb2",
+      "dimensions": [
+        1086,
+        1448
+      ],
+      "panels": 4,
+      "panelRects": [
+        [
+          15,
+          14,
+          522,
+          698
+        ],
+        [
+          548,
+          14,
+          522,
+          698
+        ],
+        [
+          15,
+          723,
+          522,
+          710
+        ],
+        [
+          548,
+          723,
+          522,
+          710
+        ]
+      ],
+      "originalSha256": "1901973e43988ee4520c77150971d94cbe4db772e1ddb837ae4eee5517d9ced8",
+      "review": "Author and independent parent actual pixel review passed; runtime browser acceptance is separate."
+    },
+    {
+      "id": "life-relax-park-01",
+      "sourceId": "life-action-20261012:relax:park",
+      "file": "park-bench-breeze-v1.webp",
+      "sha256": "5f79ffed82caf2e0112b3c3ea30cc5dded55581bfab48b0af4f91bd33aead9f3",
+      "dimensions": [
+        1086,
+        1448
+      ],
+      "panels": 4,
+      "panelRects": [
+        [
+          18,
+          14,
+          519,
+          686
+        ],
+        [
+          549,
+          14,
+          520,
+          686
+        ],
+        [
+          18,
+          711,
+          519,
+          720
+        ],
+        [
+          549,
+          711,
+          520,
+          720
+        ]
+      ],
+      "originalSha256": "0aca541f0a82a1b649f5c6f3d6ed780e47066c895ce19945503eda5320bbb68c",
+      "review": "Author and independent parent actual pixel review passed; runtime browser acceptance is separate."
+    }
+  ]
+}

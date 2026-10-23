@@ -1,0 +1,56 @@
+.event-comic-dialog{width:min(720px,calc(100vw - 24px));max-height:94dvh;background:#fffaf2;box-shadow:7px 7px 0 #d498ae}
+.event-comic-dialog .dialog-scroll{padding:16px 24px 24px;overscroll-behavior:contain}
+.event-comic-eyebrow{margin:0;color:#85566c;font-size:12px!important;letter-spacing:.14em}
+.event-comic-dialog h2{font-size:24px;margin:5px 0 14px}
+.event-comic-sheet{display:block;width:100%;height:auto;max-height:70dvh;object-fit:contain;border:1px solid #4d3840;background:#fff;box-sizing:border-box}
+.event-comic-sheet[hidden],.event-comic-missing[hidden]{display:none}
+.event-comic-missing{border:1px dashed #a99299;background:#f4ece5;padding:36px 16px;text-align:center;color:#77636b}
+.event-comic-lines{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 22px;padding-left:23px!important;margin:18px 0}
+.event-comic-lines li{font-size:13px;line-height:1.65;margin:0;padding:0 3px;color:#49373e;overflow-wrap:anywhere}
+.event-comic-lines b{color:#7d365a}
+.event-comic-receipt{margin:12px 0;padding-top:12px;border-top:1px dashed #b39b9f;font-size:14px!important;font-weight:700;font-variant-numeric:tabular-nums}
+.event-comic-controls{display:grid;grid-template-columns:1fr 2fr;gap:12px}
+.event-comic-controls button{margin-top:2px;min-height:44px}
+.event-comic-launcher{width:auto;font-size:12px;padding:8px 14px;margin:8px 0}
+@media(max-width:560px){.event-comic-dialog .dialog-scroll{padding:12px 13px 17px}.event-comic-dialog h2{font-size:21px}.event-comic-lines{grid-template-columns:1fr;gap:8px}.event-comic-lines li{font-size:13px}}
+/* Receipt-backed life choices: the whole card is the explicit action. */
+.daily-recap .recap-choice-hint{font-size:14px;font-weight:800;color:#69405a;margin:20px 0 10px}
+.daily-recap .recap-choices{gap:12px;align-items:stretch}
+.daily-recap .recap-choices button.recap-choice,.daily-recap .recap-choices button.recap-loan{position:relative;appearance:none;-webkit-appearance:none;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;align-items:stretch;gap:7px;min-height:92px;padding:16px!important;border:1.5px solid #bc7496!important;border-radius:13px;background:linear-gradient(135deg,#fff8ee 0%,#ffe6ef 100%)!important;color:#46283e;text-align:left;box-shadow:0 3px 0 #d5a0b7,0 7px 15px #7b415912;cursor:pointer;touch-action:manipulation;animation:none!important;transition:transform .14s ease,box-shadow .14s ease,border-color .14s ease}
+.daily-recap .recap-choices button.recap-choice::before,.daily-recap .recap-choices button.recap-loan::before{content:'';position:absolute;inset:0 auto 0 0;width:4px;background:#c5548c;pointer-events:none}
+.daily-recap .recap-choices b{display:flex;align-items:start;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:14px;font-weight:800;line-height:1.45}
+.daily-recap .recap-choice-label{flex:1;min-width:100px}
+.daily-recap .recap-choice-cost{flex:none;align-self:start;border:1px solid #dcb48a;border-radius:7px;background:#fff9e7;padding:3px 7px;color:#805025;font-size:13px;line-height:1.2;font-variant-numeric:tabular-nums;white-space:nowrap}
+.daily-recap .recap-choices small{font-size:11px;line-height:1.65;color:#795f70;margin:0;overflow-wrap:anywhere}
+.daily-recap .recap-choices button.recap-choice[data-choice='quiet-night']{background:linear-gradient(135deg,#faf3ee,#e7eaf2)!important;border-color:#9a94b0!important;box-shadow:0 3px 0 #bcb4cc,0 7px 15px #53497612}
+.daily-recap .recap-choices button.recap-choice[data-choice='quiet-night']::before{background:#81729f}
+.daily-recap .recap-choices button.recap-choice[data-choice='noodles-today']{background:linear-gradient(135deg,#fff8ea,#f9ebd0)!important;border-color:#b59b75!important;box-shadow:0 3px 0 #d3bea0,0 7px 15px #745b3812}
+.daily-recap .recap-choices button.recap-choice[data-choice='noodles-today']::before{background:#a7844f}
+.daily-recap .recap-choices button.recap-loan{background:linear-gradient(135deg,#fff7dd,#fce9d9)!important;border-color:#bf885d!important;box-shadow:0 3px 0 #d7b291,0 7px 15px #7b5d4112}
+.daily-recap .recap-choices button.recap-loan::before{background:#ac773c}
+.daily-recap .recap-choices button:is(.recap-choice,.recap-loan):focus-visible{outline:3px solid #71365c;outline-offset:4px}
+.daily-recap .recap-choices button:is(.recap-choice,.recap-loan):active:not(:disabled){transform:translateY(3px);box-shadow:0 0 0 #d5a0b7,0 2px 5px #7b415916}
+.daily-recap .recap-choices button:is(.recap-choice,.recap-loan):disabled{cursor:default;color:#786d75;border-color:#c9bcc3!important;background:#f4edf1!important;box-shadow:0 1px 0 #d9ccd2;opacity:1}
+.daily-recap .recap-choices button:is(.recap-choice,.recap-loan):disabled::before{background:#bca9b3}
+.daily-recap .recap-choices button:is(.recap-choice,.recap-loan):disabled .recap-choice-cost{background:#f8f2ed;border-color:#d6c8bf;color:#857269}
+.daily-recap .recap-choices button.recap-choice[data-selected='true']{border-color:#6b987f!important;background:#edf6ee!important;color:#375b45;box-shadow:0 2px 0 #b7cfbd}
+.daily-recap .recap-choices button.recap-choice[data-selected='true']::before{background:#5a9072}
+.daily-recap .recap-choices button.recap-choice[data-selected='true'] .recap-choice-label::after{content:' ✓';color:#397554}
+@media(hover:hover){.daily-recap .recap-choices button:is(.recap-choice,.recap-loan):hover:not(:disabled){transform:translateY(-2px);border-color:#924264!important;box-shadow:0 5px 0 #d5a0b7,0 10px 18px #7b415924}}
+@media(max-width:480px){.daily-recap .recap-choices button.recap-choice,.daily-recap .recap-choices button.recap-loan{min-height:78px;padding:13px 14px!important}.daily-recap .recap-choice-label{min-width:0}.daily-recap .recap-choices b{font-size:14px}.daily-recap .recap-choices{gap:10px}}
+@media(prefers-reduced-motion:reduce){body:not(.motion-full) .daily-recap .recap-choices button:is(.recap-choice,.recap-loan){transition:none!important;transform:none!important}}
+
+/* Approved four-panel captions preserve two speakers without renumbering panels. */
+.event-comic-lines .comic-panel-line{font-size:inherit;line-height:inherit;margin:2px 0}
+.event-comic-lines .comic-panel-action{font-size:12px;line-height:1.5;margin:0 0 5px;color:#77636b}
+
+.comic-panel-cards{list-style:none;padding-left:0!important;gap:16px!important;align-items:start}
+.comic-panel-cards>li{min-width:0;padding:0!important}
+.comic-panel-art{position:relative;overflow:hidden;width:100%;margin:0 0 9px;background:#fff;border:1px solid #4d3840;box-sizing:border-box}
+.comic-panel-art .comic-panel-crop[hidden]{display:none}
+
+/* Wide single panels remain legible; pan the original artwork rather than
+   shrinking all four friends and their meal into a thumbnail on a phone. */
+.comic-panel-viewport{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;touch-action:pan-x pan-y;border-radius:2px}
+.comic-panel-viewport:focus-visible{outline:2px solid #7d365a;outline-offset:3px}
+.comic-panel-panorama{width:max(100%,560px)}

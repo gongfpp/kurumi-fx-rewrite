@@ -1,0 +1,5 @@
+.pair label{font-size:.75rem;color:var(--muted,#999)}
+.terminal .pair label{color:#bdb4c3}
+.pair select{max-width:100%;font:inherit;font-weight:700;border:1px solid currentColor;border-radius:6px;background:var(--panel,#171b2d);color:inherit;padding:.3em .5em;cursor:pointer}
+.pair select:focus-visible{outline:2px solid #7de0c5;outline-offset:3px}
+@media(max-width:480px){.terminal-head .pair{min-width:0;flex-wrap:wrap}.pair select{font-size:.95rem}}

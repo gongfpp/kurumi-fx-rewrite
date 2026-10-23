@@ -1,0 +1,133 @@
+{
+  "version": 1,
+  "kind": "original-fan-art",
+  "generator": "built-in image_gen",
+  "copyrightNote": "原创同人游戏插画；不是原作漫画页或原作台词。",
+  "panelLayout": "2x2, left-to-right then top-to-bottom",
+  "assets": [
+    {
+      "id": "closed-profit",
+      "sha256": "d2de347b1ba3e289db306be765f70b8b394fd7fcbfe30db723af9bb3134b5a43"
+    },
+    {
+      "id": "dinner-banquet",
+      "sha256": "6b4b3151c6028b83bf0860fe8bf08e8c327525acd90a4ee96bd318608f4daab8"
+    },
+    {
+      "id": "dinner-feast",
+      "sha256": "4170667fef94bdaa4ea6e3b742fcc05a79ca027eeb65e1583f2639a68c890d8c"
+    },
+    {
+      "id": "dinner-friends",
+      "sha256": "68a8273e3b8091a621eee222134146c239e93d93e4ac0dadc0b0f2763a2f966c"
+    },
+    {
+      "id": "dinner-small",
+      "sha256": "a856457c5847fb8f31cab7489c132bdae71c8af6c0a166816feb4f542792a8fc"
+    },
+    {
+      "id": "energy",
+      "sha256": "3396c131823338279c7cd93b1234bcff60f8f24d0bcba590b3d4323655771ac3"
+    },
+    {
+      "id": "father-borrow",
+      "sha256": "7e284da5b1b546fd3d082f15dc27d27a9b417873862152aa9b53e6876f17bbb2"
+    },
+    {
+      "id": "father-discover",
+      "sha256": "1a067718d3f4da28e8a5b95aff0d133acef15e6dd990b974542964e244217ce5"
+    },
+    {
+      "id": "father-found",
+      "sha256": "787a45de038c51e98cec8ec610b30f147b3bf9f0dac689d99e274c91e1f1e03c"
+    },
+    {
+      "id": "father-repaid",
+      "sha256": "191d5a1258cf0fbb075094f2d72ed5698767b23006fa8ef00aacb3f456ae21ff"
+    },
+    {
+      "id": "father-repay-part",
+      "sha256": "69711450dad0fd8b013d573bda465451bd4dc0dedb931287ca698c20b63ff99b"
+    },
+    {
+      "id": "friend-treat",
+      "sha256": "451484cdfa8b14f42db0445a68c24cdf1f77d96491adefa781dbf98d90524fe9"
+    },
+    {
+      "id": "liquidation",
+      "sha256": "b378f3a25cb5f1a294fcae17e2f439a20875ca1580256532568db766ff783635"
+    },
+    {
+      "id": "living-basic",
+      "sha256": "847ad4f50b1dce5120310bd81219bfe35a34d5b75b3c483459b13d6b759f503a"
+    },
+    {
+      "id": "living-comfortable",
+      "sha256": "650a87db41b03a48bca74a8fe51e71256734c5d0356e0dbe8fb624faad5f5323"
+    },
+    {
+      "id": "living-generous",
+      "sha256": "d58d72728831ff2a423b8f72d6e3d25733d51fcd036f57709953a1f29edeb88e"
+    },
+    {
+      "id": "loan-funded",
+      "sha256": "953413455596e2cf9a6988d7413d3e8b08e9f93fd1e07208d72e1a8434d9f359"
+    },
+    {
+      "id": "loan-interest",
+      "sha256": "953692370ba227b99ddb1d98d09880b51d197eeda6509450283ba25bc552266d"
+    },
+    {
+      "id": "loan-repaid",
+      "sha256": "9915b63ee19e882dffa33d1e3e41baf352e5e25cf98783ee4c13e44e566b3f48"
+    },
+    {
+      "id": "loan-repay-part",
+      "sha256": "f049613d4bbd627b8c4c5f62cdc468799177319f868d857fcc50c82837951e93"
+    },
+    {
+      "id": "noodles-today",
+      "sha256": "f9555c0be12939173c514cc76c0f39054d230f6fea04c86c1fba583562a451e1"
+    },
+    {
+      "id": "quote-2hz",
+      "sha256": "d2ffd4bcd6737134c72c81a4079d7f3552fe96c48cec76306487f706c9f044f8"
+    },
+    {
+      "id": "quote-4hz",
+      "sha256": "cd6b810cb2dbb6c0486f43d37a81893e3081dc6a3f6fee4f4d6da36168c84fb1"
+    },
+    {
+      "id": "settled-gain",
+      "sha256": "2bcc37f0f8852408746ec3153a11ecccac3dd713ec8c9da161d483a3bfa7f281"
+    },
+    {
+      "id": "settled-no-trade",
+      "sha256": "76d94928f7766679fa7cb2c761f0354ec0e8d00e2773dab8d1ee91004bcf9bfc"
+    },
+    {
+      "id": "settled-severe-loss",
+      "sha256": "93b2e2d1350976aa81564fef9da34e74bc798688b125e5c734eba574cd056543"
+    },
+    {
+      "id": "settled-small-loss",
+      "sha256": "e87d2bb1ebf5796cdcf1ff2d9639af00ff8b0c26afd190c6a59a84626d16f763"
+    },
+    {
+      "id": "shrine-walk",
+      "sha256": "0429a66dadbea1194b91a8f97727df2426801c7a292e931656dad3f2b3f16681"
+    },
+    {
+      "id": "spa",
+      "sha256": "59397fcfe8bfe96d507278c17d2cd8f41d269efc65ce015e19de2ccfc9b4f710"
+    },
+    {
+      "id": "stop-loss",
+      "sha256": "7dc5f5c859d533e8fb1db4fe2264363e77db262cd388cc800c01ce78200cf6de"
+    },
+    {
+      "id": "takeaway",
+      "sha256": "6cb1ebbb004e11aa33218140379668cbb1cae6fd88ee9248185d6bee3c5aacb6"
+    }
+  ]
+}

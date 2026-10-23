@@ -1,0 +1,871 @@
+{
+  "format": "kurumi-private-fx-research-m1-v1",
+  "source": "Forexite official MetaStock archive",
+  "symbol": "USDJPY",
+  "utcMonth": "2008-10",
+  "precision": "M1-OHLC",
+  "quoteSide": "unverified-single-price-OHLC",
+  "sourceTimeZone": "CET/CEST",
+  "conversionZone": "Europe/Berlin",
+  "timestampMeaning": "unknown-open-or-close-label",
+  "timestampHandling": "Only timezone conversion; no one-minute shift; labels are not availability times",
+  "executionEligible": false,
+  "executionBlockers": [
+    "Bar label start/end semantics unverified",
+    "No observed ask/spread or intrabar tick ordering"
+  ],
+  "rights": {
+    "researchAudience": "owner-only",
+    "redistribution": "unverified-not-authorized",
+    "uploadPolicy": "candidate-only; publication requires owner review",
+    "originalConservativeMarker": {
+      "localResearchOnly": true,
+      "uploadAllowed": false
+    },
+    "policyNote": "Original uploadAllowed=false was a local conservative policy, not a verified supplier prohibition. No broader redistribution is authorized."
+  },
+  "normalization": {
+    "syntheticTicks": false,
+    "imputedRows": 0,
+    "crossSourceMerge": false,
+    "deduplication": "reject",
+    "ohlcValidation": "positive, low <= open/close <= high"
+  },
+  "rows": 32629,
+  "firstLabelUTC": "2008-10-01T00:00:00Z",
+  "lastLabelUTC": "2008-10-31T21:00:00Z",
+  "utcOffsetCounts": {
+    "2:00:00": 25489,
+    "1:00:00": 7140
+  },
+  "csv": {
+    "file": "USDJPY-2008-10.forexite.m1.csv",
+    "sha256": "2af9fddd65762a43cdec1111a4d03e5bbba9662bd184656a2f98b4f91540a12b",
+    "bytes": 2654005
+  },
+  "gaps": [
+    {
+      "from": "2008-10-03T20:00:00Z",
+      "to": "2008-10-05T21:01:00Z",
+      "deltaMinutes": 2941,
+      "classification": "weekend_closure_candidate"
+    },
+    {
+      "from": "2008-10-10T20:00:00Z",
+      "to": "2008-10-12T21:01:00Z",
+      "deltaMinutes": 2941,
+      "classification": "weekend_closure_candidate"
+    },
+    {
+      "from": "2008-10-17T20:00:00Z",
+      "to": "2008-10-19T21:01:00Z",
+      "deltaMinutes": 2941,
+      "classification": "weekend_closure_candidate"
+    },
+    {
+      "from": "2008-10-23T05:48:00Z",
+      "to": "2008-10-23T06:01:00Z",
+      "deltaMinutes": 13,
+      "classification": "unexplained_observation_gap"
+    },
+    {
+      "from": "2008-10-24T20:00:00Z",
+      "to": "2008-10-26T22:01:00Z",
+      "deltaMinutes": 3001,
+      "classification": "weekend_closure_candidate"
+    }
+  ],
+  "largeChanges": [
+    {
+      "from": "2008-10-08T11:00:00Z",
+      "to": "2008-10-08T11:01:00Z",
+      "closeChangePct": 1.1762340404142035,
+      "classification": "large_change_review_not_auto_correction"
+    },
+    {
+      "from": "2008-10-24T08:14:00Z",
+      "to": "2008-10-24T08:15:00Z",
+      "closeChangePct": -1.055408970976257,
+      "classification": "large_change_review_not_auto_correction"
+    },
+    {
+      "from": "2008-10-24T20:00:00Z",
+      "to": "2008-10-26T22:01:00Z",
+      "closeChangePct": -2.1242866201648725,
+      "classification": "large_change_review_not_auto_correction"
+    }
+  ],
+  "days": [
+    {
+      "date": "2008-10-01",
+      "rows": 1440,
+      "open": 106.0,
+      "high": 106.49,
+      "low": 105.31,
+      "close": 106.02,
+      "firstLabelUTC": "2008-10-01T00:00:00Z",
+      "lastLabelUTC": "2008-10-01T23:59:00Z"
+    },
+    {
+      "date": "2008-10-02",
+      "rows": 1440,
+      "open": 106.03,
+      "high": 106.26,
+      "low": 104.92,
+      "close": 104.97,
+      "firstLabelUTC": "2008-10-02T00:00:00Z",
+      "lastLabelUTC": "2008-10-02T23:59:00Z"
+    },
+    {
+      "date": "2008-10-03",
+      "rows": 1201,
+      "open": 104.96,
+      "high": 106.12,
+      "low": 104.53,
+      "close": 105.13,
+      "firstLabelUTC": "2008-10-03T00:00:00Z",
+      "lastLabelUTC": "2008-10-03T20:00:00Z"
+    },
+    {
+      "date": "2008-10-05",
+      "rows": 179,
+      "open": 104.9,
+      "high": 105.13,
+      "low": 104.42,
+      "close": 104.48,
+      "firstLabelUTC": "2008-10-05T21:01:00Z",
+      "lastLabelUTC": "2008-10-05T23:59:00Z"
+    },
+    {
+      "date": "2008-10-06",
+      "rows": 1440,
+      "open": 104.49,
+      "high": 104.64,
+      "low": 100.25,
+      "close": 101.56,
+      "firstLabelUTC": "2008-10-06T00:00:00Z",
+      "lastLabelUTC": "2008-10-06T23:59:00Z"
+    },
+    {
+      "date": "2008-10-07",
+      "rows": 1440,
+      "open": 101.56,
+      "high": 103.26,
+      "low": 101.06,
+      "close": 101.22,
+      "firstLabelUTC": "2008-10-07T00:00:00Z",
+      "lastLabelUTC": "2008-10-07T23:59:00Z"
+    },
+    {
+      "date": "2008-10-08",
+      "rows": 1440,
+      "open": 101.25,
+      "high": 101.57,
+      "low": 98.58,
+      "close": 99.7,
+      "firstLabelUTC": "2008-10-08T00:00:00Z",
+      "lastLabelUTC": "2008-10-08T23:59:00Z"
+    },
+    {
+      "date": "2008-10-09",
+      "rows": 1440,
+      "open": 99.71,
+      "high": 101.45,
+      "low": 98.49,
+      "close": 99.07,
+      "firstLabelUTC": "2008-10-09T00:00:00Z",
+      "lastLabelUTC": "2008-10-09T23:59:00Z"
+    },
+    {
+      "date": "2008-10-10",
+      "rows": 1201,
+      "open": 99.08,
+      "high": 100.69,
+      "low": 97.9,
+      "close": 100.25,
+      "firstLabelUTC": "2008-10-10T00:00:00Z",
+      "lastLabelUTC": "2008-10-10T20:00:00Z"
+    },
+    {
+      "date": "2008-10-12",
+      "rows": 179,
+      "open": 100.73,
+      "high": 101.16,
+      "low": 100.38,
+      "close": 100.81,
+      "firstLabelUTC": "2008-10-12T21:01:00Z",
+      "lastLabelUTC": "2008-10-12T23:59:00Z"
+    },
+    {
+      "date": "2008-10-13",
+      "rows": 1440,
+      "open": 100.8,
+      "high": 102.65,
+      "low": 99.55,
+      "close": 102.62,
+      "firstLabelUTC": "2008-10-13T00:00:00Z",
+      "lastLabelUTC": "2008-10-13T23:59:00Z"
+    },
+    {
+      "date": "2008-10-14",
+      "rows": 1440,
+      "open": 102.61,
+      "high": 103.03,
+      "low": 101.45,
+      "close": 101.56,
+      "firstLabelUTC": "2008-10-14T00:00:00Z",
+      "lastLabelUTC": "2008-10-14T23:59:00Z"
+    },
+    {
+      "date": "2008-10-15",
+      "rows": 1440,
+      "open": 101.57,
+      "high": 101.9,
+      "low": 99.25,
+      "close": 99.26,
+      "firstLabelUTC": "2008-10-15T00:00:00Z",
+      "lastLabelUTC": "2008-10-15T23:59:00Z"
+    },
+    {
+      "date": "2008-10-16",
+      "rows": 1440,
+      "open": 99.27,
+      "high": 101.7,
+      "low": 99.27,
+      "close": 101.4,
+      "firstLabelUTC": "2008-10-16T00:00:00Z",
+      "lastLabelUTC": "2008-10-16T23:59:00Z"
+    },
+    {
+      "date": "2008-10-17",
+      "rows": 1201,
+      "open": 101.39,
+      "high": 101.79,
+      "low": 100.59,
+      "close": 101.43,
+      "firstLabelUTC": "2008-10-17T00:00:00Z",
+      "lastLabelUTC": "2008-10-17T20:00:00Z"
+    },
+    {
+      "date": "2008-10-19",
+      "rows": 179,
+      "open": 101.56,
+      "high": 101.69,
+      "low": 101.39,
+      "close": 101.47,
+      "firstLabelUTC": "2008-10-19T21:01:00Z",
+      "lastLabelUTC": "2008-10-19T23:59:00Z"
+    },
+    {
+      "date": "2008-10-20",
+      "rows": 1440,
+      "open": 101.48,
+      "high": 102.39,
+      "low": 101.34,
+      "close": 102.06,
+      "firstLabelUTC": "2008-10-20T00:00:00Z",
+      "lastLabelUTC": "2008-10-20T23:59:00Z"
+    },
+    {
+      "date": "2008-10-21",
+      "rows": 1440,
+      "open": 102.07,
+      "high": 102.13,
+      "low": 100.04,
+      "close": 100.23,
+      "firstLabelUTC": "2008-10-21T00:00:00Z",
+      "lastLabelUTC": "2008-10-21T23:59:00Z"
+    },
+    {
+      "date": "2008-10-22",
+      "rows": 1440,
+      "open": 100.24,
+      "high": 100.41,
+      "low": 97.22,
+      "close": 97.73,
+      "firstLabelUTC": "2008-10-22T00:00:00Z",
+      "lastLabelUTC": "2008-10-22T23:59:00Z"
+    },
+    {
+      "date": "2008-10-23",
+      "rows": 1428,
+      "open": 97.73,
+      "high": 98.29,
+      "low": 95.93,
+      "close": 97.6,
+      "firstLabelUTC": "2008-10-23T00:00:00Z",
+      "lastLabelUTC": "2008-10-23T23:59:00Z"
+    },
+    {
+      "date": "2008-10-24",
+      "rows": 1201,
+      "open": 97.59,
+      "high": 97.59,
+      "low": 90.91,
+      "close": 94.62,
+      "firstLabelUTC": "2008-10-24T00:00:00Z",
+      "lastLabelUTC": "2008-10-24T20:00:00Z"
+    },
+    {
+      "date": "2008-10-26",
+      "rows": 119,
+      "open": 92.6,
+      "high": 93.47,
+      "low": 91.89,
+      "close": 93.47,
+      "firstLabelUTC": "2008-10-26T22:01:00Z",
+      "lastLabelUTC": "2008-10-26T23:59:00Z"
+    },
+    {
+      "date": "2008-10-27",
+      "rows": 1440,
+      "open": 93.48,
+      "high": 94.46,
+      "low": 92.04,
+      "close": 93.16,
+      "firstLabelUTC": "2008-10-27T00:00:00Z",
+      "lastLabelUTC": "2008-10-27T23:59:00Z"
+    },
+    {
+      "date": "2008-10-28",
+      "rows": 1440,
+      "open": 93.15,
+      "high": 99.67,
+      "low": 92.63,
+      "close": 98.17,
+      "firstLabelUTC": "2008-10-28T00:00:00Z",
+      "lastLabelUTC": "2008-10-28T23:59:00Z"
+    },
+    {
+      "date": "2008-10-29",
+      "rows": 1440,
+      "open": 98.17,
+      "high": 98.25,
+      "low": 96.06,
+      "close": 97.55,
+      "firstLabelUTC": "2008-10-29T00:00:00Z",
+      "lastLabelUTC": "2008-10-29T23:59:00Z"
+    },
+    {
+      "date": "2008-10-30",
+      "rows": 1440,
+      "open": 97.54,
+      "high": 99.1,
+      "low": 97.38,
+      "close": 98.77,
+      "firstLabelUTC": "2008-10-30T00:00:00Z",
+      "lastLabelUTC": "2008-10-30T23:59:00Z"
+    },
+    {
+      "date": "2008-10-31",
+      "rows": 1261,
+      "open": 98.76,
+      "high": 99.09,
+      "low": 96.33,
+      "close": 98.45,
+      "firstLabelUTC": "2008-10-31T00:00:00Z",
+      "lastLabelUTC": "2008-10-31T21:00:00Z"
+    }
+  ],
+  "originals": [
+    {
+      "url": "https://www.forexite.com/free_forex_quotes/2008/09/300908.zip",
+      "file": "raw/forexite-300908.zip",
+      "bytes": 430389,
+      "sha256": "82404bb6df201a74f4b02f2ccd86b27ef6b763a7e76d6bff71d03ae0a56dca4d",
+      "zipCrcVerified": true,
+      "members": [
+        {
+          "member": "300908.txt",
+          "bytes": 3290812,
+          "sha256": "90cbf3408ad9376b76af6965ae7a920625c8d877b85f1303d5cc818cf6e3064c"
+        }
+      ],
+      "USDJPYRows": 1440,
+      "firstLabelUTC": "2008-09-29T22:01:00Z",
+      "lastLabelUTC": "2008-09-30T22:00:00Z"
+    },
+    {
+      "url": "https://www.forexite.com/free_forex_quotes/2008/10/011008.zip",
+      "file": "raw/forexite-011008.zip",
+      "bytes": 417791,
+      "sha256": "80b3be419321dd448745d15858c2aed13a7888f60c04b0672b0ddb1fd353e98c",
+      "zipCrcVerified": true,
+      "members": [
+        {
+          "member": "011008.txt",
+          "bytes": 3285379,
+          "sha256": "67eb1b4a9bba10108c0300e38649152abf32b9fa538ad615b0d6a28b14fadcdf"
+        }
+      ],
+      "USDJPYRows": 1440,
+      "firstLabelUTC": "2008-09-30T22:01:00Z",
+      "lastLabelUTC": "2008-10-01T22:00:00Z"
+    },
+    {
+      "url": "https://www.forexite.com/free_forex_quotes/2008/10/021008.zip",
+      "file": "raw/forexite-021008.zip",
+      "bytes": 420651,
+      "sha256": "ed505c785bdf24679a91ea60b0f777c731494ea885f859b61ab6516658654961",
+      "zipCrcVerified": true,
+      "members": [
+        {
+          "member": "021008.txt",
+          "bytes": 3284588,
+          "sha256": "6c482eeff6c6ca74b33906c7ccedf85fe435178d6cf51d122919222c8f1df126"
+        }
+      ],
+      "USDJPYRows": 1440,
+      "firstLabelUTC": "2008-10-01T22:01:00Z",
+      "lastLabelUTC": "2008-10-02T22:00:00Z"
+    },
+    {
+      "url": "https://www.forexite.com/free_forex_quotes/2008/10/031008.zip",
+      "file": "raw/forexite-031008.zip",
+      "bytes": 390034,
+      "sha256": "02ba4d1ed63032db7dda82c5bba4b0a11fa5605bcb8de44256de26ac0c133da2",
+      "zipCrcVerified": true,
+      "members": [
+        {
+          "member": "031008.txt",
+          "bytes": 3027622,
+          "sha256": "737c1cc1c585fda66b02290548b53f38d24faef162330b2fc0378eb03042de72"
+        }
+      ],
+      "USDJPYRows": 1320,
+      "firstLabelUTC": "2008-10-02T22:01:00Z",
+      "lastLabelUTC": "2008-10-03T20:00:00Z"
+    },
+    {
+      "url": "https://www.forexite.com/free_forex_quotes/2008/10/051008.zip",
+      "file": "raw/forexite-051008.zip",
+      "bytes": 16311,
+      "sha256": "3512a743105627b959adb20fd3599969f2a339dc96093f41244b1bf887ccb797",
+      "zipCrcVerified": true,
+      "members": [
+        {
+          "member": "051008.txt",
+          "bytes": 123146,
+          "sha256": "de3e9b8d00cfdd151df58bb94f0122cc1e24c6a713b220f84b899ff41821aa3a"
+        }
+      ],
+      "USDJPYRows": 60,
+      "firstLabelUTC": "2008-10-05T21:01:00Z",
+      "lastLabelUTC": "2008-10-05T22:00:00Z"
+    },
+    {
+      "url": "https://www.forexite.com/free_forex_quotes/2008/10/061008.zip",
+      "file": "raw/forexite-061008.zip",
+      "bytes": 467361,
+      "sha256": "9780988d4dadde8606d85d17a4e5b9f10ea8bde186fa1533319241cd0a3eaf6a",
+      "zipCrcVerified": true,
+      "members": [
+        {
+          "member": "061008.txt",
+          "bytes": 3326887,
+          "sha256": "8fc1bf80b7c8e803810bf3959d2279c8711c0498039dc3edbc71632af6753a83"
+        }
+      ],
+      "USDJPYRows": 1440,
+      "firstLabelUTC": "2008-10-05T22:01:00Z",
+      "lastLabelUTC": "2008-10-06T22:00:00Z"
+    },
+    {
+      "url": "https://www.forexite.com/free_forex_quotes/2008/10/071008.zip",
+      "file": "raw/forexite-071008.zip",
+      "bytes": 445905,
+      "sha256": "2aefa5fb94dcdcb255147bfa7cfc8f2afc2debd64a4121ca3e6a3a2b1961d0bc",
+      "zipCrcVerified": true,
+      "members": [
+        {
+          "member": "071008.txt",
+          "bytes": 3091681,
+          "sha256": "bc1506d42fe82c30d14a473bcb239fdb2d1c6e169e7d16ff123e50f65b36bc5b"
+        }
+      ],
+      "USDJPYRows": 1440,
+      "firstLabelUTC": "2008-10-06T22:01:00Z",
+      "lastLabelUTC": "2008-10-07T22:00:00Z"
+    },
+    {
+      "url": "https://www.forexite.com/free_forex_quotes/2008/10/081008.zip",
+      "file": "raw/forexite-081008.zip",
+      "bytes": 443554,
+      "sha256": "c4032e551e3824fd46fd4b166135893e1bb6c0dbada11a71213ae6ca71a6af4d",
+      "zipCrcVerified": true,
+      "members": [
+        {
+          "member": "081008.txt",
+          "bytes": 2885953,
+          "sha256": "88f355494660617433f56a6a809f8ae01fbee21f5380fd78a6b44998348ac706"
+        }
+      ],
+      "USDJPYRows": 1440,
+      "firstLabelUTC": "2008-10-07T22:01:00Z",
+      "lastLabelUTC": "2008-10-08T22:00:00Z"
+    },
+    {
+      "url": "https://www.forexite.com/free_forex_quotes/2008/10/091008.zip",
+      "file": "raw/forexite-091008.zip",
+      "bytes": 469066,
+      "sha256": "f47d033f884ce03e283d091c4b938f8897f515addae04a7affefa2e558bcea5e",
+      "zipCrcVerified": true,
+      "members": [
+        {
+          "member": "091008.txt",
+          "bytes": 3254455,
+          "sha256": "9ee25de2fbe799f1997fc7aaba491b6396ceb667b27f3c4bd61b2b7ec76ed229"
+        }
+      ],
+      "USDJPYRows": 1440,
+      "firstLabelUTC": "2008-10-08T22:01:00Z",
+      "lastLabelUTC": "2008-10-09T22:00:00Z"
+    },
+    {
+      "url": "https://www.forexite.com/free_forex_quotes/2008/10/101008.zip",
+      "file": "raw/forexite-101008.zip",
+      "bytes": 463753,
+      "sha256": "65514735d9cfe283201415f8236f1698d63e49cf84e091ffa1de79d7e37f38b4",
+      "zipCrcVerified": true,
+      "members": [
+        {
+          "member": "101008.txt",
+          "bytes": 3019889,
+          "sha256": "dd4c6fc6d5ffc4daf7f182b22d213e9ba944967cd01d4876303838686c0a130f"
+        }
+      ],
+      "USDJPYRows": 1320,
+      "firstLabelUTC": "2008-10-09T22:01:00Z",
+      "lastLabelUTC": "2008-10-10T20:00:00Z"
+    },
+    {
+      "url": "https://www.forexite.com/free_forex_quotes/2008/10/121008.zip",
+      "file": "raw/forexite-121008.zip",
+      "bytes": 16688,
+      "sha256": "394435568d0839ba9841a8b0060964d0d6abdb78396152c7928c43e6efb0a392",
+      "zipCrcVerified": true,
+      "members": [
+        {
+          "member": "121008.txt",
+          "bytes": 119846,
+          "sha256": "1a16c9dce326b8d6a25e95cce73a341f566b4deae28c0308a4999660fc4f64cf"
+        }
+      ],
+      "USDJPYRows": 60,
+      "firstLabelUTC": "2008-10-12T21:01:00Z",
+      "lastLabelUTC": "2008-10-12T22:00:00Z"
+    },
+    {
+      "url": "https://www.forexite.com/free_forex_quotes/2008/10/131008.zip",
+      "file": "raw/forexite-131008.zip",
+      "bytes": 477727,
+      "sha256": "49687c94423058f3deeca88e7a0a3a39f9b70b870f61ecf6074319864a37e072",
+      "zipCrcVerified": true,
+      "members": [
+        {
+          "member": "131008.txt",
+          "bytes": 3339572,
+          "sha256": "48ed2972454446c208499d0f407d275b013f42217ae49b43e43a7cdd0ea12795"
+        }
+      ],
+      "USDJPYRows": 1440,
+      "firstLabelUTC": "2008-10-12T22:01:00Z",
+      "lastLabelUTC": "2008-10-13T22:00:00Z"
+    },
+    {
+      "url": "https://www.forexite.com/free_forex_quotes/2008/10/141008.zip",
+      "file": "raw/forexite-141008.zip",
+      "bytes": 462472,
+      "sha256": "ccb58408701ebd36c8d8f7060c2954e4ee271f81835922129e77cc41f2c22ced",
+      "zipCrcVerified": true,
+      "members": [
+        {
+          "member": "141008.txt",
+          "bytes": 3318810,
+          "sha256": "5df2b1922e94db4dfe0369ea3defa6081cf7001daee4db9fdc807e50983baec9"
+        }
+      ],
+      "USDJPYRows": 1440,
+      "firstLabelUTC": "2008-10-13T22:01:00Z",
+      "lastLabelUTC": "2008-10-14T22:00:00Z"
+    },
+    {
+      "url": "https://www.forexite.com/free_forex_quotes/2008/10/151008.zip",
+      "file": "raw/forexite-151008.zip",
+      "bytes": 468916,
+      "sha256": "02144356a6be54127fcbc5e78f8cae61b613b266f6cf94497e438a54809773f9",
+      "zipCrcVerified": true,
+      "members": [
+        {
+          "member": "151008.txt",
+          "bytes": 3313196,
+          "sha256": "641cb848ac1a74ebb8feb43960ea2fbfae4ad7dd5a03af2befed9d48650d5996"
+        }
+      ],
+      "USDJPYRows": 1440,
+      "firstLabelUTC": "2008-10-14T22:01:00Z",
+      "lastLabelUTC": "2008-10-15T22:00:00Z"
+    },
+    {
+      "url": "https://www.forexite.com/free_forex_quotes/2008/10/161008.zip",
+      "file": "raw/forexite-161008.zip",
+      "bytes": 490630,
+      "sha256": "46efd6361eaa3072d43fe2480019b7ce2398c8480cd671eaa7aa441ad223d856",
+      "zipCrcVerified": true,
+      "members": [
+        {
+          "member": "161008.txt",
+          "bytes": 3329504,
+          "sha256": "c2d4c709790014d26fb218ac0c17b1de57285ee34ad430c08f9ed0186c734637"
+        }
+      ],
+      "USDJPYRows": 1440,
+      "firstLabelUTC": "2008-10-15T22:01:00Z",
+      "lastLabelUTC": "2008-10-16T22:00:00Z"
+    },
+    {
+      "url": "https://www.forexite.com/free_forex_quotes/2008/10/171008.zip",
+      "file": "raw/forexite-171008.zip",
+      "bytes": 425972,
+      "sha256": "cae8c507906a5308b3474c411ad7cabea4bd785428d3720dbb2f025ff4346429",
+      "zipCrcVerified": true,
+      "members": [
+        {
+          "member": "171008.txt",
+          "bytes": 3034687,
+          "sha256": "23f71fbc69043bb4c693cc29779f1886aa48c092304297d89a1a6e131a49a1f9"
+        }
+      ],
+      "USDJPYRows": 1320,
+      "firstLabelUTC": "2008-10-16T22:01:00Z",
+      "lastLabelUTC": "2008-10-17T20:00:00Z"
+    },
+    {
+      "url": "https://www.forexite.com/free_forex_quotes/2008/10/191008.zip",
+      "file": "raw/forexite-191008.zip",
+      "bytes": 14323,
+      "sha256": "de12d9fb2c1ac7c1269b3090d4e5cd402235f01d72a0dd59b58e7933473b541d",
+      "zipCrcVerified": true,
+      "members": [
+        {
+          "member": "191008.txt",
+          "bytes": 117874,
+          "sha256": "9d7c181f9d0a24f0b06ad244ad9b8c6c5602c8059a564f1413e7729219560b78"
+        }
+      ],
+      "USDJPYRows": 60,
+      "firstLabelUTC": "2008-10-19T21:01:00Z",
+      "lastLabelUTC": "2008-10-19T22:00:00Z"
+    },
+    {
+      "url": "https://www.forexite.com/free_forex_quotes/2008/10/201008.zip",
+      "file": "raw/forexite-201008.zip",
+      "bytes": 440613,
+      "sha256": "0977232103bd1a114c3d6dea0ec23fdd11e0c4af21190a9e976be8b3c7294909",
+      "zipCrcVerified": true,
+      "members": [
+        {
+          "member": "201008.txt",
+          "bytes": 3292926,
+          "sha256": "471752952d4f21140766c14ed6fa7c9b85f6598131a8ba13ff15e84e31efaba2"
+        }
+      ],
+      "USDJPYRows": 1440,
+      "firstLabelUTC": "2008-10-19T22:01:00Z",
+      "lastLabelUTC": "2008-10-20T22:00:00Z"
+    },
+    {
+      "url": "https://www.forexite.com/free_forex_quotes/2008/10/211008.zip",
+      "file": "raw/forexite-211008.zip",
+      "bytes": 443948,
+      "sha256": "9b67cdbf8d1dc29d0b1fbc20a3501b970b142b3d2728c8dc929d67c62d816cf7",
+      "zipCrcVerified": true,
+      "members": [
+        {
+          "member": "211008.txt",
+          "bytes": 3293198,
+          "sha256": "195af995a9f5fd0d8c288fc0130cdf056d9c6c257211dbb041d68e01cc170e61"
+        }
+      ],
+      "USDJPYRows": 1440,
+      "firstLabelUTC": "2008-10-20T22:01:00Z",
+      "lastLabelUTC": "2008-10-21T22:00:00Z"
+    },
+    {
+      "url": "https://www.forexite.com/free_forex_quotes/2008/10/221008.zip",
+      "file": "raw/forexite-221008.zip",
+      "bytes": 483790,
+      "sha256": "95d48f85e2933e54185bccd5e9daf8cd7144fd93bed84857e5a710c5c86cfd4f",
+      "zipCrcVerified": true,
+      "members": [
+        {
+          "member": "221008.txt",
+          "bytes": 3336534,
+          "sha256": "5ccd5e85b535e9c46e43a893c42feae188145f384ea1c632b551e80498a7f152"
+        }
+      ],
+      "USDJPYRows": 1440,
+      "firstLabelUTC": "2008-10-21T22:01:00Z",
+      "lastLabelUTC": "2008-10-22T22:00:00Z"
+    },
+    {
+      "url": "https://www.forexite.com/free_forex_quotes/2008/10/231008.zip",
+      "file": "raw/forexite-231008.zip",
+      "bytes": 487544,
+      "sha256": "9373d40862f0ccbae88bf253e2a0030ae6c27d05e4e0a820fe6e8ca8e3041629",
+      "zipCrcVerified": true,
+      "members": [
+        {
+          "member": "231008.txt",
+          "bytes": 3321214,
+          "sha256": "f8ff909ba868e48d331978b322bc7091268401faab1ee8b7b271358147935095"
+        }
+      ],
+      "USDJPYRows": 1428,
+      "firstLabelUTC": "2008-10-22T22:01:00Z",
+      "lastLabelUTC": "2008-10-23T22:00:00Z"
+    },
+    {
+      "url": "https://www.forexite.com/free_forex_quotes/2008/10/241008.zip",
+      "file": "raw/forexite-241008.zip",
+      "bytes": 461626,
+      "sha256": "7ee3f7a27d8c3de015f5034167244ce79e527c2a0e55b69e1ff6d960ce42c1ad",
+      "zipCrcVerified": true,
+      "members": [
+        {
+          "member": "241008.txt",
+          "bytes": 2943466,
+          "sha256": "d887d2cbbe110e425f3820cfaee8fe06b82e54ce93791201a2bb99863593bbc9"
+        }
+      ],
+      "USDJPYRows": 1320,
+      "firstLabelUTC": "2008-10-23T22:01:00Z",
+      "lastLabelUTC": "2008-10-24T20:00:00Z"
+    },
+    {
+      "url": "https://www.forexite.com/free_forex_quotes/2008/10/261008.zip",
+      "file": "raw/forexite-261008.zip",
+      "bytes": 19716,
+      "sha256": "044ff4ec8220253796751ac28ce00d7263e6daaf62e6ac3006bed6c4aeb184c1",
+      "zipCrcVerified": true,
+      "members": [
+        {
+          "member": "261008.txt",
+          "bytes": 127298,
+          "sha256": "30edb685604b822c5eb3a506f35b46b386ee54850756591b4d68bc1a5584bdca"
+        }
+      ],
+      "USDJPYRows": 60,
+      "firstLabelUTC": "2008-10-26T22:01:00Z",
+      "lastLabelUTC": "2008-10-26T23:00:00Z"
+    },
+    {
+      "url": "https://www.forexite.com/free_forex_quotes/2008/10/271008.zip",
+      "file": "raw/forexite-271008.zip",
+      "bytes": 497956,
+      "sha256": "187d3671b4c5a29e6b0be30b185f25e23fbf6e2f5342db8442bc2cbe91544f0b",
+      "zipCrcVerified": true,
+      "members": [
+        {
+          "member": "271008.txt",
+          "bytes": 3358450,
+          "sha256": "298bef5018a20287eacd87aee7c1a169036751ebc7292d6f64ab016b6208351b"
+        }
+      ],
+      "USDJPYRows": 1440,
+      "firstLabelUTC": "2008-10-26T23:01:00Z",
+      "lastLabelUTC": "2008-10-27T23:00:00Z"
+    },
+    {
+      "url": "https://www.forexite.com/free_forex_quotes/2008/10/281008.zip",
+      "file": "raw/forexite-281008.zip",
+      "bytes": 502527,
+      "sha256": "df65847b7f35ed02ddf2102890f20de713ebae6f125d64b20cd9b01671cbf3ed",
+      "zipCrcVerified": true,
+      "members": [
+        {
+          "member": "281008.txt",
+          "bytes": 3357674,
+          "sha256": "2fc23d37b768dda65a45c873c4221943f26f780ce477f81062915f4dd258e66e"
+        }
+      ],
+      "USDJPYRows": 1440,
+      "firstLabelUTC": "2008-10-27T23:01:00Z",
+      "lastLabelUTC": "2008-10-28T23:00:00Z"
+    },
+    {
+      "url": "https://www.forexite.com/free_forex_quotes/2008/10/291008.zip",
+      "file": "raw/forexite-291008.zip",
+      "bytes": 501778,
+      "sha256": "b3eb0c67ffbc176a8578a8b0258c2244289a1c5becb18bd7c29def4f6ab1ca71",
+      "zipCrcVerified": true,
+      "members": [
+        {
+          "member": "291008.txt",
+          "bytes": 3346471,
+          "sha256": "338797af77e9bbbb510b685f4d95ef3f555ed14485613af801c528f78606ee3e"
+        }
+      ],
+      "USDJPYRows": 1440,
+      "firstLabelUTC": "2008-10-28T23:01:00Z",
+      "lastLabelUTC": "2008-10-29T23:00:00Z"
+    },
+    {
+      "url": "https://www.forexite.com/free_forex_quotes/2008/10/301008.zip",
+      "file": "raw/forexite-301008.zip",
+      "bytes": 502702,
+      "sha256": "ac95d61967cc8ebf63184b0bbaf66804a5455fcdf1d2fe959fb2b82c2919509f",
+      "zipCrcVerified": true,
+      "members": [
+        {
+          "member": "301008.txt",
+          "bytes": 3343232,
+          "sha256": "b41466fe2c877a44eaa7e69aaa63e7d086e625fde8f77b3658e963df5bd58445"
+        }
+      ],
+      "USDJPYRows": 1440,
+      "firstLabelUTC": "2008-10-29T23:01:00Z",
+      "lastLabelUTC": "2008-10-30T23:00:00Z"
+    },
+    {
+      "url": "https://www.forexite.com/free_forex_quotes/2008/10/311008.zip",
+      "file": "raw/forexite-311008.zip",
+      "bytes": 457505,
+      "sha256": "ae67a78817fbd5c0491e4980f90811a134e0f3a4a65644ae713162437f6c8297",
+      "zipCrcVerified": true,
+      "members": [
+        {
+          "member": "311008.txt",
+          "bytes": 3072166,
+          "sha256": "f76fa475c4fbb87513cbe05a484c0308e883a810d07df3613bd1923dc4d5b90e"
+        }
+      ],
+      "USDJPYRows": 1320,
+      "firstLabelUTC": "2008-10-30T23:01:00Z",
+      "lastLabelUTC": "2008-10-31T21:00:00Z"
+    },
+    {
+      "url": "https://www.forexite.com/free_forex_quotes/2008/11/021108.zip",
+      "file": "raw/forexite-021108.zip",
+      "bytes": 13858,
+      "sha256": "3408690175a262494016fa703222f3b11b41e3298b91abdbfdd4c36608e1c689",
+      "zipCrcVerified": true,
+      "members": [
+        {
+          "member": "021108.txt",
+          "bytes": 120082,
+          "sha256": "9332f3f029a0c71605d5370711eafeb6732f9ffd03d6778fd0f78fd9e2ee80a2"
+        }
+      ],
+      "USDJPYRows": 60,
+      "firstLabelUTC": "2008-11-02T22:01:00Z",
+      "lastLabelUTC": "2008-11-02T23:00:00Z"
+    }
+  ],
+  "gzip": {
+    "file": "USDJPY-2008-10.forexite.m1.csv.gz",
+    "sha256": "da10482677dfaf6493a3e762e9137c23635130b2f13addfec0abd6ccfdc10fdd",
+    "bytes": 429204,
+    "roundTripVerified": true
+  }
+}

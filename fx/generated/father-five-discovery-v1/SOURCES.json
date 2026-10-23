@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "kind": "original-fan-art",
+  "generator": "OpenAI image generation",
+  "copyrightNote": "Original fan-art illustrations and game-adapted dialogue; not original manga pages or canonical quotations.",
+  "approvedDialogueSha256": "ff92b030682e197172dd2139f6ca2b4193becf9c89b854af25a7dbf4cfe9dd56",
+  "assets": [
+    {
+      "id": "father-discovery-flat",
+      "outcomeBand": "flat",
+      "file": "father-discovery-flat.webp",
+      "sha256": "f30d15e32bf3e6e0ac1e739bff171aefad9b0039b5c889b65bec201e4027d06a",
+      "width": 1086,
+      "height": 1448,
+      "originalSha256": "eb1ade77e9fa568dee70e52a4f1921031798d0ff82ff99e52ee9b3ae9c037f97",
+      "panels": 4,
+      "readingOrder": "top-left, top-right, bottom-left, bottom-right"
+    },
+    {
+      "id": "father-discovery-small-profit",
+      "outcomeBand": "small-profit",
+      "file": "father-discovery-small-profit.webp",
+      "sha256": "a90d35c2cf4430aabc820ed9d72f4dd29626f3208a8836c611d1acda716475e3",
+      "width": 1086,
+      "height": 1448,
+      "originalSha256": "0911d2c090a174af397cbc59c0787a2447ce8d0e49a8da8bf29f2cdeb436180a",
+      "panels": 4,
+      "readingOrder": "top-left, top-right, bottom-left, bottom-right"
+    },
+    {
+      "id": "father-discovery-large-profit",
+      "outcomeBand": "large-profit",
+      "file": "father-discovery-large-profit.webp",
+      "sha256": "c233177331695733cfc7db875fd5a73eea6f62119d681640fb848493888bb35d",
+      "width": 1086,
+      "height": 1448,
+      "originalSha256": "199767f6aa25b6193c87ff3c54eaa0c679d1494cf047352f319763567201ae50",
+      "panels": 4,
+      "readingOrder": "top-left, top-right, bottom-left, bottom-right"
+    },
+    {
+      "id": "father-discovery-small-loss",
+      "outcomeBand": "small-loss",
+      "file": "father-discovery-small-loss.webp",
+      "sha256": "1af4f36fbdf3aa300eebf8c14ccf7a04e4f08e6e887f65f6d4fb3834d9d0448d",
+      "width": 1086,
+      "height": 1448,
+      "originalSha256": "78232e2c6f8b7f3bd7a5e28f68248bdca62c2b5bbb859b4988d1b5098ba052fd",
+      "panels": 4,
+      "readingOrder": "top-left, top-right, bottom-left, bottom-right"
+    },
+    {
+      "id": "father-discovery-large-loss",
+      "outcomeBand": "large-loss",
+      "file": "father-discovery-large-loss.webp",
+      "sha256": "7593de73818a39c544a7b4d6253d4f11224543c51359e321ac6969deb7f22672",
+      "width": 1086,
+      "height": 1448,
+      "originalSha256": "2db86810fd2b94f27c9024ef14a8556c1838aa522e77d7198de6a3f76c29827e",
+      "panels": 4,
+      "readingOrder": "top-left, top-right, bottom-left, bottom-right"
+    }
+  ]
+}

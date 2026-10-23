@@ -1,0 +1,24 @@
+/* Financial pairs wrap as label/value groups, never as a detached + / − / ¥. */
+.trade-card,.position-card,.order-row,.position-pnl,.day-total,.ranking-entry,.dialog-scroll{container-type:inline-size;min-width:0}
+.position-pnl{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px}
+.position-pnl>span{flex:0 0 auto;white-space:nowrap;font-size:12px}
+.position-pnl>strong{flex:0 0 auto;display:block;margin-left:auto;max-width:100%;--amount-font:27px}
+[data-atomic-amount]{display:inline-block;max-width:100%;white-space:nowrap;word-break:normal;overflow-wrap:normal;font-variant-numeric:tabular-nums;font-size:var(--amount-font,1em)}
+@supports(font-size:1cqw){[data-atomic-amount]{font-size:min(var(--amount-font,1em),calc((100cqw - 4px) / var(--amount-characters,16) * 1.35))}}
+.account-heading>b{--amount-font:36px}.order-live-pnl b{--amount-font:20px}.order-estimate .primary-estimate b{--amount-font:17px}.day-total>strong{--amount-font:38px}.prop-dialog .dialog-scroll>strong{--amount-font:35px}
+.account-row,.order-row-data,.order-estimate>div{flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.account-row>span,.order-row-data>span,.order-estimate>div>span{flex:0 0 auto;max-width:100%;word-break:keep-all;overflow-wrap:normal}
+.account-row>b,.order-row-data>b,.order-estimate>div>b{min-width:0;margin-left:auto;text-align:right;overflow-wrap:anywhere}
+.liquidation-estimate>div{grid-template-columns:minmax(0,1fr);gap:5px}
+.liquidation-estimate>div>span{white-space:nowrap;word-break:keep-all}
+.liquidation-estimate p{min-width:0;overflow-wrap:break-word;word-break:normal}
+.liquidation-estimate p b{display:inline-block;white-space:nowrap;max-width:100%}
+.ranking-metrics{min-width:0}.ranking-metrics>div{min-width:0}.ranking-entry-head{flex-wrap:wrap}
+@media(max-width:390px){.position-pnl{display:grid;grid-template-columns:minmax(0,1fr)}.position-pnl>strong{margin-left:0;--amount-font:24px}.order-row-data,.order-estimate>div{display:flex;flex-direction:column;align-items:stretch}.order-row-data>b,.order-estimate>div>b{margin-left:0;text-align:left}.account-heading>b{--amount-font:32px}}
+
+.position-pnl>strong:not([data-atomic-amount]){white-space:normal;overflow-wrap:anywhere;min-width:0}
+/* Phone facts share a line whenever they fit; only genuinely long amounts wrap. */
+@media(max-width:690px){
+ .position-pnl{display:flex;gap:4px 8px}.position-pnl>strong{margin-left:auto;--amount-font:23px}.account-heading>b{--amount-font:29px}.order-live-pnl b{--amount-font:18px}.order-estimate .primary-estimate b{--amount-font:15px}.day-total>strong{--amount-font:29px}
+ .order-row-data,.order-estimate>div{flex-direction:row;align-items:baseline;gap:3px 7px}.order-row-data>b,.order-estimate>div>b{margin-left:auto;text-align:right}.liquidation-estimate>div{grid-template-columns:82px minmax(0,1fr);gap:6px}
+}

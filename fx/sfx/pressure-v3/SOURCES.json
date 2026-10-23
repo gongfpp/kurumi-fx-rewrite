@@ -1,0 +1,40 @@
+{
+  "kind": "original-synthesized-pressure-v3",
+  "generator": "tools/build-pressure-sfx-v3.py",
+  "sampleRate": 44100,
+  "targetPeakDb": -14,
+  "sourceBoundary": "No recording, sample, melody, or proprietary audio copied. Deterministic sine sweeps and seeded noise only.",
+  "validation": "Decoded peaks measured. Human listening not yet verified; Firefox Cubeb audio device unavailable in this QA environment.",
+  "clips": [
+    {
+      "file": "hit.mp3",
+      "synthetic": true,
+      "leadInSeconds": 0.004,
+      "duration": 0.17400000000000002,
+      "decodedPeakDb": -13.9,
+      "decodedMeanDb": -25.7,
+      "bytes": 3804,
+      "sha256": "d63bf07600bac3d24b92645591742457b33f8ec8e4eeb47a2ad5fe7e30847c85"
+    },
+    {
+      "file": "break-rise.mp3",
+      "synthetic": true,
+      "leadInSeconds": 0.004,
+      "duration": 0.464,
+      "decodedPeakDb": -14.5,
+      "decodedMeanDb": -27.7,
+      "bytes": 8402,
+      "sha256": "5b24d66aa9f3f78665355d88a69ef06eb3fded5a7c5570e5a759e68aba6d0356"
+    },
+    {
+      "file": "break-fall.mp3",
+      "synthetic": true,
+      "leadInSeconds": 0.004,
+      "duration": 0.464,
+      "decodedPeakDb": -14.2,
+      "decodedMeanDb": -26.5,
+      "bytes": 8402,
+      "sha256": "7bc8bff68148e66584589748c6c5cee873217c878cc3ad4615a4ebf19875172c"
+    }
+  ]
+}

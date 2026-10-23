@@ -1,0 +1,14 @@
+.energy-stage-hint{display:block;margin:6px 0;font-size:.78rem;line-height:1.45;color:#d7ad64}.energy-stage-hint[hidden]{display:none}.inventory-lottery{margin:14px 0;min-width:0}
+.lottery-card{border:1px solid var(--line,#e7dfe4);border-radius:12px;padding:14px;background:var(--pink-light,#fff0f6);color:var(--ink,#282431)}.lottery-card h3{margin-top:0}.lottery-card p{font-size:.85rem;line-height:1.6}.lottery-card button,.lottery-card input{max-width:100%;margin:4px 6px 4px 0}.lottery-card input{width:10em}
+/* Use the host palette and controls; long tickets and narrow drawers can wrap. */
+#pixel-frontend .lottery-card{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,10rem),1fr));gap:10px;min-width:0;padding:12px;border:1.5px solid var(--px-line);border-radius:6px;background:var(--pink-light);color:var(--px-ink);font-size:16px;line-height:1.6}
+#pixel-frontend .lottery-card :is(h3,p){grid-column:1/-1;min-width:0;margin:0;color:inherit;overflow-wrap:anywhere}
+#pixel-frontend .lottery-card h3{font-size:18px;line-height:1.4}
+#pixel-frontend .lottery-card p{font-size:16px;line-height:1.6}
+#pixel-frontend .lottery-card :is(button,input){box-sizing:border-box;min-width:0;width:100%;max-width:100%;min-height:44px;margin:0;padding:8px 10px;border:1.5px solid var(--px-ink);border-radius:6px;color:var(--px-ink);font-size:16px;line-height:1.4}
+#pixel-frontend .lottery-card input{background:#fff}
+#pixel-frontend .lottery-card input::placeholder{color:var(--muted);opacity:1}
+#pixel-frontend .lottery-card button{background:var(--px-mint);white-space:normal;overflow-wrap:anywhere;font-weight:700}
+#pixel-frontend .lottery-card>button:first-of-type,#pixel-frontend .lottery-card>button:last-child{grid-column:1/-1}
+#pixel-frontend .lottery-card :is(button,input):focus-visible{outline:3px solid var(--px-ink);outline-offset:2px}
+.lottery-dialog{max-width:min(460px,calc(100vw - 28px))}#lottery-reveal>div{font:700 clamp(1.5rem,8vw,3rem)/1.8 monospace;letter-spacing:.06em;text-align:center;color:#e8c76c}#lottery-reveal p{font-variant-numeric:tabular-nums;line-height:1.7}#lottery-reveal button{margin:5px}

@@ -1,0 +1,9 @@
+Toy piano layer: "Toy records#06-E3-02.wav" by poissonmort
+Original creator page: https://freesound.org/people/poissonmort/sounds/253249/
+License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/
+
+Derived from the original creator's publicly available preview, not a game recording.
+Changes: decoded to PCM, onset trim, cropped first 0.75 seconds, mono, exponential decay and edge fades, resampled to 22050 Hz PCM16, attenuated. Runtime transposition and mixing with original synthesized chip impacts and paper-money flutter. Exact byte hashes and processing details: SOURCES.json.
+Original chip/paper synthesis: Kurumi project, 2026. No sampled banknote machine and no extracted Balatro game sound. The user's 9.4-second audition recording is not included or played by the game.
+No endorsement by the original creator is implied.

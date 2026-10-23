@@ -1,0 +1,37 @@
+/* The reader uses whole reviewed panels; no face crops or text overlays. */
+#opening-dialog{width:min(760px,calc(100vw - 24px));background:#f6f2ec;border:2px solid #28242a;border-radius:8px;box-shadow:10px 10px 0 #26222a40}
+#opening-dialog .dialog-toolbar{min-height:46px;padding:2px 12px;border-bottom:1px solid #28242a25;background:#f6f2ec}
+#opening-dialog .dialog-toolbar:before{content:'FX KURUMI / PROLOGUE';margin-right:auto;color:#746970;letter-spacing:.14em;font-size:10px}
+#opening-dialog .dialog-toolbar .x-close{width:auto;flex:0 0 auto;min-width:88px;min-height:44px;padding:8px 12px;background:transparent;font-size:12px;color:#544a50}
+#opening-dialog .dialog-scroll{padding:18px 28px 22px;scrollbar-gutter:stable}
+#opening-dialog #opening-count{display:block;letter-spacing:.18em;color:#7d6672;font-size:11px}
+#opening-dialog h2{font-size:clamp(21px,4vw,29px);line-height:1.25;margin:12px 0 8px}
+#opening-dialog #opening-copy{font-size:14px;line-height:1.8;margin:0 0 18px;color:#62555c}
+.opening-panel{margin:0 auto;width:100%;max-width:660px;background:#fff;border:1px solid #1c1a1d;box-shadow:5px 5px 0 #2e283315}
+.opening-panel img{display:block;width:100%;height:auto;object-fit:contain}
+#opening-dialog[data-page='recovery-vow'] .opening-panel{max-width:439px}
+#opening-dialog[data-page='mothers-diary'] .opening-panel{max-width:200px}
+#opening-dialog[data-page='mothers-diary'] .opening-panel.opening-companion{max-width:660px;margin-top:16px}
+#opening-dialog[data-page='quiet-reply'] .opening-panel{max-width:180px}
+.opening-panel .manga-image-fallback{padding:18px}
+.opening-nav{flex:0 0 auto;display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px 12px;padding:12px 24px max(12px,env(safe-area-inset-bottom));border-top:1px solid #2b252b;background:#fffaf5}
+#opening-dialog .opening-nav button{min-height:48px;white-space:normal;line-height:1.45;border-radius:5px}
+#opening-dialog #opening-back{padding:10px 16px;border:1px solid #c7b8bf;background:transparent;font-size:12px;color:#5c4c56}
+#opening-dialog #opening-back:disabled{opacity:.35}
+#opening-dialog #opening-next{width:100%;margin:0;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 18px;background:#27212b;color:#fff6fa;border:1px solid #27212b;box-shadow:3px 3px 0 #e8a7c5}
+#opening-dialog #opening-next:hover{background:#49313e}
+#opening-next-hint{font-size:10px;opacity:.7;white-space:nowrap}
+#opening-next-label{font-size:15px;font-weight:800;text-align:right}
+.opening-reader-meta{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:10px;min-width:0}
+#opening-save{font-size:10px;color:#8b7782;line-height:1.45}
+#opening-dialog #opening-source{font-size:11px;color:#77515f;min-height:44px;padding:5px 0 5px 10px;background:transparent;border:0;white-space:nowrap}
+.opening-terminal-sheet{position:relative;overflow:hidden;min-height:280px;box-sizing:border-box;padding:30px;border:2px solid #2b242b;background:radial-gradient(#30263213 .65px,transparent .85px) 0 0/5px 5px,#fff;box-shadow:6px 6px 0 #29232a}
+.opening-terminal-kicker{display:block;font:700 12px monospace;letter-spacing:.18em;border-bottom:2px solid #302932;padding-bottom:14px;margin-bottom:24px}
+#opening-dialog .opening-terminal-sheet p{font-size:14px;line-height:1.7;margin:12px 0}
+.opening-terminal-sheet strong{display:block;font-size:clamp(40px,8vw,72px);line-height:1.25;letter-spacing:-.06em;color:#2b2229;font-variant-numeric:tabular-nums}
+.opening-terminal-sheet>small{font-size:12px;color:#76636e}
+#opening-dialog .opening-terminal-sheet .opening-goal{margin-top:22px;border-top:1px solid #bfaeb8;padding-top:18px;font-weight:700}
+#opening-dialog .opening-terminal-sheet .opening-prompt{margin-top:16px;color:#77626e;font-size:12px}
+#opening-dialog button:focus-visible{outline:3px solid #be4a80;outline-offset:3px}
+@media(max-width:480px){#opening-dialog .dialog-scroll{padding:15px 15px 20px}.opening-nav{padding-left:14px;padding-right:14px;gap:8px}#opening-dialog #opening-back{padding:8px 12px}#opening-dialog #opening-next{padding:10px 12px}#opening-next-label{font-size:13px}.opening-terminal-sheet{padding:22px;min-height:260px}#opening-dialog .dialog-toolbar:before{font-size:9px;letter-spacing:.08em}}
+@media(max-height:500px){#opening-dialog .dialog-toolbar{min-height:44px}.opening-nav{padding-top:7px;padding-bottom:7px;gap:4px 10px}.opening-reader-meta{min-height:26px}#opening-dialog .dialog-scroll{padding-top:12px;padding-bottom:16px}}

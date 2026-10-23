@@ -1,0 +1,57 @@
+// Reviewed independent public utterances; retain original context and archive attribution.
+export const MONEY_RISK_COMMENT_ROWS=Object.freeze([
+  {
+    "id": "money-risk-43853",
+    "source_url": "https://money.stackexchange.com/questions/43853/why-might-a-robo-advisor-service-like-betterment-be-preferable-to-just-buying-a",
+    "source_title": "智能投顾的分散组合相比只买SPY，有什么优势？",
+    "source_title_kind": "translated-title",
+    "source_date": "2015-02-02",
+    "source_time_display": "17:40",
+    "attribution_display": "Joe",
+    "original": "It's also work to diversify your portfolio: you have to make minor changes every year at a minimum",
+    "zh_translation": "分散投资组合也需要花工夫：至少每年都要做些小调整。",
+    "context": "一位刚毕业的投资者比较Betterment股债组合与单买SPY的费用和历史表现。摘录是Joe对维持分散配置所需工作的看法，不代表平台推广，也不是对FX仓位的通用操作指令。",
+    "reuse_rationale_zh": "分散配置需要持续维护，区别于方向判断。",
+    "record_kind": "public_answer_excerpt",
+    "license": "CC-BY-SA-3.0",
+    "source_updated": null,
+    "source_batch": "money-risk-public-web-20261015",
+    "attribution_review": "所选Joe回答至answered 2015-02-02 17:40署名区；只作本次页面可见区的有界观察，不宣称完整修订历史。"
+  },
+  {
+    "id": "money-risk-71723",
+    "source_url": "https://money.stackexchange.com/questions/71723/what-does-a-well-diversified-self-managed-investment-portfolio-look-like",
+    "source_title": "自己管理的充分分散投资组合是什么样的？",
+    "source_title_kind": "translated-title",
+    "source_date": "2016-10-14",
+    "source_time_display": "21:06",
+    "attribution_display": "Patches",
+    "original": "Diversification is spreading your investments around so that one point of risk doesn't sink your whole portfolio.",
+    "zh_translation": "分散配置就是把投资分开，让单一风险点不至于拖垮整个组合。",
+    "context": "问题询问在不主动降低整体风险与预期长期收益的前提下，怎样构建自行管理的组合。Patches的回答区分公司、行业、地区及资产类型风险；摘录仅取定义首句，不声称消灭所有风险。",
+    "reuse_rationale_zh": "明确组合边界与单一风险点，非资产方向建议。",
+    "record_kind": "public_answer_excerpt",
+    "license": "CC-BY-SA-3.0",
+    "source_updated": null,
+    "source_batch": "money-risk-public-web-20261015",
+    "attribution_review": "所选Patches回答至answered 2016-10-14 21:06署名区；只作本次页面可见区的有界观察，不宣称完整修订历史。"
+  },
+  {
+    "id": "money-risk-65821",
+    "source_url": "https://money.stackexchange.com/questions/65821/how-should-residents-of-smaller-economies-allocate-their-portfolio-between-domes",
+    "source_title": "小型经济体居民应如何分配本国与海外资产？",
+    "source_title_kind": "translated-title",
+    "source_date": "2016-06-06",
+    "source_time_display": "11:46",
+    "attribution_display": "Brythan",
+    "original": "The other risk with a foreign investment is that the currency may lose value relative to your currency.",
+    "zh_translation": "海外投资的另一种风险，是其货币相对你的本币可能贬值。",
+    "context": "澳大利亚投资者希望在本国和海外股票之间分配退休组合，明确说自己不是外汇交易者。答者讨论本币支出与海外投资的汇率风险；本句不是做空外币建议，也不是任何货币下一步方向。",
+    "reuse_rationale_zh": "海外分散资产仍有本币计价风险。",
+    "record_kind": "public_answer_excerpt",
+    "license": "CC-BY-SA-3.0",
+    "source_updated": null,
+    "source_batch": "money-risk-public-web-20261015",
+    "attribution_review": "所选Brythan回答至answered 2016-06-06 11:46署名区；只作本次页面可见区的有界观察，不宣称完整修订历史。"
+  }
+].map(Object.freeze));
