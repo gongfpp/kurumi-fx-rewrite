@@ -30,6 +30,13 @@ import { createAudio, type AudioController } from '../view/components/audio';
 import * as D from '../view/components/dialogs';
 import * as P from '../view/components/panels';
 import * as L from '../view/components/library-dialogs';
+import * as S from '../view/components/source-dialogs';
+import { parseForexite, buildHistoricalScript, historicalDayCount, candlesFromScript } from '../domain/market/sources/historical';
+import { fetchLiveQuote, applyLiveQuote, createLiveState, type LiveState } from '../domain/market/sources/live';
+import { encodeReplay, decodeReplay, replayFromLocation } from '../domain/market/sources/replay';
+import { processRisk } from '../domain/core/day';
+import { planDay } from '../domain/market/sources/simulated';
+import { historyCandles } from '../domain/market/history';
 import { currentComments } from '../domain/story/library';
 import { DEFAULT_THEME, THEME_IDS, themeTokens, type ThemeId } from '../view/styles/tokens';
 import { loadGame, saveGame, encodeSave, decodeSave } from './persistence/save';
@@ -52,6 +59,13 @@ let privacyOn = true;
 let devVerified = false;
 let devTainted = false;
 const DEV_PASSWORD = 'kurumi-fx';
+let marketSource: 'sim' | 'historical' | 'live' | 'replay' = 'sim';
+let historyFile: string | null = null;
+let historyDays = 0;
+let historyMinutes: { t: number; o: number; h: number; l: number; c: number }[] = [];
+let historyDayIdx = 0;
+let live: LiveState = createLiveState();
+let liveTimer: number | null = null;
 let timer: number | null = null;
 let modal: string | null = null;
 let leaderboard: LeaderboardEntry[] | null = null;
@@ -175,6 +189,8 @@ export function start(): void {
   }
   document.documentElement.dataset.theme = theme;
   document.documentElement.dataset.frontend = pixelFrontend ? 'pixel' : 'default';
+  const urlReplay = replayFromLocation(globalThis.location?.search ?? '');
+  if (urlReplay) applyReplay(encodeReplay(urlReplay));
   document.addEventListener('keydown', (ev) => {
     if (ev.key === 'Escape' && modal) {
       modal = null;
@@ -426,6 +442,10 @@ function onAction(act: string): void {
       if (!pendingStory(state)) queueStory(state, 'quietNight');
     } else if (act === 'next') {
       nextDay(state);
+      if (marketSource === 'historical') {
+        historyDayIdx += 1;
+        applyHistoricalDay(historyDayIdx);
+      }
       modal = null;
     } else if (act === 'walkaway') {
       modal = 'walkaway';
@@ -486,6 +506,38 @@ function onAction(act: string): void {
       } catch {
         notice = '载入失败。';
       }
+    } else if (act.startsWith('source:')) {
+      const kind = act.split(':')[1] as 'sim' | 'historical' | 'live' | 'replay';
+      marketSource = kind;
+      if (kind === 'sim') {
+        stopLive();
+        state.script = planDay(state.seed, state.day, state.price);
+      } else if (kind === 'replay') {
+        notice = '粘贴回放码后点「载入回放」。';
+      }
+    } else if (act === 'history:load') {
+      const sel = document.querySelector('[data-field="historyFile"]') as HTMLSelectElement | null;
+      if (sel && sel.value) void loadHistorical(sel.value);
+      else notice = '请先选择历史数据文件。';
+    } else if (act === 'live:start') {
+      startLive();
+    } else if (act === 'live:stop') {
+      stopLive();
+      marketSource = 'sim';
+      notice = '已停止实时行情。';
+    } else if (act === 'replay:copy') {
+      const code = encodeReplay({ seed: state.seed, day: state.day, mode: state.mode });
+      try {
+        const pr = navigator.clipboard?.writeText(code);
+        if (pr) void pr.catch(() => undefined);
+      } catch {
+        /* ignore */
+      }
+      notice = `回放码：${code}`;
+    } else if (act === 'replay:load') {
+      const input = document.querySelector('[data-field="replayCode"]') as HTMLInputElement | null;
+      if (input && input.value) applyReplay(input.value);
+      else notice = '请输入回放码。';
     } else if (act === 'new') {
       modal = 'restart';
     } else if (act === 'restart:confirm') {
@@ -595,6 +647,100 @@ async function loadLeaderboard(): Promise<void> {
   render();
 }
 
+
+function sourceStatus(): S.SourceStatus {
+  return { current: marketSource, historyFile, live, replayCode: encodeReplay({ seed: state.seed, day: state.day, mode: state.mode }), historyDays };
+}
+
+async function loadHistorical(file: string): Promise<void> {
+  try {
+    historyFile = file;
+    const res = await fetch(assetUrl(file));
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const buf = await res.arrayBuffer();
+    let text: string;
+    const DS = (globalThis as { DecompressionStream?: new (f: string) => unknown }).DecompressionStream;
+    if (DS && file.endsWith('.gz')) {
+      const stream = new Blob([buf]).stream().pipeThrough(new DS('gzip') as unknown as ReadableWritablePair<Uint8Array, Uint8Array>);
+      text = await new Response(stream).text();
+    } else {
+      text = new TextDecoder().decode(buf);
+    }
+    const minutes = parseForexite(text);
+    if (!minutes.length) throw new Error('没有解析到历史数据');
+    historyMinutes = minutes;
+    historyDays = historicalDayCount(minutes);
+    historyDayIdx = 0;
+    applyHistoricalDay(0);
+    marketSource = 'historical';
+    notice = `已载入历史数据：${historyDays} 个交易日。`;
+  } catch (error) {
+    marketSource = 'sim';
+    notice = `历史数据载入失败：${(error as Error).message}`;
+  }
+  persist();
+  render();
+}
+
+function applyHistoricalDay(dayIdx: number): void {
+  const script = buildHistoricalScript(historyMinutes, dayIdx);
+  state.script = script;
+  state.candles = candlesFromScript(script);
+  const first = script.tracks[0]?.[0]?.[0] ?? state.price;
+  state.price = first;
+}
+
+function stopLive(): void {
+  if (liveTimer !== null) {
+    clearInterval(liveTimer);
+    liveTimer = null;
+  }
+  live = { ...live, active: false };
+}
+
+function startLive(): void {
+  stopLive();
+  live = { active: true, source: null, lastPrice: null, lastAt: null, degraded: false, note: '' };
+  const poll = async (): Promise<void> => {
+    try {
+      const quote = await fetchLiveQuote();
+      applyLiveQuote(state, quote);
+      live = { active: true, source: quote.source, lastPrice: quote.price, lastAt: quote.at, degraded: false, note: '' };
+      processRisk(state);
+      marketSource = 'live';
+      render();
+    } catch {
+      live = { active: false, source: null, lastPrice: null, lastAt: null, degraded: true, note: '连接失败，已降级为模拟盘' };
+      marketSource = 'sim';
+      stopLive();
+      render();
+    }
+  };
+  void poll();
+  liveTimer = window.setInterval(() => void poll(), 3000);
+  marketSource = 'live';
+  notice = '已启动实时行情（公开汇率源，可能失败）。';
+  persist();
+  render();
+}
+
+function applyReplay(code: string): boolean {
+  const res = decodeReplay(code);
+  if (!res.replay) {
+    notice = `回放码无效：${res.reason ?? ''}`;
+    return false;
+  }
+  stopTimer();
+  stopLive();
+  state = createGame(res.replay.seed, { mode: res.replay.mode });
+  state.day = Math.max(1, res.replay.day);
+  state.script = planDay(state.seed, state.day, state.price);
+  state.candles = historyCandles(state.seed);
+  marketSource = 'replay';
+  notice = `已载入共享回放：种子 ${res.replay.seed} · 第 ${state.day} 天。`;
+  return true;
+}
+
 function buildModal(): string {
   switch (modal) {
     case 'manga':
@@ -629,8 +775,8 @@ function buildModal(): string {
       return D.creditDialog(state);
     case 'father':
       return D.fatherDialog(state);
-    case 'mode':
-      return P.modeDialog(state.mode);
+    case 'source':
+      return S.sourceDialog(state, sourceStatus());
     case 'margin':
       return P.marginDialog(state);
     case 'bankrupt':
@@ -663,7 +809,7 @@ function buildModal(): string {
 }
 
 const TOP_BUTTONS: [string, string][] = [
-  ['open:mode', '模式'],
+  ['open:source', '模式/行情源'],
   ['open:manga', '漫画'],
   ['open:mangalib', '原作漫画'],
   ['open:charstory', '人物篇章'],

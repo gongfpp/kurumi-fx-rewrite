@@ -44,7 +44,7 @@ function ensureCandle(s: GameState, beat: number): Candle {
 }
 
 /** Soft stop-loss and cross-margin liquidation at the current observed price. */
-function processRisk(s: GameState): TradeReceipt[] {
+export function processRisk(s: GameState): TradeReceipt[] {
   const exits: TradeReceipt[] = [];
   for (const p of [...s.positions]) {
     if (p.stopPrice != null) {
