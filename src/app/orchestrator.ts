@@ -25,7 +25,7 @@ import { closeOrders } from '../domain/trading/close';
 import { maxTopUp, topUpMargin } from '../domain/trading/margin';
 import { placeOrder, previewOrder, type OrderType, type StopPips } from '../domain/trading/order';
 import { entryFromState, fetchLeaderboard, submitScore, type LeaderboardEntry } from './services/leaderboard';
-import { layoutCandles, movingAverage, bollinger } from '../view/charts/candles';
+import { layoutCandles, movingAverage, bollinger, volumeMA } from '../view/charts/candles';
 import { createAudio, type AudioController } from '../view/components/audio';
 import * as D from '../view/components/dialogs';
 import * as P from '../view/components/panels';
@@ -66,6 +66,8 @@ let rankAnon = true;
 let rankStatus = '';
 let currentSavedAt = 0;
 let conflictOpen = false;
+let currentRaw: string | null = null;
+let rankSort = 'netProfit';
 const DEV_PASSWORD = 'kurumi-fx';
 let marketSource: 'sim' | 'historical' | 'live' | 'replay' = 'sim';
 let historyFile: string | null = null;
@@ -111,6 +113,7 @@ function stopTimer(): void {
 function persist(): void {
   if (conflictOpen) return;
   try {
+    currentRaw = encodeSave(state);
     saveGame(state);
     currentSavedAt = Date.now();
   } catch {
@@ -206,6 +209,7 @@ export function start(): void {
   document.documentElement.dataset.theme = theme;
   document.documentElement.dataset.frontend = pixelFrontend ? 'pixel' : 'default';
   document.documentElement.style.setProperty('--fx-pixel-icon', `url("${assetUrl('pixel-assets/ui-icons-transparent.png')}")`);
+  document.documentElement.style.setProperty('--fx-pixel-atlas', `url("${assetUrl('pixel-assets/reference-atlas.png')}")`);
   const fxCanvas = document.createElement('canvas');
   fxCanvas.id = 'fx-particles';
   fxCanvas.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:80';
@@ -224,13 +228,16 @@ export function start(): void {
     const c = candles[idx];
     const tip = document.getElementById('chart-tip');
     if (tip && c) { tip.hidden = false; tip.style.left = `${Math.min(rect.width - 150, x)}px`; tip.style.top = `${y}px`;
-      tip.innerHTML = `<b>${c.close.toFixed(3)}</b><br>开 ${c.open.toFixed(3)}<br>高 ${c.high.toFixed(3)}<br>低 ${c.low.toFixed(3)}`; }
+      const maLine = maSet.length ? maSet.map((m) => { const v = movingAverage(candles, m)[idx]; return `MA${m} ${v ? v.toFixed(3) : '—'}`; }).join(' · ') : '';
+      const bollLine = showBoll ? (() => { const b = bollinger(candles, 20, 2); const v = b.mid[idx]; return `BOLL ${v ? v.toFixed(3) : '—'}`; })() : '';
+      tip.innerHTML = `<b>${c.close.toFixed(3)}</b><br>开 ${c.open.toFixed(3)} · 高 ${c.high.toFixed(3)} · 低 ${c.low.toFixed(3)}<br>${maLine}${bollLine ? '<br>' + bollLine : ''}`; }
     drawChart();
   });
   app.addEventListener('mouseout', (e) => {
     const el = e.target as HTMLElement;
     if (el.classList && el.classList.contains('fx-chart')) { hoverIndex = -1; const tip = document.getElementById('chart-tip'); if (tip) tip.hidden = true; drawChart(); }
   });
+  try { const nk = localStorage.getItem('kurumi-fx:nickname'); if (nk) rankNick = nk; } catch { /* ignore */ }
   watchStorageConflict();
   const urlReplay = replayFromLocation(globalThis.location?.search ?? '');
   if (urlReplay) applyReplay(encodeReplay(urlReplay));
@@ -386,11 +393,18 @@ function onAction(act: string): void {
       amount = Math.min(amount + 1000, Math.max(100, Math.floor(orderPreviewSafe().maxMargin)));
     } else if (act === 'amount:-1000') {
       amount = Math.max(100, amount - 1000);
+    } else if (act.startsWith('tab:')) {
+      const id = 'col-' + act.split(':')[1];
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    } else if (act.startsWith('rank:sort:')) {
+      rankSort = act.split(':')[2] as string;
     } else if (act === 'rank:anon') {
       rankAnon = !rankAnon;
     } else if (act === 'rank:submit' || act === 'rank:retry') {
       const input = document.querySelector('[data-field="nickname"]') as HTMLInputElement | null;
       if (input && input.value) rankNick = input.value;
+      try { localStorage.setItem('kurumi-fx:nickname', rankNick); } catch { /* ignore */ }
       void submitRank();
     } else if (act === 'conflict:keep') {
       try {
@@ -846,8 +860,9 @@ async function submitRank(): Promise<void> {
 function watchStorageConflict(): void {
   window.addEventListener('storage', (ev) => {
     if (!ev.key || ev.key !== scopedKey(saveKeyFor(state.mode))) return;
+    if (ev.newValue && ev.newValue === currentRaw) return;
     const meta = decodeSave(ev.newValue ?? null);
-    if (meta.savedAt && meta.savedAt > currentSavedAt) {
+    if (meta.state && meta.savedAt && meta.savedAt > currentSavedAt) {
       conflictOpen = true;
       modal = 'conflict';
       render();
@@ -872,7 +887,7 @@ function buildModal(): string {
     case 'achievements':
       return D.achievementsDialog(state);
     case 'leaderboard':
-      return D.leaderboardDialog(leaderboard);
+      return D.leaderboardDialog(leaderboard, { sort: rankSort, myNick: rankNick });
     case 'voice':
       return D.vocalDialog();
     case 'settings':
@@ -994,10 +1009,17 @@ function render(): void {
       </div>
     </header>
     ${notice ? `<div class="fx-panel" style="margin-bottom:12px" role="status">${notice}</div>` : ''}
+    <nav class="fx-tabs" aria-label="移动导航">
+      <button data-act="tab:market">行情</button>
+      <button data-act="tab:account">下单</button>
+      <button data-act="tab:character">角色</button>
+      <button data-act="open:life">生活</button>
+      <button data-act="open:manga">漫画</button>
+    </nav>
     ${state.phase === 'ending' ? endingPanel(metrics.equity) : ''}
     ${state.phase === 'resting' ? storyOverlay() : ''}
     <div class="fx-grid">
-      <section class="fx-panel" aria-label="角色状态">
+      <section class="fx-panel" id="col-character" aria-label="角色状态">
         <h2>久留美 · ${moodLabel(emotion)}</h2>
         ${D.faceHtml(emotion)}
         <div class="fx-bar" aria-label="心理承受力"><span style="width:${Math.max(0, Math.min(100, state.sanity))}%;background:${t.accent}"></span></div>
@@ -1009,7 +1031,7 @@ function render(): void {
         <div class="fx-caption">杠杆上限 ${limits.leverage}× · 仓位 ${Math.round(limits.stake * 100)}%${limits.noEntry ? ' · 承受力过低，禁止开仓' : ''}</div>
         ${P.pressurePanelHtml(state, Date.now())}
       </section>
-      <section class="fx-panel" aria-label="行情终端">
+      <section class="fx-panel" id="col-market" aria-label="行情终端">
         <h2>行情终端 · USD/JPY</h2>
         <div class="fx-quote-price" id="quote-price" aria-live="polite">${num(state.price, 3)}</div>
         <div class="fx-delta ${profit >= 0 ? 'up' : 'down'}" id="quote-delta">累计 ${profit >= 0 ? '+' : ''}${yen(profit)} · 目标 +${yen(NUMERICS.TARGET_PROFIT)}</div>
@@ -1019,7 +1041,7 @@ function render(): void {
         ${L.commentsRow(state)}
         <div id="alerts">${P.riskAlertsHtml(state)}</div>
       </section>
-      <section class="fx-panel" aria-label="账户与下单">
+      <section class="fx-panel" id="col-account" aria-label="账户与下单">
         <h2>账户与下单</h2>
         <div class="fx-row"><span>总资产</span><b id="equity-value">${yen(metrics.equity)}</b></div>
         <div class="fx-row"><span>净资产(扣债)</span><b>${yen(metrics.equity - debt)}</b></div>
@@ -1239,6 +1261,18 @@ function drawChart(): void {
     ctx.fillRect(c.x - c.width / 2, h - vp.padding - h0, c.width, h0);
     ctx.globalAlpha = 1;
   }
+  const vma = volumeMA(candles, 5);
+  ctx.strokeStyle = t.warn;
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  let vStarted = false;
+  vma.forEach((v, i) => {
+    if (v === null) return;
+    const c = layout[i] as (typeof layout)[number];
+    const y = h - vp.padding - (v / maxVol) * volH;
+    if (!vStarted) { ctx.moveTo(c.x, y); vStarted = true; } else ctx.lineTo(c.x, y);
+  });
+  ctx.stroke();
   // Crosshair + hover readout
   if (hoverIndex >= 0 && hoverIndex < layout.length) {
     const c = layout[hoverIndex] as (typeof layout)[number];

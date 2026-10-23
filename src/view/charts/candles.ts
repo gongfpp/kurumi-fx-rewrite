@@ -97,3 +97,19 @@ export function bollinger(candles: Candle[], period = 20, mult = 2): { mid: (num
   }
   return { mid, upper, lower };
 }
+
+/** Approximate volume (candle range) and its moving average. */
+export function approxVolume(candles: Candle[]): number[] {
+  return candles.map((c) => Math.abs(c.high - c.low));
+}
+export function volumeMA(candles: Candle[], window = 5): (number | null)[] {
+  const vols = approxVolume(candles);
+  const out: (number | null)[] = [];
+  let sum = 0;
+  for (let i = 0; i < vols.length; i++) {
+    sum += vols[i]!;
+    if (i >= window) sum -= vols[i - window]!;
+    out.push(i >= window - 1 ? sum / window : null);
+  }
+  return out;
+}

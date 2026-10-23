@@ -155,10 +155,31 @@ export function achievementsDialog(s: GameState): string {
   return shell('成就', rows);
 }
 
-export function leaderboardDialog(entries: LeaderboardEntry[] | null): string {
-  if (!entries || !entries.length) return shell('名人堂', '<div class="fx-caption">暂无榜单数据（后端未配置或为空）。上榜默认匿名。</div><div class="fx-actions"><button data-act="open:rank">投稿上榜</button></div>');
-  const rows = entries.map((r, i) => `<div class="fx-row"><span>${i + 1}. ${r.nickname}</span><b>${yen(r.netProfit)} · ${r.survivedDays}天 · 回撤 ${(r.maxDrawdown * 100).toFixed(1)}%</b></div>`).join('');
-  return shell('名人堂', `${rows}<div class="fx-caption">上榜默认匿名；统计不含身份信息。</div><div class="fx-actions"><button data-act="open:rank">投稿上榜</button></div>`);
+export function leaderboardDialog(entries: LeaderboardEntry[] | null, opts: { sort?: string; myNick?: string } = {}): string {
+  const sort = opts.sort ?? 'netProfit';
+  const sorts: [string, string][] = [
+    ['survivedDays', '存活天数'],
+    ['returnRate', '收益率'],
+    ['netProfit', '净收益'],
+    ['maxDrawdown', '最大回撤'],
+  ];
+  const bar = `<div class="fx-actions wrap">${sorts.map(([k, label]) => `<button data-act="rank:sort:${k}" class="${sort === k ? 'on' : ''}">${label}</button>`).join('')}</div>`;
+  if (!entries || !entries.length) {
+    return shell('名人堂', `${bar}<div class="fx-caption">暂无榜单数据（后端未配置或为空）。上榜默认匿名。</div><div class="fx-actions"><button data-act="open:rank">投稿上榜</button></div>`);
+  }
+  const key = sort as keyof LeaderboardEntry;
+  const sorted = [...entries].sort((a, b) => {
+    const av = (a[key] ?? 0) as number;
+    const bv = (b[key] ?? 0) as number;
+    return av === bv ? 0 : av < bv ? 1 : -1;
+  });
+  const rows = sorted
+    .map((r, i) => {
+      const mine = opts.myNick && r.nickname === opts.myNick;
+      return `<div class="fx-row ${mine ? 'mine' : ''}"><span>${i + 1}. ${r.nickname}${mine ? '（我）' : ''}</span><b>${yen(r.netProfit)} · ${r.survivedDays}天 · 回撤 ${(r.maxDrawdown * 100).toFixed(1)}%</b></div>`;
+    })
+    .join('');
+  return shell('名人堂', `${bar}${rows}<div class="fx-caption">上榜默认匿名；统计不含身份信息。</div><div class="fx-actions"><button data-act="open:rank">投稿上榜</button></div>`);
 }
 
 export function settingsDialog(audio: AudioState): string {

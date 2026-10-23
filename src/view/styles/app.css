@@ -593,3 +593,28 @@ button:active::after { animation: fxRipple .5s ease-out; }
   background-image: var(--fx-pixel-icon); background-size: contain; background-repeat: no-repeat; image-rendering: pixelated;
 }
 :root[data-frontend='pixel'] { --fx-pixel-icon: none; }
+
+/* Mobile bottom tabs (hidden on desktop) */
+.fx-tabs { display: none; }
+@media (max-width: 720px) {
+  .fx-tabs {
+    display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
+    background: var(--fx-panel); border-top: 1px solid var(--fx-grid); padding: 6px; gap: 6px;
+  }
+  .fx-tabs button { flex: 1; min-height: 42px; font-size: 12px; }
+  #app { padding-bottom: 62px; }
+}
+.fx-row.mine { border-color: var(--fx-accent); }
+.fx-row.mine span { color: var(--fx-accent); font-weight: 700; }
+.fx-row.mine::after { content: ''; }
+
+/* Pixel atlas background */
+:root[data-frontend='pixel'] .fx-panel {
+  background-image: var(--fx-pixel-atlas);
+  background-size: 220px auto;
+  background-position: right -40px bottom -40px;
+  background-repeat: no-repeat;
+  background-blend-mode: luminosity;
+  background-color: color-mix(in srgb, var(--fx-panel) 92%, transparent);
+}
+:root[data-frontend='pixel'] { --fx-pixel-atlas: none; }

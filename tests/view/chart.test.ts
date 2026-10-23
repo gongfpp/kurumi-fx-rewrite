@@ -52,3 +52,13 @@ describe('bollinger bands', () => {
     expect(b.lower[2]! < b.mid[2]!).toBe(true);
   });
 });
+
+import { volumeMA, approxVolume } from '../../src/view/charts/candles';
+
+describe('volume moving average', () => {
+  it('averages the approximate volume over the window', () => {
+    const cs = [candle(1, 3, 1, 2), candle(2, 5, 2, 3)];
+    expect(approxVolume(cs)).toEqual([2, 3]);
+    expect(volumeMA(cs, 2)).toEqual([null, 2.5]);
+  });
+});
