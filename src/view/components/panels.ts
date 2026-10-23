@@ -212,3 +212,30 @@ export function conflictDialog(): string {
       </div>
     </div></section></div>`;
 }
+
+export function indicatorsDialog(info: { bollPeriod: number; bollMult: number; ma: number[] }): string {
+  return `<div class="fx-modal-backdrop"><section class="fx-modal" role="dialog" aria-modal="true" aria-label="指标参数">
+    <header class="fx-modal-head"><h2>指标参数</h2><button data-act="modal:close" aria-label="关闭">×</button></header>
+    <div class="fx-modal-body">
+      <div class="fx-row"><span>BOLL 周期</span><b><input type="number" min="5" max="60" data-field="bollPeriod" value="${info.bollPeriod}" aria-label="BOLL周期" /></b></div>
+      <div class="fx-row"><span>BOLL 倍数</span><b><input type="number" min="1" max="4" step="0.5" data-field="bollMult" value="${info.bollMult}" aria-label="BOLL倍数" /></b></div>
+      <div class="fx-caption">当前均线：${info.ma.map((m) => `MA${m}`).join(' / ') || '无'}（在主界面工具栏切换）</div>
+      <div class="fx-actions"><button data-act="ind:apply">应用</button><button data-act="ind:reset">恢复默认</button></div>
+      <div class="fx-caption">参数会保存在本机。</div>
+    </div></section></div>`;
+}
+
+export function recordsDialog(list: { day: number; equity: number; profit: number; ending: string | null; mode: string; at: number }[]): string {
+  const rows = list.length
+    ? list
+        .map(
+          (r) =>
+            `<div class="fx-row"><span>${r.mode === 'endless' ? '操盘' : '剧情'} · 第 ${r.day} 天 · ${r.ending ?? '进行中'}</span><b>${yen(r.equity)} · ${r.profit >= 0 ? '+' : ''}${yen(r.profit)}</b></div>`,
+        )
+        .join('')
+    : '<div class="fx-caption">还没有历史战绩。</div>';
+  return `<div class="fx-modal-backdrop"><section class="fx-modal wide" role="dialog" aria-modal="true" aria-label="我的战绩">
+    <header class="fx-modal-head"><h2>我的战绩（本机最近 ${list.length} 条）</h2><button data-act="modal:close" aria-label="关闭">×</button></header>
+    <div class="fx-modal-body">${rows}<div class="fx-actions"><button data-act="records:clear">清空历史</button></div>
+    <div class="fx-caption">仅保存在本机，不会上传。</div></div></section></div>`;
+}

@@ -41,6 +41,7 @@ import { historyCandles } from '../domain/market/history';
 import { currentComments } from '../domain/story/library';
 import { DEFAULT_THEME, THEME_IDS, themeTokens, type ThemeId } from '../view/styles/tokens';
 import { loadGame, saveGame, encodeSave, decodeSave, saveKeyFor } from './persistence/save';
+import { loadRecords, pushRecord, clearRecords, type RunRecord } from './persistence/records';
 import { scopedKey } from './persistence/storage';
 
 const THEME_KEY = 'kurumi-fx:theme';
@@ -68,6 +69,11 @@ let currentSavedAt = 0;
 let conflictOpen = false;
 let currentRaw: string | null = null;
 let rankSort = 'netProfit';
+let bollPeriod = 20;
+let bollMult = 2;
+let visibleCount = 48;
+let panOffset = 0;
+let records: RunRecord[] = [];
 const DEV_PASSWORD = 'kurumi-fx';
 let marketSource: 'sim' | 'historical' | 'live' | 'replay' = 'sim';
 let historyFile: string | null = null;
@@ -93,6 +99,12 @@ const audio: AudioController = createAudio();
 
 const yen = (n: number): string => '¥' + Math.round(n).toLocaleString('zh-CN');
 const num = (n: number, d = 2): string => n.toLocaleString('zh-CN', { minimumFractionDigits: d, maximumFractionDigits: d });
+
+function chartWindow() {
+  const total = state.candles.length;
+  const start = Math.max(0, total - visibleCount - panOffset);
+  return state.candles.slice(start, Math.max(1, total - panOffset));
+}
 
 function activeScript(): DayScript {
   return state.script as DayScript;
@@ -178,6 +190,7 @@ function resolveEnding(walkaway: boolean): void {
   const result = classifyEnding(state, { walkaway });
   if (result && (result.baseId !== 'walkaway' || walkaway)) {
     applyEnding(state, result);
+    records = pushRecord({ day: state.day, equity: accountMetrics(state).equity, profit: tradingProfit(state), ending: result.variant ?? result.baseId, mode: state.mode, at: Date.now() });
     audio.playSfx(result.baseId === 'million' || result.baseId === 'walkaway' ? 'majorProfit' : 'majorLoss');
     persist();
   }
@@ -220,7 +233,7 @@ export function start(): void {
     if (!el.classList || !el.classList.contains('fx-chart')) return;
     const rect = el.getBoundingClientRect();
     const x = e.clientX - rect.left, y = e.clientY - rect.top;
-    const candles = state.candles.slice(-48);
+    const candles = chartWindow();
     const padding = 18;
     const slot = Math.max(1, rect.width - padding * 2) / Math.max(1, candles.length);
     const idx = Math.min(candles.length - 1, Math.max(0, Math.floor((x - padding) / slot)));
@@ -229,15 +242,57 @@ export function start(): void {
     const tip = document.getElementById('chart-tip');
     if (tip && c) { tip.hidden = false; tip.style.left = `${Math.min(rect.width - 150, x)}px`; tip.style.top = `${y}px`;
       const maLine = maSet.length ? maSet.map((m) => { const v = movingAverage(candles, m)[idx]; return `MA${m} ${v ? v.toFixed(3) : '—'}`; }).join(' · ') : '';
-      const bollLine = showBoll ? (() => { const b = bollinger(candles, 20, 2); const v = b.mid[idx]; return `BOLL ${v ? v.toFixed(3) : '—'}`; })() : '';
+      const bollLine = showBoll ? (() => { const b = bollinger(candles, bollPeriod, bollMult); const v = b.mid[idx]; return `BOLL ${v ? v.toFixed(3) : '—'}`; })() : '';
       tip.innerHTML = `<b>${c.close.toFixed(3)}</b><br>开 ${c.open.toFixed(3)} · 高 ${c.high.toFixed(3)} · 低 ${c.low.toFixed(3)}<br>${maLine}${bollLine ? '<br>' + bollLine : ''}`; }
     drawChart();
   });
+  app.addEventListener('wheel', (e) => {
+    const el = e.target as HTMLElement;
+    if (!el.classList || !el.classList.contains('fx-chart')) return;
+    e.preventDefault();
+    if (e.shiftKey) panOffset = Math.max(0, Math.min(state.candles.length - 10, panOffset + (e.deltaY > 0 ? 3 : -3)));
+    else visibleCount = Math.max(20, Math.min(Math.max(20, state.candles.length), visibleCount + (e.deltaY > 0 ? 4 : -4)));
+    drawChart();
+  }, { passive: false });
+  let holdTimer: number | null = null;
+  const stopHold = () => { if (holdTimer !== null) { clearInterval(holdTimer); holdTimer = null; } };
+  app.addEventListener('pointerdown', (e) => {
+    const el = (e.target as HTMLElement).closest('[data-act^="amount:"]') as HTMLElement | null;
+    if (!el) return;
+    stopHold();
+    holdTimer = window.setInterval(() => onAction(el.dataset.act as string), 140);
+  });
+  app.addEventListener('pointerup', stopHold);
+  app.addEventListener('pointercancel', stopHold);
+  let touchStartX = 0, touchCount = 0;
+  app.addEventListener('touchstart', (e) => {
+    const el = e.target as HTMLElement;
+    if (!el.classList || !el.classList.contains('fx-chart')) return;
+    touchCount = e.touches.length;
+    touchStartX = e.touches[0]?.clientX ?? 0;
+  }, { passive: true });
+  app.addEventListener('touchmove', (e) => {
+    const el = e.target as HTMLElement;
+    if (!el.classList || !el.classList.contains('fx-chart')) return;
+    if (e.touches.length === 2) {
+      visibleCount = Math.max(20, Math.min(Math.max(20, state.candles.length), visibleCount + (e.touches[0]!.clientX - touchStartX > 0 ? 2 : -2)));
+    } else if (touchCount === 1) {
+      const dx = (e.touches[0]?.clientX ?? 0) - touchStartX;
+      panOffset = Math.max(0, Math.min(state.candles.length - 10, panOffset + (dx > 0 ? 1 : -1)));
+    }
+    touchStartX = e.touches[0]?.clientX ?? touchStartX;
+    drawChart();
+  }, { passive: true });
   app.addEventListener('mouseout', (e) => {
     const el = e.target as HTMLElement;
     if (el.classList && el.classList.contains('fx-chart')) { hoverIndex = -1; const tip = document.getElementById('chart-tip'); if (tip) tip.hidden = true; drawChart(); }
   });
   try { const nk = localStorage.getItem('kurumi-fx:nickname'); if (nk) rankNick = nk; } catch { /* ignore */ }
+  try {
+    const pj = JSON.parse(localStorage.getItem('kurumi-fx:indicator') ?? 'null') as { bollPeriod?: number; bollMult?: number } | null;
+    if (pj) { if (Number.isFinite(pj.bollPeriod)) bollPeriod = pj.bollPeriod as number; if (Number.isFinite(pj.bollMult)) bollMult = pj.bollMult as number; }
+  } catch { /* ignore */ }
+  records = loadRecords();
   watchStorageConflict();
   const urlReplay = replayFromLocation(globalThis.location?.search ?? '');
   if (urlReplay) applyReplay(encodeReplay(urlReplay));
@@ -397,6 +452,20 @@ function onAction(act: string): void {
       const id = 'col-' + act.split(':')[1];
       document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       return;
+    } else if (act === 'ind:apply') {
+      const bp = document.querySelector('[data-field="bollPeriod"]') as HTMLInputElement | null;
+      const bm = document.querySelector('[data-field="bollMult"]') as HTMLInputElement | null;
+      if (bp) bollPeriod = Math.max(5, Math.min(60, Number(bp.value) || 20));
+      if (bm) bollMult = Math.max(1, Math.min(4, Number(bm.value) || 2));
+      try { localStorage.setItem('kurumi-fx:indicator', JSON.stringify({ bollPeriod, bollMult })); } catch { /* ignore */ }
+      notice = `指标参数已应用：BOLL ${bollPeriod} × ${bollMult}`;
+      modal = null;
+    } else if (act === 'ind:reset') {
+      bollPeriod = 20; bollMult = 2;
+      try { localStorage.setItem('kurumi-fx:indicator', JSON.stringify({ bollPeriod, bollMult })); } catch { /* ignore */ }
+      notice = '指标参数已恢复默认。';
+    } else if (act === 'records:clear') {
+      clearRecords(); records = []; notice = '历史战绩已清空。';
     } else if (act.startsWith('rank:sort:')) {
       rankSort = act.split(':')[2] as string;
     } else if (act === 'rank:anon') {
@@ -936,6 +1005,10 @@ function buildModal(): string {
       return P.rankDialog(state, { nickname: rankNick, anon: rankAnon, status: rankStatus });
     case 'conflict':
       return P.conflictDialog();
+    case 'indicators':
+      return P.indicatorsDialog({ bollPeriod, bollMult, ma: maSet });
+    case 'records':
+      return P.recordsDialog(records);
     default:
       return '';
   }
@@ -962,6 +1035,8 @@ const TOP_BUTTONS: [string, string][] = [
   ['open:opening', '序章'],
   ['open:events', '事件'],
   ['open:scenes', '插画库'],
+  ['open:records', '战绩'],
+  ['open:indicators', '指标'],
   ['open:save', '存档'],
   ['open:privacy', '隐私'],
   ['open:developer', '开发者'],
@@ -1188,7 +1263,7 @@ function drawChart(): void {
   }
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   ctx.clearRect(0, 0, w, h);
-  const candles = state.candles.slice(-48);
+  const candles = chartWindow();
   if (!candles.length) return;
   const vp = { width: w, height: h, padding: 18 };
   const layout = layoutCandles(candles, vp);
@@ -1297,7 +1372,7 @@ function drawChart(): void {
     ctx.restore();
   }
   if (showBoll) {
-    const b = bollinger(candles, 20, 2);
+    const b = bollinger(candles, bollPeriod, bollMult);
     ctx.strokeStyle = 'rgba(124,159,255,0.9)';
     ctx.lineWidth = 1;
     for (const series of [b.upper, b.mid, b.lower]) {
