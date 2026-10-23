@@ -1,0 +1,330 @@
+// Independently reviewed, actual Gemini short factual summaries. Display-only.
+// Isolated runtime candidate: exact five append-only records; no publication performed.
+export const NEWS_2014_VERIFIED_FIVE = Object.freeze([
+  {
+    "id": "2014-06-09-jp-gdp-q1-second-preliminary",
+    "eventDate": "2014-06-09",
+    "eventType": "gdp_revision",
+    "currencies": [
+      "JPY"
+    ],
+    "pairs": [
+      "USDJPY",
+      "GBPJPY",
+      "AUDJPY"
+    ],
+    "publicationDate": "2014-06-09",
+    "publishedAt": null,
+    "publicationTimeZone": "Asia/Tokyo",
+    "publicationTimePrecision": "date",
+    "availableAfterJst": "2014-06-10T18:00:00+09:00",
+    "availabilityBasis": "Conservative next-calendar-day 18:00 JST, later than the end of the source-local release day. This is a display gate, not a claimed publication time.",
+    "referencePeriod": "2014-Q1 second preliminary; chained 2005 yen; seasonally adjusted",
+    "date": "2014-06-09",
+    "eventFamily": "ESRI_CAO:gdp_revision",
+    "eventKey": "ESRI_CAO:gdp_revision:2014-06-09:2014-Q1 second preliminary; chained 2005 yen; seasonally adjusted",
+    "independentEventId": "ESRI_CAO:gdp_revision:2014-06-09:2014-Q1 second preliminary; chained 2005 yen; seasonally adjusted",
+    "sourceName": "日本内阁府",
+    "sourceUrl": "https://www.esri.cao.go.jp/en/sna/data/sokuhou/files/2014/qe141_2/pdf/gaiyou1412_e.pdf",
+    "sourceLocator": "PDF page 1, section 1-1 real GDP comparison, first row and annual-rate brackets; document date at top.",
+    "publicationTimeBasis": "Only the dated original publication is established; the conservative display gate is not a claimed release minute.",
+    "catalyst": "gdp_revision",
+    "scenarioTags": [
+      "gdp_revision"
+    ],
+    "scenarioTagBasis": "source_subject_only_no_observed_price_or_future_event_inference",
+    "applicableDirections": [],
+    "applicableVolatility": [],
+    "directionInterpretation": null,
+    "observedMarketDirection": null,
+    "observedMarketReturn": null,
+    "observedPriceImpact": null,
+    "eligibleBeforePublication": false,
+    "priceEngineInput": false,
+    "productionEnabled": true,
+    "runtimeIntegrated": true,
+    "title": "日本一季度实际GDP环比二次速报上修至1.6%",
+    "summary": "日本内阁府公布2014年一季度实际GDP二次速报环比增长1.6%，高于初报的1.5%；对应折合年率由初报的5.9%上修至6.7%。",
+    "contentKind": "historical_fact",
+    "summaryKind": "original_factual_summary",
+    "factStatus": "official_publication_verified",
+    "sourceTextOrImageReuseAuthorized": false,
+    "publicationReviewRequired": true,
+    "sourceAttribution": "日本内阁府经济社会综合研究所2014年6月9日发布的国民经济计算二次速报官方文件，数据按当时版本核算。",
+    "sourceAdaptation": "Independent original factual summary. No source text, images, charts or logos reproduced.",
+    "sourcePolicyReviewStatus": "original_factual_summary_only_reviewed",
+    "copyReview": "independent_passed_against_official_facts",
+    "workflowStatus": "detached_runtime_candidate_pending_acceptance_not_published",
+    "copyProvenance": {
+      "copySHA256": "ee3976fa85020f274c8ad2b8a704b308bc239f57bfe350bfa422a9e07c0c5ba3"
+    },
+    "publicationReview": {
+      "status": "original_factual_summary_reviewed",
+      "reviewScope": "original_factual_summary_only",
+      "reviewedAt": "2026-10-12",
+      "sourceTextOrImageReuseAuthorized": false,
+      "copySHA256": "ee3976fa85020f274c8ad2b8a704b308bc239f57bfe350bfa422a9e07c0c5ba3",
+      "sourceRestrictionRecord": "Reviewed use is a short original summary of announced public facts with source attribution. No permission to reproduce source text, imagery, charts, logos or full datasets is asserted."
+    }
+  },
+  {
+    "id": "2014-09-19-uk-scottish-referendum-result",
+    "eventDate": "2014-09-18",
+    "eventType": "constitutional_vote_result",
+    "currencies": [
+      "GBP"
+    ],
+    "pairs": [
+      "GBPJPY"
+    ],
+    "publicationDate": "2014-09-19",
+    "publishedAt": null,
+    "publicationTimeZone": "Europe/London",
+    "publicationTimePrecision": "date",
+    "availableAfterJst": "2014-09-20T18:00:00+09:00",
+    "availabilityBasis": "Conservative next-calendar-day 18:00 JST, later than the end of the source-local release day. This is a display gate, not a claimed publication time.",
+    "referencePeriod": "Scottish independence referendum held 2014-09-18",
+    "date": "2014-09-19",
+    "eventFamily": "GOV_UK:constitutional_vote_result",
+    "eventKey": "GOV_UK:constitutional_vote_result:2014-09-19:Scottish independence referendum held 2014-09-18",
+    "independentEventId": "GOV_UK:constitutional_vote_result:2014-09-19:Scottish independence referendum held 2014-09-18",
+    "sourceName": "英国政府",
+    "sourceUrl": "https://www.gov.uk/government/news/scottish-independence-referendum-whats-next",
+    "sourceLocator": "Published date and What has happened section.",
+    "publicationTimeBasis": "Only the dated original publication is established; the conservative display gate is not a claimed release minute.",
+    "catalyst": "constitutional_vote_result",
+    "scenarioTags": [
+      "constitutional_vote_result"
+    ],
+    "scenarioTagBasis": "source_subject_only_no_observed_price_or_future_event_inference",
+    "applicableDirections": [],
+    "applicableVolatility": [],
+    "directionInterpretation": null,
+    "observedMarketDirection": null,
+    "observedMarketReturn": null,
+    "observedPriceImpact": null,
+    "eligibleBeforePublication": false,
+    "priceEngineInput": false,
+    "productionEnabled": true,
+    "runtimeIntegrated": true,
+    "title": "苏格兰独立公投结果揭晓：55.3%反对独立",
+    "summary": "英国政府公布9月18日举行的苏格兰独立公投结果，苏格兰投票决定留在联合王国境内，其中反对独立票数占55.3%，支持独立票数占44.7%。",
+    "contentKind": "historical_fact",
+    "summaryKind": "original_factual_summary",
+    "factStatus": "official_publication_verified",
+    "sourceTextOrImageReuseAuthorized": false,
+    "publicationReviewRequired": true,
+    "sourceAttribution": "英国政府于2014年9月19日发布的苏格兰公投官方计票结果通报与首相声明，公投投票日为9月18日。",
+    "sourceAdaptation": "Independent original factual summary. No source text, images, charts or logos reproduced.",
+    "sourcePolicyReviewStatus": "original_factual_summary_only_reviewed",
+    "copyReview": "independent_passed_against_official_facts",
+    "workflowStatus": "detached_runtime_candidate_pending_acceptance_not_published",
+    "copyProvenance": {
+      "copySHA256": "8f3040b43ea6d4d82aa9e4d7e4a4940aa5e41ec65730b6c8e7727564c00f6985"
+    },
+    "publicationReview": {
+      "status": "original_factual_summary_reviewed",
+      "reviewScope": "original_factual_summary_only",
+      "reviewedAt": "2026-10-12",
+      "sourceTextOrImageReuseAuthorized": false,
+      "copySHA256": "8f3040b43ea6d4d82aa9e4d7e4a4940aa5e41ec65730b6c8e7727564c00f6985",
+      "sourceRestrictionRecord": "Reviewed use is a short original summary of announced public facts with source attribution. No permission to reproduce source text, imagery, charts, logos or full datasets is asserted."
+    }
+  },
+  {
+    "id": "2014-10-09-au-september-employment-seasonal-revision",
+    "eventDate": "2014-10-09",
+    "eventType": "employment_and_method_revision",
+    "currencies": [
+      "AUD"
+    ],
+    "pairs": [
+      "AUDJPY"
+    ],
+    "publicationDate": "2014-10-09",
+    "publishedAt": "2014-10-09T11:30:00+11:00",
+    "publicationTimeZone": "Australia/Sydney",
+    "publicationTimePrecision": "minute",
+    "availableAfterJst": "2014-10-09T09:30:00+09:00",
+    "availabilityBasis": "Verified official release time, converted to JST.",
+    "referencePeriod": "2014-09 release; contemporaneous revisions to 2014-07 and 2014-08 seasonal/trend series",
+    "date": "2014-10-09",
+    "eventFamily": "ABS:employment_and_method_revision",
+    "eventKey": "ABS:employment_and_method_revision:2014-10-09:2014-09 release; contemporaneous revisions to 2014-07 and 2014-08 seasonal/trend series",
+    "independentEventId": "ABS:employment_and_method_revision:2014-10-09:2014-09 release; contemporaneous revisions to 2014-07 and 2014-08 seasonal/trend series",
+    "sourceName": "澳大利亚统计局",
+    "sourceUrl": "https://www.ausstats.abs.gov.au/ausstats/meisubs.nsf/0/DB99D25B86297ECDCA257D6B001FC323/$File/62020_sep%202014.pdf",
+    "sourceLocator": "Page 1 embargo and seasonally adjusted key figures; page 3 method headline; page 5 seasonal-factor treatment and unchanged original series.",
+    "publicationTimeBasis": "Original official release PDF embargo: 11:30 Canberra time, AEDT UTC+11.",
+    "catalyst": "employment_and_method_revision",
+    "scenarioTags": [
+      "employment_and_method_revision"
+    ],
+    "scenarioTagBasis": "source_subject_only_no_observed_price_or_future_event_inference",
+    "applicableDirections": [],
+    "applicableVolatility": [],
+    "directionInterpretation": null,
+    "observedMarketDirection": null,
+    "observedMarketReturn": null,
+    "observedPriceImpact": null,
+    "eligibleBeforePublication": false,
+    "priceEngineInput": false,
+    "productionEnabled": true,
+    "runtimeIntegrated": true,
+    "title": "澳大利亚9月就业减少2.97万人 失业率达6.1%",
+    "summary": "澳大利亚统计局公布9月季调后就业人数减少29,700人，失业率上升0.1个百分点至6.1%。除总月工时外，7至9月季调因子设为1；7月与8月季调及趋势序列同期修订，原始未季调序列未作修改。",
+    "contentKind": "historical_fact",
+    "summaryKind": "original_factual_summary",
+    "factStatus": "official_publication_verified",
+    "sourceTextOrImageReuseAuthorized": false,
+    "publicationReviewRequired": true,
+    "sourceAttribution": "澳大利亚统计局2014年10月9日发布的劳动力调查报告（6202.0），包含9月就业数据及7、8月季调序列修订。",
+    "sourceAdaptation": "Independent original factual summary. No source text, images, charts or logos reproduced.",
+    "sourcePolicyReviewStatus": "original_factual_summary_only_reviewed",
+    "copyReview": "independent_passed_against_official_facts",
+    "workflowStatus": "detached_runtime_candidate_pending_acceptance_not_published",
+    "copyProvenance": {
+      "copySHA256": "2d5ae56c5d92800b826166ee75ac732e329c58d58f999fffa983631a5b705df0"
+    },
+    "publicationReview": {
+      "status": "original_factual_summary_reviewed",
+      "reviewScope": "original_factual_summary_only",
+      "reviewedAt": "2026-10-12",
+      "sourceTextOrImageReuseAuthorized": false,
+      "copySHA256": "2d5ae56c5d92800b826166ee75ac732e329c58d58f999fffa983631a5b705df0",
+      "sourceRestrictionRecord": "Reviewed use is a short original summary of announced public facts with source attribution. No permission to reproduce source text, imagery, charts, logos or full datasets is asserted."
+    }
+  },
+  {
+    "id": "2014-10-31-jp-gpif-policy-asset-mix",
+    "eventDate": "2014-10-31",
+    "eventType": "public_pension_asset_allocation",
+    "currencies": [
+      "JPY"
+    ],
+    "pairs": [
+      "USDJPY",
+      "GBPJPY",
+      "AUDJPY"
+    ],
+    "publicationDate": "2014-10-31",
+    "publishedAt": null,
+    "publicationTimeZone": "Asia/Tokyo",
+    "publicationTimePrecision": "date",
+    "availableAfterJst": "2014-11-01T18:00:00+09:00",
+    "availabilityBasis": "Conservative next-calendar-day 18:00 JST, later than the end of the source-local release day. This is a display gate, not a claimed publication time.",
+    "referencePeriod": "Policy asset mix approved/effective 2014-10-31; target weights, not completed trades",
+    "date": "2014-10-31",
+    "eventFamily": "GPIF:public_pension_asset_allocation",
+    "eventKey": "GPIF:public_pension_asset_allocation:2014-10-31:Policy asset mix approved/effective 2014-10-31; target weights, not completed trades",
+    "independentEventId": "GPIF:public_pension_asset_allocation:2014-10-31:Policy asset mix approved/effective 2014-10-31; target weights, not completed trades",
+    "sourceName": "GPIF",
+    "sourceUrl": "https://www.gpif.go.jp/gpif/pdf/midterm_plan_change.pdf",
+    "sourceLocator": "PDF pages 1-2 approval/effective date and old/new target tables; page 14 transitional deviation allowance.",
+    "publicationTimeBasis": "Only the dated original publication is established; the conservative display gate is not a claimed release minute.",
+    "catalyst": "public_pension_asset_allocation",
+    "scenarioTags": [
+      "public_pension_asset_allocation"
+    ],
+    "scenarioTagBasis": "source_subject_only_no_observed_price_or_future_event_inference",
+    "applicableDirections": [],
+    "applicableVolatility": [],
+    "directionInterpretation": null,
+    "observedMarketDirection": null,
+    "observedMarketReturn": null,
+    "observedPriceImpact": null,
+    "eligibleBeforePublication": false,
+    "priceEngineInput": false,
+    "productionEnabled": true,
+    "runtimeIntegrated": true,
+    "title": "GPIF通过资产组合调整 增配国内外股票",
+    "summary": "日本政府年金投资基金公布新目标配置：国内债券35%、国内股票25%、外国债券15%、外国股票25%。过渡安排允许临时偏离以降低市场冲击。",
+    "contentKind": "historical_fact",
+    "summaryKind": "original_factual_summary",
+    "factStatus": "official_publication_verified",
+    "sourceTextOrImageReuseAuthorized": false,
+    "publicationReviewRequired": true,
+    "sourceAttribution": "日本年金积立金管理运用独立行政法人（GPIF）于2014年10月31日发布的中期计划变更与新资产配置目标公告。",
+    "sourceAdaptation": "Independent original factual summary. No source text, images, charts or logos reproduced.",
+    "sourcePolicyReviewStatus": "original_factual_summary_only_reviewed",
+    "copyReview": "independent_passed_against_official_facts",
+    "workflowStatus": "detached_runtime_candidate_pending_acceptance_not_published",
+    "copyProvenance": {
+      "copySHA256": "121ae826c19acf1635063031ac9e33f572240ea7d36d09ee98962ef58527d632"
+    },
+    "publicationReview": {
+      "status": "original_factual_summary_reviewed",
+      "reviewScope": "original_factual_summary_only",
+      "reviewedAt": "2026-10-12",
+      "sourceTextOrImageReuseAuthorized": false,
+      "copySHA256": "121ae826c19acf1635063031ac9e33f572240ea7d36d09ee98962ef58527d632",
+      "sourceRestrictionRecord": "Reviewed use is a short original summary of announced public facts with source attribution. No permission to reproduce source text, imagery, charts, logos or full datasets is asserted."
+    }
+  },
+  {
+    "id": "2014-11-18-jp-consumption-tax-delay-announcement",
+    "eventDate": "2014-11-18",
+    "eventType": "fiscal_policy_announcement",
+    "currencies": [
+      "JPY"
+    ],
+    "pairs": [
+      "USDJPY",
+      "GBPJPY",
+      "AUDJPY"
+    ],
+    "publicationDate": "2014-11-18",
+    "publishedAt": null,
+    "publicationTimeZone": "Asia/Tokyo",
+    "publicationTimePrecision": "date",
+    "availableAfterJst": "2014-11-19T18:00:00+09:00",
+    "availabilityBasis": "Conservative next-calendar-day 18:00 JST, later than the end of the source-local release day. This is a display gate, not a claimed publication time.",
+    "referencePeriod": "Announcement to defer planned October 2015 rise to 10% by 18 months",
+    "date": "2014-11-18",
+    "eventFamily": "CABINET_OFFICE:fiscal_policy_announcement",
+    "eventKey": "CABINET_OFFICE:fiscal_policy_announcement:2014-11-18:Announcement to defer planned October 2015 rise to 10% by 18 months",
+    "independentEventId": "CABINET_OFFICE:fiscal_policy_announcement:2014-11-18:Announcement to defer planned October 2015 rise to 10% by 18 months",
+    "sourceName": "日本内阁府",
+    "sourceUrl": "https://www5.cao.go.jp/keizai-shimon/kaigi/minutes/2014/1118/interview.html",
+    "sourceLocator": "Conference header 20:08-20:44; fiscal-target and consumption-tax Q&A acknowledges the 18-month delay and refers to the preceding PM statement.",
+    "publicationTimeBasis": "Only the dated original publication is established; the conservative display gate is not a claimed release minute.",
+    "catalyst": "fiscal_policy_announcement",
+    "scenarioTags": [
+      "fiscal_policy_announcement"
+    ],
+    "scenarioTagBasis": "source_subject_only_no_observed_price_or_future_event_inference",
+    "applicableDirections": [],
+    "applicableVolatility": [],
+    "directionInterpretation": null,
+    "observedMarketDirection": null,
+    "observedMarketReturn": null,
+    "observedPriceImpact": null,
+    "eligibleBeforePublication": false,
+    "priceEngineInput": false,
+    "productionEnabled": true,
+    "runtimeIntegrated": true,
+    "title": "安倍宣布拟推迟消费税率上调至10%的计划",
+    "summary": "日本首相安倍晋三宣布，原定2015年10月将消费税率上调至10%的计划拟推迟18个月实施。该政策声明需后续立法步骤，当晚现行8%的税率未发生变动。",
+    "contentKind": "historical_fact",
+    "summaryKind": "original_factual_summary",
+    "factStatus": "official_publication_verified",
+    "sourceTextOrImageReuseAuthorized": false,
+    "publicationReviewRequired": true,
+    "sourceAttribution": "日本内阁府大臣记者会记录及自民党于2014年11月18日发布的总裁记者会文稿，政策尚待后续立法推进。",
+    "sourceAdaptation": "Independent original factual summary. No source text, images, charts or logos reproduced.",
+    "sourcePolicyReviewStatus": "original_factual_summary_only_reviewed",
+    "copyReview": "independent_passed_against_official_facts",
+    "workflowStatus": "detached_runtime_candidate_pending_acceptance_not_published",
+    "copyProvenance": {
+      "copySHA256": "9241ec4d53671ea7076222115f541bd4cbbb9a046df570309277e58924788061"
+    },
+    "publicationReview": {
+      "status": "original_factual_summary_reviewed",
+      "reviewScope": "original_factual_summary_only",
+      "reviewedAt": "2026-10-12",
+      "sourceTextOrImageReuseAuthorized": false,
+      "copySHA256": "9241ec4d53671ea7076222115f541bd4cbbb9a046df570309277e58924788061",
+      "sourceRestrictionRecord": "Reviewed use is a short original summary of announced public facts with source attribution. No permission to reproduce source text, imagery, charts, logos or full datasets is asserted."
+    }
+  }
+]);

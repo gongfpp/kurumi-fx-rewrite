@@ -1,0 +1,13 @@
+{
+  "author": "poissonmort",
+  "source": "https://freesound.org/people/poissonmort/sounds/253249/",
+  "license": "CC BY 4.0",
+  "licenseURL": "https://creativecommons.org/licenses/by/4.0/",
+  "originalPreviewSHA256": "5a7dc0942185343090791f72027eec8f4a012f8048bfeca44a3d7eea7f98bbfe",
+  "file": "toy-piano-note.wav",
+  "sha256": "4d8db0e2eab85c8869bdb82e28e5c4997c5b7a5f98ad3699ade12c0cefd645f3",
+  "bytes": 33120,
+  "sampleRate": 22050,
+  "duration": 0.7500226757369615,
+  "modifications": "Decoded original creator preview; mono, onset trim, first 0.75 seconds, exponential decay, 80-frame attack and 500-frame fade-out at original rate; resampled to 22050 Hz PCM16 with peak attenuation. Runtime pitch-shifting and mixing with original synthesized chips/paper. No Balatro game audio or complete audition recording included."
+}

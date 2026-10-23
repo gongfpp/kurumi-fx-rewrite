@@ -1,0 +1,18 @@
+{
+  "sourceCommit": "539d26616071e7036617b0b49726bd24af40ef2e",
+  "captureRevision": "capture-v1-1fbef814f493",
+  "assetVersion": "539d26616071e7036617b0b49726bd24af40ef2e-capture-v1-1fbef814f493",
+  "entry": "effects-preview.html",
+  "purpose": "isolated preview with manual own-page audio recording",
+  "persistedGameWrites": false,
+  "analytics": false,
+  "entryHashes": {
+    "effects-preview.html": "9e61e372d6a0c2a481899c5b05acacf23606314cacadf1f6ad56e7a968703405",
+    "effects-preview.js": "b8df0287089bdd3389f14e3614d4c6af7ac46a72b954a4bcb86fa635de6ff3ee",
+    "audio-envelope.js": "fd29a55ff87c74e89072fd10ad4f18819ebbee7a9d7713955aaef12e79f0d09e",
+    "preview-capture.js": "2e80721612abd662405136245324c6a93f66417821620897f4156ea6dca27d20",
+    "preview-capture.css": "3dc42f28808f488e41178390d4008ecd1742686be305cbf43f674175a742df87"
+  },
+  "browserEncodingVerified": false,
+  "listeningVerified": false
+}

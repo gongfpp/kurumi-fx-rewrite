@@ -1,0 +1,53 @@
+/* Only a safely placed risk panel floats. Existing position risk readouts stay put. */
+.floating-risk{position:fixed;z-index:3;box-sizing:border-box;width:248px;padding:10px 12px;border:1px solid #d4b3c5;border-radius:8px;background:#fff8fc;color:#684154;pointer-events:none!important;user-select:none;contain:layout style;visibility:hidden;margin:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
+.floating-risk,.floating-risk *{pointer-events:none!important}
+.floating-risk .floating-risk-close{pointer-events:auto!important;user-select:auto;display:block;width:100%;min-height:36px;margin-top:8px;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+.floating-risk .floating-risk-close:focus-visible{outline:3px solid #873a68;outline-offset:3px}
+.floating-risk .floating-risk-close:disabled{cursor:default;opacity:.55}
+.floating-risk[hidden],html.dialog-active .floating-risk,body:has(dialog[open])>.floating-risk{display:none!important}
+.floating-risk-heading{display:block;margin:0 0 5px;font-size:11px;font-weight:700;color:#927487;letter-spacing:.04em}
+.floating-risk .liquidation-meter-value{font-size:12px;line-height:1.5;gap:6px}
+.floating-risk .liquidation-meter-track{height:6px}
+/* Narrow layouts keep the original meter in the position card. */
+@media(max-width:699px){body:not([data-frontend="pixel"])>.floating-risk{display:none!important}}
+@media print{.floating-risk{display:none!important}}
+
+/* One persistent view across both frontends. Only these native controls take input. */
+.floating-risk-icon,.floating-risk-badge,.floating-risk-message{display:none}
+.floating-risk .floating-risk-dismiss{pointer-events:auto!important;user-select:auto;position:absolute;right:3px;top:2px;width:28px;min-height:28px;margin:0;padding:0;border:0;border-radius:3px;background:transparent;color:inherit;font:inherit;font-size:23px;line-height:1;cursor:pointer}
+.floating-risk .floating-risk-dismiss:focus-visible{outline:3px solid #873a68;outline-offset:2px}
+.floating-risk-heading{padding-right:18px}
+body[data-frontend="pixel"]>.floating-risk{display:grid;grid-template-columns:44px minmax(0,1fr) 134px 28px;grid-template-rows:auto auto;column-gap:10px;align-items:center;min-height:72px;padding:7px 8px 7px 12px;border:2px solid #080e53;border-radius:3px;background:linear-gradient(110deg,#fff0f7,#ffd1e7 60%,#ffe9f5);color:#080e53;box-shadow:inset 0 0 0 3px #fff9,3px 3px 0 #e59acaaa;font-family:"Noto Sans CJK SC","Microsoft YaHei",sans-serif}
+body[data-frontend="pixel"]>.floating-risk .floating-risk-heading{grid-column:2;grid-row:1;display:flex;align-items:center;gap:15px;margin:0;padding:0;color:inherit;letter-spacing:0;line-height:31px;white-space:nowrap}
+body[data-frontend="pixel"]>.floating-risk .floating-risk-icon{display:block;position:absolute;left:12px;top:12px;width:44px;height:44px}
+body[data-frontend="pixel"]>.floating-risk .floating-risk-icon svg{display:block;width:44px;height:44px}
+body[data-frontend="pixel"]>.floating-risk .floating-risk-badge{display:inline-block;flex:none;padding:0 8px;border-radius:3px;background:linear-gradient(#ff83bc,#ff3295);color:#fff;font-size:21px;font-weight:800;line-height:34px;box-shadow:inset 0 1px 0 #ffb9dc}
+body[data-frontend="pixel"]>.floating-risk .floating-risk-title{font-size:26px;font-weight:800;letter-spacing:1px}
+body[data-frontend="pixel"]>.floating-risk .liquidation-meter-value{grid-column:2;grid-row:2;display:block;margin:0 0 0 94px;font-size:18px;line-height:24px;color:inherit;white-space:nowrap}
+body[data-frontend="pixel"]>.floating-risk .liquidation-meter-label{display:none}
+body[data-frontend="pixel"]>.floating-risk .floating-risk-message{display:inline}
+body[data-frontend="pixel"]>.floating-risk .floating-risk-close{grid-column:3;grid-row:1/3;width:100%;height:47px;min-height:44px;margin:0;padding:0 6px;border:2px solid #080e53;border-radius:5px;background:linear-gradient(110deg,#ff42a3,#ff1990);color:#fff;font:inherit;font-size:24px;font-weight:800;white-space:nowrap;text-shadow:1px 1px #d91d80;box-shadow:inset 0 0 0 2px #ff90c7}
+body[data-frontend="pixel"]>.floating-risk .floating-risk-dismiss{position:static;grid-column:4;grid-row:1/3;align-self:center;width:28px;height:44px;font-size:34px;line-height:40px}
+body[data-frontend="pixel"]>.floating-risk button:focus-visible{outline:3px solid #d80088;outline-offset:2px}
+@media(max-width:699px){
+ body[data-frontend="pixel"]>.floating-risk{grid-template-columns:28px minmax(0,1fr) 98px 28px;column-gap:6px;min-height:84px;padding:7px}
+ body[data-frontend="pixel"]>.floating-risk .floating-risk-heading{display:block;line-height:22px;white-space:normal}
+ body[data-frontend="pixel"]>.floating-risk .floating-risk-icon{left:7px;top:22px;width:28px;height:30px}
+ body[data-frontend="pixel"]>.floating-risk .floating-risk-icon svg{width:28px;height:30px}
+ body[data-frontend="pixel"]>.floating-risk .floating-risk-badge{padding:0 4px;margin-right:3px;font-size:12px;line-height:20px;vertical-align:1px}
+ body[data-frontend="pixel"]>.floating-risk .floating-risk-title{font-size:18px;letter-spacing:0;white-space:nowrap}
+ body[data-frontend="pixel"]>.floating-risk .liquidation-meter-value{margin:2px 0 0;font-size:12px;line-height:17px;white-space:normal;overflow-wrap:anywhere}
+ body[data-frontend="pixel"]>.floating-risk .floating-risk-close{height:44px;padding:0 3px;font-size:19px}
+ body[data-frontend="pixel"]>.floating-risk .floating-risk-dismiss{font-size:30px}
+}
+
+/* The chart can be narrow on a wide viewport too (scaled/stacked frontends). */
+ body[data-frontend="pixel"]>.floating-risk[data-compact="true"]{grid-template-columns:28px minmax(0,1fr) 98px 28px;column-gap:6px;min-height:84px;padding:7px}
+ body[data-frontend="pixel"]>.floating-risk[data-compact="true"] .floating-risk-heading{display:block;line-height:22px;white-space:normal}
+ body[data-frontend="pixel"]>.floating-risk[data-compact="true"] .floating-risk-icon{left:7px;top:22px;width:28px;height:30px}
+ body[data-frontend="pixel"]>.floating-risk[data-compact="true"] .floating-risk-icon svg{width:28px;height:30px}
+ body[data-frontend="pixel"]>.floating-risk[data-compact="true"] .floating-risk-badge{padding:0 4px;margin-right:3px;font-size:12px;line-height:20px;vertical-align:1px}
+ body[data-frontend="pixel"]>.floating-risk[data-compact="true"] .floating-risk-title{font-size:18px;letter-spacing:0;white-space:nowrap}
+ body[data-frontend="pixel"]>.floating-risk[data-compact="true"] .liquidation-meter-value{margin:2px 0 0;font-size:12px;line-height:17px;white-space:normal;overflow-wrap:anywhere}
+ body[data-frontend="pixel"]>.floating-risk[data-compact="true"] .floating-risk-close{height:44px;padding:0 3px;font-size:19px}
+ body[data-frontend="pixel"]>.floating-risk[data-compact="true"] .floating-risk-dismiss{font-size:30px}

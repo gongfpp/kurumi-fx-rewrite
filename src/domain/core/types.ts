@@ -168,6 +168,7 @@ export interface GameState {
   lifeActionsToday?: string[];
   dinner?: boolean;
   relationship?: number;
+  newsLog?: { time?: string; source: string; title: string; copy: string }[];
   story?: StoryState;
   ending?: EndingState;
   livingDiscount?: number;

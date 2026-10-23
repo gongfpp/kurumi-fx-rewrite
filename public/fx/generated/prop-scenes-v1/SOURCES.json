@@ -1,0 +1,55 @@
+{
+  "kind": "original-fan-art",
+  "copyrightNote": "Original game fan art; Gemini-authored game dialogue, not a manga quotation.",
+  "assets": [
+    {
+      "id": "prop-daily-drink-first-use",
+      "dialogueId": "prop-daily-drink-first-use",
+      "file": "prop-daily-drink-first-use.webp",
+      "sha256": "33a4400a884f9c9e67e06fc3cbddad4d8a98d04d9c0befa13a9950169051c303",
+      "originalSHA256": "ad3625be9c9b8f652363e50a8ad00ce38f307730339b0434f7d0b055b5c87c8a",
+      "width": 1086,
+      "height": 1448,
+      "panels": 4,
+      "panelRects": [
+        [
+          10,
+          8,
+          524,
+          700
+        ],
+        [
+          552,
+          8,
+          524,
+          700
+        ],
+        [
+          10,
+          725,
+          524,
+          713
+        ],
+        [
+          552,
+          725,
+          524,
+          713
+        ]
+      ],
+      "panelOrder": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "characters": [
+        "久留美"
+      ],
+      "people": 1,
+      "hasEmbeddedText": false,
+      "sourceDialogueSHA256": "0e6feaae323dc0712ccddad4941d1db229b74aef772be66929a3c4c9db965d30",
+      "pixelReview": "approved"
+    }
+  ]
+}

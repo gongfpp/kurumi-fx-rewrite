@@ -1,0 +1,288 @@
+{
+  "format": "licensed-bgm-v1",
+  "tracks": [
+    {
+      "id": "on-the-ground",
+      "title": "On the Ground",
+      "artist": "Kevin MacLeod",
+      "src": "./bgm/on-the-ground.mp3",
+      "license": {
+        "name": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1400030",
+      "credit": "\"On the Ground\" Kevin MacLeod (incompetech.com). Licensed under Creative Commons: By Attribution 4.0 License. https://creativecommons.org/licenses/by/4.0/",
+      "sceneTags": [
+        "neutral",
+        "focus"
+      ],
+      "duration": 159.137959,
+      "sha256": "ab466d8d629c79125e0ff67695c0260561b357f06e0a2eb599567de6ea2656f9",
+      "modifications": "Transcoded to stereo 44.1kHz/128kbps MP3; loudness normalized to target -20 LUFS / -3 dBTP; 0.8s fade-in and 1.5s fade-out."
+    },
+    {
+      "id": "the-complex",
+      "title": "The Complex",
+      "artist": "Kevin MacLeod",
+      "src": "./bgm/the-complex.mp3",
+      "license": {
+        "name": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1300025",
+      "credit": "\"The Complex\" Kevin MacLeod (incompetech.com). Licensed under Creative Commons: By Attribution 4.0 License. https://creativecommons.org/licenses/by/4.0/",
+      "sceneTags": [
+        "tension",
+        "gain"
+      ],
+      "duration": 267.781224,
+      "sha256": "4ddea0aafcd3326325d7c3db79b51bb5b2be3961e8370fa031d5e3213b39b69c",
+      "modifications": "Transcoded to stereo 44.1kHz/128kbps MP3; loudness normalized to target -20 LUFS / -3 dBTP; 0.8s fade-in and 1.5s fade-out."
+    },
+    {
+      "id": "dark-fog",
+      "title": "Dark Fog",
+      "artist": "Kevin MacLeod",
+      "src": "./bgm/dark-fog.mp3",
+      "license": {
+        "name": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1300031",
+      "credit": "\"Dark Fog\" Kevin MacLeod (incompetech.com). Licensed under Creative Commons: By Attribution 4.0 License. https://creativecommons.org/licenses/by/4.0/",
+      "sceneTags": [
+        "loss",
+        "crisis"
+      ],
+      "duration": 239.072653,
+      "sha256": "a3142c0865c58c203f9063574fad66d8a7caacd3d542cd97316899f970bf1df4",
+      "modifications": "Transcoded to stereo 44.1kHz/128kbps MP3; loudness normalized to target -20 LUFS / -3 dBTP; 0.8s fade-in and 1.5s fade-out."
+    },
+    {
+      "id": "comfortable-mystery-4",
+      "title": "Comfortable Mystery 4",
+      "artist": "Kevin MacLeod",
+      "src": "./bgm/comfortable-mystery-4.mp3",
+      "license": {
+        "name": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100535",
+      "credit": "\"Comfortable Mystery 4\" Kevin MacLeod (incompetech.com). Licensed under Creative Commons: By Attribution 4.0 License. https://creativecommons.org/licenses/by/4.0/",
+      "sceneTags": [
+        "numb"
+      ],
+      "duration": 75.781224,
+      "sha256": "467c6a47b74f7b694e91d23eb885a3e0a1482662f8b5b56809456988a1dd810a",
+      "modifications": "Transcoded to stereo 44.1kHz/128kbps MP3; loudness normalized to target -20 LUFS / -3 dBTP; 0.8s fade-in and 1.5s fade-out."
+    },
+    {
+      "id": "cool-vibes",
+      "title": "Cool Vibes",
+      "artist": "Kevin MacLeod",
+      "src": "./bgm/cool-vibes.mp3",
+      "license": {
+        "name": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100863",
+      "credit": "\"Cool Vibes\" Kevin MacLeod (incompetech.com). Licensed under Creative Commons: By Attribution 4.0 License. https://creativecommons.org/licenses/by/4.0/",
+      "sceneTags": [
+        "relief",
+        "neutral"
+      ],
+      "duration": 218.409796,
+      "sha256": "37404e5b6119d05580ad0ec1363f82fffd910eb6f0e53e2696ad917f81064e8b",
+      "modifications": "Transcoded to stereo 44.1kHz/128kbps MP3; loudness normalized to target -20 LUFS / -3 dBTP; 0.8s fade-in and 1.5s fade-out."
+    },
+    {
+      "id": "airport-lounge",
+      "title": "Airport Lounge",
+      "artist": "Kevin MacLeod",
+      "src": "./bgm/airport-lounge.mp3",
+      "license": {
+        "name": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100806",
+      "credit": "\"Airport Lounge\" Kevin MacLeod (incompetech.com). Licensed under Creative Commons: By Attribution 4.0 License. https://creativecommons.org/licenses/by/4.0/",
+      "sceneTags": [
+        "neutral",
+        "relief"
+      ],
+      "duration": 307.696327,
+      "sha256": "9ef726b5fb213e7731513caf6aaa5cd918484d9091eb0bd367e7a85798dae8e1",
+      "modifications": "Transcoded to stereo 44.1kHz/128kbps MP3; loudness normalized to target -20 LUFS / -3 dBTP; 0.8s fade-in and 1.5s fade-out."
+    },
+    {
+      "id": "spy-glass",
+      "title": "Spy Glass",
+      "artist": "Kevin MacLeod",
+      "src": "./bgm/spy-glass.mp3",
+      "license": {
+        "name": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1500058",
+      "credit": "\"Spy Glass\" Kevin MacLeod (incompetech.com). Licensed under Creative Commons: By Attribution 4.0 License. https://creativecommons.org/licenses/by/4.0/",
+      "sceneTags": [
+        "focus"
+      ],
+      "duration": 227.004082,
+      "sha256": "819476eaead42493a9f7a805f77cfe66a0cb60d58b469c6725b1fc3e8b3af1ec",
+      "modifications": "Transcoded to stereo 44.1kHz/128kbps MP3; loudness normalized to target -20 LUFS / -3 dBTP; 0.8s fade-in and 1.5s fade-out."
+    },
+    {
+      "id": "deep-haze",
+      "title": "Deep Haze",
+      "artist": "Kevin MacLeod",
+      "src": "./bgm/deep-haze.mp3",
+      "license": {
+        "name": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100886",
+      "credit": "\"Deep Haze\" Kevin MacLeod (incompetech.com). Licensed under Creative Commons: By Attribution 4.0 License. https://creativecommons.org/licenses/by/4.0/",
+      "sceneTags": [
+        "focus",
+        "tension"
+      ],
+      "duration": 122.096327,
+      "sha256": "fc37a4978d2732c16ae6ae6d14eae763d167b2fa568c565e01d9bbad01cfccd9",
+      "modifications": "Transcoded to stereo 44.1kHz/128kbps MP3; loudness normalized to target -20 LUFS / -3 dBTP; 0.8s fade-in and 1.5s fade-out."
+    },
+    {
+      "id": "cipher",
+      "title": "Cipher",
+      "artist": "Kevin MacLeod",
+      "src": "./bgm/cipher.mp3",
+      "license": {
+        "name": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100844",
+      "credit": "\"Cipher\" Kevin MacLeod (incompetech.com). Licensed under Creative Commons: By Attribution 4.0 License. https://creativecommons.org/licenses/by/4.0/",
+      "sceneTags": [
+        "gain"
+      ],
+      "duration": 231.288163,
+      "sha256": "2a0078c16d60227e0a8b5a3f81a0a09fa7934423fee853f1d4afde570a4d5019",
+      "modifications": "Transcoded to stereo 44.1kHz/128kbps MP3; loudness normalized to target -20 LUFS / -3 dBTP; 0.8s fade-in and 1.5s fade-out."
+    },
+    {
+      "id": "district-four",
+      "title": "District Four",
+      "artist": "Kevin MacLeod",
+      "src": "./bgm/district-four.mp3",
+      "license": {
+        "name": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1600039",
+      "credit": "\"District Four\" Kevin MacLeod (incompetech.com). Licensed under Creative Commons: By Attribution 4.0 License. https://creativecommons.org/licenses/by/4.0/",
+      "sceneTags": [
+        "gain",
+        "tension"
+      ],
+      "duration": 248.267755,
+      "sha256": "724727ccf1f660a0052b2f40c81ca15ed4087b3442647cb1c20e69d38959762a",
+      "modifications": "Transcoded to stereo 44.1kHz/128kbps MP3; loudness normalized to target -20 LUFS / -3 dBTP; 0.8s fade-in and 1.5s fade-out."
+    },
+    {
+      "id": "crypto",
+      "title": "Crypto",
+      "artist": "Kevin MacLeod",
+      "src": "./bgm/crypto.mp3",
+      "license": {
+        "name": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1600013",
+      "credit": "\"Crypto\" Kevin MacLeod (incompetech.com). Licensed under Creative Commons: By Attribution 4.0 License. https://creativecommons.org/licenses/by/4.0/",
+      "sceneTags": [
+        "tension",
+        "crisis"
+      ],
+      "duration": 204.094694,
+      "sha256": "c11fb5afacbb5d6399d2697aba7c2c57f0cbde286bd550676444c87bbd91b72d",
+      "modifications": "Transcoded to stereo 44.1kHz/128kbps MP3; loudness normalized to target -20 LUFS / -3 dBTP; 0.8s fade-in and 1.5s fade-out."
+    },
+    {
+      "id": "night-on-the-docks-piano",
+      "title": "Night on the Docks - Piano",
+      "artist": "Kevin MacLeod",
+      "src": "./bgm/night-on-the-docks-piano.mp3",
+      "license": {
+        "name": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100135",
+      "credit": "\"Night on the Docks - Piano\" Kevin MacLeod (incompetech.com). Licensed under Creative Commons: By Attribution 4.0 License. https://creativecommons.org/licenses/by/4.0/",
+      "sceneTags": [
+        "loss",
+        "numb"
+      ],
+      "duration": 174.08,
+      "sha256": "0806b9e5e0c37573dc29b67cc003f98033ead643437d9621e3f8bca1e095a1dd",
+      "modifications": "Transcoded to stereo 44.1kHz/128kbps MP3; loudness normalized to target -20 LUFS / -3 dBTP; 0.8s fade-in and 1.5s fade-out."
+    },
+    {
+      "id": "floating-cities",
+      "title": "Floating Cities",
+      "artist": "Kevin MacLeod",
+      "src": "./bgm/floating-cities.mp3",
+      "license": {
+        "name": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1600018",
+      "credit": "\"Floating Cities\" Kevin MacLeod (incompetech.com). Licensed under Creative Commons: By Attribution 4.0 License. https://creativecommons.org/licenses/by/4.0/",
+      "sceneTags": [
+        "numb",
+        "loss"
+      ],
+      "duration": 184.084898,
+      "sha256": "83358bbc5dc7b991bf396557123118a982e99e9bede4408c50b31049d61b9c92",
+      "modifications": "Transcoded to stereo 44.1kHz/128kbps MP3; loudness normalized to target -20 LUFS / -3 dBTP; 0.8s fade-in and 1.5s fade-out."
+    },
+    {
+      "id": "long-stroll",
+      "title": "Long Stroll",
+      "artist": "Kevin MacLeod",
+      "src": "./bgm/long-stroll.mp3",
+      "license": {
+        "name": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100174",
+      "credit": "\"Long Stroll\" Kevin MacLeod (incompetech.com). Licensed under Creative Commons: By Attribution 4.0 License. https://creativecommons.org/licenses/by/4.0/",
+      "sceneTags": [
+        "neutral",
+        "relief"
+      ],
+      "duration": 254.72,
+      "sha256": "91361f06ffe68ab12a0ae2b869d55e87cc36b29329f9ef3340684be7494b86d5",
+      "modifications": "Transcoded to stereo 44.1kHz/128kbps MP3; loudness normalized to target -20 LUFS / -3 dBTP; 0.8s fade-in and 1.5s fade-out."
+    },
+    {
+      "id": "impact-moderato",
+      "title": "Impact Moderato",
+      "artist": "Kevin MacLeod",
+      "src": "./bgm/impact-moderato.mp3",
+      "license": {
+        "name": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100618",
+      "credit": "\"Impact Moderato\" Kevin MacLeod (incompetech.com). Licensed under Creative Commons: By Attribution 4.0 License. https://creativecommons.org/licenses/by/4.0/",
+      "sceneTags": [
+        "focus",
+        "relief"
+      ],
+      "duration": 75.702857,
+      "sha256": "b2aeeccef2ea514111aa98386d6b02be3013dc58bb7b8c90e60b738791420d2c",
+      "modifications": "Transcoded to stereo 44.1kHz/128kbps MP3; loudness normalized to target -20 LUFS / -3 dBTP; 0.8s fade-in and 1.5s fade-out."
+    }
+  ],
+  "validation": "File hashes and MP3 decoding verified; author credits and CC BY 4.0 source records supplied and checked. Human listening not yet verified."
+}

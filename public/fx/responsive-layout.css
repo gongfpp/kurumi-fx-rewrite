@@ -1,0 +1,161 @@
+/* Responsive corrections only. Approved desktop art, live nodes and game state
+   stay owned by the existing renderers. Loaded last to avoid legacy overrides. */
+
+/* A centered modal must clear the larger inset on both sides, including a
+   landscape notch. Keeping the shell bounded preserves its fixed close control. */
+body :is(dialog.dialog-shell,dialog.life-action-picker){
+ --dialog-safe-x:max(12px,calc(env(safe-area-inset-left,0px) + 8px),calc(env(safe-area-inset-right,0px) + 8px));
+ --dialog-safe-y:max(12px,calc(env(safe-area-inset-top,0px) + 8px),calc(env(safe-area-inset-bottom,0px) + 8px));
+ max-width:calc(100vw - 2 * var(--dialog-safe-x));
+ max-height:calc(100vh - 2 * var(--dialog-safe-y));
+ max-height:calc(100dvh - 2 * var(--dialog-safe-y));
+}
+/* ID-based skins otherwise override the common shell's inset constraints. */
+body[data-frontend="pixel"] :is(#day-dialog[data-recap-layout="profit-first"],#leaderboard-dialog,#achievements-dialog,#opening-dialog,#character-story-dialog){
+ max-width:calc(100vw - 2 * var(--dialog-safe-x));
+ max-height:calc(100vh - 2 * var(--dialog-safe-y));
+ max-height:calc(100dvh - 2 * var(--dialog-safe-y));
+}
+.life-action-picker{display:flex;flex-direction:column}
+.life-action-picker:not([open]){display:none}
+.life-picker-shell{min-height:0;max-height:100%;flex:1 1 auto}
+.life-picker-title,.life-picker-housing-copy,.life-picker-option-title{min-width:0;overflow-wrap:anywhere}
+.life-picker-option-title{flex-wrap:wrap}
+.life-picker-content :is(button,h3,h4,p){overflow-wrap:anywhere}
+.dialog-scroll{scroll-padding-block:12px}
+body[data-frontend="pixel"] .pixel-ach-grid{overscroll-behavior:contain;scroll-padding-block:8px}
+@media(max-width:850px){body[data-frontend="pixel"] #achievements-dialog>.dialog-scroll{scroll-padding-bottom:76px}}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .pixel-settlement-heading{flex-wrap:wrap}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .pixel-settlement-day{max-width:100%;white-space:normal;overflow-wrap:anywhere}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .dialog-toolbar .x-close{min-width:44px;min-height:44px;flex-basis:44px}
+
+/* Numeric tokens keep every digit; each amount is sized against its own cell
+   rather than the entire trading panel. No abbreviations or ellipses. */
+#pixel-frontend :is(.account-heading,.pixel-account-summary>.account-row,.order-pixel-data,.order-live-pnl){container-type:inline-size;min-width:0}
+#pixel-frontend :is(.order-pixel-data>b,.order-live-pnl>b){max-width:100%;overflow-wrap:anywhere}
+@supports(font-size:1cqw){
+ #pixel-frontend #equity[data-atomic-amount]{font-size:min(29px,calc(100cqw / var(--amount-characters,16) * 1.35))}
+ #pixel-frontend #day-pnl[data-atomic-amount]{font-size:min(27px,calc(100cqw / var(--amount-characters,16) * 1.35))}
+ #pixel-frontend :is(.order-pixel-data>b,.order-live-pnl>b)[data-atomic-amount]{font-size:min(19px,calc(100cqw / var(--amount-characters,16) * 1.35))}
+}
+#pixel-frontend .order-pixel-data>b:not([data-atomic-amount]){white-space:normal;overflow-wrap:anywhere}
+#pixel-frontend .pixel-fee-summary{white-space:normal;overflow-wrap:anywhere}
+#pixel-frontend .pixel-fee-summary b{display:inline-block;white-space:nowrap;max-width:100%}
+#pixel-frontend .pixel-drawer-content{overscroll-behavior:contain;scroll-padding-block:8px}
+
+@media(max-width:1200px){
+ /* The original compact skin is now fluid through tablet widths. A 768px
+    viewport must never shrink a 1536px desktop and halve every hit target. */
+ #pixel-frontend{width:100%;min-height:100dvh;zoom:1!important}
+ #pixel-frontend .topbar{padding-inline:max(10px,env(safe-area-inset-left,0px)) max(10px,env(safe-area-inset-right,0px))}
+ #pixel-frontend .brand{max-width:calc(100% - 124px);font-size:clamp(24px,6.4vw,30px)}
+ #pixel-frontend .top-right{gap:6px}
+ #pixel-frontend :is(#leaderboard-open,#achievements-open,#share-open),#pixel-frontend .pixel-settings>summary{height:44px;min-height:44px}
+ #pixel-frontend .pixel-settings>.pixel-drawer-content{top:48px}
+ #pixel-frontend .pixel-life-actions>.pixel-drawer>summary,#pixel-frontend .pixel-voice-button,#pixel-frontend .pixel-life-button{height:44px;min-height:44px;font-size:16px}
+ #pixel-frontend #terminal>.candle-view-controls{grid-template-columns:repeat(6,minmax(0,1fr))}
+ #pixel-frontend .candle-view-controls #quote-package-open{grid-column:span 2;width:100%;min-height:44px;height:44px}
+ #pixel-frontend #quote-refresh-options{grid-column:span 4;width:100%}
+ #pixel-frontend .quote-refresh-choice{min-height:44px!important;height:44px!important}
+ #pixel-frontend .candle-view-controls>button:not(#quote-package-open){grid-column:span 2;grid-row:2;min-width:0;height:44px;min-height:44px}
+ #pixel-frontend .candle-view-controls .candle-history{grid-column:1/-1;grid-row:3;height:auto;min-height:32px}
+ #pixel-frontend .pixel-currency-button{min-height:44px;height:44px}
+ #pixel-frontend #amount-field{height:auto;min-height:190px}
+ #pixel-frontend .amount-heading{height:44px;min-height:44px}
+ #pixel-frontend #amount-random{height:44px;min-height:44px}
+ #pixel-frontend #amount-field:after{top:44px}
+ #pixel-frontend .amount-presets{grid-template-rows:repeat(2,44px)}
+ #pixel-frontend .amount-presets button{min-height:44px}
+ #pixel-frontend #order-empty fieldset{height:auto;min-height:86px;padding:34px 4px 4px}
+ #pixel-frontend #percent-field{height:auto!important;min-height:86px}
+ #pixel-frontend #order-empty fieldset>legend,#pixel-frontend #percent-field>legend{top:5px!important;left:8px;width:auto}
+ #pixel-frontend #order-empty fieldset button{height:44px;min-height:44px;font-size:16px}
+ #pixel-frontend .position-title{min-height:54px;height:auto;padding-block:4px;flex-wrap:wrap}
+ #pixel-frontend #position-close-all{min-height:44px;height:44px}
+ #pixel-frontend .order-row{grid-template-columns:repeat(2,minmax(0,1fr)) 64px;grid-template-rows:44px minmax(54px,auto) minmax(54px,auto) minmax(44px,auto)}
+ #pixel-frontend .order-row-head{height:44px;padding-right:54px}
+ #pixel-frontend .order-pixel-data:has([data-order-field="entry"]){grid-column:1;grid-row:2}
+ #pixel-frontend .order-pixel-data:has([data-order-field="current"]){grid-column:2;grid-row:2}
+ #pixel-frontend .order-pixel-data:has([data-order-field="quantity"]){grid-column:1;grid-row:3}
+ #pixel-frontend .order-live-pnl{grid-column:1/-1;grid-row:4;flex-direction:row;flex-wrap:wrap;justify-content:space-between;gap:6px;padding:6px 10px;border-top:1px solid #edc9df}
+ #pixel-frontend .order-row-actions{grid-column:3;grid-row:2/4}
+ #pixel-frontend .order-row-actions [data-position-action="half"]{top:0;right:4px;height:44px;min-height:44px}
+ #pixel-frontend [data-position-detail]{width:28px;min-width:28px;height:32px;min-height:32px}
+ #pixel-frontend .hold-actions button{min-height:44px}
+ #pixel-frontend :is(.pixel-conversation,.pixel-market-extras,.pixel-recent-comments,.pixel-financial-details)>summary{display:flex;align-items:center;min-height:36px;font-size:12px}
+ #pixel-frontend #player-comment-text{font-size:16px}
+ body :is(#margin-dialog,#loan-dialog,#developer-dialog).dialog-shell :is(input,select,textarea){font-size:16px}
+ body[data-frontend="pixel"] #leaderboard-dialog :is(#ranking-name,#ranking-sort),body[data-frontend="pixel"] #achievements-dialog .pixel-ach-choice{font-size:16px}
+ #pixel-frontend .pixel-account-summary{height:auto;min-height:76px}
+ #pixel-frontend .pixel-account-summary>.account-row{height:auto;min-height:45px}
+ #pixel-frontend .pixel-footer-slot>footer{padding-bottom:max(10px,env(safe-area-inset-bottom,0px))}
+}
+/* Two readable columns, without shrinking buttons. At 700/701 and 1024/1025
+   widths the same fluid rules apply; the approved desktop starts above 1200px. */
+@media(min-width:760px) and (max-width:1200px){
+ #pixel-frontend .pixel-dashboard{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto auto auto auto;align-items:start}
+ #pixel-frontend .pixel-character-panel{grid-column:1/-1;grid-row:1}
+ #pixel-frontend .pixel-market-panel{grid-column:1;grid-row:2}
+ #pixel-frontend .pixel-trading-panel{grid-column:2;grid-row:2/5}
+ #pixel-frontend .pixel-news-panel{grid-column:1;grid-row:3}
+ #pixel-frontend .pixel-comments-panel{grid-column:1;grid-row:4}
+ #pixel-frontend .pixel-character-body{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:10px;align-items:start}
+ #pixel-frontend #character-card{display:grid;grid-template-columns:110px minmax(0,1fr);grid-template-rows:40px auto 12px auto;gap:4px 10px;min-height:0}
+ #pixel-frontend .pixel-character-body #character-card>.portrait{grid-column:1;grid-row:1/4;width:110px;height:107px;align-self:start;margin:0;background-size:574.7px 383.1px;background-position:-7.85px -50.85px}
+ #pixel-frontend .pixel-character-name{grid-column:1;grid-row:4;margin:0;font-size:20px;line-height:28px}
+ #pixel-frontend #character-card>.character-heading{grid-column:2;grid-row:1;height:auto;min-height:40px;margin:0;padding:4px 6px;gap:4px;flex-wrap:wrap;font-size:16px}
+ #pixel-frontend .character-heading>span:first-child:after{font-size:15px}
+ #pixel-frontend #emotion-label{width:auto;height:30px;padding:0 6px;gap:4px;font-size:16px}
+ #pixel-frontend #emotion-label:before{font-size:22px}
+ #pixel-frontend #character-card>.sanity-label{grid-column:2;grid-row:2;padding:0;font-size:15px;line-height:26px;flex-wrap:wrap}
+ #pixel-frontend #sanity-text{font-size:18px}
+ #pixel-frontend #character-card>.sanity-meter{grid-column:2;grid-row:3;margin:0;height:12px}
+ #pixel-frontend #character-card>.pixel-stamina{grid-column:2;grid-row:4;margin:0}
+ #pixel-frontend .pixel-stamina-label{font-size:15px;line-height:24px;flex-wrap:wrap}
+ #pixel-frontend .pixel-stamina-value{font-size:18px}
+ #pixel-frontend .pixel-life-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin:0;align-self:start}
+ #pixel-frontend .pixel-life-actions>.pixel-drawer>.pixel-drawer-content{top:48px;max-height:60dvh}
+ #pixel-frontend .pixel-life-actions>.pixel-comic>.pixel-drawer-content{top:98px}
+ #pixel-frontend .pixel-conversation{grid-column:1/-1}
+ #pixel-frontend .pixel-account-summary{grid-template-columns:minmax(0,1fr);gap:8px}
+ #pixel-frontend .pixel-account-summary>.account-row{border-left:0;border-top:1px solid #edc9df;padding-top:5px}
+}
+@media(max-width:480px){
+ #pixel-frontend .pixel-account-summary{grid-template-columns:minmax(0,1fr);gap:8px}
+ #pixel-frontend .pixel-account-summary>.account-row{border-left:0;border-top:1px solid #edc9df;padding-top:5px}
+ #pixel-frontend #character-card{grid-template-columns:100px minmax(0,1fr);grid-template-rows:auto auto 19px auto;gap:0 8px}
+ #pixel-frontend #character-card>.portrait{width:100px;height:98px;align-self:start;background-size:522.24px 348.16px;background-position:-7.14px -46.24px}
+ #pixel-frontend #character-card>.sanity-label{flex-wrap:wrap;line-height:22px}
+ #pixel-frontend .character-heading{height:auto;min-height:36px;flex-wrap:wrap;padding:4px}
+ #pixel-frontend #emotion-label{margin-left:auto}
+ #pixel-frontend .pixel-life-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+ #pixel-frontend .pixel-life-actions>.pixel-drawer>.pixel-drawer-content,#pixel-frontend .pixel-life-actions>.pixel-comic>.pixel-drawer-content{top:100px}
+ #pixel-frontend .sanity-label .help-dot,#pixel-frontend .account-heading .help-dot{width:24px;height:24px;min-width:24px;min-height:24px}
+ body[data-frontend="pixel"] .pixel-ach-nav{gap:6px;padding:8px}
+ body[data-frontend="pixel"] .pixel-ach-nav button{font-size:14px;padding-inline:6px;min-width:0;white-space:normal}
+ body[data-frontend="pixel"] #ranking-name,body[data-frontend="pixel"] .pixel-ach-choice{font-size:16px}
+}
+/* Risk placement measures the resulting panel, so wrapped warnings are kept
+   inside the plot or fall back to the existing inline meter. */
+body[data-frontend="pixel"]>.floating-risk{grid-template-columns:44px minmax(0,1fr) 134px 44px}
+body[data-frontend="pixel"]>.floating-risk[data-compact="true"]{grid-template-columns:28px minmax(0,1fr) 98px 44px}
+body[data-frontend="pixel"]>.floating-risk[data-compact="true"] .floating-risk-title{white-space:normal;overflow-wrap:anywhere;font-size:16px}
+body[data-frontend="pixel"]>.floating-risk .floating-risk-dismiss{width:44px;min-width:44px;min-height:44px}
+@media(max-width:699px){
+ body[data-frontend="pixel"]>.floating-risk{grid-template-columns:28px minmax(0,1fr) 98px 44px}
+ body[data-frontend="pixel"]>.floating-risk .floating-risk-title{white-space:normal;overflow-wrap:anywhere;font-size:16px}
+}
+/* Large settled amounts get a full row on phones rather than an 8px font.
+   The underlying recap animation, numbers and original action nodes are intact. */
+@media(max-width:760px){
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-profit-hero{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto auto auto}
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-stage-profit{grid-column:1;grid-row:1;padding:0 0 10px;border-right:0;border-bottom:1px solid #ec409f}
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-realized-score{display:flex;flex-direction:column;align-items:flex-start;gap:6px;height:auto}
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-realized-score::before{display:none}
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-realized-value{align-self:auto;font-size:min(31px,calc((100cqw - 12px)/var(--recap-score-width,10)))}
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-step-group{grid-column:1;grid-row:2;padding:8px 0 0}
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-counter{grid-column:1;grid-row:3;padding:0;font-size:min(33px,calc((100cqw - 12px)/var(--recap-character-width,8)))}
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-stage-rate-group{grid-column:1;grid-row:4;padding:0}
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .pixel-settlement-paid:not([hidden]){grid-template-columns:minmax(0,1fr)}
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .pixel-settlement-fee{border-right:0;border-bottom:1px solid #edc9df;padding:0 0 8px}
+}

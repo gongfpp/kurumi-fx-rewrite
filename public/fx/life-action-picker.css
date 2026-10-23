@@ -1,0 +1,219 @@
+/* Life illustrations reuse only the user-approved proposal pixels. All labels,
+   balances, conditions and choices are accessible live DOM, never screenshot text. */
+.life-action-picker{--life-ink:#10134e;--life-pink:#ff2296;--life-line:#171764;color:var(--life-ink);width:min(1060px,calc(100vw - 32px));max-width:none;max-height:calc(100dvh - 32px);padding:9px;border:2px solid var(--life-line);border-radius:13px;background:#fff8fd;box-shadow:0 0 0 5px #fff0fa,5px 5px 0 5px #35204744;overflow:hidden;font-family:inherit;box-sizing:border-box}
+.life-action-picker::backdrop{background:rgba(24,15,41,.63)}
+.life-action-picker *{box-sizing:border-box}
+.life-action-picker [hidden]{display:none!important}
+.life-action-picker button{font-family:inherit;cursor:pointer;min-height:44px;touch-action:manipulation}
+.life-action-picker button:disabled{cursor:not-allowed;opacity:.52}
+.life-action-picker button:focus-visible{outline:3px solid #135dc1;outline-offset:3px}
+.life-picker-shell{display:flex;flex-direction:column;max-height:calc(100dvh - 56px);border:1px solid var(--life-line);border-radius:8px;overflow:hidden;background:#fff}
+.life-picker-header{flex-shrink:0;display:flex;align-items:center;gap:20px;min-height:70px;padding:8px 12px;border-bottom:1px solid var(--life-line);background:linear-gradient(105deg,#ffeef8,#ffe6f2 58%,#ffd6eb);position:relative}
+.life-picker-header:after{content:'';position:absolute;right:54px;top:0;width:205px;height:100%;background-image:url('./pixel-assets/life-menu-approved.png?v=56d6bec24fd11a7578768d36d112a0cef37982c5-23f2a20b7717');background-size:1113.04348% 1969.23077%;background-position:78.68383% 20.16461%;pointer-events:none;opacity:.75}
+.life-picker-title{display:flex;align-items:center;gap:13px;position:relative;z-index:1;font-size:36px;line-height:1.15;margin:0;font-weight:850;flex:1;color:var(--life-ink)}
+.life-picker-close{width:47px;padding:0;flex:none;font-size:46px;line-height:1;background:transparent;border:0;color:var(--life-ink);position:relative;z-index:1;border-radius:6px}
+.life-picker-back,.life-picker-return{display:flex;align-items:center;justify-content:center;gap:12px;color:var(--life-ink);background:linear-gradient(130deg,#ffe3f3,#fff4fa);border:1px solid var(--life-line);border-radius:6px;font-size:24px;line-height:1.2;font-weight:750;padding:8px 19px;position:relative;z-index:1;white-space:nowrap}
+.life-picker-arrow{font-size:39px;line-height:.7}
+.life-picker-content{padding:12px;overflow:auto;min-height:0;overscroll-behavior:contain;scrollbar-gutter:stable}
+.life-picker-consequence{margin:0 0 12px;padding:10px 12px;text-align:center;border-radius:7px;background:#ffe2f1;color:var(--life-ink);font-weight:750;font-size:22px;line-height:1.4}
+.life-picker-feedback{margin:0 0 12px;padding:10px;border:1px solid #ad3776;border-radius:6px;background:#fff2f7;color:#8c235f;line-height:1.5}
+.life-picker-section-title{display:flex;align-items:center;gap:12px;font-size:29px;line-height:1.3;font-weight:850;color:var(--life-ink);margin:8px 0}
+.life-picker-housing{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(140px,.85fr) minmax(160px,.9fr);align-items:center;gap:22px;padding:10px;border:1px solid var(--life-line);border-radius:8px;background:linear-gradient(110deg,#fffaff,#ffe9f5);margin-bottom:12px}
+.life-picker-housing .life-picker-art{aspect-ratio:408 / 132}
+.life-picker-housing-copy h3{display:flex;align-items:center;gap:10px;font-size:29px;margin:0 0 5px;color:var(--life-ink)}
+.life-picker-housing-copy p{font-size:19px;line-height:1.5;margin:0;overflow-wrap:anywhere}
+.life-picker-today>.life-picker-section-title{border:1px solid var(--life-line);border-bottom:0;border-radius:8px 8px 0 0;margin:0;padding:8px;background:#ffeff9}
+.life-picker-menu-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+.life-picker-menu-card,.life-picker-option-card{min-width:0;display:flex;flex-direction:column;gap:8px;border:1px solid var(--life-line);border-radius:7px;padding:10px;background:#fff}
+.life-picker-menu-card h4{display:flex;align-items:center;justify-content:center;gap:8px;font-size:24px;line-height:1.2;margin:0;color:var(--life-ink)}
+.life-picker-art{width:100%;aspect-ratio:1.33;background-color:#ffedf7;background-repeat:no-repeat;border-radius:6px;border:1px solid #e45baf;flex:none}
+.life-picker-art-symbol{display:grid;place-items:center;background-image:none}
+.life-picker-primary{display:flex;align-items:center;justify-content:center;gap:17px;min-width:0;width:100%;border:1px solid var(--life-line);border-radius:7px;background:linear-gradient(135deg,#ff1d95,#ff2d9d);box-shadow:inset 0 1px 1px #ff83c0;color:#fff;font-size:25px;font-weight:800;line-height:1.25;padding:10px 7px;margin-top:auto;overflow-wrap:anywhere}
+.life-picker-primary:hover:enabled{background:#e90b84;box-shadow:inset 0 0 0 1px #fff8}
+.life-picker-chevron{font-size:39px;line-height:.7;font-weight:400}
+.life-picker-footer{border:0;padding:0;display:flex;align-items:center;justify-content:flex-start;margin-top:12px}
+.life-picker-footer .life-picker-return{min-width:228px;text-decoration:none}
+.life-picker-option-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.life-picker-friend-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.life-picker-option-card{padding:12px;gap:10px}
+.life-picker-option-title{display:flex;align-items:center;justify-content:center;gap:16px;font-size:28px;line-height:1.2;margin:0;color:var(--life-ink)}
+.life-picker-friend-grid .life-picker-option-title{justify-content:flex-start;font-size:30px}
+.life-picker-friend-badge{font-size:16px;font-weight:750;border-radius:6px;padding:7px 19px;background:#84f6d9;white-space:nowrap}
+.life-picker-friend-badge[data-locked='true']{background:#ede7ef;color:#62576a}
+.life-picker-friend-grid .life-picker-art{aspect-ratio:1.51}
+.life-picker-friend-grid .life-picker-primary{font-size:29px;min-height:58px}
+.life-picker-income{font-size:18px;text-align:center;margin:0;color:#80556d}
+.life-picker-option-reason{font-size:17px;line-height:1.4;margin:0;color:#80556d}
+.life-picker-empty{padding:30px 10px;text-align:center}
+.life-picker-icon{display:inline-block;flex:none;width:38px;height:40px;background-repeat:no-repeat}
+.life-picker-menu-card .life-picker-icon{width:32px;height:35px}
+.life-action-picker[data-category='menu'] .life-picker-consequence{font-size:19px;font-weight:500;background:#fff0f8}
+@media(max-width:800px){
+ .life-action-picker{width:calc(100vw - 24px);max-height:calc(100dvh - 24px);padding:6px}
+ .life-picker-header{gap:10px;min-height:62px;padding:7px 10px}
+ .life-picker-title{font-size:29px;gap:8px}
+ .life-picker-back{font-size:20px;padding:8px 12px;gap:7px}
+ .life-picker-housing{gap:12px;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}
+ .life-picker-housing>.life-picker-primary{grid-column:2}
+ .life-picker-housing>.life-picker-art{grid-row:1 / 3;aspect-ratio:408 / 132;background-size:376.47% 775.758%;background-position:25.266% 30.83%}
+ .life-picker-housing-copy h3{font-size:25px}.life-picker-housing-copy p{font-size:17px}
+ .life-picker-menu-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .life-picker-option-title{font-size:24px}.life-picker-friend-grid .life-picker-option-title{font-size:26px;gap:10px}
+ .life-picker-friend-badge{padding:5px 10px;font-size:14px}
+ .life-picker-consequence{font-size:18px}.life-picker-primary{font-size:21px;gap:8px}
+ .life-picker-option-card{padding:9px}.life-picker-content{padding:10px}
+}
+@media(max-width:560px){
+ .life-action-picker{width:calc(100vw - 16px);max-height:calc(100dvh - 20px);padding:4px;border-radius:9px;box-shadow:0 0 0 2px #fff0fa,3px 3px 0 2px #35204744}
+ .life-picker-header{gap:6px;padding:6px;flex-wrap:wrap}.life-picker-header:after{opacity:.4;width:150px}
+ .life-picker-shell{max-height:calc(100dvh - 36px)}
+ .life-picker-title{font-size:25px;gap:6px;min-width:0}.life-picker-title .life-picker-icon{width:28px;height:31px}
+ .life-picker-close{width:39px;font-size:37px;min-height:44px}.life-picker-back{font-size:17px;gap:4px;padding:6px 9px;min-height:44px}
+ .life-picker-content{padding:8px}.life-picker-consequence,.life-action-picker[data-category='menu'] .life-picker-consequence{font-size:14px;line-height:1.5;padding:8px;margin-bottom:9px}
+ .life-picker-section-title{font-size:23px;gap:8px}.life-picker-housing{gap:8px;padding:8px}.life-picker-housing-copy h3{font-size:22px;gap:5px}.life-picker-housing-copy h3 .life-picker-icon{display:none}
+ .life-picker-housing-copy p{font-size:14px}.life-picker-housing>.life-picker-primary{font-size:18px;padding:8px 5px}
+ .life-picker-menu-card{padding:7px;gap:7px}.life-picker-menu-card h4{font-size:18px;gap:4px}.life-picker-menu-card .life-picker-icon{width:25px;height:28px}
+ .life-picker-primary{font-size:18px;padding:8px 5px;min-height:44px;gap:7px}.life-picker-chevron{font-size:28px}
+ .life-picker-option-grid{grid-template-columns:minmax(0,1fr);gap:10px}.life-picker-option-card{padding:10px;gap:8px}
+ .life-picker-option-card .life-picker-art{aspect-ratio:1.5}.life-picker-friend-grid .life-picker-art{aspect-ratio:1.51}
+ .life-picker-option-title,.life-picker-friend-grid .life-picker-option-title{font-size:24px}.life-picker-friend-grid .life-picker-primary{font-size:23px;min-height:47px}
+ .life-picker-option-title{justify-content:flex-start}.life-picker-income{text-align:left;font-size:16px}.life-picker-friend-badge{font-size:14px}
+ .life-picker-footer .life-picker-return{font-size:20px;min-width:0;width:100%}
+}
+@media(prefers-reduced-motion:reduce){body:not(.motion-full) .life-action-picker *{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+/* Crop bounds are measured against the approved 1536 × 1024 reference images. */
+.life-picker-art-housing{background-image:url('./pixel-assets/life-menu-approved.png?v=56d6bec24fd11a7578768d36d112a0cef37982c5-23f2a20b7717');background-size:376.47059% 775.75758%;background-position:25.26596% 30.82960%}
+.life-picker-art-dinner{background-image:url('./pixel-assets/life-menu-approved.png?v=56d6bec24fd11a7578768d36d112a0cef37982c5-23f2a20b7717');background-size:679.64602% 605.91716%;background-position:21.14504% 63.04094%}
+.life-picker-art-friend{background-image:url('./pixel-assets/life-menu-approved.png?v=56d6bec24fd11a7578768d36d112a0cef37982c5-23f2a20b7717');background-size:676.65198% 605.91716%;background-position:40.71811% 63.04094%}
+.life-picker-art-work{background-image:url('./pixel-assets/life-menu-approved.png?v=56d6bec24fd11a7578768d36d112a0cef37982c5-23f2a20b7717');background-size:704.58716% 605.91716%;background-position:59.86343% 63.04094%}
+.life-picker-art-relax{background-image:url('./pixel-assets/life-menu-approved.png?v=56d6bec24fd11a7578768d36d112a0cef37982c5-23f2a20b7717');background-size:676.65198% 605.91716%;background-position:79.37357% 63.04094%}
+.life-picker-art-mochiko{background-image:url('./pixel-assets/life-friends-approved.png?v=56d6bec24fd11a7578768d36d112a0cef37982c5-23f2a20b7717');background-size:350.68493% 349.48805%;background-position:28.14208% 62.24350%}
+.life-picker-art-yasuko{background-image:url('./pixel-assets/life-friends-approved.png?v=56d6bec24fd11a7578768d36d112a0cef37982c5-23f2a20b7717');background-size:331.74946% 349.48805%;background-position:74.46412% 62.24350%}
+.life-picker-art-convenience{background-image:url('./pixel-assets/life-work-approved.png?v=56d6bec24fd11a7578768d36d112a0cef37982c5-23f2a20b7717');background-size:505.26316% 432.06751%;background-position:22.32143% 50.19060%}
+.life-picker-art-cafe{background-image:url('./pixel-assets/life-work-approved.png?v=56d6bec24fd11a7578768d36d112a0cef37982c5-23f2a20b7717');background-size:503.60656% 432.06751%;background-position:50.04062% 50.19060%}
+.life-picker-art-bookstore{background-image:url('./pixel-assets/life-work-approved.png?v=56d6bec24fd11a7578768d36d112a0cef37982c5-23f2a20b7717');background-size:503.60656% 432.06751%;background-position:77.82291% 50.19060%}
+.life-picker-art-shrine{background-image:url('./pixel-assets/life-relax-approved.png?v=56d6bec24fd11a7578768d36d112a0cef37982c5-23f2a20b7717');background-size:505.26316% 414.57490%;background-position:22.97078% 57.27156%}
+.life-picker-art-river{background-image:url('./pixel-assets/life-relax-approved.png?v=56d6bec24fd11a7578768d36d112a0cef37982c5-23f2a20b7717');background-size:529.65517% 414.57490%;background-position:50.08026% 57.27156%}
+.life-picker-art-park{background-image:url('./pixel-assets/life-relax-approved.png?v=56d6bec24fd11a7578768d36d112a0cef37982c5-23f2a20b7717');background-size:505.26316% 414.57490%;background-position:77.11039% 57.27156%}
+
+@media(max-width:380px){.life-picker-title{font-size:22px}.life-picker-title .life-picker-icon{display:none}.life-picker-back{font-size:15px;padding:6px;gap:3px}.life-picker-arrow{font-size:28px}.life-picker-header{flex-wrap:nowrap}.life-picker-menu-card h4{font-size:16px}.life-picker-menu-card .life-picker-icon{width:22px;height:25px}}
+
+.life-action-story{text-align:left;overflow-wrap:anywhere}
+.life-action-story>p{font-size:16px;line-height:1.65;padding:10px 12px;margin:9px 0;border-left:3px solid #e88eb9;border-radius:5px;background:#fff3fa;color:#4a2842}
+
+/* Approved compact life page. This attribute is set only for the pixel mobile
+   viewport; desktop and the original frontend keep their existing menu. */
+.life-action-picker[data-mobile-life='true']{width:min(100%,760px);height:calc(100dvh - 24px);margin:auto;padding:0;border:1px solid var(--life-line);border-radius:9px;box-shadow:none;background:#fffafd}
+.life-action-picker[data-mobile-life='true'] .life-picker-shell{height:100%;max-height:100%;border:0;border-radius:0;background:linear-gradient(135deg,#fff,#fff8fd)}
+.life-action-picker[data-mobile-life='true'] .life-picker-header{min-height:58px;flex-wrap:nowrap;padding:7px 10px;gap:7px;border:0;background:transparent}
+.life-action-picker[data-mobile-life='true'] .life-picker-header:after{display:none}
+.life-action-picker[data-mobile-life='true'] .life-picker-title{font-size:25px;line-height:1.2;gap:8px}
+.life-action-picker[data-mobile-life='true'] .life-picker-title .life-picker-icon{display:block;width:29px;height:31px}
+.life-action-picker[data-mobile-life='true'] .life-picker-back{font-size:16px;gap:4px;border:0;background:none;padding:0 4px;min-width:44px}
+.life-action-picker[data-mobile-life='true'] .life-picker-arrow{font-size:36px}
+.life-action-picker[data-mobile-life='true'] .life-picker-close{width:44px;font-size:32px}
+.life-action-picker[data-mobile-life='true'] .life-picker-content{flex:1 1 auto;display:flex;flex-direction:column;padding:0 10px 12px;gap:8px;scrollbar-gutter:auto;scroll-padding-block:8px}
+.life-action-picker[data-mobile-life='true'] .life-picker-body{order:1;display:flex;flex-direction:column;gap:8px}
+.life-action-picker[data-mobile-life='true'] .life-picker-feedback{order:0;margin:0;font-size:13px}
+.life-action-picker[data-mobile-life='true'] .life-picker-consequence{order:0;margin:0;padding:8px;border:1px solid #ffc2e3;border-radius:7px;text-align:left;font-size:14px;line-height:1.5;background:#fff3fa}
+.life-action-picker[data-mobile-life='true'] .life-picker-housing{grid-template-columns:90px minmax(0,1fr);gap:7px;padding:8px;margin:0}
+.life-action-picker[data-mobile-life='true'] .life-picker-housing>.life-picker-art{grid-column:1;grid-row:1/3;aspect-ratio:408/132;align-self:center}
+.life-action-picker[data-mobile-life='true'] .life-picker-housing-copy h3{font-size:21px}
+.life-action-picker[data-mobile-life='true'] .life-picker-housing-copy p{font-size:15px}
+.life-action-picker[data-mobile-life='true'] .life-picker-menu-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.life-action-picker[data-mobile-life='true'] .life-picker-menu-card{gap:7px;padding:8px}
+.life-action-picker[data-mobile-life='true'] .life-picker-menu-card h4{font-size:18px;flex-wrap:wrap}
+.life-action-picker[data-mobile-life='true'] .life-picker-menu-card>.life-picker-art{height:76px;aspect-ratio:auto}
+.life-action-picker[data-mobile-life='true'] .life-picker-footer{margin:0}
+.life-action-picker[data-mobile-life='true'] .life-picker-return{font-size:18px;width:100%}
+.life-picker-action-dock{flex:0 0 auto;display:grid;gap:9px;max-height:44dvh;overflow:auto;padding:10px max(10px,env(safe-area-inset-right,0px)) max(12px,env(safe-area-inset-bottom,0px)) max(10px,env(safe-area-inset-left,0px));border-top:1px solid #ffc2e3;background:#fff8fd;overscroll-behavior:contain}
+.life-mobile-selection{min-width:0;display:grid;gap:5px;font-size:15px;line-height:1.45;overflow-wrap:anywhere}
+.life-mobile-selection>p{margin:0}
+.life-mobile-selected-label{font-size:17px}
+.life-action-picker[data-mobile-life='true'] .life-picker-primary{min-height:44px;font-size:20px;line-height:1.2;padding:8px;border:1.5px solid var(--life-pink);border-radius:6px;background:#fff;color:var(--life-pink);box-shadow:none}
+.life-action-picker[data-mobile-life='true'] .life-picker-primary:hover:enabled{background:#fff0f8;color:#df087c;box-shadow:none}
+.life-action-picker[data-mobile-life='true'] .life-picker-chevron{display:none}
+.life-mobile-character{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);align-items:center;gap:8px;border:1px solid #ffc2e3;border-radius:8px;padding:7px;background:#fff}
+.life-mobile-identity{display:flex;align-items:center;gap:7px;min-width:0}
+.life-mobile-identity>strong{font-size:21px;line-height:1.2;white-space:nowrap}
+.life-mobile-stats{display:flex;flex-direction:column;gap:3px;min-width:0}
+.life-mobile-emotion,.life-mobile-stat{margin:0;border:1px solid #ffe1f1;border-radius:5px;background:#fffbfe;padding:2px 5px;min-width:0}
+.life-mobile-emotion{display:flex;align-items:center;gap:7px;font-size:12px;line-height:1.5}
+.life-mobile-emotion .life-picker-icon{width:16px;height:16px}
+.life-mobile-emotion>strong{border-radius:15px;background:#d8f4fc;padding:1px 8px;font-weight:750;overflow-wrap:anywhere}
+.life-mobile-stat>p{display:flex;align-items:center;gap:5px;margin:0;font-size:12px;line-height:1.2}
+.life-mobile-stat>p>strong{font-size:13px;margin-left:3px}
+.life-mobile-meter{height:5px;border-radius:8px;margin:1px 0 0 22px;background:#e5e0ee;overflow:hidden}
+.life-mobile-meter>span{display:block;height:100%;border-radius:inherit;background:#ff2a9b}
+.life-mobile-stamina .life-mobile-meter>span{background:#2cdbc8}
+.life-mobile-section{display:flex;flex-direction:column;gap:8px;padding:8px;border:1px solid #ffc2e3;border-radius:8px;background:#fff}
+.life-mobile-heading{display:flex;align-items:center;gap:9px;margin:0;color:var(--life-ink);font-size:22px;line-height:1.25}
+.life-mobile-heading>.life-picker-icon{width:27px;height:28px}
+.life-mobile-hint{margin:-6px 0 0 36px;color:#63689d;font-size:13px;line-height:1.4}
+.life-mobile-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;align-items:stretch}
+.life-mobile-friend .life-mobile-options{grid-template-columns:repeat(2,minmax(0,1fr))}
+.life-mobile-option{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:8px;min-width:0;min-height:128px;padding:10px 7px;border:1px solid #dfe4fc;border-radius:5px;background:#fff;color:var(--life-ink);overflow:hidden}
+.life-mobile-option[aria-pressed='true']{border:1.5px solid var(--life-pink);background:#fff0f8}
+.life-mobile-option[aria-pressed='true']:after{content:'✓';position:absolute;right:0;top:0;background:var(--life-pink);color:#fff;font-size:15px;font-weight:900;line-height:22px;width:23px;border-radius:0 0 0 15px;text-align:right;padding-right:3px}
+.life-mobile-art{display:flex;align-items:center;justify-content:center;flex:none;width:100%;height:64px;background:#fff7fc;border-radius:5px}
+.life-mobile-art-symbol>.life-picker-icon{width:38px;height:40px}
+.life-mobile-option-label{font-size:16px;line-height:1.4;font-weight:700;overflow-wrap:anywhere}
+.life-mobile-reason{font-size:12px;line-height:1.4;color:#735e71;margin:0;overflow-wrap:anywhere}
+.life-mobile-income{display:flex;align-items:center;flex-wrap:wrap;gap:5px 9px;min-height:34px;margin:0;padding:3px 7px;border:1px solid #ffe1f1;border-radius:6px;background:#fff8fc;font-size:14px}
+.life-mobile-income>strong{font-size:21px;color:var(--life-pink);font-weight:800}
+.life-mobile-extras{display:flex;gap:8px}
+.life-mobile-extra{display:flex;align-items:center;justify-content:center;gap:7px;flex:1;min-width:0;border:1px solid #ffc2e3;border-radius:6px;background:#fff;color:var(--life-ink);font-size:14px;font-weight:700}
+.life-mobile-extra>.life-picker-icon{width:22px;height:23px}
+.life-mobile-sprite{display:block;flex:none;width:55px;height:48px;background-repeat:no-repeat;background-image:url('./pixel-assets/mobile-life-approved.png?v=56d6bec24fd11a7578768d36d112a0cef37982c5-23f2a20b7717');image-rendering:pixelated}
+.life-mobile-identity>.life-mobile-sprite{width:48px;height:48px;border-radius:5px}
+.life-mobile-friend .life-mobile-sprite{width:52px;height:50px}
+.life-mobile-stat .life-mobile-sprite{width:17px;height:17px}
+.life-mobile-income>.life-mobile-sprite{width:22px;height:25px}
+@media(max-width:359px){
+ .life-action-picker[data-mobile-life='true'] .life-picker-content{padding-left:7px;padding-right:7px}
+ .life-mobile-character{gap:5px;padding:6px;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr)}
+ .life-mobile-identity{gap:4px}.life-mobile-identity>strong{font-size:17px}
+ .life-mobile-identity>.life-mobile-sprite{width:41px;height:41px}
+ .life-mobile-emotion{gap:4px;padding:2px 3px}.life-mobile-stat{padding:2px 3px}
+ .life-mobile-heading{font-size:21px}
+}
+
+/* Exact sprite windows in the approved 854 × 1842 mobile reference. */
+.life-mobile-sprite-kurumi{background-size:862.6262626% 1879.5918367%;background-position:6.2251656% 12.8440367%}
+.life-mobile-sprite-sanity{background-size:2440.0000000% 6351.7241379%;background-position:49.9389499% 14.5615003%}
+.life-mobile-sprite-stamina{background-size:2587.8787879% 4847.3684211%;background-position:49.9390987% 17.0177384%}
+.life-mobile-sprite-mochiko{background-size:769.3693694% 1805.8823529%;background-position:23.2839838% 29.0229885%}
+.life-mobile-sprite-yasuko{background-size:798.1308411% 1805.8823529%;background-position:76.4390897% 29.0804598%}
+.life-mobile-sprite-convenience{width:55px;height:45px;background-size:993.0232558% 2631.4285714%;background-position:15.8854167% 52.1444695%}
+.life-mobile-sprite-cafe{width:52px;height:46.45px;background-size:1138.6666667% 2749.2537313%;background-position:50.4492940% 52.2816901%}
+.life-mobile-sprite-bookstore{width:58px;height:44.47px;background-size:948.8888889% 2669.5652174%;background-position:83.9005236% 52.1714608%}
+.life-mobile-sprite-shrine{width:55px;height:47.41px;background-size:981.6091954% 2456.0000000%;background-position:16.0365059% 79.5132994%}
+.life-mobile-sprite-river{width:66px;height:41.66px;background-size:700.0000000% 2392.2077922%;background-position:49.4535519% 79.5467422%}
+.life-mobile-sprite-park{width:66px;height:42.5px;background-size:646.9696970% 2167.0588235%;background-position:86.0110803% 79.5105293%}
+.life-mobile-sprite-coins{background-size:1986.0465116% 3611.7647059%;background-position:7.1516646% 60.5248465%}
+
+/* The housing child uses the existing native dialog and the same engine quotes.
+   Header and payment stay outside its one scrolling list. */
+.life-housing-picker{width:min(760px,calc(100vw - 24px));color:#10134e;background:#fffafd}
+.life-housing-picker .dialog-toolbar{gap:8px;padding:6px 8px;flex-wrap:wrap}
+.life-housing-picker .dialog-toolbar h2{flex:1;min-width:0;margin:0;font-size:24px;line-height:1.3;overflow-wrap:anywhere}
+.life-housing-picker .dialog-toolbar .x-close{margin-left:auto}
+.life-housing-picker .life-housing-return{min-height:44px;padding:6px 8px;font:inherit;font-size:16px;border:1px solid #d9a2c3;border-radius:6px;background:#fff;color:inherit}
+.life-housing-picker .dialog-scroll{padding:12px;scroll-padding-block:8px}
+.life-housing-current,.life-housing-pending{margin:0 0 10px;font-size:16px;line-height:1.5;overflow-wrap:anywhere}
+.life-housing-pending{color:#9d246a}
+.life-housing-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.life-housing-option{display:flex;flex-direction:column;gap:7px;min-width:0;min-height:132px;padding:12px;text-align:left;font:inherit;font-size:15px;line-height:1.45;border:1px solid #dbb5ce;border-radius:7px;background:#fff;color:inherit;touch-action:manipulation;overflow-wrap:anywhere;white-space:normal}
+.life-housing-option[aria-pressed='true']{border:2px solid #e51b8d;padding:11px;background:#fff0f8}
+.life-housing-option:disabled{opacity:.6;cursor:not-allowed}
+.life-housing-option>strong{font-size:18px;line-height:1.4}
+.life-housing-rate{font-size:19px;font-weight:750;font-variant-numeric:tabular-nums}
+.life-housing-option-status{font-size:14px;color:#80556d}
+.life-housing-action-dock{flex:0 0 auto;max-height:44dvh;overflow:auto;display:grid;gap:9px;padding:12px max(12px,env(safe-area-inset-right,0px)) max(12px,env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));border-top:1px solid #e6b9d3;background:#fff3fa;overscroll-behavior:contain}
+.life-housing-selection{font-size:16px;line-height:1.5;min-width:0;overflow-wrap:anywhere}
+.life-housing-selection p{margin:5px 0 0}
+.life-housing-confirm{min-height:48px;padding:10px;width:100%;font:inherit;font-size:17px;line-height:1.4;white-space:normal;overflow-wrap:anywhere}
+.life-housing-feedback{margin:10px 0 0;font-size:15px;line-height:1.5;color:#8c235f}
+.life-housing-picker button:focus-visible{outline:3px solid #135dc1;outline-offset:-3px}
+@media(max-width:560px){.life-housing-choices{grid-template-columns:minmax(0,1fr)}.life-housing-option{min-height:112px}.life-housing-action-dock{padding:10px}.life-housing-confirm{font-size:16px}}

@@ -1,0 +1,51 @@
+{
+  "kind": "original-synthesized-recap-v3",
+  "generator": "tools/build-recap-sfx-v3.py",
+  "sampleRate": 44100,
+  "targetPeakDb": -20,
+  "sourceBoundary": "No recording, sample, melody or proprietary platform WAV was copied. Event taxonomy inspiration only; not a global standard trading sound.",
+  "references": [],
+  "validation": "All MP3s decoded and peak measured after encoding. Human listening not yet verified.",
+  "clips": [
+    {
+      "file": "rise.mp3",
+      "synthetic": true,
+      "leadInSeconds": 0.004,
+      "duration": 0.199,
+      "decodedPeakDb": -20.4,
+      "decodedMeanDb": -32.5,
+      "bytes": 3178,
+      "sha256": "189037f903dc3d3a39d49e28f1d87304f966bb29b23ee6b84a275fcb1ad56849"
+    },
+    {
+      "file": "fall.mp3",
+      "synthetic": true,
+      "leadInSeconds": 0.004,
+      "duration": 0.184,
+      "decodedPeakDb": -20.4,
+      "decodedMeanDb": -31.3,
+      "bytes": 3178,
+      "sha256": "03b028428f628ad506142161d4ba1110b4189b349b7d16ebb2fda3466e75d5d9"
+    },
+    {
+      "file": "land-profit.mp3",
+      "synthetic": true,
+      "leadInSeconds": 0.004,
+      "duration": 0.574,
+      "decodedPeakDb": -20.4,
+      "decodedMeanDb": -32.2,
+      "bytes": 7567,
+      "sha256": "8a8eb9ae13c10d5cd91e5edb6f1031e44dce9e2dd91382d7cb6bc40d97193e4c"
+    },
+    {
+      "file": "land-loss.mp3",
+      "synthetic": true,
+      "leadInSeconds": 0.004,
+      "duration": 0.534,
+      "decodedPeakDb": -20.4,
+      "decodedMeanDb": -30.7,
+      "bytes": 7253,
+      "sha256": "cf12fa6643bdeed7a7ebac746ddec1ce6a7c6d3ba46ebd21ec65fec88e546cb7"
+    }
+  ]
+}

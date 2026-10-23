@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "kind": "original-fan-art",
+  "generator": "built-in image_gen",
+  "copyrightNote": "Original fan-game artwork and game-adapted dialogue; not an original manga page.",
+  "readingOrder": "Use panelRects in array order; preserve the measured source geometry.",
+  "assets": [
+    {
+      "id": "dinner-new-20",
+      "file": "dinner-friend-photo.webp",
+      "sha256": "850b7f5f824ece3edcb73741a4eb60aca203722623035c0b419f30b5943189f8",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "panels": 4,
+      "panelRects": [
+        [
+          7,
+          6,
+          617,
+          617
+        ],
+        [
+          631,
+          6,
+          617,
+          617
+        ],
+        [
+          7,
+          630,
+          617,
+          616
+        ],
+        [
+          631,
+          630,
+          617,
+          616
+        ]
+      ],
+      "characters": [
+        "久留美",
+        "芽吹",
+        "安子"
+      ],
+      "people": 3,
+      "tier": "dinner-friends",
+      "cost": 8000,
+      "dialogueId": "dinner-expansion20-20261012:dinner-new-20",
+      "storyCountContribution": 1
+    }
+  ]
+}

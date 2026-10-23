@@ -1,0 +1,22 @@
+/* One document-root filter covers header, market, controls and fixed dock.
+   The root is intentionally used: filtering body/main would re-anchor fixed
+   descendants. Strength changes in bounded stamina steps, never per frame. */
+html[data-stamina-vision="true"]{filter:var(--stamina-ghost-filter) blur(var(--stamina-blur,.3px))}
+.stamina-drowsiness{position:fixed;inset:0;z-index:9999;overflow:hidden;pointer-events:none;background:radial-gradient(ellipse at center,transparent 30%,rgb(5 3 9 / var(--stamina-vignette,.3)) 100%),rgb(6 3 10 / var(--stamina-dim,.1))}
+.stamina-vision-defs{position:absolute;width:0;height:0;overflow:hidden;pointer-events:none}
+.stamina-drowsiness::before,.stamina-drowsiness::after{content:"";position:absolute;left:-3%;width:106%;height:58%;pointer-events:none;animation:stamina-slow-blink var(--stamina-blink-duration,12s) ease-in-out infinite;will-change:transform}
+.stamina-drowsiness::before{top:0;border-radius:0 0 48% 48%;background:linear-gradient(to bottom,#050307 76%,#050307e8 89%,#05030700 100%);--lid-rest:calc(-1 * var(--stamina-lid-open,98%))}
+.stamina-drowsiness::after{bottom:0;border-radius:48% 48% 0 0;background:linear-gradient(to top,#050307 76%,#050307e8 89%,#05030700 100%);--lid-rest:var(--stamina-lid-open,98%)}
+@keyframes stamina-slow-blink{0%,76%,100%{transform:translateY(var(--lid-rest))}81%,83%{transform:translateY(0)}90%{transform:translateY(var(--lid-rest))}}
+/* The existing exhaustion transaction remains exactly 2500ms, without a modal,
+   focus trap, input interception, or additional recovery/timeline state. */
+.stamina-exhaustion{position:fixed;inset:0;z-index:10000;background:#08060a;color:#eadde7;display:grid;place-items:center;pointer-events:none}
+.stamina-exhaustion span{font-size:16px;opacity:.75}
+.stamina-exhaustion[data-reduced="true"]{background:#08060a80}
+.stamina-drowsiness[hidden],.stamina-exhaustion[hidden]{display:none}
+@media(prefers-reduced-motion:reduce){
+ html[data-stamina-vision="true"]:not(:has(body.motion-full)){filter:none}
+ body:not(.motion-full) .stamina-drowsiness{display:none}
+ body:not(.motion-full) .stamina-drowsiness::before,body:not(.motion-full) .stamina-drowsiness::after{animation:none;will-change:auto}
+ body:not(.motion-full) .stamina-exhaustion{background:#08060a80}
+}

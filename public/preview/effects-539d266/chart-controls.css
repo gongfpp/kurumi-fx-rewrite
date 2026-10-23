@@ -1,0 +1,30 @@
+/* Controls belong to the plot's upper edge and never cover candles or labels. */
+.chart-controls{display:flex;justify-content:flex-end;align-items:center;gap:8px;flex-wrap:wrap;margin:10px 0 6px;min-width:0}
+.chart-controls .speed-buttons{display:flex;gap:4px;min-width:0}
+.chart-controls button{border:1px solid #706579;background:#3f394a;color:#eee7f0;border-radius:5px;min-width:38px;min-height:36px;padding:7px 9px;font-size:11px;line-height:1.2;white-space:nowrap;touch-action:manipulation}
+.chart-controls .speed-buttons button:last-child{flex:0 0 auto}
+.chart-controls .speed-buttons button[aria-pressed="true"]{background:#f4b2d0;color:#2c2230;border-color:#f4b2d0}
+.chart-controls #finish-day{background:#5b3e53;border-color:#bc84a6;color:#ffeef6}
+.chart-controls button:hover:not(:disabled){filter:brightness(1.15)}
+.chart-controls button:focus-visible,.chart-foot button:focus-visible{outline:2px solid #ffc8e3;outline-offset:3px}
+.chart-foot #motion-toggle{flex:0 0 auto;border:1px solid #6c6374;background:transparent;color:#cfc1d2;border-radius:4px;padding:5px 7px;font-size:10px;line-height:1.2;min-height:28px;white-space:nowrap}
+.npc-investors{background:#fffafd;border:1px solid #eadce5;border-radius:7px;padding:10px 12px;min-width:0;overflow:hidden}
+.npc-investors-heading{display:flex;align-items:center;gap:8px;margin-bottom:5px}.npc-investors-heading h2{font-size:12px;margin:0;font-weight:750;color:#786474}.npc-investors-heading>span{font-size:9px;border:1px solid #d6c1ce;border-radius:4px;padding:1px 5px;color:#977489}
+#npc-messages{list-style:none;padding:0;margin:0;display:grid;gap:5px;max-height:116px;overflow:auto;overscroll-behavior:contain}
+#npc-messages li{font-size:11px;line-height:1.5;display:grid;grid-template-columns:78px minmax(0,1fr);gap:7px;min-width:0}
+#npc-messages b{font-size:10px;font-weight:650;color:#967e8e;white-space:nowrap}#npc-messages p{margin:0;min-width:0;overflow-wrap:anywhere;color:#675766}#npc-messages [data-stance="long"] b{color:#4a8c73}#npc-messages [data-stance="short"] b{color:#a45e82}
+@media(max-width:390px){.chart-controls{gap:6px}.chart-controls button{min-width:36px;min-height:44px;padding:7px 8px}.chart-foot{gap:8px;align-items:center}.chart-foot>span{min-width:0;line-height:1.5}.npc-investors{padding:9px 10px}#npc-messages li{grid-template-columns:72px minmax(0,1fr);gap:6px}}
+@media(prefers-reduced-motion:reduce){.npc-investors *{animation:none!important;transition:none!important}}
+.investment-controls{grid-column:1/-1;min-width:0;border:1px solid #eadce5;border-radius:7px;padding:10px;margin-top:12px;background:#fffafd}
+.investment-controls fieldset{margin:0 0 12px}.investment-controls .amount-field{margin:0}.amount-presets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin:9px 0}.amount-presets button{min-width:0;padding:8px 4px;border:1px solid #d8bfd0;border-radius:4px;background:white;font-size:11px;white-space:nowrap;font-variant-numeric:tabular-nums}.amount-presets button[aria-pressed="true"]{background:#f8ddeb;border-color:#b65d8d}
+.inventory-action,.loan-presets button{appearance:none;border:1px solid #c38ba8;border-radius:6px;background:#fff0f7;color:#803b61;min-height:40px;padding:9px 15px;font-family:inherit;font-size:12px;font-weight:650;line-height:1.4;cursor:pointer;transition:background .12s,border-color .12s,box-shadow .12s}
+.inventory-action:hover:not(:disabled),.loan-presets button:hover:not(:disabled),.amount-presets button:hover:not(:disabled){background:#f9ddeb;border-color:#a7547e}.inventory-action:active:not(:disabled),.loan-presets button:active:not(:disabled),.amount-presets button:active:not(:disabled){background:#f0c4d9;box-shadow:inset 0 2px 3px #8b46602b}.inventory-action:focus-visible,.loan-presets button:focus-visible,.amount-presets button:focus-visible{outline:3px solid #a94779;outline-offset:3px}.inventory-action:disabled,.loan-presets button:disabled,.amount-presets button:disabled{cursor:not-allowed;background:#f4edf1;border-color:#ddd1d8;color:#afa0ab;box-shadow:none;opacity:.75}
+@media(max-width:390px){.investment-controls{padding:9px}.amount-presets button,.inventory-action,.loan-presets button{min-height:44px}.amount-presets{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+.candle-view-controls{display:flex;flex-wrap:wrap;align-items:center;gap:5px;margin:9px 0;font-size:11px;min-width:0}
+.candle-view-controls button{font:inherit;border:1px solid #817186;border-radius:5px;background:#3d3445;color:#f8edf5;padding:6px 8px;min-height:32px;white-space:nowrap}
+.candle-view-controls button[aria-pressed=true]{background:#f1b2d0;color:#322337}.candle-view-controls button:disabled{opacity:.45}.candle-view-controls button:focus-visible{outline:2px solid #c56c99;outline-offset:2px}
+.candle-history{display:flex;align-items:center;gap:8px;flex:1 0 100%;color:inherit}.candle-history[hidden]{display:none}.candle-history input{flex:1;min-width:0;accent-color:#b74f80}
+#chart{min-height:220px;max-height:580px;resize:vertical;overflow:auto}#chart svg{height:100%;min-height:220px}
+.daily-recap .candle-view-controls button{background:#fff7fb;color:#813e62;border-color:#c994b0;font-size:11px!important;padding:6px 8px!important}.daily-recap .candle-view-controls button[aria-pressed=true]{background:#b14679;color:white}
+.candle-view-notice{font-size:11px;line-height:1.6;margin:5px 0;color:#8a5e77;overflow-wrap:anywhere}.recap-candle-plot{height:280px;min-height:220px;max-height:580px;resize:vertical;overflow:auto}.recap-candle-plot svg{height:100%;min-height:220px}

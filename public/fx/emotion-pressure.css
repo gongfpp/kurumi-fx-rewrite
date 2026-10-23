@@ -1,0 +1,65 @@
+.segments button.emotion-soft-lock{position:relative;isolation:isolate;opacity:1;color:#8f687d;background:#f8eff4;border:1px dashed #ba8ea6;cursor:pointer;overflow:visible}
+.segments [data-pressure-label]{position:relative;isolation:isolate}
+.segments button.emotion-soft-lock:focus-visible{outline:3px solid #a54372;outline-offset:3px}
+.pressure-fracture{position:absolute;inset:1px;width:calc(100% - 2px);height:calc(100% - 2px);pointer-events:none;z-index:1;opacity:0;overflow:visible}
+.pressure-fracture path{fill:none;stroke:#a84b78;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:bevel;vector-effect:non-scaling-stroke}
+.emotion-soft-lock .pressure-fracture,.pressure-breaking .pressure-fracture{opacity:.75}
+.pressure-count{position:absolute;right:3px;bottom:1px;font-size:8px;line-height:1.1;color:#915f7a;background:#fff8fbd9;padding:1px 3px;border-radius:3px;pointer-events:none;z-index:2}
+.emotion-soft-lock::after{content:'';position:absolute;left:1px;bottom:-2px;width:calc(var(--pressure-progress,0)*100% - 2px);height:2px;background:#b94d80;pointer-events:none}
+.emotion-soft-lock[data-pressure-stage='fracture']{border-style:dashed;border-color:#ac6087;background:#f8e8f0}
+.emotion-soft-lock[data-pressure-stage='rupture']{border-style:dashed;border-color:#94335f;box-shadow:1px 0 0 #cf8daa,-1px 0 0 #c8a5b7}
+.emotion-soft-lock[data-pressure-stage='rupture']::before{content:attr(data-pressure-label);position:absolute;inset:0;display:grid;place-items:center;clip-path:polygon(0 37%,100% 37%,100% 51%,0 51%);transform:translateX(-2px);opacity:.4;color:#a44272;pointer-events:none}
+.pressure-breaking{animation:pressure-frame-release .5s ease-out both}
+.pressure-breaking .pressure-fracture{animation:pressure-crack-release .5s ease-out both}
+@keyframes pressure-frame-release{0%{box-shadow:inset 0 0 0 1px #a04470}50%{box-shadow:0 0 0 4px #b958822b}100%{box-shadow:none}}
+@keyframes pressure-crack-release{0%{opacity:.8;transform:scale(1)}100%{opacity:0;transform:scale(1.14)}}
+.emotion-pressure-panel{display:none!important}
+.pressure-tooltip{position:fixed;z-index:10000;box-sizing:border-box;padding:11px 13px;background:#302732;color:#fff4fa;border:1px solid #98647d;border-radius:7px;box-shadow:0 5px 18px #30273233;font-size:12px;line-height:1.65;overflow-wrap:anywhere;pointer-events:none}
+@media(prefers-reduced-motion:reduce){body:not(.motion-full) .emotion-soft-lock,body:not(.motion-full) .pressure-breaking,body:not(.motion-full) .pressure-fracture{animation:none!important;transition:none!important;transform:none!important}body:not(.motion-full) .emotion-soft-lock::before{display:none!important}}
+body:not(.motion-full) .pressure-breaking,body:not(.motion-full) .pressure-fracture{animation:none!important;transform:none!important}
+body:not(.motion-full) .emotion-soft-lock::before{display:none!important}
+
+/* Progressive fracture stays readable; page translation is driven separately
+   from trade transforms, and never runs with reduced motion. */
+.pressure-fracture path{stroke-width:1.8;filter:drop-shadow(0 1px 0 #fff8fc)}.emotion-soft-lock[data-pressure-stage=fracture] .pressure-fracture{opacity:.95}.emotion-soft-lock[data-pressure-stage=rupture]{border-width:2px;border-color:#a93668;box-shadow:inset 0 0 12px #a94b7528}.pressure-breaking{animation:pressure-final-frame .65s ease-out both!important}.pressure-breaking .pressure-fracture{opacity:1;animation:pressure-final-crack .65s ease-out both!important}.pressure-count{font-size:10px;font-weight:800;background:#fff6fbef}.pressure-page-flare{position:fixed;inset:0;pointer-events:none;z-index:9998;box-shadow:inset 0 0 0 0 transparent;opacity:0;transition:opacity .2s ease}.pressure-page-flare[data-active=true]{opacity:1;box-shadow:inset 0 0 32px 6px rgb(157 47 94 / var(--pressure-edge,.2))}body[data-pressure-impact=break] .pressure-page-flare{box-shadow:inset 0 0 48px 9px #a6386555}
+@keyframes pressure-final-frame{0%{box-shadow:inset 0 0 0 2px #9d3569}40%{box-shadow:0 0 0 7px #b9588238,inset 0 0 16px #cf89ad}100%{box-shadow:none}}@keyframes pressure-final-crack{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.28)}}
+@media(prefers-reduced-motion:reduce){body:not(.motion-full) .pressure-page-flare{display:none!important}body:not(.motion-full) .pressure-breaking,body:not(.motion-full) .pressure-breaking .pressure-fracture{animation:none!important;transform:none!important}}body:not(.motion-full) .pressure-page-flare{display:none}body:not(.motion-full) .pressure-breaking,body:not(.motion-full) .pressure-breaking .pressure-fracture{animation:none!important;transform:none!important}
+
+/* Re-rendering the trading surface during a pressure shake invalidates its
+   scroll anchor. Browsers can compensate by one text line per press, moving
+   the target away from a stationary pointer. Keep this animated game surface
+   out of anchor selection; do not move the viewport or suppress its motion. */
+main:has([data-pressure-label]){overflow-anchor:none}
+
+/* The lock outline itself loses fragments on each press. The central label is
+   excluded from the fracture paths by an SVG rim clip, rather than painted over. */
+.pressure-frame-shards{opacity:0}.pressure-frame-shards line{stroke:#a14b75;stroke-width:1.25;stroke-dasharray:4 3;vector-effect:non-scaling-stroke;transform-box:fill-box;transform-origin:center}
+.segments button.emotion-soft-lock[data-pressure-frame=cracking]{border-color:transparent}
+.emotion-soft-lock[data-pressure-frame=cracking] .pressure-frame-shards{opacity:1}
+body.motion-full .pressure-frame-shards line{transition:transform 180ms ease-out,opacity 180ms ease-out}
+@media(prefers-reduced-motion:reduce){body:not(.motion-full) .pressure-frame-shards line{transition:none!important;transform:none!important}}
+
+/* Short, readable directional pressure; low-contrast edge tint never strobes. */
+.segments button[data-pressure-direction=ecstatic],.pressure-page-flare[data-direction=ecstatic]{--pressure-ink:#ad4261;--pressure-rgb:173 66 97}
+.segments button[data-pressure-direction=despair],.pressure-page-flare[data-direction=despair]{--pressure-ink:#68439a;--pressure-rgb:104 67 154}
+.segments button.emotion-soft-lock[data-pressure-frame=cracking]{color:#332336;background:#fff5fa;border-width:1px;box-shadow:inset 0 0 0 1px rgb(var(--pressure-rgb,173 66 97) / .14)}
+.segments button.emotion-soft-lock[data-pressure-stage=rupture]{border-width:1px;box-shadow:inset 0 0 12px rgb(var(--pressure-rgb,173 66 97) / .22)}
+.pressure-fracture path{stroke:var(--pressure-ink,#a84b78);stroke-width:2.3;filter:drop-shadow(0 1px 0 #fff8fc)}
+.pressure-frame-shards line{stroke:var(--pressure-ink,#a84b78);stroke-width:1.8}
+.pressure-count{color:var(--pressure-ink,#915f7a);font-size:10px;line-height:1.1;padding:1px 2px}
+.pressure-page-flare[data-active=true]{box-shadow:inset 0 0 34px 7px rgb(var(--pressure-rgb,173 66 97) / var(--pressure-edge,.2))}
+body[data-pressure-impact=break] .pressure-page-flare{box-shadow:inset 0 0 46px 9px rgb(var(--pressure-rgb,173 66 97) / .26)}
+.pressure-tooltip{padding:8px 11px;font-size:12px;line-height:1.5;width:max-content;max-width:calc(100vw - 24px)}
+
+.segments button[data-pressure-label]{touch-action:manipulation}
+
+/* Full-viewport impact reads at the first press, with five growing edge cracks.
+   All decorative layers are pointer transparent and never change focus. */
+.pressure-page-flare{overflow:hidden;contain:strict;transition:none}
+.pressure-viewport-glass{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.pressure-viewport-glass path{fill:none;stroke:rgb(var(--pressure-rgb,173 66 97));stroke-width:2;stroke-linecap:round;stroke-linejoin:bevel;vector-effect:non-scaling-stroke;filter:drop-shadow(1px 1px 0 #fff)}
+.pressure-impact-ring{position:absolute;left:var(--pressure-origin-x,50%);top:var(--pressure-origin-y,50%);width:240px;height:240px;transform:translate(-50%,-50%);border:2px solid rgb(var(--pressure-rgb,173 66 97) / .3);border-radius:50%;box-shadow:0 0 0 18px rgb(var(--pressure-rgb,173 66 97) / .04);pointer-events:none}
+.pressure-page-flare[data-stage=break] .pressure-impact-ring{width:440px;height:440px;border-width:4px;box-shadow:0 0 0 35px rgb(var(--pressure-rgb,173 66 97) / .07)}
+.pressure-page-flare[data-stage=break] .pressure-viewport-glass path{stroke-width:3}
+body[data-pressure-impact=break] .pressure-page-flare{box-shadow:inset 0 0 70px 14px rgb(var(--pressure-rgb,173 66 97) / .36)}
+@media(max-width:690px){.pressure-impact-ring{width:150px;height:150px}.pressure-page-flare[data-stage=break] .pressure-impact-ring{width:280px;height:280px}}

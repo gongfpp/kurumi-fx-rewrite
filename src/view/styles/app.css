@@ -248,3 +248,200 @@ canvas.fx-chart {
   color: var(--fx-muted);
   text-align: center;
 }
+/* --- character portrait, modals, manga, galleries --- */
+.fx-face {
+  margin: 0;
+  text-align: center;
+}
+.fx-face img {
+  width: 100%;
+  max-width: 220px;
+  border-radius: 8px;
+  border: 1px solid var(--fx-grid);
+  background: var(--fx-panel-alt);
+}
+.fx-face figcaption {
+  font-size: 11px;
+  color: var(--fx-muted);
+  margin-top: 4px;
+}
+.fx-mood-tag {
+  color: var(--fx-accent);
+  font-weight: 700;
+}
+.fx-actions.wrap {
+  flex-wrap: wrap;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  display: grid;
+}
+.fx-sub {
+  font-size: 12px;
+  color: var(--fx-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 14px 0 6px;
+}
+.fx-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.62);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 24px;
+  overflow: auto;
+  z-index: 50;
+}
+.fx-modal {
+  background: var(--fx-panel);
+  border: 1px solid var(--fx-grid);
+  border-radius: 10px;
+  max-width: 560px;
+  width: 100%;
+  max-height: 88vh;
+  overflow: auto;
+}
+.fx-modal.wide {
+  max-width: 900px;
+}
+.fx-modal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--fx-grid);
+  position: sticky;
+  top: 0;
+  background: var(--fx-panel);
+}
+.fx-modal-head h2 {
+  margin: 0;
+  font-size: 14px;
+}
+.fx-modal-body {
+  padding: 14px;
+}
+.fx-scene {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--fx-grid);
+  margin-bottom: 10px;
+}
+.fx-icons {
+  width: 100%;
+  background: var(--fx-panel-alt);
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+.fx-manga-title {
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+.tag {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 1px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--fx-grid);
+  color: var(--fx-muted);
+}
+.tag.fan {
+  color: var(--fx-warn);
+}
+.fx-manga-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 8px;
+}
+.fx-frame {
+  position: relative;
+  min-height: 150px;
+  border: 1px solid var(--fx-grid);
+  border-radius: 6px;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+.fx-frame .n {
+  position: absolute;
+  top: 4px;
+  left: 6px;
+  font-size: 11px;
+  color: var(--fx-muted);
+}
+.fx-frame-text {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 8px;
+  font-size: 12px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.82));
+}
+.fx-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 6px;
+}
+.fx-gallery.manga img {
+  height: 150px;
+  object-fit: cover;
+}
+.fx-gallery img {
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid var(--fx-grid);
+}
+.fx-item {
+  border: 1px solid var(--fx-grid);
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 8px;
+}
+.fx-item-head {
+  display: flex;
+  justify-content: space-between;
+}
+.fx-ach {
+  display: flex;
+  gap: 10px;
+  padding: 8px;
+  border-bottom: 1px dashed var(--fx-grid);
+  opacity: 0.55;
+}
+.fx-ach.on {
+  opacity: 1;
+}
+.fx-ach .badge {
+  font-size: 20px;
+}
+.fx-help {
+  margin: 0;
+  padding-left: 18px;
+  line-height: 1.7;
+  font-size: 13px;
+}
+.fx-news-toast {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--fx-panel);
+  border: 1px solid var(--fx-accent);
+  border-radius: 8px;
+  padding: 10px 14px;
+  max-width: 560px;
+  z-index: 60;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+}
+
+.fx-modal-backdrop {
+  pointer-events: none;
+}
+.fx-modal {
+  pointer-events: auto;
+}

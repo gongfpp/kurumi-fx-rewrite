@@ -1,0 +1,105 @@
+/* Approved 04 presentation. No rules alter the legacy book or reader sessions. */
+body[data-frontend="pixel"] :is(#achievements-dialog,#opening-dialog,#character-story-dialog){
+ --reader-ink:#17255a;--reader-pink:#ff409c;--reader-line:#c276b1;
+ color:var(--reader-ink);border:2px solid var(--reader-ink);border-radius:10px;
+ background:#fffaff;box-shadow:5px 6px 0 #18245338,0 20px 65px #28244645;
+}
+body[data-frontend="pixel"] :is(#achievements-dialog,#opening-dialog,#character-story-dialog)::backdrop{background:#1a21447a;backdrop-filter:blur(1px)}
+body[data-frontend="pixel"] :is(#achievements-dialog,#opening-dialog,#character-story-dialog) .dialog-toolbar{
+ min-height:58px;padding:6px 12px;border-bottom:2px solid var(--reader-ink);
+ background:linear-gradient(110deg,#ffedf8,#ffc9e8 55%,#ffd8ef);gap:12px;
+}
+body[data-frontend="pixel"] #achievements-dialog .dialog-toolbar::before{content:'成就与插图';margin-right:auto;font-size:22px;font-weight:900;color:var(--reader-ink)}
+body[data-frontend="pixel"] #character-story-dialog .dialog-toolbar::before{content:'原作人物篇章';margin-right:auto;font-size:20px;font-weight:900}
+body[data-frontend="pixel"] #opening-dialog .dialog-toolbar::before{content:'序章';font-size:20px;color:var(--reader-ink);font-weight:900;letter-spacing:.03em}
+body[data-frontend="pixel"] :is(#achievements-dialog,#opening-dialog,#character-story-dialog) .dialog-toolbar .x-close{
+ position:static;min-width:44px;min-height:44px;width:auto;flex:0 0 auto;padding:6px 11px;border:2px solid var(--reader-ink);
+ border-radius:7px;background:linear-gradient(#ff79bf,#fc3096);color:white;font-size:26px;font-weight:800;box-shadow:2px 2px 0 #a3448d;
+}
+body[data-frontend="pixel"] #opening-dialog .dialog-toolbar .x-close{font-size:13px}
+body[data-frontend="pixel"] #achievements-dialog{width:min(1240px,calc(100vw - 24px));max-height:calc(100dvh - 24px)}
+body[data-frontend="pixel"] #achievements-dialog .dialog-scroll{padding:12px;scrollbar-gutter:stable}
+body[data-frontend="pixel"] #achievements-dialog .dialog-scroll>h2{font-size:18px;margin:0 0 4px}
+body[data-frontend="pixel"] #achievements-dialog .dialog-scroll>.eyebrow{display:none}
+body[data-frontend="pixel"] #achievements-dialog .dialog-scroll>.small-print{font-size:12px;margin:0 0 10px;color:#685382}
+body[data-frontend="pixel"] #achievement-book.pixel-ach-enhanced{display:none}
+/* The added presentation stays unavailable if a caller switches CSS first. */
+body:not([data-frontend="pixel"]) .pixel-ach-browser{display:none!important}
+body[data-frontend="pixel"] .pixel-ach-browser{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);gap:10px;min-width:0;align-items:stretch}
+body[data-frontend="pixel"] .pixel-ach-browser [hidden],body[data-frontend="pixel"] .pixel-ach-browser[hidden]{display:none!important}
+body[data-frontend="pixel"] :is(.pixel-ach-catalog,.pixel-ach-reader){min-width:0;border:1px solid var(--reader-ink);border-radius:8px;overflow:hidden;background:#fff}
+body[data-frontend="pixel"] .pixel-ach-catalog{display:flex;flex-direction:column}
+body[data-frontend="pixel"] .pixel-ach-section-header{display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding:12px;border-bottom:1px solid #efafd8;background:linear-gradient(110deg,#fff,#fff0f9)}
+body[data-frontend="pixel"] .pixel-ach-heading{margin:0;font-size:22px;font-weight:900;line-height:1.25;white-space:nowrap}
+body[data-frontend="pixel"] .pixel-ach-count{font-size:17px;font-weight:800;font-variant-numeric:tabular-nums}
+body[data-frontend="pixel"] .pixel-ach-filters{display:flex;flex-wrap:wrap;gap:5px;margin-left:auto}
+body[data-frontend="pixel"] .pixel-ach-filter{min-height:36px;padding:5px 10px;border:1px solid #efa6d2;border-radius:6px;background:#fff;color:var(--reader-ink);font-size:12px;font-weight:800}
+body[data-frontend="pixel"] .pixel-ach-filter[aria-pressed="true"]{border-color:var(--reader-pink);background:#cf2a7f;color:#fff}
+body[data-frontend="pixel"] .pixel-ach-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-content:start;gap:9px;padding:12px;max-height:430px;overflow:auto;scrollbar-gutter:stable;flex:1}
+body[data-frontend="pixel"] .pixel-ach-tile{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0;min-height:128px;margin:0;padding:6px;border:1px solid #c5bdd7;border-radius:7px;background:#fff;color:var(--reader-ink);font-weight:800;line-height:1.45;white-space:normal;box-shadow:inset 0 0 0 2px #fff}
+body[data-frontend="pixel"] .pixel-ach-tile:hover{border-color:#ef67b0;background:#fff1f8}
+body[data-frontend="pixel"] .pixel-ach-tile[aria-pressed="true"]{border:2px solid var(--reader-pink);padding:5px;background:#fff1f9;box-shadow:inset 0 0 0 2px #fff,0 0 0 1px #ffc0e2}
+body[data-frontend="pixel"] .pixel-ach-thumb{position:relative;display:grid;place-items:center;flex:0 0 auto;width:100%;aspect-ratio:1;min-width:0;border:1px solid #dec2da;border-radius:5px;overflow:hidden;background:linear-gradient(135deg,#fff7fc,#ffd8ee);box-sizing:border-box}
+body[data-frontend="pixel"] .pixel-ach-badge-text{font-size:clamp(25px,3vw,38px);font-weight:900;color:#a33274}
+body[data-frontend="pixel"] .pixel-ach-badge-image{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:contain;background:#fff}
+body[data-frontend="pixel"] .pixel-ach-tile.locked .pixel-ach-thumb{border-color:#c6c5cc;background:repeating-linear-gradient(135deg,#edecf1 0 3px,#e7e6ec 3px 4px)}
+body[data-frontend="pixel"] .pixel-ach-tile.locked .pixel-ach-badge-text{font-size:25px;color:#626279}
+body[data-frontend="pixel"] .pixel-ach-tile-name{font-size:12px;overflow-wrap:anywhere;text-align:center}
+body[data-frontend="pixel"] .pixel-ach-detail{display:grid;grid-template-columns:minmax(0,1fr) auto;align-content:start;gap:8px;padding:16px;border-top:1px solid #ed9cd0;background:linear-gradient(135deg,#fff4fb,#fff 55%);min-width:0}
+body[data-frontend="pixel"] .pixel-ach-detail-title{margin:0;font-size:22px;font-weight:900;overflow-wrap:anywhere;line-height:1.45}
+body[data-frontend="pixel"] .pixel-ach-detail-status{margin:0;padding:6px 9px;align-self:start;max-width:180px;border-radius:5px;background:#cf2a7f;color:white;font-size:12px;font-weight:800;line-height:1.6}
+body[data-frontend="pixel"] .pixel-ach-detail[data-locked="true"] .pixel-ach-detail-status{background:#e9e6f0;color:#615575}
+body[data-frontend="pixel"] .pixel-ach-condition-title{grid-column:1/-1;margin:7px 0 0;padding-top:10px;border-top:1px solid #e5d4ea;font-size:14px}
+body[data-frontend="pixel"] .pixel-ach-condition{grid-column:1/-1;margin:0;font-size:14px;line-height:1.75;overflow-wrap:anywhere}
+body[data-frontend="pixel"] .pixel-ach-detail-notes{grid-column:1/-1;margin:0;color:#695575;font-size:12px;line-height:1.65;white-space:pre-line}
+body[data-frontend="pixel"] .pixel-ach-empty{padding:24px;margin:0;color:#715c79;text-align:center}
+body[data-frontend="pixel"] .pixel-ach-reader{display:flex;flex-direction:column}
+body[data-frontend="pixel"] .pixel-ach-reader .pixel-ach-section-header{flex-wrap:nowrap}
+body[data-frontend="pixel"] .pixel-ach-choice{margin-left:auto;min-width:0;max-width:62%;min-height:40px;border:1px solid #bf71b4;border-radius:6px;padding:6px 25px 6px 10px;background:#fff;color:var(--reader-ink);font-size:13px;font-weight:800;text-overflow:ellipsis}
+body[data-frontend="pixel"] .pixel-ach-art{display:flex;flex-direction:column;gap:8px;flex:1;min-height:0;min-width:0;margin:0;padding:12px;background:#fff}
+body[data-frontend="pixel"] .pixel-ach-image-frame{display:grid;place-items:start center;align-content:start;min-height:330px;max-height:min(65dvh,660px);overflow:auto;background:#fff;border:1px solid #1c244e;scrollbar-gutter:stable;overscroll-behavior:contain}
+body[data-frontend="pixel"] .pixel-ach-page{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;background:#fff}
+body[data-frontend="pixel"] .pixel-ach-page.image-unavailable{display:none}
+body[data-frontend="pixel"] .pixel-ach-image-frame .manga-image-fallback{grid-area:1/1;padding:20px;color:#655273;background:#fff0f8;margin:0;line-height:1.75;font-size:14px}
+body[data-frontend="pixel"] .pixel-ach-caption{font-size:12px;text-align:center;color:#67537b;line-height:1.5}
+body[data-frontend="pixel"] .pixel-ach-nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;padding:10px 12px;border-top:1px solid #ecc0dc;background:#fff8fd}
+body[data-frontend="pixel"] .pixel-ach-nav button{min-height:44px;border:1px solid #b465b0;border-radius:6px;background:linear-gradient(#ffc8e8,#ff96ce);color:var(--reader-ink);padding:8px 10px;font-weight:900;font-size:16px}
+body[data-frontend="pixel"] .pixel-ach-nav button:disabled{opacity:.4;background:#f2deec;cursor:default}
+body[data-frontend="pixel"] .pixel-ach-position{font-size:15px;font-weight:800;font-variant-numeric:tabular-nums;min-width:55px;text-align:center}
+body[data-frontend="pixel"] :is(#achievements-dialog,#opening-dialog,#character-story-dialog) :is(button,select):focus-visible{outline:3px solid #63277c;outline-offset:3px}
+body[data-frontend="pixel"] :is(#opening-dialog,#character-story-dialog){width:min(900px,calc(100vw - 24px));max-height:calc(100dvh - 24px)}
+body[data-frontend="pixel"] :is(#opening-dialog,#character-story-dialog) .dialog-scroll{background:linear-gradient(#fff4fb,#fff 150px);padding:22px 28px}
+body[data-frontend="pixel"] :is(#opening-dialog,#character-story-dialog) :is(h2,#opening-count,.character-story-eyebrow){color:var(--reader-ink)}
+body[data-frontend="pixel"] :is(#opening-dialog,#character-story-dialog) :is(.opening-panel,#character-story-panels img){border-color:var(--reader-ink);box-shadow:3px 3px 0 #f3bedf}
+body[data-frontend="pixel"] :is(#opening-nav,#character-story-controls){background:#fff3fb;border-top:1px solid #bc76b1}
+body[data-frontend="pixel"] :is(#opening-nav,#character-story-controls) button{border:1px solid #bc76b1;border-radius:6px;color:#17255a;background:linear-gradient(#ffe9f6,#ffc6e5);font-weight:800;box-shadow:none}
+body[data-frontend="pixel"] :is(#opening-next,#character-story-return){color:white!important;background:linear-gradient(#ff78bd,#f83a9a)!important;border-color:#be4f96!important}
+body[data-frontend="pixel"] #opening-dialog #opening-next:hover{background:linear-gradient(#ff8bc7,#fa53a6)!important}
+body[data-frontend="pixel"] #character-story-aftermath{border-left-color:#fb64b0}
+@media(min-width:1220px){body[data-frontend="pixel"] .pixel-ach-grid{grid-template-columns:repeat(5,minmax(0,1fr))}}
+@media(max-width:850px){
+ body[data-frontend="pixel"] .pixel-ach-browser{grid-template-columns:1fr}
+ body[data-frontend="pixel"] .pixel-ach-grid{grid-template-columns:repeat(4,minmax(0,1fr));max-height:310px}
+ body[data-frontend="pixel"] .pixel-ach-tile{min-height:118px}
+ body[data-frontend="pixel"] .pixel-ach-image-frame{min-height:220px;max-height:none;overflow:visible;scrollbar-gutter:auto}
+ body[data-frontend="pixel"] .pixel-ach-art{padding:10px}
+ body[data-frontend="pixel"] .pixel-ach-nav{position:sticky;bottom:0}
+}
+@media(max-width:480px){
+ body[data-frontend="pixel"] :is(#achievements-dialog,#opening-dialog,#character-story-dialog){width:calc(100vw - 12px);max-height:calc(100dvh - 12px);border-radius:7px}
+ body[data-frontend="pixel"] #achievements-dialog .dialog-scroll{padding:8px;scrollbar-gutter:auto}
+ body[data-frontend="pixel"] .pixel-ach-section-header{padding:10px;gap:7px}
+ body[data-frontend="pixel"] .pixel-ach-heading{font-size:18px}
+ body[data-frontend="pixel"] .pixel-ach-filters{width:100%;margin-left:0}
+ body[data-frontend="pixel"] .pixel-ach-filter{flex:1;min-height:40px}
+ body[data-frontend="pixel"] .pixel-ach-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;padding:8px;max-height:280px}
+ body[data-frontend="pixel"] .pixel-ach-tile{min-height:115px}
+ body[data-frontend="pixel"] .pixel-ach-detail{padding:12px;grid-template-columns:1fr}
+ body[data-frontend="pixel"] .pixel-ach-detail-title{font-size:20px}
+ body[data-frontend="pixel"] .pixel-ach-detail-status{max-width:none;justify-self:start}
+ body[data-frontend="pixel"] .pixel-ach-reader .pixel-ach-section-header{flex-wrap:wrap}
+ body[data-frontend="pixel"] .pixel-ach-choice{width:100%;max-width:none;margin-left:0}
+ body[data-frontend="pixel"] :is(#opening-dialog,#character-story-dialog) .dialog-scroll{padding:16px}
+ body[data-frontend="pixel"] #character-story-controls{flex-wrap:wrap;padding:10px}
+ body[data-frontend="pixel"] #character-story-return{width:100%}
+}

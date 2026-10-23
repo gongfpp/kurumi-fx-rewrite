@@ -1,0 +1,825 @@
+{
+  "version": 1,
+  "kind": "original-fan-art",
+  "generator": "built-in image_gen",
+  "copyrightNote": "原创同人游戏插画与游戏改编短对白，不是原作漫画页或原作逐字台词。",
+  "readingOrder": "Use each asset panelRects in array order; preserve the measured source geometry.",
+  "assets": [
+    {
+      "id": "dinner-story-ramen",
+      "file": "dinner-story-ramen.webp",
+      "sha256": "c11219ef1f4e5e12a01558b65782d7adbd4b72574d441f729b3f65b6dc5186de",
+      "dimensions": [
+        1086,
+        1448
+      ],
+      "panels": 4,
+      "panelRects": [
+        [
+          17,
+          13,
+          518,
+          494
+        ],
+        [
+          551,
+          13,
+          518,
+          494
+        ],
+        [
+          17,
+          522,
+          1052,
+          424
+        ],
+        [
+          17,
+          965,
+          1052,
+          470
+        ]
+      ],
+      "characters": [
+        "久留美",
+        "萌智子"
+      ],
+      "tier": "dinner-small",
+      "cost": 1500
+    },
+    {
+      "id": "dinner-story-takoyaki",
+      "file": "dinner-story-takoyaki.webp",
+      "sha256": "f3cc9439edc91d516a65fa7e35609bcbd69455dd0a5a9f908e742566a0759229",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "panels": 4,
+      "panelRects": [
+        [
+          8,
+          8,
+          488,
+          1010
+        ],
+        [
+          510,
+          8,
+          520,
+          488
+        ],
+        [
+          510,
+          511,
+          520,
+          507
+        ],
+        [
+          1044,
+          8,
+          482,
+          1010
+        ]
+      ],
+      "characters": [
+        "久留美",
+        "萌智子"
+      ],
+      "tier": "dinner-small",
+      "cost": 1500
+    },
+    {
+      "id": "dinner-story-bad-hamburg",
+      "file": "dinner-story-bad-hamburg.webp",
+      "sha256": "74f291d86d1671eb96ecec3ede00223dedadb6d8dffc316df5b201fbbb2de35f",
+      "dimensions": [
+        1086,
+        1448
+      ],
+      "panels": 4,
+      "panelRects": [
+        [
+          13,
+          11,
+          1060,
+          462
+        ],
+        [
+          13,
+          482,
+          448,
+          456
+        ],
+        [
+          472,
+          482,
+          600,
+          456
+        ],
+        [
+          13,
+          948,
+          1059,
+          485
+        ]
+      ],
+      "characters": [
+        "久留美",
+        "萌智子"
+      ],
+      "tier": "dinner-small",
+      "cost": 1500
+    },
+    {
+      "id": "dinner-story-last-gyoza",
+      "file": "dinner-story-last-gyoza.webp",
+      "sha256": "dcd3975b5a90f1ec4b7b72c2d81f1b36626b494bca30c898e7da0f2720636dca",
+      "dimensions": [
+        1942,
+        809
+      ],
+      "panels": 4,
+      "panelRects": [
+        [
+          11,
+          12,
+          394,
+          783
+        ],
+        [
+          418,
+          12,
+          461,
+          783
+        ],
+        [
+          892,
+          12,
+          435,
+          783
+        ],
+        [
+          1340,
+          12,
+          590,
+          783
+        ]
+      ],
+      "characters": [
+        "久留美",
+        "萌智子"
+      ],
+      "tier": "dinner-small",
+      "cost": 1500
+    },
+    {
+      "id": "friends-crepe-catch",
+      "file": "friends-crepe-catch.webp",
+      "sha256": "4c965005576c416c3c041a405b9ec7f2f32fe1663a83915dcab6c4f089b8d288",
+      "dimensions": [
+        1086,
+        1448
+      ],
+      "panels": 4,
+      "panelRects": [
+        [
+          17,
+          14,
+          518,
+          481
+        ],
+        [
+          551,
+          14,
+          518,
+          481
+        ],
+        [
+          17,
+          510,
+          1052,
+          437
+        ],
+        [
+          17,
+          963,
+          1052,
+          471
+        ]
+      ],
+      "characters": [
+        "久留美",
+        "芽吹"
+      ],
+      "tier": "dinner-small",
+      "cost": 1500
+    },
+    {
+      "id": "friends-yakitori-trim",
+      "file": "friends-yakitori-trim.webp",
+      "sha256": "774b4325296ded0ffc15001f67cf1a8cfd10b76954b170e80441a2ff317343b4",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "panels": 4,
+      "panelRects": [
+        [
+          7,
+          4,
+          330,
+          1014
+        ],
+        [
+          349,
+          4,
+          344,
+          1014
+        ],
+        [
+          706,
+          4,
+          344,
+          1014
+        ],
+        [
+          1065,
+          4,
+          465,
+          1014
+        ]
+      ],
+      "characters": [
+        "芽吹",
+        "安子"
+      ],
+      "tier": "dinner-small",
+      "cost": 1500
+    },
+    {
+      "id": "friends-okonomiyaki-flip",
+      "file": "friends-okonomiyaki-flip.webp",
+      "sha256": "53b7473c55aaf1c42d53ab40962f3dfe7b0009285f7e1079722beba1abb5a99e",
+      "dimensions": [
+        1086,
+        1448
+      ],
+      "panels": 4,
+      "panelRects": [
+        [
+          12,
+          8,
+          1062,
+          464
+        ],
+        [
+          12,
+          486,
+          518,
+          431
+        ],
+        [
+          550,
+          486,
+          524,
+          431
+        ],
+        [
+          12,
+          937,
+          1062,
+          500
+        ]
+      ],
+      "characters": [
+        "久留美",
+        "芽吹",
+        "安子"
+      ],
+      "tier": "dinner-friends",
+      "cost": 8000
+    },
+    {
+      "id": "friends-hotpot-rescue",
+      "file": "friends-hotpot-rescue.webp",
+      "sha256": "f9070b032441f7f1577625b0c9f5c24f381e4b43c8a56b1415b754507aa767c5",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "panels": 4,
+      "panelRects": [
+        [
+          7,
+          4,
+          613,
+          615
+        ],
+        [
+          638,
+          4,
+          611,
+          615
+        ],
+        [
+          7,
+          638,
+          613,
+          610
+        ],
+        [
+          638,
+          638,
+          611,
+          610
+        ]
+      ],
+      "characters": [
+        "久留美",
+        "萌智子",
+        "芽吹",
+        "安子"
+      ],
+      "tier": "dinner-friends",
+      "cost": 8000
+    },
+    {
+      "id": "dinner-seafood-claw",
+      "file": "dinner-seafood-claw.webp",
+      "sha256": "83ef50e520ac23bcf0aad3726f24faaacdf336c852aeef10bd84e9750fd206a6",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "panels": 4,
+      "panelRects": [
+        [
+          5,
+          4,
+          616,
+          615
+        ],
+        [
+          637,
+          4,
+          612,
+          615
+        ],
+        [
+          5,
+          638,
+          616,
+          611
+        ],
+        [
+          637,
+          638,
+          612,
+          611
+        ]
+      ],
+      "characters": [
+        "久留美",
+        "萌智子",
+        "芽吹",
+        "安子"
+      ],
+      "tier": "dinner-feast",
+      "cost": 30000
+    },
+    {
+      "id": "dinner-fine-dining-dome",
+      "file": "dinner-fine-dining-dome.webp",
+      "sha256": "cef55ee8d1e3b65ecf22c52968348ac15465b3bd0818da789dd251575205f835",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "panels": 4,
+      "panelRects": [
+        [
+          4,
+          3,
+          1528,
+          323
+        ],
+        [
+          4,
+          341,
+          755,
+          327
+        ],
+        [
+          777,
+          341,
+          754,
+          327
+        ],
+        [
+          4,
+          685,
+          1528,
+          334
+        ]
+      ],
+      "characters": [
+        "久留美",
+        "萌智子",
+        "芽吹",
+        "安子"
+      ],
+      "tier": "dinner-banquet",
+      "cost": 100000
+    },
+    {
+      "id": "dinner-ume-sour",
+      "file": "dinner-ume-sour.webp",
+      "sha256": "9248d5159d6715921bab38b9342b53ebef2c46cd8c159fa24feb58e0a1f71548",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "panels": 4,
+      "panelRects": [
+        [
+          15,
+          13,
+          602,
+          596
+        ],
+        [
+          637,
+          13,
+          602,
+          596
+        ],
+        [
+          15,
+          629,
+          602,
+          609
+        ],
+        [
+          637,
+          629,
+          602,
+          609
+        ]
+      ],
+      "characters": [
+        "久留美",
+        "萌智子"
+      ],
+      "tier": "dinner-small",
+      "cost": 1500
+    },
+    {
+      "id": "dinner-pizza-stretch",
+      "file": "dinner-pizza-stretch.webp",
+      "sha256": "63d96d58b7fc4e37e8c9d27d6a508f1332781ea41d59ea1ab52e87dc3a41982a",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "panels": 4,
+      "panelRects": [
+        [
+          14,
+          13,
+          603,
+          604
+        ],
+        [
+          637,
+          13,
+          602,
+          604
+        ],
+        [
+          14,
+          636,
+          603,
+          602
+        ],
+        [
+          637,
+          636,
+          602,
+          602
+        ]
+      ],
+      "characters": [
+        "久留美",
+        "芽吹",
+        "安子"
+      ],
+      "tier": "dinner-friends",
+      "cost": 8000
+    },
+    {
+      "id": "dinner-kaiseki-bag",
+      "file": "dinner-kaiseki-bag.webp",
+      "sha256": "e4fcaaac0f3591ef5e9881a399d71e59fd92e5c2b9ac1cea42aab1172fc3c0f1",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "panels": 4,
+      "panelRects": [
+        [
+          13,
+          14,
+          604,
+          603
+        ],
+        [
+          637,
+          14,
+          603,
+          603
+        ],
+        [
+          13,
+          636,
+          604,
+          604
+        ],
+        [
+          637,
+          636,
+          603,
+          604
+        ]
+      ],
+      "characters": [
+        "久留美",
+        "芽吹",
+        "安子",
+        "萌智子"
+      ],
+      "tier": "dinner-feast",
+      "cost": 30000
+    },
+    {
+      "id": "dinner-napkin-swan",
+      "file": "dinner-napkin-swan.webp",
+      "sha256": "0ecb7a61ebecb4e880a301d295376c7696fd54c9ea4e3c348afd8a64fb59f34d",
+      "contentIdentity": "sha256:0e4a3874e5f9ded15af5216b6590d3fffd8520cf977650b851c7e7013fafc76a",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "panels": 4,
+      "panelRects": [
+        [
+          10,
+          10,
+          607,
+          607
+        ],
+        [
+          637,
+          10,
+          606,
+          607
+        ],
+        [
+          10,
+          636,
+          607,
+          607
+        ],
+        [
+          637,
+          636,
+          606,
+          607
+        ]
+      ],
+      "characters": [
+        "久留美",
+        "芽吹",
+        "安子",
+        "萌智子"
+      ],
+      "tier": "dinner-banquet",
+      "cost": 100000
+    },
+    {
+      "id": "dinner-new-15",
+      "file": "dinner-cat-fishcake.webp",
+      "sha256": "84f50e4eeb03b14dfd3419af899892fcb6dbf3955a62857b53b4186b2261283a",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "panels": 4,
+      "panelRects": [
+        [
+          13,
+          14,
+          604,
+          604
+        ],
+        [
+          637,
+          14,
+          604,
+          604
+        ],
+        [
+          13,
+          635,
+          604,
+          604
+        ],
+        [
+          637,
+          635,
+          604,
+          604
+        ]
+      ],
+      "characters": [
+        "久留美",
+        "萌智子"
+      ],
+      "tier": "dinner-small",
+      "cost": 1500
+    },
+    {
+      "id": "dinner-new-16",
+      "file": "dinner-apple-curry.webp",
+      "sha256": "09e14b0e9a5969de785f03a789156d7afb798bb5618dfe8807af42c38b524c39",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "panels": 4,
+      "panelRects": [
+        [
+          5,
+          5,
+          612,
+          612
+        ],
+        [
+          639,
+          5,
+          610,
+          612
+        ],
+        [
+          5,
+          639,
+          612,
+          610
+        ],
+        [
+          639,
+          639,
+          610,
+          610
+        ]
+      ],
+      "characters": [
+        "久留美",
+        "安子"
+      ],
+      "tier": "dinner-small",
+      "cost": 1500,
+      "dialogueOrigin": "captured Gemini output; canonical character-name normalization only",
+      "artDirectionOrigin": "editorial single-moment adaptation"
+    },
+    {
+      "id": "dinner-new-18",
+      "file": "dinner-bonito-dance.webp",
+      "sha256": "491752445a12f6d53229df75d7455ab6f523bb92277cefe953b7748c174f4d24",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "panels": 4,
+      "panelRects": [
+        [
+          14,
+          14,
+          603,
+          603
+        ],
+        [
+          638,
+          14,
+          602,
+          603
+        ],
+        [
+          14,
+          638,
+          603,
+          601
+        ],
+        [
+          638,
+          638,
+          602,
+          601
+        ]
+      ],
+      "characters": [
+        "久留美",
+        "萌智子"
+      ],
+      "tier": "dinner-small",
+      "cost": 1500,
+      "dialogueOrigin": "captured Gemini output; selected verbatim lines",
+      "artDirectionOrigin": "editorial single-moment adaptation"
+    },
+    {
+      "id": "dinner-new-17",
+      "file": "dinner-seaweed-crunch.webp",
+      "sha256": "4324f04a75476710fcd64c60c2b2f513c834e1bfd44ac0d80f7a2edcc83a929a",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "panels": 4,
+      "panelRects": [
+        [
+          13,
+          13,
+          605,
+          605
+        ],
+        [
+          636,
+          13,
+          605,
+          605
+        ],
+        [
+          13,
+          636,
+          605,
+          605
+        ],
+        [
+          636,
+          636,
+          605,
+          605
+        ]
+      ],
+      "characters": [
+        "久留美",
+        "芽吹"
+      ],
+      "tier": "dinner-small",
+      "cost": 1500
+    },
+    {
+      "id": "dinner-new-19",
+      "file": "dinner-scallion-wraps.webp",
+      "sha256": "7823a880badf5a6eb5e8303fe3175d2d1b2f1358aebf14dffa750c5ff3b4f1fe",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "panels": 4,
+      "panelRects": [
+        [
+          10,
+          10,
+          609,
+          609
+        ],
+        [
+          635,
+          10,
+          609,
+          609
+        ],
+        [
+          10,
+          635,
+          609,
+          609
+        ],
+        [
+          635,
+          635,
+          609,
+          609
+        ]
+      ],
+      "characters": [
+        "久留美",
+        "萌智子",
+        "康子"
+      ],
+      "tier": "dinner-friends",
+      "cost": 8000
+    }
+  ]
+}

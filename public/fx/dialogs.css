@@ -1,0 +1,36 @@
+/* Loaded after the original presentation styles: shell never scrolls. */
+html.dialog-active,html.dialog-active body{overflow:hidden;overscroll-behavior:none}
+html{scrollbar-gutter:stable}
+dialog.dialog-shell{box-sizing:border-box;padding:0;overflow:hidden;max-width:calc(100vw - max(24px,env(safe-area-inset-left) + env(safe-area-inset-right) + 16px));max-height:calc(100vh - 32px);max-height:calc(100dvh - max(32px,env(safe-area-inset-top) + env(safe-area-inset-bottom) + 16px));margin:auto}
+dialog.dialog-shell[open]{display:flex;flex-direction:column}
+dialog.dialog-shell:not([open]){display:none}
+.dialog-toolbar{flex:0 0 auto;display:flex;justify-content:flex-end;align-items:center;min-height:52px;padding:4px 6px 0;background:inherit;border-bottom:1px solid #eedee7;position:relative;z-index:2}
+.dialog-toolbar .x-close{position:static;display:grid;place-items:center;flex:0 0 44px;min-width:44px;min-height:44px;margin:0;padding:0;font-size:27px;line-height:1;border-radius:5px;background:#fff6fa;color:#684154}
+.dialog-toolbar .x-close:hover{background:#f8dce9}
+.dialog-toolbar .x-close:focus-visible{outline:3px solid #a44373;outline-offset:-3px}
+.dialog-scroll{flex:1 1 auto;min-height:0;min-width:0;overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable;padding:18px 26px 28px;overflow-wrap:anywhere;-webkit-overflow-scrolling:touch}
+.dialog-scroll>*{max-width:100%;box-sizing:border-box}
+.dialog-scroll input,.dialog-scroll select,.dialog-scroll audio{max-width:100%;min-width:0}
+.dialog-scroll img{max-width:100%}
+.dialog-scroll h2{overflow-wrap:anywhere}
+.opening-dialog .dialog-scroll>img{display:block;width:180px;height:180px;object-fit:cover;object-position:top;border:2px solid #282431;margin:12px auto;box-shadow:5px 5px 0 #f4b0cc}
+.prop-dialog .dialog-scroll>strong{display:block;font-size:35px;font-weight:900;color:#a84470;font-variant-numeric:tabular-nums}
+.prop-dialog .dialog-scroll>p{font-size:14px;line-height:1.8}
+.dialog-scroll .share-actions a,.dialog-scroll .share-actions button{min-width:min(140px,100%)}
+#scene-resume{margin:0 0 20px;padding:12px 16px;min-height:44px;width:auto;max-width:100%;border:1px solid #a34e77;background:#ffeaf4;border-radius:6px;font-weight:700;line-height:1.6}
+@media(max-width:390px){.dialog-scroll{padding:14px 16px 20px}.dialog-scroll h2{font-size:23px}.dialog-scroll .mode-options button{padding:15px}.dialog-scroll .ranking-entry-head{flex-wrap:wrap}.dialog-scroll .ranking-entry-head strong{white-space:normal}.dialog-scroll .developer-form{grid-template-columns:minmax(0,1fr)}}
+@media(max-height:440px){.dialog-toolbar{min-height:48px;padding-top:0}.dialog-scroll{padding-top:12px;padding-bottom:16px}.opening-dialog .dialog-scroll>img{width:100px;height:100px}}
+
+dialog.dialog-shell:has(.food-comic:not([hidden])){padding:0}
+@media(max-width:690px){
+ .dialog-scroll{padding:10px 12px 16px}.dialog-scroll h2{font-size:22px;margin-block:8px 12px}.dialog-scroll>p{margin-block:8px}.dialog-toolbar{min-height:48px;padding-top:0}
+ .day-total{padding:9px 0;margin:12px 0}.day-total strong{font-size:29px}.comic-captions{gap:7px;margin:10px 0}.dialog-scroll .primary,.dialog-scroll .secondary{min-height:40px}
+}
+
+/* The cabinet crisis stays one expanded story, with all three moments visible. */
+.daily-family-sequence{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.daily-family-sequence[hidden]{display:none}
+.daily-family-sequence figure{margin:0;min-width:0;background:#fffaf3;border:1px solid #dbc1c7;border-radius:8px;overflow:hidden}
+.daily-family-sequence img{display:block;width:100%;height:auto;object-fit:contain}
+.daily-family-sequence figcaption{padding:8px;font-size:13px;line-height:1.55;overflow-wrap:anywhere;color:#593647}
+@media(max-width:560px){.daily-family-sequence{grid-template-columns:1fr;gap:8px}.daily-family-sequence figure{display:grid;grid-template-columns:42% minmax(0,1fr);align-items:center}.daily-family-sequence figcaption{padding:9px;font-size:13px}}

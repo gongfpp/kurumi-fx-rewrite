@@ -1,0 +1,28 @@
+/* A contained strip, outside the price plot and all trading controls. */
+.investor-comments{border:1px solid #eadce5;border-radius:7px;padding:9px 12px;background:#fffafd;min-width:0;overflow:hidden}
+.investor-comments-heading{display:flex;gap:8px;align-items:center;margin-bottom:4px;color:#786474}
+.investor-comments-heading h2{font-size:12px;margin:0;font-weight:750}.investor-comments-heading span{font-size:10px;color:#947b8b}
+#investor-danmaku{position:relative;display:block;list-style:none;padding:0;margin:0;height:104px;overflow:hidden;contain:layout paint;pointer-events:none}
+#investor-danmaku .investor-danmaku-line{position:absolute;left:100%;top:calc(var(--comment-lane) * 25px);width:var(--comment-width);max-width:none;margin:0;padding:2px 0;font:600 13px/21px sans-serif;white-space:nowrap;color:#59465a;text-shadow:0 1px 0 #fff;will-change:transform;animation:investor-comment-right-to-left var(--comment-duration) linear forwards}
+#investor-danmaku[data-paused="true"] .investor-danmaku-line{animation-play-state:paused}
+@keyframes investor-comment-right-to-left{from{transform:translateX(0)}to{transform:translateX(calc(-100% - var(--comment-travel)))}}
+#investor-danmaku[data-reduced="true"] .investor-danmaku-line{position:static;width:auto;max-width:100%;animation:none;transform:none;white-space:normal;overflow-wrap:anywhere;will-change:auto}
+.comment-credits section{border-top:1px solid #eadce5;padding:12px 0}.comment-credits h3{font-size:15px}.comment-credits p{font-size:13px;line-height:1.6;overflow-wrap:anywhere}
+@media(prefers-reduced-motion:reduce){body:not(.motion-full) #investor-danmaku:not([data-reduced="false"]) .investor-danmaku-line{position:static;width:auto;max-width:100%;animation:none;transform:none;white-space:normal;overflow-wrap:anywhere;will-change:auto}}
+@media(max-width:390px){.investor-comments{padding:8px 10px}#investor-danmaku{height:104px}}
+
+#investor-danmaku .investor-danmaku-line:nth-child(3n+2){color:#7c4d67}
+#investor-danmaku[data-reduced="true"]{height:58px}
+
+.leaderboard-broadcast{position:fixed;left:50%;bottom:calc(72px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:15;pointer-events:none;max-width:min(86vw,620px);font-size:12px;line-height:1.5;color:#f5efcf;background:#252a35ed;border:1px solid #87794f;border-radius:14px;padding:7px 14px;box-shadow:0 3px 12px #0003}.leaderboard-broadcast:empty{display:none}@media(max-width:600px){.leaderboard-broadcast{bottom:calc(88px + env(safe-area-inset-bottom));font-size:11px;max-width:88vw}}
+
+.player-comments{border-top:1px solid #eadce5;margin-top:6px;padding-top:8px}.player-comments h3{font-size:12px;margin:0 0 6px;color:#786474}.player-comment-list{list-style:none;padding:0;margin:0 0 6px;max-height:100px;overflow:auto;font-size:12px;line-height:1.6;overflow-wrap:anywhere}.player-comment-list:empty{display:none}.player-comment-list li{margin:3px 0}.player-comment-list strong{color:#7c4d67;font-weight:600}.player-comments form{display:flex;align-items:stretch;gap:6px}.player-comments textarea{min-width:0;flex:1;resize:vertical;max-height:120px;border:1px solid #dec8d5;border-radius:6px;padding:7px;font:inherit;font-size:12px;background:#fff;color:#59465a}.player-comments button{white-space:nowrap;font-size:12px;padding:7px 10px;align-self:stretch}.player-comments p{font-size:10px;color:#786474;margin:4px 0 0;line-height:1.4}.player-comments [role=status]:empty{display:none}
+
+/* Scrolling excerpts are an explicit game presentation; other reduced-motion effects stay unchanged. */
+#investor-danmaku[data-reduced="false"] .investor-danmaku-line{animation:investor-comment-right-to-left var(--comment-duration) linear forwards!important}
+#investor-danmaku[data-reduced="false"][data-paused="true"] .investor-danmaku-line{animation-play-state:paused!important}
+
+/* Only a long public message needs a focusable full-text action. */
+#investor-danmaku .investor-danmaku-open{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;pointer-events:auto;white-space:inherit;cursor:pointer;text-align:left}
+#investor-danmaku .investor-danmaku-open:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+#investor-danmaku .investor-danmaku-line:focus-within{animation-play-state:paused}

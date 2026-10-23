@@ -1,0 +1,129 @@
+/* Approved 2026-10-11 pink pixel settlement. Every rule is opt-in and tied to
+   the existing day dialog; legacy presentation and business state are intact. */
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"]{
+ --settle-ink:#111252;--settle-pink:#ff238d;--settle-teal:#00bdb9;--settle-line:#9460b7;
+ width:min(960px,calc(100vw - 28px));max-width:calc(100vw - 20px);border:3px solid var(--settle-ink);border-radius:16px;background:#fffafd;color:var(--settle-ink);box-shadow:3px 3px 0 #17133d33;isolation:isolate;
+ font-family:var(--pixel-font,"Fusion Pixel","Ark Pixel",ui-monospace,"Microsoft YaHei",sans-serif);
+}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"]::backdrop{background:#25132f8c;backdrop-filter:none}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .dialog-scroll{padding:0 18px 16px;scrollbar-gutter:auto;overflow-x:hidden}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .dialog-toolbar{top:0;right:0;min-height:70px;padding:10px 12px 0;z-index:4}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .dialog-toolbar .x-close{width:54px;min-width:54px;height:54px;min-height:54px;flex-basis:54px;border:2px solid var(--settle-ink);border-radius:9px;background:linear-gradient(#ffe2f7,#ff9acb);color:var(--settle-ink);font:500 48px/1 ui-monospace,monospace;box-shadow:inset 2px 2px 0 #fff8}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .pixel-settlement-heading{display:flex;align-items:center;gap:18px;min-height:74px;padding:8px 72px 8px 18px;margin:0 -18px 16px;border-bottom:2px solid var(--settle-ink);background:linear-gradient(105deg,#ffc2e7,#ffe2f1 55%,#ffc4e6);box-sizing:border-box}
+body[data-frontend="pixel"] #day-dialog .pixel-settlement-heading,
+body[data-frontend="pixel"] #day-dialog .pixel-settlement-paid,
+body[data-frontend="pixel"] #day-dialog .pixel-settlement-actions{display:none}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .pixel-settlement-title{display:flex;align-items:center;gap:14px;font-size:clamp(24px,3.2vw,43px);font-weight:950;line-height:1.15;letter-spacing:.045em;white-space:nowrap}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .pixel-settlement-day{padding:5px 20px;border:1px solid #ab4594;border-radius:6px;font-size:20px;font-weight:800;line-height:1.6;white-space:nowrap}
+/* Keep the original labelled heading in the accessibility tree. */
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"]:has(.pixel-settlement-heading) #day-title{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;border:0!important;overflow:hidden!important;clip-path:inset(50%);white-space:nowrap}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] #day-subtitle{padding:0 4px;margin:0 0 10px;background:none;color:var(--settle-ink);font-size:13px;line-height:1.5;text-align:left}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .daily-recap{padding:0;border:0;color:var(--settle-ink)}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-playback{display:block;margin:0;padding:0;border:0;border-radius:0;background:none;box-shadow:none;color:var(--settle-ink);overflow:visible;filter:none}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-profit-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto auto auto;align-items:center;column-gap:0;min-width:0;margin:0 0 10px;padding:14px 16px 10px;border:1px solid var(--settle-line);border-radius:9px;background:linear-gradient(100deg,#fff,#fffaff);text-align:left;container-type:inline-size}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-step-group{grid-column:2;grid-row:1;padding-left:28px;margin:0;line-height:1.5;min-width:0}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-step{display:block;font-size:clamp(16px,2.2vw,27px);font-weight:850;letter-spacing:0;color:var(--settle-ink)}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-counter{grid-column:2;grid-row:2;display:block;padding:0 0 0 28px;margin:0;min-width:0;min-height:1.2em;line-height:1.15;font-size:min(49px,calc((50cqw - 36px)/var(--recap-character-width,8)));font-weight:950;letter-spacing:-.05em;text-align:left;white-space:nowrap;text-shadow:none;transform-origin:center}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .daily-recap[data-tier][data-direction] .recap-playback[data-stage] .recap-counter{color:var(--settle-pink)!important}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .daily-recap[data-tier][data-direction] .recap-playback[data-stage] .recap-counter[data-direction="loss"]{color:#087e85!important}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .daily-recap[data-tier][data-direction] .recap-playback[data-stage] .recap-counter[data-direction="flat"]{color:var(--settle-ink)!important}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-stage-rate-group{grid-column:2;grid-row:3;justify-content:flex-start;gap:5px;min-height:26px;margin:2px 0 0;padding-left:28px}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-stage-rate{padding:0;background:none;border-radius:0;color:var(--settle-ink);font-size:12px;line-height:1.4}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-stage-profit{grid-column:1;grid-row:1/4;display:block;align-self:stretch;margin:0;padding:2px 18px 2px 4px;border:0;border-right:1px solid #ec409f;text-align:left;min-width:0}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-realized-score{display:grid;grid-template-columns:58px minmax(0,1fr);grid-template-rows:auto auto;gap:1px 17px;align-items:center;min-width:0;height:100%;color:var(--settle-ink)!important}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-realized-label{grid-column:2;grid-row:1;align-self:end;font-family:inherit;font-size:clamp(16px,2.2vw,27px);font-weight:850;line-height:1.3;color:var(--settle-ink)}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-realized-value{grid-column:2;grid-row:2;align-self:start;display:block;min-width:0;font-size:min(46px,calc((50cqw - 108px)/var(--recap-score-width,10)));line-height:1.2;font-weight:950;letter-spacing:-.05em;white-space:nowrap;transform-origin:center}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-realized-score::before{content:"";grid-column:1;grid-row:1/3;width:58px;height:64px;background:var(--settlement-wallet) center/contain no-repeat;image-rendering:pixelated}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-chart-heading{padding:10px 17px 0;margin:0;border:1px solid var(--settle-line);border-bottom:0;border-radius:9px 9px 0 0;background:#fff;color:var(--settle-ink);font-size:17px;line-height:1.5;text-align:left}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-stage-chart{width:100%;box-sizing:border-box;margin:0;border:1px solid var(--settle-line);border-top:0;border-radius:0 0 9px 9px;background:repeating-linear-gradient(0deg,transparent 0 31px,#ececf5 32px 33px),repeating-linear-gradient(90deg,#fff 0 31px,#ececf5 32px 33px);overflow:hidden}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-stage-chart svg{display:block;width:100%;height:auto;min-height:0;max-height:none;aspect-ratio:720/254}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-stage-chart svg text{fill:var(--settle-ink);font-family:inherit}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-stage-chart svg>line:not([stroke-dasharray]){stroke:#dfe5ed}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-stage-chart [data-replay-candle] rect[fill="#8cface"]{fill:var(--settle-teal)}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-stage-chart [data-replay-candle] line[stroke="#8cface"]{stroke:var(--settle-teal)}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-stage-chart [data-replay-candle] rect[fill="#ff87b2"]{fill:var(--settle-pink)}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-stage-chart [data-replay-candle] line[stroke="#ff87b2"]{stroke:var(--settle-pink)}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-stage-chart svg>line[stroke="#ffda86"]{stroke:var(--settle-pink)}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-stage-chart svg>circle{fill:var(--settle-pink)}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-stage-chart [data-replay-trade]>circle{fill:#fff;stroke:#8f2bac}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-chart-caption{padding:3px 16px 8px;background:#fff;gap:10px;color:var(--settle-ink)}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-phase-label,
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-replay-clock,
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-stage-chart p{color:var(--settle-ink)}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-event-card{margin:8px 0 0;padding:6px 10px;border-radius:5px;background:#fff1f7;color:var(--settle-ink)}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-event-delta{font-size:18px}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-playback-controls{margin:7px 0 9px;align-items:center;gap:5px}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-speed,
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-skip{font-family:inherit;border:1px solid #c480b7!important;border-radius:5px;background:#fff5fa;color:var(--settle-ink);min-height:36px}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-speed[aria-pressed="true"]{background:#ffc0e4;border-color:var(--settle-ink)!important;color:var(--settle-ink)}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-impact-label{top:6px;right:6px;font-size:10px;background:var(--settle-ink);color:#fff}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-asset-delta{top:112px;font-size:11px;color:var(--settle-ink)}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .pixel-settlement-paid:not([hidden]){display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);padding:11px 15px;margin:0 0 10px;border:1px solid var(--settle-line);border-radius:9px;background:#fff;gap:20px;min-width:0}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .pixel-settlement-fee,
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .pixel-settlement-balance{display:flex;gap:12px;align-items:center;min-width:0;font-size:21px;font-weight:800}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .pixel-settlement-fee{border-right:1px solid var(--settle-pink);padding-right:16px}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .pixel-settlement-cost,
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .pixel-settlement-balance-value{font-size:clamp(19px,2.6vw,32px);margin-left:auto;overflow-wrap:anywhere;font-variant-numeric:tabular-nums;line-height:1.3}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .pixel-settlement-cost{color:var(--settle-pink)}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .pixel-settlement-actions{display:grid;grid-template-columns:minmax(0,.88fr) minmax(0,1fr);gap:34px;margin:0}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .pixel-settlement-actions .recap-replay,
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .pixel-settlement-actions #recap-next{display:flex;align-items:center;justify-content:center;width:100%;min-width:0;min-height:60px;margin:0;padding:12px 10px;border:2px solid var(--settle-ink)!important;border-radius:10px;background:#fff;color:var(--settle-ink);box-shadow:none;font-family:inherit;font-size:22px;font-weight:850;line-height:1.3;text-align:center;white-space:normal;overflow-wrap:anywhere}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .pixel-settlement-actions #recap-next{background:linear-gradient(100deg,#ff58af,#ff298d);color:#fff}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] #day-share{width:100%;margin:12px 0 0;min-height:40px;background:#fff5fa;border:1px solid #ca91bc;border-radius:6px;color:var(--settle-ink)}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] #day-recap-extras{margin:14px 0 0;color:var(--settle-ink)}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] button:focus-visible{outline:3px solid var(--settle-ink);outline-offset:2px}
+/* Tiny hand-authored decorative pixel glyphs. No remote assets or generated
+   financial picture: every visible candle and value remains the live DOM. */
+body[data-frontend="pixel"] #day-dialog{
+ --settlement-wallet:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' shape-rendering='crispEdges'%3E%3Cpath d='M4 10V7L24 1l3 7h2v19H4z' fill='%23111252'/%3E%3Cpath d='M6 8l17-5 1 3L8 10z' fill='%2300e5d1'/%3E%3Cpath d='M5 11h22v14H5z' fill='%23ffd19b'/%3E%3Cpath d='M22 15h8v7h-8z' fill='%23111252'/%3E%3Cpath d='M24 17h4v3h-4z' fill='%23ffc56c'/%3E%3C/svg%3E");
+ --settlement-bars:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' shape-rendering='crispEdges'%3E%3Cpath d='M2 17h7v14H2zm10-8h7v22h-7zM22 1h8v30h-8z' fill='%23111252'/%3E%3Cpath d='M4 19h3v10H4zm10-8h3v18h-3z' fill='%23ff2697'/%3E%3Cpath d='M24 3h4v26h-4z' fill='%2300e5d1'/%3E%3C/svg%3E");
+}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .pixel-settlement-title::before{content:"";width:43px;height:43px;flex:0 0 43px;background:var(--settlement-bars) center/contain no-repeat;image-rendering:pixelated}
+@media(max-width:620px){
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"]{width:calc(100vw - 16px);max-width:calc(100vw - 16px);border-width:2px;border-radius:11px}
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .dialog-scroll{padding:0 10px 12px}
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .pixel-settlement-heading{gap:8px;min-height:62px;padding:8px 49px 8px 10px;margin:0 -10px 10px}
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .pixel-settlement-title{gap:7px;font-size:23px;letter-spacing:0}
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .pixel-settlement-title::before{width:28px;height:31px;flex-basis:28px}
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .pixel-settlement-day{padding:4px 7px;font-size:13px}
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .dialog-toolbar{min-height:52px;padding:8px 7px 0}
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .dialog-toolbar .x-close{width:40px;height:40px;min-width:40px;min-height:40px;flex-basis:40px;font-size:36px;border-radius:6px}
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] #day-subtitle{font-size:11px;margin-bottom:8px}
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-profit-hero{padding:13px 9px 10px}
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-step-group,
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-stage-rate-group{padding-left:12px}
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-counter{padding-left:12px;font-size:min(33px,calc((50cqw - 15px)/var(--recap-character-width,8)));letter-spacing:-.04em}
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-stage-profit{padding:0 9px 0 0}
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-realized-score{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:6px}
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-realized-score::before{display:none}
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-realized-value{font-size:min(31px,calc((50cqw - 18px)/var(--recap-score-width,10)));align-self:auto}
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-realized-label{align-self:auto}
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-chart-heading{padding:8px 9px 0;font-size:13px}
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-stage-chart svg{aspect-ratio:360/230;min-height:0;max-height:none}
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-chart-caption{padding:1px 9px 6px}
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-event-card{flex-wrap:wrap;gap:4px}
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .pixel-settlement-actions{gap:10px;grid-template-columns:minmax(0,.75fr) minmax(0,1fr)}
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .pixel-settlement-actions .recap-replay,
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .pixel-settlement-actions #recap-next{min-height:52px;font-size:15px;padding:9px 6px;border-radius:7px}
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .pixel-settlement-paid:not([hidden]){padding:10px;gap:10px}
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .pixel-settlement-fee,
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .pixel-settlement-balance{flex-wrap:wrap;gap:3px 8px;font-size:14px}
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .pixel-settlement-cost,
+ body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .pixel-settlement-balance-value{font-size:18px;margin-left:0}
+}
+@media(prefers-reduced-motion:reduce){body:not(.motion-full)[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .pixel-settlement-paid{animation:none;transition:none}}
+/* Receipt signs match the pixel amount: profit pink, loss teal. */
+body[data-frontend="pixel"] .recap-receipt-chart [data-direction="profit"] rect{fill:var(--settle-pink,#ff238d)}
+body[data-frontend="pixel"] .recap-receipt-chart [data-direction="loss"] rect{fill:var(--settle-teal,#00bdb9)}
+body[data-frontend="pixel"] .recap-receipt-chart [data-direction="profit"] rect[stroke]{stroke:var(--settle-pink,#ff238d)}
+body[data-frontend="pixel"] .recap-receipt-chart [data-direction="loss"] rect[stroke]{stroke:var(--settle-teal,#00bdb9)}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-playback[data-event-direction="profit"] .recap-event-card{border-left-color:var(--settle-pink)}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-playback[data-event-direction="loss"] .recap-event-card{border-left-color:var(--settle-teal)}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-playback[data-event-direction="profit"] .recap-event-delta{color:var(--settle-pink)}
+body[data-frontend="pixel"] #day-dialog[data-recap-layout="profit-first"] .recap-playback[data-event-direction="loss"] .recap-event-delta{color:#087e85}
+/* The virtual player owns the entire effect budget, including particle delay.
+   All keyframes reach their transparent/resting end before complete clears. */
+.recap-screen[data-recap-budget="true"][data-stage="landing"]>*{animation-duration:calc(var(--recap-landing-duration) - var(--delay,0ms))!important}
+.recap-playback[data-recap-budget="true"][data-stage="landing"]{animation-duration:var(--recap-impact-duration,420ms)}
+.recap-playback[data-recap-budget="true"][data-stage="landing"] .recap-spark{animation-duration:calc(var(--recap-landing-duration) - var(--spark-delay,0ms))}
+.recap-playback[data-recap-budget="true"][data-stage="landing"] .recap-outcome-art{animation-duration:var(--recap-landing-duration)}

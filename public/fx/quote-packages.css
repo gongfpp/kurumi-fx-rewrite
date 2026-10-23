@@ -1,0 +1,39 @@
+.quote-package-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:18px 0}
+.quote-package-card{min-width:0;border:1px solid #edb5c9;border-radius:14px;padding:16px 12px;background:#fff9fc}
+.quote-package-card.selected{border-color:#bc4472;box-shadow:inset 0 0 0 1px #bc4472}
+.quote-package-card header{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.quote-package-card strong{font-size:1.05rem;font-variant-numeric:tabular-nums;white-space:normal}
+.quote-package-card p,.quote-package-card small,.quote-package-note,.quote-package-disclosure{line-height:1.6;color:#765667;overflow-wrap:anywhere}
+.quote-package-card button{width:100%;min-height:44px;white-space:normal;line-height:1.5}
+.quote-package-card small{display:block;margin-top:6px}.quote-package-disclosure{font-size:.84rem}
+.quote-package-receipts{border-top:1px solid #eed6e1;padding-top:12px}.quote-package-receipts summary{cursor:pointer;min-height:32px}.quote-package-receipts li{line-height:1.8;font-variant-numeric:tabular-nums}
+@media(max-width:540px){.quote-package-grid{grid-template-columns:1fr}.quote-package-card{display:grid;grid-template-columns:1fr auto;align-items:center;gap:6px 12px}.quote-package-card p{grid-column:1;margin:0}.quote-package-card button{grid-column:2;grid-row:1/3;width:auto;max-width:180px}.quote-package-card small{grid-column:1/-1}}
+@media(max-width:380px){.quote-package-card{display:block}.quote-package-card button{width:100%;max-width:none;margin-top:10px}}
+
+.quote-package-cost{display:block;font-size:1.1rem;margin:10px 0;color:#804261;font-variant-numeric:tabular-nums}
+@media(max-width:540px){.quote-package-card{display:block}.quote-package-card button{width:100%;max-width:none;margin-top:8px}.quote-package-cost{margin:7px 0}}
+
+/* Compact, whole-row targets for the unified period picker. */
+#quote-package-dialog{width:min(430px,calc(100vw - 28px));padding:20px;box-sizing:border-box}
+#quote-package-dialog h2{font-size:21px;margin:4px 24px 14px 0}
+.candle-period-list{display:grid;gap:8px}
+.candle-period-row{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:2px 8px;width:100%;min-height:52px;margin:0;padding:9px 12px;border:1px solid #dfbfd0;border-radius:8px;background:#fff9fc;color:#64394f;font:inherit;text-align:left;cursor:pointer;touch-action:manipulation}
+.candle-period-row[aria-pressed=true]{background:#fbe2ed;border-color:#a63d6a;box-shadow:inset 0 0 0 1px #a63d6a}
+.candle-period-row:focus-visible{outline:3px solid #a94779;outline-offset:2px}
+.candle-period-row:disabled{cursor:not-allowed;opacity:.6}
+.candle-period-name{display:flex;flex-direction:column;gap:2px;min-width:0}
+.candle-period-name strong{font-size:14px;line-height:1.3}.candle-period-name>span{font-size:11px;line-height:1.3;color:#836376}
+.candle-period-price{font-size:12px;font-weight:700;line-height:1.3;white-space:nowrap;font-variant-numeric:tabular-nums}
+.candle-period-row>small{grid-column:1/-1;font-size:11px;line-height:1.3;color:#92617b}
+#quote-package-dialog .candle-period-note{font-size:12px;line-height:1.5;margin:12px 0 0;color:#806475}
+#quote-package-dialog #quote-package-error:empty{display:none}
+#quote-package-dialog>.primary{min-height:44px;margin-top:12px;padding:10px}
+@media(max-width:380px){#quote-package-dialog{padding:16px}.candle-period-row{min-height:52px;padding:8px 10px}.candle-period-list{gap:7px}}
+
+/* Dropdown changes chart period; adjacent pressed buttons change the rental directly. */
+.candle-view-controls #quote-package-open{border-style:dashed;background:#282330;min-height:44px}
+.quote-refresh-options{display:flex;gap:4px;flex:1 1 200px;min-width:0;max-width:360px}
+.candle-view-controls .quote-refresh-choice{display:flex;flex:1 1 0;min-width:0;min-height:44px;align-items:center;justify-content:center;flex-direction:column;gap:3px;padding:5px 4px;border-style:solid;white-space:normal;font-size:11px}
+.quote-refresh-choice strong,.quote-refresh-choice small{font-size:inherit;line-height:1.25;white-space:nowrap}
+.quote-refresh-choice small{font-size:10px;opacity:.85}
+@media(max-width:380px){.quote-refresh-options{gap:3px;flex-basis:192px}.candle-view-controls .quote-refresh-choice{font-size:10px;padding:5px 2px}.candle-view-controls #quote-package-open{padding-inline:5px}}

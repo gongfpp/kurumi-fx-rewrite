@@ -1,22 +1,13 @@
-"""Headless smoke test for the built game UI.
-
-Run with the helper so the preview server lifecycle is managed:
-    python3 <skill>/scripts/with_server.py \
-      --server "npm run preview -- --port 4173 --strictPort" --port 4173 \
-      -- python3 tests/e2e/verify_ui.py
-"""
 import os
-
 from playwright.sync_api import sync_playwright
 
 URL = os.environ.get("FX_URL", "http://localhost:4173/kurumi-fx-rewrite/")
-
 
 def main() -> None:
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
         page = browser.new_page(viewport={"width": 1280, "height": 900})
-        errors: list[str] = []
+        errors = []
         page.on("console", lambda m: errors.append(m.text) if m.type == "error" else None)
         page.on("pageerror", lambda e: errors.append(str(e)))
 
@@ -24,39 +15,53 @@ def main() -> None:
         page.wait_for_load_state("networkidle")
         page.wait_for_selector("canvas.fx-chart")
 
-        title = page.inner_text(".fx-title")
-        price_before = page.inner_text(".fx-quote-price")
+        face_ok = page.eval_on_selector("img.fx-face-img, .fx-face img", "el => el.complete && el.naturalWidth > 0")
 
-        page.click('button[data-act="long"]')
-        page.wait_for_timeout(150)
+        # Mangas / galleries dialog loads real images
+        page.click('button[data-act="open:manga"]')
+        page.wait_for_selector(".fx-modal", timeout=8000)
+        page.wait_for_timeout(900)
+        manga_imgs = page.locator(".fx-gallery img").count()
+        gallery_ok = page.eval_on_selector(".fx-gallery img", "el => el.complete && el.naturalWidth > 0")
+        page.screenshot(path="/tmp/fx-manga.png", full_page=False)
+        page.click('.fx-modal-head button[data-act="modal:close"]')
 
-        # Persistence: a reload must restore the saved run (one open position).
-        page.reload()
-        page.wait_for_load_state("networkidle")
-        page.wait_for_selector("canvas.fx-chart")
+        page.click('button[data-act="open:items"]'); page.wait_for_selector(".fx-item", timeout=6000)
+        items = page.locator(".fx-item").count()
+        page.click('.fx-modal-head button[data-act="modal:close"]')
+
+        page.click('button[data-act="open:life"]'); page.wait_for_selector(".fx-modal", timeout=6000)
+        life_btns = page.locator('.fx-modal [data-act^="life:"]').count()
+        page.click('.fx-modal-head button[data-act="modal:close"]')
+
+        page.click('button[data-act="open:news"]'); page.wait_for_selector(".fx-modal", timeout=6000)
+        page.click('.fx-modal-head button[data-act="modal:close"]')
+
+        page.click('button[data-act="open:settings"]'); page.wait_for_selector(".fx-modal", timeout=6000)
+        bgm_buttons = page.locator('.fx-modal [data-act^="bgm:play:"]').count()
+        page.click('.fx-modal-head button[data-act="modal:close"]')
+
+        page.click('button[data-act="open:voice"]'); page.wait_for_selector(".fx-modal", timeout=6000)
+        voice_buttons = page.locator('.fx-modal [data-act^="voice:play:"]').count()
+        page.click('.fx-modal-head button[data-act="modal:close"]')
+
+        # Trade + play loop + persistence
+        page.click('button[data-act="long"]'); page.wait_for_timeout(150)
+        page.reload(); page.wait_for_load_state("networkidle")
         persisted = "1 笔" in page.content()
-
-        page.click('button[data-act="play"]')
-        page.wait_for_timeout(1500)
-        price_after = page.inner_text(".fx-quote-price")
-
-        # Theme switch
-        page.click('button[data-theme-set="terminal"]')
-        page.wait_for_timeout(200)
-        theme = page.get_attribute("html", "data-theme")
+        page.click('button[data-act="play"]'); page.wait_for_timeout(1500)
+        price = page.inner_text(".fx-quote-price")
+        page.click('button[data-theme-set="terminal"]'); page.wait_for_timeout(200)
         page.screenshot(path="/tmp/fx-terminal.png", full_page=True)
-        page.click('button[data-theme-set="cyber"]')
-        page.wait_for_timeout(200)
+        page.click('button[data-theme-set="cyber"]'); page.wait_for_timeout(200)
         page.screenshot(path="/tmp/fx-cyber.png", full_page=True)
 
-        print("TITLE:", title.replace("\n", " | "))
-        print("PRICE_BEFORE:", price_before)
-        print("PRICE_AFTER:", price_after)
-        print("THEME:", theme)
-        print("PERSISTED:", persisted)
-        print("CONSOLE_ERRORS:", errors[:5])
+        print("FACE_OK:", face_ok)
+        print("MANGA_IMGS:", manga_imgs, "GALLERY_OK:", gallery_ok)
+        print("ITEMS:", items, "LIFE_BTNS:", life_btns, "BGM:", bgm_buttons, "VOICE:", voice_buttons)
+        print("PERSISTED:", persisted, "PRICE:", price)
+        print("CONSOLE_ERRORS:", errors[:6])
         browser.close()
-
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,19 @@
+/* Report choices never change the active game frontend or save data. */
+.share-report-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;min-width:0}
+.share-report-heading h2{margin:0;min-width:0;flex:1 1 150px}
+.share-style-switch{display:flex;flex:0 1 auto;min-width:0;gap:0}
+.share-style-switch button{min-height:44px;margin:0;min-width:76px;border:1px solid #b18aa2;border-radius:0;background:#fff;color:#282431;padding:8px 12px;font-size:14px}
+.share-style-switch button[aria-pressed="true"]{background:#f16f9f;font-weight:800}
+.share-style-switch button:focus-visible{outline:3px solid #ba3e78;outline-offset:3px;position:relative}
+#share-dialog[data-report-style="pixel"]{width:min(680px,calc(100vw - 26px));color:#0a1255;background:#fffafd;border:3px solid #ff52ab;border-radius:0;font-family:'Noto Sans CJK SC','Microsoft YaHei',sans-serif}
+#share-dialog[data-report-style="pixel"] .share-report-heading{border:3px solid #0a1255;padding:9px;margin-bottom:10px}
+#share-dialog[data-report-style="pixel"] .share-report-heading h2{font-weight:900;color:#0a1255}
+#share-dialog[data-report-style="pixel"] .share-style-switch button{color:#0a1255;border:2px solid #0a1255;font-weight:800}
+#share-dialog[data-report-style="pixel"] .share-style-switch button[aria-pressed="true"]{background:#ff329d;color:#fff}
+#share-dialog[data-report-style="pixel"] #share-preview{width:100%;height:auto;max-height:none;object-fit:contain;image-rendering:auto;margin:12px auto}
+#share-dialog[data-report-style="pixel"] .share-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+#share-dialog[data-report-style="pixel"] .share-actions>*{min-width:0;border:2px solid #ff52ab;border-radius:0;color:#0a1255;font-weight:800;overflow-wrap:anywhere}
+#share-dialog[data-report-style="pixel"] #share-download{grid-column:1/-1;margin-top:0;background:#ff329d;color:#fff}
+#share-dialog[data-report-style="pixel"] .share-actions>[hidden]{display:none!important}
+@media(max-width:390px){.share-report-heading{gap:8px}.share-report-heading h2{flex-basis:135px}.share-style-switch{flex:1 1 100%}.share-style-switch button{flex:1;min-width:0}#share-dialog[data-report-style="pixel"] .share-report-heading h2{font-size:22px}}
+#share-dialog .share-actions[hidden],#share-dialog #share-preview[hidden]{display:none!important}

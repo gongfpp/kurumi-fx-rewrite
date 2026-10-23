@@ -1,0 +1,23 @@
+#tool-list.inventory-view{display:block;min-width:0}
+#tool-list.inventory-view .inventory-heading{font-size:15px;margin:16px 0 8px}
+#tool-list.inventory-view .inventory-note{font-size:12px;line-height:1.6;color:#756575;margin:6px 0 12px}
+/* Size columns from the drawer's content width, including on a wide viewport. */
+#tool-list.inventory-view .inventory-supply-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:10px}
+#tool-list.inventory-view .inventory-card{border:1px solid #d8c7d3;background:#fffafd;border-radius:8px;padding:10px;display:grid;grid-template-columns:36px minmax(0,1fr) auto;align-content:start;align-items:start;min-width:0;gap:6px 8px}
+#tool-list.inventory-view h4{font-size:14px;margin:0;min-width:0;overflow-wrap:anywhere}
+#tool-list.inventory-view .inventory-card>h4{grid-column:2}
+#tool-list.inventory-view .inventory-symbol{width:36px;height:36px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;color:#9b5275;flex-shrink:0}
+#tool-list.inventory-view .inventory-card>.inventory-symbol{grid-row:1/4}
+#tool-list.inventory-view .inventory-price{grid-column:3;font-size:13px}
+#tool-list.inventory-view .inventory-effect,#tool-list.inventory-view .inventory-detail{font-size:12px;line-height:1.6;margin:0;min-width:0;overflow-wrap:anywhere}
+#tool-list.inventory-view .inventory-card>.inventory-effect,#tool-list.inventory-view .inventory-card>.inventory-detail{grid-column:2/-1}
+#tool-list.inventory-view .inventory-detail{color:#756575}
+/* Nested actions have their own size; legacy tool buttons use a flex basis. */
+#tool-list.inventory-view button.inventory-use{display:block;flex:0 0 auto;grid-column:2/-1;text-align:center;min-height:40px;height:auto;width:100%;margin-top:2px;padding:8px;white-space:normal;overflow-wrap:anywhere;font-size:13px;line-height:1.4}
+#tool-list.inventory-view .inventory-work-item{border-bottom:1px solid #e4d7df;padding:12px 0;display:grid;grid-template-columns:40px minmax(0,1fr);gap:4px 8px}
+#tool-list.inventory-view .inventory-work-item .inventory-symbol{grid-row:1/5}
+#tool-list.inventory-view .inventory-work-item p,#tool-list.inventory-view .inventory-work-item small,#tool-list.inventory-view .inventory-work-item button{grid-column:2}
+#tool-list.inventory-view .inventory-passive{font-size:11px;color:#6c6f54;text-align:left}
+#tool-list.inventory-view .inventory-collection{margin-top:16px;padding:12px;border:1px solid #e4d7df;border-radius:6px}
+#tool-list.inventory-view summary{cursor:pointer;font-size:13px}
+#tool-list.inventory-view .inventory-father{width:100%;margin-top:12px}

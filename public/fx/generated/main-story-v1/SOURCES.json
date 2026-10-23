@@ -1,0 +1,107 @@
+{
+  "version": 1,
+  "kind": "generated-game-art",
+  "createdAt": "2026-10-15",
+  "generationTool": "image_gen.imagegen",
+  "actualModel": null,
+  "modelReported": false,
+  "purpose": "New wordless main-story game-adaptation illustrations; not original manga or anime frames.",
+  "originalsPreserved": true,
+  "processing": "Byte-exact PNG copies from generation output; no crop, upscale, redraw of an existing asset, or re-encoding.",
+  "referenceAssets": [
+    {
+      "path": "./generated/life-friends-v1/life-friend-mochiko-01.png",
+      "purpose": "Existing game character identity and illustration style reference.",
+      "sha256": "079659a0922ae992be3d9d737787f88b7ca524e8453a62dffaae8b1c431ed085"
+    }
+  ],
+  "assets": [
+    {
+      "key": "two-notebooks",
+      "file": "night-two-notebooks.png",
+      "sha256": "5d0eb26ed16e12f46eb6ee978a7ac1d39b8bd3580de7fa300acd31631aac26cc",
+      "bytes": 2052435,
+      "width": 1536,
+      "height": 1024,
+      "storyDays": [
+        1,
+        10,
+        25
+      ],
+      "characters": [
+        "久留美"
+      ],
+      "briefId": "main-story-art-01",
+      "containsReadableText": false,
+      "review": {
+        "pixels": "reviewed-2026-10-15",
+        "runtimeBrowser": "pending",
+        "humanAcceptance": "pending"
+      },
+      "countContribution": {
+        "originalManga": 0,
+        "fourPanelStories": 0,
+        "performances": 0
+      }
+    },
+    {
+      "key": "campus-bench",
+      "file": "campus-bench-listening.png",
+      "sha256": "f567d38fd14648da5fbd4183351ff68f9e9c3cdba564275d6d71133a185e785c",
+      "bytes": 2438926,
+      "width": 1536,
+      "height": 1024,
+      "storyDays": [
+        15,
+        35
+      ],
+      "characters": [
+        "久留美",
+        "萌智子"
+      ],
+      "briefId": "main-story-art-02",
+      "containsReadableText": false,
+      "review": {
+        "pixels": "reviewed-2026-10-15",
+        "runtimeBrowser": "pending",
+        "humanAcceptance": "pending"
+      },
+      "countContribution": {
+        "originalManga": 0,
+        "fourPanelStories": 0,
+        "performances": 0
+      }
+    },
+    {
+      "key": "close-review",
+      "file": "dawn-close-review.png",
+      "sha256": "cbaff6f5d98e6365dbf9e21e30fe0ecce11794e1dd054e518d5b51f46da667ad",
+      "bytes": 2134513,
+      "width": 1536,
+      "height": 1024,
+      "storyDays": [
+        50
+      ],
+      "characters": [
+        "久留美"
+      ],
+      "briefId": "main-story-art-03",
+      "containsReadableText": false,
+      "review": {
+        "pixels": "reviewed-2026-10-15",
+        "runtimeBrowser": "pending",
+        "humanAcceptance": "pending"
+      },
+      "countContribution": {
+        "originalManga": 0,
+        "fourPanelStories": 0,
+        "performances": 0
+      },
+      "continuityReference": {
+        "key": "two-notebooks",
+        "sha256": "5d0eb26ed16e12f46eb6ee978a7ac1d39b8bd3580de7fa300acd31631aac26cc",
+        "purpose": "Same adult identity, room and two notebooks; new dawn action and lighting."
+      }
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+/* Readable original thought panels stay separate from the portrait and controls. */
+.trading-expression[hidden]{display:none!important}
+.trading-expression{position:fixed;z-index:20;max-width:calc(100vw - 16px);width:max-content;margin:0;border:2px solid #b34776;border-radius:9px;background:#fff9fc;color:#722d50;overflow:hidden;pointer-events:none;box-shadow:3px 4px 0 #ddafc3}
+.trading-expression-heading{display:block;height:32px;padding:5px 40px 5px 10px;font-size:14px;line-height:22px;font-weight:700;box-sizing:border-box}
+.trading-expression-close{position:absolute;right:2px;top:2px;width:28px;height:28px;min-height:28px;padding:0;border:1px solid #aa7590;border-radius:50%;font-size:21px;line-height:1;background:#fff;color:#553447;pointer-events:auto;cursor:pointer}
+.trading-expression-crop{position:relative;overflow:hidden;pointer-events:none}
+.trading-expression .trading-expression-crop img{position:absolute;max-width:none;object-fit:fill;margin:0;display:block}
+.trading-expression.is-detached{position:fixed;margin:0;z-index:20}
+.motion-full .trading-expression:not([hidden]){animation:trading-expression-arrive .2s ease-out}
+@keyframes trading-expression-arrive{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){body:not(.motion-full) .trading-expression:not([hidden]){animation:none}}
