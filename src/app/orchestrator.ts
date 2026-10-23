@@ -1085,6 +1085,38 @@ function drawChart(): void {
     const height = Math.max(1.5, Math.abs(c.yClose - c.yOpen));
     ctx.fillRect(c.x - c.width / 2, top, c.width, height);
   }
+  const lastIdx = layout.length - 1;
+  if (state.phase === 'playing' && lastIdx >= 0) {
+    const prog = Math.min(1, ((state.pending?.tick ?? 0) + 0.5) / NUMERICS.TICKS_PER_CANDLE);
+    const c0 = layout[lastIdx] as (typeof layout)[number];
+    const top0 = Math.min(c0.yOpen, c0.yClose);
+    const height0 = Math.max(1.5, Math.abs(c0.yClose - c0.yOpen));
+    ctx.save();
+    ctx.globalAlpha = 0.45 + 0.55 * prog;
+    ctx.strokeStyle = c0.bullish ? t.up : t.down;
+    ctx.fillStyle = c0.bullish ? t.up : t.down;
+    ctx.beginPath();
+    ctx.moveTo(c0.x, c0.yHigh);
+    ctx.lineTo(c0.x, c0.yLow);
+    ctx.stroke();
+    ctx.fillRect(c0.x - c0.width / 2, top0, c0.width, height0);
+    ctx.restore();
+  }
+  const last = layout[lastIdx];
+  if (last) {
+    ctx.save();
+    ctx.shadowColor = t.accent;
+    ctx.shadowBlur = 12;
+    ctx.strokeStyle = t.accent;
+    ctx.beginPath();
+    ctx.moveTo(last.x, last.yHigh);
+    ctx.lineTo(last.x, last.yLow);
+    ctx.stroke();
+    ctx.restore();
+    ctx.fillStyle = t.accent;
+    ctx.font = '11px sans-serif';
+    ctx.fillText(state.price.toFixed(3), Math.min(w - 52, last.x + 6), Math.max(12, last.yClose - 4));
+  }
   const colors: Record<number, string> = { 5: '#f2c14e', 10: '#7fd4a0', 20: '#f16f9f' };
   for (const m of maSet) {
     const values = movingAverage(candles, m);

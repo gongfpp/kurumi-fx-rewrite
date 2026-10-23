@@ -554,3 +554,11 @@ button:active::after { animation: fxRipple .5s ease-out; }
 :root[data-frontend='pixel'] .fx-title { text-shadow: 2px 2px 0 var(--fx-accent); }
 :root[data-frontend='pixel'] .fx-bar { border-radius: 0; }
 :root[data-frontend='pixel'] .fx-bar > span { image-rendering: pixelated; }
+
+@keyframes fxShimmer { from{background-position:200% 0} to{background-position:-200% 0} }
+.fx-gallery img, .fx-face img, .fx-scene, .fx-icons {
+  background: linear-gradient(100deg, var(--fx-panel-alt) 30%, color-mix(in srgb, var(--fx-accent) 18%, var(--fx-panel-alt)) 50%, var(--fx-panel-alt) 70%);
+  background-size: 200% 100%;
+  animation: fxShimmer 1.5s linear infinite;
+}
+.fx-gallery img[src], .fx-face img[src] { animation-duration: 1.5s; }
