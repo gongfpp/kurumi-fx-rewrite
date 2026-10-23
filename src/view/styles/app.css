@@ -564,3 +564,7 @@ button:active::after { animation: fxRipple .5s ease-out; }
 .fx-gallery img[src], .fx-face img[src] { animation-duration: 1.5s; }
 
 .fx-badge { font-size: 11px; padding: 3px 8px; border: 1px solid var(--fx-grid); border-radius: 999px; color: var(--fx-muted); white-space: nowrap; }
+
+.fx-chart-wrap { position: relative; }
+.fx-chart-tip { position: absolute; pointer-events: none; background: var(--fx-panel); border: 1px solid var(--fx-grid); border-radius: 6px; padding: 6px 8px; font-size: 11px; line-height: 1.5; color: var(--fx-ink); box-shadow: 0 6px 18px rgba(0,0,0,.45); transform: translate(10px, -50%); z-index: 5; white-space: nowrap; }
+.fx-chart-tip b { color: var(--fx-accent); }

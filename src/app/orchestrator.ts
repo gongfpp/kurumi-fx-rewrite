@@ -69,6 +69,8 @@ let live: LiveState = createLiveState();
 let liveTimer: number | null = null;
 let particles: ParticleSystem | null = null;
 let prevEquity = Number.NaN;
+let hoverIndex = -1;
+let hoverY = -1;
 let timer: number | null = null;
 let modal: string | null = null;
 let leaderboard: LeaderboardEntry[] | null = null;
@@ -199,6 +201,35 @@ export function start(): void {
   fxCanvas.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:80';
   document.body.append(fxCanvas);
   particles = createParticles(fxCanvas);
+  const chartEl = document.querySelector('canvas.fx-chart') as HTMLCanvasElement | null;
+  if (chartEl) {
+    const tip = document.getElementById('chart-tip') as HTMLElement | null;
+    chartEl.addEventListener('mousemove', (ev) => {
+      const rect = chartEl.getBoundingClientRect();
+      const x = ev.clientX - rect.left;
+      const y = ev.clientY - rect.top;
+      const candles = state.candles.slice(-48);
+      const padding = 18;
+      const usable = Math.max(1, rect.width - padding * 2);
+      const slot = usable / Math.max(1, candles.length);
+      const idx = Math.min(candles.length - 1, Math.max(0, Math.floor((x - padding) / slot)));
+      hoverIndex = idx;
+      hoverY = y;
+      const c = candles[idx];
+      if (tip && c) {
+        tip.hidden = false;
+        tip.style.left = `${Math.min(rect.width - 150, x)}px`;
+        tip.style.top = `${y}px`;
+        tip.innerHTML = `<b>${c.close.toFixed(3)}</b><br>开 ${c.open.toFixed(3)}<br>高 ${c.high.toFixed(3)}<br>低 ${c.low.toFixed(3)}`;
+      }
+      drawChart();
+    });
+    chartEl.addEventListener('mouseleave', () => {
+      hoverIndex = -1;
+      if (tip) tip.hidden = true;
+      drawChart();
+    });
+  }
   const urlReplay = replayFromLocation(globalThis.location?.search ?? '');
   if (urlReplay) applyReplay(encodeReplay(urlReplay));
   document.addEventListener('keydown', (ev) => {
@@ -915,7 +946,7 @@ function render(): void {
         <div class="fx-quote-price" id="quote-price" aria-live="polite">${num(state.price, 3)}</div>
         <div class="fx-delta ${profit >= 0 ? 'up' : 'down'}" id="quote-delta">累计 ${profit >= 0 ? '+' : ''}${yen(profit)} · 目标 +${yen(NUMERICS.TARGET_PROFIT)}</div>
         ${P.chartToolbarHtml({ period, ma: maSet, speed })}
-        <canvas class="fx-chart" width="760" height="260" role="img" aria-label="交易K线"></canvas>
+        <div class="fx-chart-wrap"><canvas class="fx-chart" width="760" height="260" role="img" aria-label="交易K线" tabindex="0"></canvas><div id="chart-tip" class="fx-chart-tip" hidden></div></div>
         <div class="fx-caption" data-act="open:news" style="cursor:pointer">📣 ${ev ? `${ev.title} · ${ev.copy}` : '等待行情'}（点击查看快讯记录）</div>
         ${L.commentsRow(state)}
         <div id="alerts">${P.riskAlertsHtml(state)}</div>
@@ -1126,6 +1157,41 @@ function drawChart(): void {
     ctx.fillStyle = t.accent;
     ctx.font = '11px sans-serif';
     ctx.fillText(state.price.toFixed(3), Math.min(w - 52, last.x + 6), Math.max(12, last.yClose - 4));
+  }
+  // Volume sub-plot (approximated from candle range, since sim has no volume)
+  const volH = 30;
+  const vols = candles.map((c) => Math.abs(c.high - c.low));
+  const maxVol = Math.max(...vols, 1e-9);
+  for (let i = 0; i < layout.length; i++) {
+    const c = layout[i] as (typeof layout)[number];
+    const h0 = (vols[i]! / maxVol) * volH;
+    ctx.globalAlpha = 0.28;
+    ctx.fillStyle = c.bullish ? t.up : t.down;
+    ctx.fillRect(c.x - c.width / 2, h - vp.padding - h0, c.width, h0);
+    ctx.globalAlpha = 1;
+  }
+  // Crosshair + hover readout
+  if (hoverIndex >= 0 && hoverIndex < layout.length) {
+    const c = layout[hoverIndex] as (typeof layout)[number];
+    ctx.save();
+    ctx.strokeStyle = t.muted;
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath();
+    ctx.moveTo(c.x, vp.padding);
+    ctx.lineTo(c.x, h - vp.padding);
+    ctx.stroke();
+    if (hoverY > vp.padding && hoverY < h - vp.padding) {
+      const priceAt = min + (1 - (hoverY - vp.padding) / (h - vp.padding * 2)) * (max - min);
+      ctx.beginPath();
+      ctx.moveTo(vp.padding, hoverY);
+      ctx.lineTo(w - vp.padding, hoverY);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = t.accent;
+      ctx.font = '11px sans-serif';
+      ctx.fillText(priceAt.toFixed(3), w - 52, hoverY - 3);
+    }
+    ctx.restore();
   }
   const colors: Record<number, string> = { 5: '#f2c14e', 10: '#7fd4a0', 20: '#f16f9f' };
   for (const m of maSet) {
