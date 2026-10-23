@@ -1,6 +1,7 @@
 import { ITEMS, type ItemDef } from '../../content';
 import { NUMERICS } from '../../content/config/numerics';
 import { consumeStamina, ensureStamina, recoverStamina } from '../body/stamina';
+import { startEnergyBoost } from '../body/energy';
 import type { DailySupplies, GameState } from '../core/types';
 
 export const SUPPLY_ITEMS: ItemDef[] = ITEMS as ItemDef[];
@@ -57,6 +58,7 @@ export function useSupply(s: GameState, id: string): SupplyReceipt {
   if (item.meal) supplies.mealCreditDay = s.day;
   if (item.stamina > 0) recoverStamina(s, { amount: item.stamina, id: `supply:${s.day}:${id}`, source: 'supply' });
   if (item.id === 'eyeMask') supplies.eyeMaskPending = true;
+  if (item.id === 'energy') startEnergyBoost(s);
   if (item.stress) {
     s.stress = Math.max(0, (s.stress || 0) + item.stress);
   }

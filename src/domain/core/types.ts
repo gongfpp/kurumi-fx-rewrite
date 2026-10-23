@@ -169,6 +169,7 @@ export interface GameState {
   dinner?: boolean;
   relationship?: number;
   newsLog?: { time?: string; source: string; title: string; copy: string }[];
+  energyEffect?: { day: number; elapsed: number };
   story?: StoryState;
   ending?: EndingState;
   livingDiscount?: number;

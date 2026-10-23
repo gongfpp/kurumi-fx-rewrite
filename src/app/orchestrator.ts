@@ -1,6 +1,7 @@
 import { ACHIEVEMENTS, ITEMS } from '../content/index';
 import { NUMERICS } from '../content/config/numerics';
 import { assetUrl, voiceUrl } from '../content/assets';
+import { energyStage } from '../domain/body/energy';
 import { staminaStatus } from '../domain/body/stamina';
 import { accountMetrics, positionsOf } from '../domain/trading/account';
 import { advanceQuote, beginPlay, beginRest, finalizeDayLiving, nextDay, settleDay } from '../domain/core/day';
@@ -14,19 +15,22 @@ import { doWork, LIFE_WORK_JOBS } from '../domain/economy/work';
 import type { DayScript } from '../domain/market/quote-grid';
 import { addEffect } from '../domain/mind/effects';
 import { mood, moodLabel } from '../domain/mind/mood';
+import { pressEmotion } from '../domain/mind/pressure';
 import { restrictions } from '../domain/mind/sanity';
 import { evaluateAchievements } from '../domain/progress/achievements';
 import { applyEnding, classifyEnding } from '../domain/progress/ending';
 import { dailyManga, routeManga } from '../domain/story/manga';
-import { checkStories, chooseStory, pendingStory, queueStory } from '../domain/story/story';
+import { OPENING_PAGES, checkStories, chooseStory, pendingStory, queueStory } from '../domain/story/story';
 import { closeOrders } from '../domain/trading/close';
+import { maxTopUp, topUpMargin } from '../domain/trading/margin';
 import { placeOrder, previewOrder, type OrderType, type StopPips } from '../domain/trading/order';
 import { entryFromState, fetchLeaderboard, type LeaderboardEntry } from './services/leaderboard';
-import { layoutCandles } from '../view/charts/candles';
+import { layoutCandles, movingAverage } from '../view/charts/candles';
 import { createAudio, type AudioController } from '../view/components/audio';
 import * as D from '../view/components/dialogs';
+import * as P from '../view/components/panels';
 import { DEFAULT_THEME, THEME_IDS, themeTokens, type ThemeId } from '../view/styles/tokens';
-import { loadGame, saveGame } from './persistence/save';
+import { loadGame, saveGame, encodeSave } from './persistence/save';
 
 const THEME_KEY = 'kurumi-fx:theme';
 
@@ -35,12 +39,17 @@ let theme: ThemeId = DEFAULT_THEME;
 let leverage = 25;
 let amount = 10_000;
 let stopPips: StopPips = null;
+let period = 15;
+let maSet: number[] = [5, 10];
+let speed = 1;
+let openingPage = 0;
 let timer: number | null = null;
 let modal: string | null = null;
 let leaderboard: LeaderboardEntry[] | null = null;
 let notice = '';
 let lastNewsKey = '';
 let newsToast = '';
+let tradeToast = '';
 let toastTimer: number | null = null;
 const log: string[] = [];
 const audio: AudioController = createAudio();
@@ -76,13 +85,15 @@ function persist(): void {
     /* ignore */
   }
 }
-function flashToast(text: string): void {
-  newsToast = text;
+function flashToast(kind: 'news' | 'trade', text: string): void {
+  if (kind === 'news') newsToast = text;
+  else tradeToast = text;
   if (toastTimer !== null) clearTimeout(toastTimer);
   toastTimer = window.setTimeout(() => {
     newsToast = '';
+    tradeToast = '';
     render();
-  }, 4200);
+  }, 3500);
 }
 
 function trackNews(): void {
@@ -94,7 +105,7 @@ function trackNews(): void {
   state.newsLog ||= [];
   state.newsLog.push({ source: ev.source, title: ev.title, copy: ev.copy });
   if (state.newsLog.length > 60) state.newsLog = state.newsLog.slice(-60);
-  flashToast(`📣 ${ev.title} · ${ev.copy}`);
+  flashToast('news', `📣 ${ev.title} · ${ev.copy}`);
   audio.playSfx('news');
 }
 
@@ -118,7 +129,7 @@ function startTimer(): void {
       log.unshift(`行情暂停：${(error as Error).message}`);
       render();
     }
-  }, 180);
+  }, Math.max(40, 180 / speed));
 }
 
 function resolveEnding(walkaway: boolean): void {
@@ -159,6 +170,19 @@ export function start(): void {
       modal = null;
       render();
     }
+    if (modal) return;
+    if (ev.key === 'ArrowUp') {
+      amount = Math.min(amount + 1000, 10_000_000);
+      render();
+    } else if (ev.key === 'ArrowDown') {
+      amount = Math.max(100, amount - 1000);
+      render();
+    } else if (ev.key === 'Enter' && state.phase === 'decision') {
+      onAction('long');
+    } else if (ev.key === ' ') {
+      ev.preventDefault();
+      onAction(state.phase === 'decision' ? 'play' : 'hold');
+    }
   });
   app.addEventListener('click', (e) => {
     const el = (e.target as HTMLElement).closest('[data-act], [data-theme-set]') as HTMLElement | null;
@@ -177,6 +201,7 @@ export function start(): void {
     }
     if (act.startsWith('open:')) {
       modal = act.slice(5);
+      if (modal === 'opening') openingPage = 0;
       render();
       return;
     }
@@ -229,7 +254,61 @@ function fatherRepay(): string {
 function onAction(act: string): void {
   notice = '';
   try {
-    if (act.startsWith('supply:')) {
+    if (act.startsWith('stake:')) {
+      const v = Number(act.split(':')[1]);
+      amount = Math.max(100, Math.floor(orderPreviewSafe().maxMargin * v));
+      stakeApplied();
+    } else if (act.startsWith('amount:')) {
+      if (act.endsWith('random')) {
+        const max = Math.max(100, Math.floor(orderPreviewSafe().maxMargin));
+        amount = Math.max(100, Math.floor((Math.random() * max) / 100) * 100);
+      } else {
+        amount = Number(act.split(':')[1]);
+      }
+    } else if (act.startsWith('period:')) {
+      period = Number(act.split(':')[1]);
+    } else if (act.startsWith('ma:')) {
+      const m = Number(act.split(':')[1]);
+      maSet = maSet.includes(m) ? maSet.filter((x) => x !== m) : [...maSet, m];
+    } else if (act.startsWith('speed:')) {
+      speed = Number(act.split(':')[1]);
+      if (state.phase === 'playing') startTimer();
+    } else if (act.startsWith('press:')) {
+      const kind = act.split(':')[1] === 'lev' ? 'leverage' : 'stake';
+      const value = kind === 'leverage' ? leverage : Math.max(0.1, Math.min(1, amount / Math.max(1, orderPreviewSafe().maxMargin)));
+      const res = pressEmotion(state, { kind, value, soft: true, emotion: mood(state) });
+      if (res.unlocked) {
+        state.dailyLeverageUnlocked = true;
+        state.heat = Math.min(5, (state.heat ?? 0) + 1);
+        log.unshift('突破心理锁！本日可用更高杠杆/仓位');
+        audio.playSfx('pressureRise');
+      } else if (res.accepted) {
+        audio.playSfx('pressureHit');
+      } else {
+        log.unshift('现在还不能连点');
+      }
+    } else if (act.startsWith('half:')) {
+      closeOrders(state, 0.5, 'manual', act.split(':')[1]);
+      log.unshift('全部减半');
+    } else if (act.startsWith('close:')) {
+      closeOrders(state, 1, 'manual', act.split(':')[1]);
+      log.unshift('平仓');
+    } else if (act.startsWith('margin:')) {
+      const id = positionsOf(state)[0]?.id;
+      if (!id) {
+        log.unshift('没有可追加的持仓');
+      } else {
+        const req = act === 'margin:max' ? maxTopUp(state) : Number(act.split(':')[1]);
+        const r = topUpMargin(state, id, req);
+        log.unshift(r.applied ? `追加保证金 ${yen(r.amount)}` : `${r.reason}`);
+      }
+    } else if (act.startsWith('mode:')) {
+      const mode = act.split(':')[1] as 'story' | 'endless';
+      stopTimer();
+      state = createGame(Date.now() >>> 0, { mode });
+      log.unshift(mode === 'endless' ? '进入操盘模式' : '进入剧情模式');
+      modal = null;
+    } else if (act.startsWith('supply:')) {
       const r = useSupply(state, act.split(':')[1] as string);
       log.unshift(r.applied ? `使用 ${r.id}` : `无法使用：${r.reason}`);
       audio.playSfx(r.applied ? 'success' : 'reject');
@@ -274,6 +353,11 @@ function onAction(act: string): void {
       audio.playBgm(act.split(':')[2] as string);
     } else if (act.startsWith('voice:play:')) {
       playVoice(act.slice('voice:play:'.length));
+    } else if (act.startsWith('opening:')) {
+      const cmd = act.split(':')[1];
+      if (cmd === 'next') openingPage = Math.min(OPENING_PAGES.length - 1, openingPage + 1);
+      else if (cmd === 'prev') openingPage = Math.max(0, openingPage - 1);
+      else if (cmd === 'skip') modal = null;
     } else if (act.startsWith('story:')) {
       const parts = act.split(':');
       const { choice } = chooseStory(state, parts[2] as string);
@@ -285,6 +369,7 @@ function onAction(act: string): void {
     } else if (act === 'long' || act === 'short') {
       placeOrder(state, { type: act as OrderType, leverage, amount, stopPips });
       log.unshift(`${act === 'long' ? '做多' : '做空'} @${num(state.price, 3)}`);
+      flashToast('trade', `${act === 'long' ? '做多' : '做空'}成交 ${yen(amount)} · ${leverage}×`);
       audio.playSfx('orderOpen');
     } else if (act === 'closeall') {
       closeOrders(state, 1, state.phase === 'playing' ? 'manual' : 'closing');
@@ -307,23 +392,36 @@ function onAction(act: string): void {
       nextDay(state);
       modal = null;
     } else if (act === 'walkaway') {
+      modal = 'walkaway';
+    } else if (act === 'walkaway:confirm') {
       resolveEnding(true);
+      modal = null;
     } else if (act === 'share') {
+      modal = 'share';
+    } else if (act === 'share:json') {
       exportShare();
+    } else if (act === 'share:png') {
+      exportSharePng();
     } else if (act === 'leaderboard') {
       void loadLeaderboard();
       modal = 'leaderboard';
     } else if (act === 'new') {
+      modal = 'restart';
+    } else if (act === 'restart:confirm') {
       newGame();
       return;
     }
-    if (!state.ending && state.phase !== 'playing') resolveEnding(false);
+    if (!state.ending && state.phase !== 'playing' && state.phase !== 'decision') resolveEnding(false);
   } catch (error) {
     log.unshift((error as Error).message);
     audio.playSfx('reject');
   }
   persist();
   render();
+}
+
+function stakeApplied(): void {
+  log.unshift(`按比例设定保证金：${yen(amount)}`);
 }
 
 function playVoice(file: string): void {
@@ -336,20 +434,61 @@ function playVoice(file: string): void {
   });
 }
 
+function download(name: string, blob: Blob): void {
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = name;
+  document.body.append(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
 function exportShare(): void {
   try {
-    const blob = new Blob([JSON.stringify({ theme, savedAt: Date.now(), state }, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `FX-${state.mode}-战报-第${state.day}天.json`;
-    document.body.append(link);
-    link.click();
-    link.remove();
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    download(`FX-${state.mode}-战报-第${state.day}天.json`, new Blob([encodeSave(state, Date.now())], { type: 'application/json' }));
     notice = '已导出存档 / 战报 JSON。';
   } catch {
     notice = '导出失败。';
+  }
+}
+
+function exportSharePng(): void {
+  try {
+    const canvas = document.createElement('canvas');
+    canvas.width = 640;
+    canvas.height = 360;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    const t = themeTokens(theme);
+    ctx.fillStyle = t.bg;
+    ctx.fillRect(0, 0, 640, 360);
+    ctx.strokeStyle = t.accent;
+    ctx.lineWidth = 4;
+    ctx.strokeRect(12, 12, 616, 336);
+    ctx.fillStyle = t.ink;
+    ctx.font = 'bold 26px sans-serif';
+    ctx.fillText('FX韭留美 · 今天也要回本', 40, 70);
+    ctx.font = '16px sans-serif';
+    const m = accountMetrics(state);
+    const lines = [
+      `第 ${state.day} 天 · ${state.mode === 'endless' ? '操盘模式' : '剧情模式'}`,
+      `总资产：${yen(m.equity)}`,
+      `总欠款：${yen(debtOf(state))}`,
+      `心理：${Math.round(state.sanity)} / 体力：${Math.round(staminaStatus(state).value)}`,
+      `累计交易：${yen(tradingProfit(state))}`,
+    ];
+    lines.forEach((l, i) => ctx.fillText(l, 40, 120 + i * 34));
+    ctx.fillStyle = t.muted;
+    ctx.font = '12px sans-serif';
+    ctx.fillText('原创同人小游戏 · 非官方作品 · 虚构行情 · 非投资建议', 40, 340);
+    canvas.toBlob((blob) => {
+      if (blob) download(`FX-战报-第${state.day}天.png`, blob);
+    });
+    notice = '已生成战报卡 PNG。';
+  } catch {
+    notice = '生成战报卡失败。';
   }
 }
 
@@ -398,7 +537,7 @@ function buildModal(): string {
     case 'settings':
       return D.settingsDialog(audio.state);
     case 'opening':
-      return D.openingDialog();
+      return P.openingPagerHtml(openingPage, OPENING_PAGES);
     case 'events':
       return D.eventsDialog();
     case 'help':
@@ -409,29 +548,42 @@ function buildModal(): string {
       return D.creditDialog(state);
     case 'father':
       return D.fatherDialog(state);
+    case 'mode':
+      return P.modeDialog(state.mode);
+    case 'margin':
+      return P.marginDialog(state);
+    case 'bankrupt':
+      return P.bankruptDialog(state);
+    case 'walkaway':
+      return P.walkawayDialog(state);
+    case 'share':
+      return P.shareDialog(state, themeTokens(theme));
+    case 'restart':
+      return D.shell('重开确认', '<div class="fx-caption">将放弃当前进度并开始新的一局。</div><div class="fx-actions"><button data-act="restart:confirm">重开韭菜人生</button><button data-act="modal:close">先等等</button></div>');
     default:
       return '';
   }
 }
 
 const TOP_BUTTONS: [string, string][] = [
+  ['open:mode', '模式'],
   ['open:manga', '漫画'],
   ['open:items', '道具'],
   ['open:life', '生活'],
   ['open:news', '快讯'],
+  ['open:margin', '追加保证金'],
   ['open:lottery', '彩票'],
   ['open:credit', '贷款'],
   ['open:father', '柜子'],
   ['open:achievements', '成就'],
   ['open:leaderboard', '名人堂'],
-  ['open:voice', '语音'],
-  ['open:settings', '设置'],
+  ['open:voice', '原声目录'],
+  ['open:settings', '背景音乐'],
   ['open:opening', '序章'],
   ['open:events', '事件'],
   ['open:scenes', '插画库'],
   ['open:help', '玩法'],
-  ['share', '导出'],
-  ['new', '重开'],
+  ['share', '战报'],
 ];
 
 function render(): void {
@@ -449,16 +601,20 @@ function render(): void {
   const profit = tradingProfit(state);
   const playing = state.phase === 'playing';
   const unlocked = Object.values(evaluateAchievements(state)).filter((a) => a.unlocked).length;
+  const canOpen = !playing && limits.noEntry === false;
   trackNews();
+
+  const lowEquity = metrics.equity < NUMERICS.MIN_EQUITY * 3 && state.phase === 'decision' && !state.ending;
 
   app.innerHTML = `
     <header class="fx-top">
-      <div class="fx-title">FX韭留美 · 今天也要回本<small>FX KURUMI / 漫画交易室 · 第 ${state.day} 天 · ${state.phase}</small></div>
+      <div class="fx-title">FX韭留美 · 今天也要回本<small>FX KURUMI / 漫画交易室 · 第 ${state.day} 天 · ${state.phase}${state.mode === 'endless' ? ' · 操盘模式' : ''}</small></div>
       <div class="fx-top-actions" role="group" aria-label="主题">
         ${THEME_IDS.map((id) => `<button data-theme-set="${id}" aria-pressed="${id === theme}" ${id === theme ? 'disabled' : ''}>${themeTokens(id).label}</button>`).join('')}
       </div>
       <div class="fx-top-actions" role="group" aria-label="功能">
         ${TOP_BUTTONS.map(([a, label]) => `<button data-act="${a}">${label}</button>`).join('')}
+        <button data-act="new">重开</button>
       </div>
     </header>
     ${notice ? `<div class="fx-panel" style="margin-bottom:12px" role="status">${notice}</div>` : ''}
@@ -475,13 +631,16 @@ function render(): void {
         <div class="fx-row"><span>压力 / 上头</span><b>${num(state.stress, 0)} / ${state.heat ?? 0}</b></div>
         <div class="fx-row"><span>成就</span><b>${unlocked} / ${ACHIEVEMENTS.length}</b></div>
         <div class="fx-caption">杠杆上限 ${limits.leverage}× · 仓位 ${Math.round(limits.stake * 100)}%${limits.noEntry ? ' · 承受力过低，禁止开仓' : ''}</div>
+        ${P.pressurePanelHtml(state, Date.now())}
       </section>
       <section class="fx-panel" aria-label="行情终端">
         <h2>行情终端 · USD/JPY</h2>
         <div class="fx-quote-price" aria-live="polite">${num(state.price, 3)}</div>
         <div class="fx-delta ${profit >= 0 ? 'up' : 'down'}">累计 ${profit >= 0 ? '+' : ''}${yen(profit)} · 目标 +${yen(NUMERICS.TARGET_PROFIT)}</div>
-        <canvas class="fx-chart" width="760" height="260" role="img" aria-label="K线图"></canvas>
+        ${P.chartToolbarHtml({ period, ma: maSet, speed })}
+        <canvas class="fx-chart" width="760" height="260" role="img" aria-label="交易K线"></canvas>
         <div class="fx-caption" data-act="open:news" style="cursor:pointer">📣 ${ev ? `${ev.title} · ${ev.copy}` : '等待行情'}（点击查看快讯记录）</div>
+        ${P.riskAlertsHtml(state)}
       </section>
       <section class="fx-panel" aria-label="账户与下单">
         <h2>账户与下单</h2>
@@ -490,16 +649,16 @@ function render(): void {
         <div class="fx-row"><span>总欠款</span><b>${yen(debt)}</b></div>
         <div class="fx-row"><span>可用保证金</span><b>${yen(metrics.availableMargin)}</b></div>
         <div class="fx-row"><span>已用 / 浮盈</span><b>${yen(metrics.usedMargin)} / ${yen(metrics.unrealized)}</b></div>
-        <div class="fx-row"><span>持仓</span><b>${positionsOf(state).length} 笔</b></div>
         <div class="fx-order-form">
           <label>杠杆
             <select data-field="leverage" aria-label="杠杆" ${playing ? 'disabled' : ''}>
-              ${NUMERICS.LEVERAGES.filter((l) => l >= limits.minLeverage && l <= limits.leverage).map((l) => `<option value="${l}" ${l === leverage ? 'selected' : ''}>${l}×</option>`).join('')}
+              ${NUMERICS.LEVERAGES.filter((l) => l >= limits.minLeverage && l <= limits.leverage).map((l) => `<option value="${l}" ${l === leverage ? 'selected' : ''}>${l}×${l >= 50 ? ' · 原作档' : ''}</option>`).join('')}
             </select>
           </label>
           <label>保证金 <b>${yen(amount)}</b>（最多 ${yen(preview.maxMargin)}）
             <input type="range" data-field="amount" aria-label="保证金" min="100" max="${Math.max(100, Math.floor(preview.maxMargin))}" step="100" value="${Math.min(amount, Math.max(100, Math.floor(preview.maxMargin)))}" ${playing ? 'disabled' : ''} />
           </label>
+          ${P.orderExtrasHtml(canOpen)}
           <label>止损
             <select data-field="stopPips" aria-label="止损" ${playing ? 'disabled' : ''}>
               <option value="" ${stopPips === null ? 'selected' : ''}>不设</option>
@@ -513,14 +672,16 @@ function render(): void {
           <button data-kind="down" data-act="short" ${!preview.valid || playing ? 'disabled' : ''}>做空</button>
         </div>
         <div class="fx-actions" style="margin-top:8px">
-          ${state.phase === 'decision' ? `<button data-act="play">继续行情 ▶</button>` : ''}
+          ${state.phase === 'decision' ? `<button data-act="play">继续下一条报价 ▶</button>` : ''}
           ${playing ? `<button data-act="closeall">全部平仓</button><button data-act="hold">继续持有</button>` : ''}
-          ${state.phase === 'decision' && positionsOf(state).length ? `<button data-act="closeall">平掉持仓</button>` : ''}
-          ${state.phase === 'closing' ? `<button data-act="settle">结算今日</button>` : ''}
-          ${state.phase === 'day_end' ? `<button data-act="rest">收工休息</button>` : ''}
-          ${state.phase === 'resting' ? `<button data-act="next">进入明天</button>` : ''}
-          ${state.phase === 'decision' || state.phase === 'day_end' ? `<button data-act="walkaway">收手离场</button>` : ''}
+          ${positionsOf(state).length ? `<button data-act="closeall">一键平仓</button>` : ''}
+          ${state.phase === 'closing' ? `<button data-act="settle">全平收盘 · 结算今日</button>` : ''}
+          ${state.phase === 'day_end' ? `<button data-act="rest">收工休息</button><button data-act="open:scenes">查看今日结算</button>` : ''}
+          ${state.phase === 'resting' ? `<button data-act="next">明天开盘</button>` : ''}
+          ${state.phase === 'decision' || state.phase === 'day_end' ? `<button data-act="walkaway">销户离场</button>` : ''}
+          ${lowEquity ? `<button data-act="open:bankrupt">账户告急</button>` : ''}
         </div>
+        <h3 class="fx-sub">持仓</h3>${P.positionsTableHtml(state)}
         ${state.phase !== 'ending' ? `<div class="fx-actions wrap" style="margin-top:8px">
           ${ITEMS.filter((i) => i.id !== 'father').map((i) => `<button data-act="supply:${i.id}">${i.name}${i.price ? ' ' + yen(i.price) : ''}</button>`).join('')}
           ${LIFE_WORK_JOBS.slice(0, 4).map((j) => `<button data-act="work:${j.id}">${j.label} +${yen(j.income)}</button>`).join('')}
@@ -529,8 +690,9 @@ function render(): void {
       </section>
     </div>
     ${newsToast ? `<div class="fx-news-toast" role="alert">${newsToast}</div>` : ''}
+    ${tradeToast ? `<div class="fx-toast" role="status">${tradeToast}</div>` : ''}
     ${modal ? buildModal() : ''}
-    <div class="fx-foot">原创同人小游戏 · 非官方作品 · 虚构行情 · 非投资建议</div>
+    <div class="fx-foot">原创同人小游戏 · 非官方作品 · 虚构行情 · 非投资建议${energyStage(state).active ? ' · ' + energyStage(state).hint : ''}</div>
   `;
   drawChart();
 }
@@ -554,7 +716,7 @@ function endingPanel(eq: number): string {
     <img class="fx-scene" src="${assetUrl(`comics/${comicId}.webp`)}" alt="结局四格" loading="lazy">
     <div>${def?.description ?? '本局结束。'}</div>
     <div class="fx-caption">资产 ${yen(eq)} · 心理 ${Math.round(state.sanity)} · 第 ${state.day} 天</div>
-    <div class="fx-actions" style="margin-top:8px"><button data-act="share">导出战报</button><button data-act="open:manga">看今日四格</button><button data-act="new">再来一局</button></div>
+    <div class="fx-actions" style="margin-top:8px"><button data-act="share">保存战报卡</button><button data-act="open:manga">看今日四格</button><button data-act="new">再来一局</button></div>
   </div>`;
 }
 
@@ -575,6 +737,11 @@ function drawChart(): void {
   if (!candles.length) return;
   const vp = { width: w, height: h, padding: 18 };
   const layout = layoutCandles(candles, vp);
+  const prices = candles.map((c) => c.high);
+  const lows = candles.map((c) => c.low);
+  const min = Math.min(...lows);
+  const max = Math.max(...prices);
+  const toY = (p0: number): number => vp.padding + (1 - (p0 - min) / Math.max(1e-9, max - min)) * (h - vp.padding * 2);
   ctx.strokeStyle = t.grid;
   ctx.lineWidth = 1;
   for (let i = 0; i <= 4; i++) {
@@ -594,5 +761,22 @@ function drawChart(): void {
     const top = Math.min(c.yOpen, c.yClose);
     const height = Math.max(1.5, Math.abs(c.yClose - c.yOpen));
     ctx.fillRect(c.x - c.width / 2, top, c.width, height);
+  }
+  const colors: Record<number, string> = { 5: '#f2c14e', 10: '#7fd4a0', 20: '#f16f9f' };
+  for (const m of maSet) {
+    const values = movingAverage(candles, m);
+    ctx.strokeStyle = colors[m] ?? t.accent;
+    ctx.beginPath();
+    let started = false;
+    values.forEach((v, i) => {
+      if (v === null) return;
+      const x = vp.padding + ((w - vp.padding * 2) * (i + 0.5)) / candles.length;
+      const y = toY(v);
+      if (!started) {
+        ctx.moveTo(x, y);
+        started = true;
+      } else ctx.lineTo(x, y);
+    });
+    ctx.stroke();
   }
 }

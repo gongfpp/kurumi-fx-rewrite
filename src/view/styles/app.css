@@ -445,3 +445,19 @@ canvas.fx-chart {
 .fx-modal {
   pointer-events: auto;
 }
+
+.fx-extras { margin: 8px 0; }
+.fx-stake-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 4px 0; }
+.fx-stake-row button { padding: 5px 9px; font-size: 12px; }
+button.on { border-color: var(--fx-accent); color: var(--fx-accent); }
+.fx-pressure { border: 1px dashed var(--fx-warn); border-radius: 8px; padding: 8px; margin: 8px 0; }
+.fx-alerts { border: 1px solid var(--fx-warn); border-radius: 8px; padding: 8px; margin: 8px 0; color: var(--fx-warn); font-size: 13px; }
+.fx-alerts div { margin: 2px 0; }
+.fx-pos { border: 1px solid var(--fx-grid); border-radius: 8px; padding: 8px; margin-bottom: 6px; }
+.fx-pos .up { color: var(--fx-up); }
+.fx-pos .down { color: var(--fx-down); }
+.fx-share-card { border: 2px solid var(--fx-accent); border-radius: 10px; padding: 14px; margin-bottom: 10px; background: var(--fx-panel-alt); }
+.fx-share-title { font-weight: 800; margin-bottom: 8px; }
+.fx-share-row { display: flex; justify-content: space-between; font-size: 13px; padding: 2px 0; }
+.fx-share-foot { font-size: 11px; color: var(--fx-muted); margin-top: 8px; }
+.fx-toast { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); background: var(--fx-panel); border: 1px solid var(--fx-up); border-radius: 8px; padding: 8px 14px; z-index: 70; }
