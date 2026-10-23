@@ -201,35 +201,26 @@ export function start(): void {
   fxCanvas.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:80';
   document.body.append(fxCanvas);
   particles = createParticles(fxCanvas);
-  const chartEl = document.querySelector('canvas.fx-chart') as HTMLCanvasElement | null;
-  if (chartEl) {
-    const tip = document.getElementById('chart-tip') as HTMLElement | null;
-    chartEl.addEventListener('mousemove', (ev) => {
-      const rect = chartEl.getBoundingClientRect();
-      const x = ev.clientX - rect.left;
-      const y = ev.clientY - rect.top;
-      const candles = state.candles.slice(-48);
-      const padding = 18;
-      const usable = Math.max(1, rect.width - padding * 2);
-      const slot = usable / Math.max(1, candles.length);
-      const idx = Math.min(candles.length - 1, Math.max(0, Math.floor((x - padding) / slot)));
-      hoverIndex = idx;
-      hoverY = y;
-      const c = candles[idx];
-      if (tip && c) {
-        tip.hidden = false;
-        tip.style.left = `${Math.min(rect.width - 150, x)}px`;
-        tip.style.top = `${y}px`;
-        tip.innerHTML = `<b>${c.close.toFixed(3)}</b><br>开 ${c.open.toFixed(3)}<br>高 ${c.high.toFixed(3)}<br>低 ${c.low.toFixed(3)}`;
-      }
-      drawChart();
-    });
-    chartEl.addEventListener('mouseleave', () => {
-      hoverIndex = -1;
-      if (tip) tip.hidden = true;
-      drawChart();
-    });
-  }
+  app.addEventListener('mousemove', (e) => {
+    const el = e.target as HTMLElement;
+    if (!el.classList || !el.classList.contains('fx-chart')) return;
+    const rect = el.getBoundingClientRect();
+    const x = e.clientX - rect.left, y = e.clientY - rect.top;
+    const candles = state.candles.slice(-48);
+    const padding = 18;
+    const slot = Math.max(1, rect.width - padding * 2) / Math.max(1, candles.length);
+    const idx = Math.min(candles.length - 1, Math.max(0, Math.floor((x - padding) / slot)));
+    hoverIndex = idx; hoverY = y;
+    const c = candles[idx];
+    const tip = document.getElementById('chart-tip');
+    if (tip && c) { tip.hidden = false; tip.style.left = `${Math.min(rect.width - 150, x)}px`; tip.style.top = `${y}px`;
+      tip.innerHTML = `<b>${c.close.toFixed(3)}</b><br>开 ${c.open.toFixed(3)}<br>高 ${c.high.toFixed(3)}<br>低 ${c.low.toFixed(3)}`; }
+    drawChart();
+  });
+  app.addEventListener('mouseout', (e) => {
+    const el = e.target as HTMLElement;
+    if (el.classList && el.classList.contains('fx-chart')) { hoverIndex = -1; const tip = document.getElementById('chart-tip'); if (tip) tip.hidden = true; drawChart(); }
+  });
   const urlReplay = replayFromLocation(globalThis.location?.search ?? '');
   if (urlReplay) applyReplay(encodeReplay(urlReplay));
   document.addEventListener('keydown', (ev) => {
