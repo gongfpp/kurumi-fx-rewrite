@@ -631,3 +631,7 @@ button:active::after { animation: fxRipple .5s ease-out; }
   .fx-order-form label { font-size: 11px; }
   .fx-panel { padding: 8px; }
 }
+
+.fx-img-fail { visibility: hidden; }
+kbd { background: var(--fx-panel-alt); border: 1px solid var(--fx-grid); border-radius: 4px; padding: 1px 5px; font-size: 11px; }
+.fx-help kbd { margin-right: 4px; }

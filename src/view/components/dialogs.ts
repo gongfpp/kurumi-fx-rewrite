@@ -267,6 +267,12 @@ export function helpDialog(): string {
       <li>交易日结束会扣生活费、贷款利息，并结算今日账单。</li>
       <li>目标：累计净交易收益 +¥${NUMERICS.TARGET_PROFIT.toLocaleString('zh-CN')}；随时可「收手离场」。</li>
       <li>行情为虚构；本作为非官方同人游戏，非投资建议。</li>
+    </ul>
+    <h3 class="fx-sub">快捷键</h3>
+    <ul class="fx-help">
+      <li><kbd>Enter</kbd> 做多 · <kbd>空格</kbd> 继续/持有 · <kbd>Esc</kbd> 关闭弹窗</li>
+      <li><kbd>↑</kbd>/<kbd>↓</kbd> 调整保证金 · <kbd>←</kbd>/<kbd>→</kbd> 巡检 K 线</li>
+      <li><kbd>?</kbd> 打开本帮助 · 滚轮缩放图表 · Shift+滚轮平移</li>
     </ul>`,
     { wide: true },
   );

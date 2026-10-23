@@ -248,6 +248,10 @@ export function start(): void {
       tip.innerHTML = `<b>${c.close.toFixed(3)}</b><br>开 ${c.open.toFixed(3)} · 高 ${c.high.toFixed(3)} · 低 ${c.low.toFixed(3)}<br>${maLine}${bollLine ? '<br>' + bollLine : ''}`; }
     drawChart();
   });
+  app.addEventListener('error', (e) => {
+    const el = e.target as HTMLElement;
+    if (el && el.tagName === 'IMG') el.classList.add('fx-img-fail');
+  }, true);
   app.addEventListener('wheel', (e) => {
     const el = e.target as HTMLElement;
     if (!el.classList || !el.classList.contains('fx-chart')) return;
@@ -295,10 +299,19 @@ export function start(): void {
     if (pj) { if (Number.isFinite(pj.bollPeriod)) bollPeriod = pj.bollPeriod as number; if (Number.isFinite(pj.bollMult)) bollMult = pj.bollMult as number; }
   } catch { /* ignore */ }
   records = loadRecords();
+  try {
+    const seen = JSON.parse(localStorage.getItem('kurumi-fx:achievements') ?? '[]') as string[];
+    for (const id of seen) seenAch.add(id);
+  } catch { /* ignore */ }
   watchStorageConflict();
   const urlReplay = replayFromLocation(globalThis.location?.search ?? '');
   if (urlReplay) applyReplay(encodeReplay(urlReplay));
   document.addEventListener('keydown', (ev) => {
+    if (ev.key === '?' || (ev.key === '/' && ev.shiftKey)) {
+      modal = 'help';
+      render();
+      return;
+    }
     if (ev.key === 'Escape' && modal) {
       modal = null;
       render();
@@ -1109,6 +1122,7 @@ function render(): void {
   for (const [id, st] of Object.entries(achMap)) {
     if (st.unlocked && !seenAch.has(id)) {
       seenAch.add(id);
+      try { localStorage.setItem('kurumi-fx:achievements', JSON.stringify([...seenAch])); } catch { /* ignore */ }
       const def = ACHIEVEMENTS.find((a) => a.id === id);
       if (def && state.completedDays !== 0) flashToast('news', `🏆 成就解锁：${def.name}`);
     }
