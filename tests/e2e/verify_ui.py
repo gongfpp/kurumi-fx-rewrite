@@ -35,7 +35,7 @@ def main() -> None:
         opening_ok = "序章 2" in page.content()
         page.click('.fx-modal-head button[data-act="modal:close"]')
 
-        page.click('button[data-act="open:mode"]'); page.wait_for_selector(".fx-modal"); mode_ok = count(page, '[data-act^="mode:"]') > 0
+        page.click('button[data-act="open:source"]'); page.wait_for_selector(".fx-modal"); mode_ok = count(page, '[data-act^="source:"]') > 0
         page.click('.fx-modal-head button[data-act="modal:close"]')
 
         page.click('button[data-act="open:manga"]'); page.wait_for_selector(".fx-modal"); page.wait_for_timeout(1200)

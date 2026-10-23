@@ -481,3 +481,65 @@ button.on { border-color: var(--fx-accent); color: var(--fx-accent); }
   .fx-manga-grid { grid-template-columns: 1fr; }
   .fx-modal { max-width: 100%; }
 }
+
+/* ================= Motion & art enhancement ================= */
+@keyframes fxShake { 0%,100%{transform:translate(0,0)} 20%{transform:translate(-4px,2px)} 40%{transform:translate(4px,-2px)} 60%{transform:translate(-3px,-1px)} 80%{transform:translate(3px,1px)} }
+@keyframes fxFlashUp { 0%{color:var(--fx-up);transform:scale(1.06)} 100%{color:var(--fx-ink);transform:scale(1)} }
+@keyframes fxFlashDown { 0%{color:var(--fx-down);transform:scale(1.06)} 100%{color:var(--fx-ink);transform:scale(1)} }
+@keyframes fxFadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fxPop { from{opacity:0;transform:scale(.94)} to{opacity:1;transform:scale(1)} }
+@keyframes fxPulse { 0%,100%{opacity:1} 50%{opacity:.55} }
+@keyframes fxSlideIn { from{opacity:0;transform:translate(-50%,-16px)} to{opacity:1;transform:translate(-50%,0)} }
+@keyframes fxRipple { to { transform: scale(4); opacity: 0; } }
+@keyframes fxFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+@keyframes fxDrift { 0%{transform:translate(0,0)} 50%{transform:translate(24px,-18px)} 100%{transform:translate(0,0)} }
+
+body { position: relative; overflow-x: hidden; }
+body::before {
+  content: ''; position: fixed; inset: -20%; z-index: -2;
+  background:
+    radial-gradient(circle at 18% 22%, color-mix(in srgb, var(--fx-accent) 22%, transparent), transparent 42%),
+    radial-gradient(circle at 82% 70%, color-mix(in srgb, var(--fx-up) 16%, transparent), transparent 46%);
+  animation: fxDrift 22s ease-in-out infinite;
+  pointer-events: none;
+}
+body::after {
+  content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background-image: repeating-linear-gradient(0deg, rgba(255,255,255,.014) 0 1px, transparent 1px 2px);
+  opacity: .5;
+}
+:root[data-theme='terminal'] body::after {
+  background-image: repeating-linear-gradient(0deg, rgba(89,255,157,.05) 0 1px, transparent 1px 3px);
+  opacity: .35;
+}
+:root[data-frontend='default'] .fx-panel {
+  background: color-mix(in srgb, var(--fx-panel) 88%, transparent);
+  backdrop-filter: blur(6px);
+}
+.fx-modal { animation: fxPop .18s ease-out; }
+.fx-top { animation: fxFadeUp .3s ease-out; }
+.fx-panel { animation: fxFadeUp .34s ease-out both; }
+.fx-bar > span { transition: width .3s ease, background .3s ease; }
+.fx-quote-price { transition: transform .12s ease; }
+.fx-quote-price.tick-up { animation: fxFlashUp .5s ease-out; }
+.fx-quote-price.tick-down { animation: fxFlashDown .5s ease-out; }
+body.fx-shake { animation: fxShake .5s ease-in-out; }
+body.fx-shake-hard { animation: fxShake .9s ease-in-out 2; }
+.fx-news-toast, .fx-toast { animation: fxSlideIn .28s ease-out; }
+.fx-pressure .fx-bar > span { animation: fxPulse 1.4s ease-in-out infinite; }
+.fx-btn-ripple { position: relative; overflow: hidden; }
+.fx-btn-ripple::after { content: ''; position: absolute; left: 50%; top: 50%; width: 6px; height: 6px; border-radius: 50%; background: color-mix(in srgb, var(--fx-accent) 60%, transparent); transform: scale(0); opacity: .8; }
+.fx-btn-ripple:active::after { animation: fxRipple .5s ease-out; }
+.fx-frame { animation: fxFadeUp .3s ease-out both; }
+.fx-gallery img { transition: transform .18s ease, box-shadow .18s ease; }
+.fx-gallery img:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 8px 20px rgba(0,0,0,.45); }
+.fx-ach.on .badge { filter: drop-shadow(0 0 6px color-mix(in srgb, var(--fx-accent) 70%, transparent)); }
+.fx-share-card { box-shadow: 0 10px 30px rgba(0,0,0,.4); }
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  body::before { animation: none; }
+}
+
+button { position: relative; overflow: hidden; }
+button::after { content: ''; position: absolute; left: 50%; top: 50%; width: 6px; height: 6px; border-radius: 50%; background: color-mix(in srgb, var(--fx-accent) 55%, transparent); transform: scale(0); opacity: .7; pointer-events: none; }
+button:active::after { animation: fxRipple .5s ease-out; }

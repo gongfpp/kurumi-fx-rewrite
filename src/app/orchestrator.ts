@@ -145,8 +145,10 @@ function startTimer(): void {
         stopTimer();
         resolveEnding(false);
         persist();
+        render();
+      } else {
+        patchMarket(result);
       }
-      render();
     } catch (error) {
       stopTimer();
       log.unshift(`行情暂停：${(error as Error).message}`);
@@ -887,13 +889,13 @@ function render(): void {
       </section>
       <section class="fx-panel" aria-label="行情终端">
         <h2>行情终端 · USD/JPY</h2>
-        <div class="fx-quote-price" aria-live="polite">${num(state.price, 3)}</div>
-        <div class="fx-delta ${profit >= 0 ? 'up' : 'down'}">累计 ${profit >= 0 ? '+' : ''}${yen(profit)} · 目标 +${yen(NUMERICS.TARGET_PROFIT)}</div>
+        <div class="fx-quote-price" id="quote-price" aria-live="polite">${num(state.price, 3)}</div>
+        <div class="fx-delta ${profit >= 0 ? 'up' : 'down'}" id="quote-delta">累计 ${profit >= 0 ? '+' : ''}${yen(profit)} · 目标 +${yen(NUMERICS.TARGET_PROFIT)}</div>
         ${P.chartToolbarHtml({ period, ma: maSet, speed })}
         <canvas class="fx-chart" width="760" height="260" role="img" aria-label="交易K线"></canvas>
         <div class="fx-caption" data-act="open:news" style="cursor:pointer">📣 ${ev ? `${ev.title} · ${ev.copy}` : '等待行情'}（点击查看快讯记录）</div>
         ${L.commentsRow(state)}
-        ${P.riskAlertsHtml(state)}
+        <div id="alerts">${P.riskAlertsHtml(state)}</div>
       </section>
       <section class="fx-panel" aria-label="账户与下单">
         <h2>账户与下单</h2>
@@ -934,12 +936,12 @@ function render(): void {
           ${state.phase === 'decision' || state.phase === 'day_end' ? `<button data-act="walkaway">销户离场</button>` : ''}
           ${lowEquity ? `<button data-act="open:bankrupt">账户告急</button>` : ''}
         </div>
-        <h3 class="fx-sub">持仓</h3>${P.positionsTableHtml(state)}
+        <h3 class="fx-sub">持仓</h3><div id="pos-table">${P.positionsTableHtml(state)}</div>
         ${state.phase !== 'ending' ? `<div class="fx-actions wrap" style="margin-top:8px">
           ${ITEMS.filter((i) => i.id !== 'father').map((i) => `<button data-act="supply:${i.id}">${i.name}${i.price ? ' ' + yen(i.price) : ''}</button>`).join('')}
           ${LIFE_WORK_JOBS.slice(0, 4).map((j) => `<button data-act="work:${j.id}">${j.label} +${yen(j.income)}</button>`).join('')}
         </div>` : ''}
-        <div class="fx-log" aria-live="polite">${log.slice(0, 6).map((l) => `<div>· ${l}</div>`).join('')}</div>
+        <div class="fx-log" id="log" aria-live="polite">${log.slice(0, 6).map((l) => `<div>· ${l}</div>`).join('')}</div>
       </section>
     </div>
     ${newsToast ? `<div class="fx-news-toast" role="alert">${newsToast}</div>` : ''}
@@ -971,6 +973,45 @@ function endingPanel(eq: number): string {
     <div class="fx-caption">资产 ${yen(eq)} · 心理 ${Math.round(state.sanity)} · 第 ${state.day} 天</div>
     <div class="fx-actions" style="margin-top:8px"><button data-act="share">保存战报卡</button><button data-act="open:manga">看今日四格</button><button data-act="new">再来一局</button></div>
   </div>`;
+}
+
+
+let prevQuote = state.price;
+function patchMarket(result: { price: number; exits: { type: string; pnl: number }[] }): void {
+  const dir = result.price >= prevQuote ? 1 : -1;
+  prevQuote = result.price;
+  const priceEl = document.getElementById('quote-price');
+  if (priceEl) {
+    priceEl.textContent = num(state.price, 3);
+    priceEl.classList.remove('tick-up', 'tick-down');
+    void priceEl.offsetWidth;
+    priceEl.classList.add(dir >= 0 ? 'tick-up' : 'tick-down');
+  }
+  const deltaEl = document.getElementById('quote-delta');
+  if (deltaEl) {
+    const profit = tradingProfit(state);
+    deltaEl.textContent = `累计 ${profit >= 0 ? '+' : ''}${yen(profit)} · 目标 +${yen(NUMERICS.TARGET_PROFIT)}`;
+    deltaEl.className = 'fx-delta ' + (profit >= 0 ? 'up' : 'down');
+  }
+  const alerts = document.getElementById('alerts');
+  if (alerts) alerts.innerHTML = P.riskAlertsHtml(state);
+  const posTable = document.getElementById('pos-table');
+  if (posTable) posTable.innerHTML = P.positionsTableHtml(state);
+  const logEl = document.getElementById('log');
+  if (logEl) logEl.innerHTML = log.slice(0, 6).map((l) => `<div>· ${l}</div>`).join('');
+  for (const exit of result.exits) {
+    if (exit.type === 'liquidation') triggerShake(true);
+    else triggerShake(false);
+  }
+  drawChart();
+}
+function triggerShake(hard: boolean): void {
+  const body = document.body;
+  const cls = hard ? 'fx-shake-hard' : 'fx-shake';
+  body.classList.remove('fx-shake', 'fx-shake-hard');
+  void body.offsetWidth;
+  body.classList.add(cls);
+  window.setTimeout(() => body.classList.remove(cls), hard ? 1800 : 550);
 }
 
 function drawChart(): void {
