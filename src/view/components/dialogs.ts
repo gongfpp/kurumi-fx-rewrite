@@ -8,6 +8,7 @@ import {
   assetUrl,
   expressionUrl,
   pixelUrl,
+  sceneUrl,
 } from '../../content/assets';
 import { NUMERICS } from '../../content/config/numerics';
 import type { GameState } from '../../domain/core/types';
@@ -56,7 +57,7 @@ export function shell(title: string, body: string, { wide = false }: { wide?: bo
 
 export function mangaPanelHtml(page: MangaPage): string {
   const scene = SCENE_BY_ROUTE[page.route];
-  const img = scene ? assetUrl(`generated/comic-scenes-v1/${scene}.webp`) : '';
+  const img = scene ? (sceneUrl(scene) ?? '') : '';
   return `<div class="fx-manga-title">${page.title} <span class="tag ${page.origin}">${page.origin === 'fan' ? '原作桥段改编' : '游戏原创'}</span></div>
     ${page.sourceNote ? `<div class="fx-caption">${page.sourceNote}</div>` : ''}
     ${img ? `<img class="fx-scene" src="${img}" alt="${page.title}" loading="lazy" />` : ''}
@@ -66,9 +67,8 @@ export function mangaPanelHtml(page: MangaPage): string {
 }
 
 function graphicFor(index: number, route: string): string {
-  const scene = SCENE_BY_ROUTE[route] ?? 'settledNoTrade';
   void index;
-  return assetUrl(`generated/comic-scenes-v1/${scene}.webp`);
+  return sceneUrl(SCENE_BY_ROUTE[route] ?? 'settledNoTrade') ?? '';
 }
 
 export function mangaDialog(_s: GameState, page: MangaPage): string {
