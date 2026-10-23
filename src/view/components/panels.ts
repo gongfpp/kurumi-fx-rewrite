@@ -221,21 +221,27 @@ export function indicatorsDialog(info: { bollPeriod: number; bollMult: number; m
       <div class="fx-row"><span>BOLL 倍数</span><b><input type="number" min="1" max="4" step="0.5" data-field="bollMult" value="${info.bollMult}" aria-label="BOLL倍数" /></b></div>
       <div class="fx-caption">当前均线：${info.ma.map((m) => `MA${m}`).join(' / ') || '无'}（在主界面工具栏切换）</div>
       <div class="fx-actions"><button data-act="ind:apply">应用</button><button data-act="ind:reset">恢复默认</button></div>
+      <div class="fx-actions wrap"><button data-act="ind:preset:default">预设：默认 20×2</button><button data-act="ind:preset:short">预设：短线 10×1.5</button><button data-act="ind:preset:long">预设：长线 40×2.5</button></div>
       <div class="fx-caption">参数会保存在本机。</div>
     </div></section></div>`;
 }
 
-export function recordsDialog(list: { day: number; equity: number; profit: number; ending: string | null; mode: string; at: number }[]): string {
-  const rows = list.length
-    ? list
-        .map(
-          (r) =>
-            `<div class="fx-row"><span>${r.mode === 'endless' ? '操盘' : '剧情'} · 第 ${r.day} 天 · ${r.ending ?? '进行中'}</span><b>${yen(r.equity)} · ${r.profit >= 0 ? '+' : ''}${yen(r.profit)}</b></div>`,
-        )
-        .join('')
-    : '<div class="fx-caption">还没有历史战绩。</div>';
+export function recordsDialog(list: { day: number; equity: number; profit: number; ending: string | null; mode: string; seed: number; at: number }[]): string {
+  if (!list.length) return `<div class="fx-modal-backdrop"><section class="fx-modal wide" role="dialog" aria-modal="true" aria-label="我的战绩"><header class="fx-modal-head"><h2>我的战绩</h2><button data-act="modal:close" aria-label="关闭">×</button></header><div class="fx-modal-body"><div class="fx-caption">还没有历史战绩。</div></div></section></div>`;
+  const seq = [...list].reverse();
+  const max = Math.max(...seq.map((r) => Math.abs(r.profit)), 1);
+  const wide = 520, h = 60;
+  const pts = seq.map((r, i) => `${(i / Math.max(1, seq.length - 1)) * wide},${h - ((r.profit + max) / (2 * max)) * h}`).join(' ');
+  const spark = `<svg class="fx-spark" viewBox="0 0 ${wide} ${h}" preserveAspectRatio="none" aria-label="战绩曲线"><polyline points="${pts}" fill="none" stroke="var(--fx-accent)" stroke-width="2"/><line x1="0" y1="${h / 2}" x2="${wide}" y2="${h / 2}" stroke="var(--fx-grid)"/></svg>`;
+  const rows = list
+    .map(
+      (r) =>
+        `<div class="fx-row"><span>${r.mode === 'endless' ? '操盘' : '剧情'} · 第 ${r.day} 天 · ${r.ending ?? '进行中'}</span><b>${yen(r.equity)} · ${r.profit >= 0 ? '+' : ''}${yen(r.profit)}</b><button data-act="records:replay:${r.seed}">再战同种子</button></div>`,
+    )
+    .join('');
   return `<div class="fx-modal-backdrop"><section class="fx-modal wide" role="dialog" aria-modal="true" aria-label="我的战绩">
     <header class="fx-modal-head"><h2>我的战绩（本机最近 ${list.length} 条）</h2><button data-act="modal:close" aria-label="关闭">×</button></header>
-    <div class="fx-modal-body">${rows}<div class="fx-actions"><button data-act="records:clear">清空历史</button></div>
-    <div class="fx-caption">仅保存在本机，不会上传。</div></div></section></div>`;
+    <div class="fx-modal-body">${spark}${rows}
+      <div class="fx-actions"><button data-act="records:clear">清空历史</button></div>
+      <div class="fx-caption">仅保存在本机，不会上传。</div></div></section></div>`;
 }

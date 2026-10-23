@@ -5,6 +5,7 @@ export interface RunRecord {
   profit: number;
   ending: string | null;
   mode: 'story' | 'endless';
+  seed: number;
   at: number;
 }
 

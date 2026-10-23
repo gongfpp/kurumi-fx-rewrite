@@ -7,7 +7,7 @@ export const MARKETS: readonly MarketDef[] = NUMERICS.MARKETS;
 
 export const marketInfo = (symbol: string): MarketDef => MARKETS.find((m) => m.symbol === symbol) ?? (MARKETS[0] as MarketDef);
 
-export const activeMarket = (s: GameState): string => s.marketBook?.active ?? 'USD/JPY';
+export const activeMarket = (s: GameState): string => s.symbol ?? s.marketBook?.active ?? 'USD/JPY';
 
 export const positionMarket = (p?: Position | null): string => p?.symbol ?? 'USD/JPY';
 

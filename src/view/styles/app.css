@@ -618,3 +618,16 @@ button:active::after { animation: fxRipple .5s ease-out; }
   background-color: color-mix(in srgb, var(--fx-panel) 92%, transparent);
 }
 :root[data-frontend='pixel'] { --fx-pixel-atlas: none; }
+
+.fx-spark { width: 100%; height: 60px; display: block; margin-bottom: 8px; background: var(--fx-panel-alt); border: 1px solid var(--fx-grid); border-radius: 6px; }
+.fx-spark polyline { filter: drop-shadow(0 0 4px color-mix(in srgb, var(--fx-accent) 60%, transparent)); }
+#story-line::after { content: '▏'; animation: fxPulse 1s steps(2) infinite; }
+/* Pixel 9-slice-ish corner accents */
+:root[data-frontend='pixel'] button { border-width: 2px; image-rendering: pixelated; }
+:root[data-frontend='pixel'] button::before { content: ''; position: absolute; inset: 2px; border: 1px dashed color-mix(in srgb, var(--fx-accent) 35%, transparent); pointer-events: none; }
+/* Landscape下单 compact */
+@media (orientation: landscape) and (max-height: 560px) {
+  .fx-order-form { gap: 4px; }
+  .fx-order-form label { font-size: 11px; }
+  .fx-panel { padding: 8px; }
+}

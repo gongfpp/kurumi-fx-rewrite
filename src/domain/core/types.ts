@@ -107,6 +107,7 @@ export interface GameState {
   beat: number;
   phase: Phase;
   price: number;
+  symbol?: string;
   recent: RecentEntry[];
 
   cash: number;

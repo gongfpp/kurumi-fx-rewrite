@@ -179,7 +179,9 @@ export function leaderboardDialog(entries: LeaderboardEntry[] | null, opts: { so
       return `<div class="fx-row ${mine ? 'mine' : ''}"><span>${i + 1}. ${r.nickname}${mine ? '（我）' : ''}</span><b>${yen(r.netProfit)} · ${r.survivedDays}天 · 回撤 ${(r.maxDrawdown * 100).toFixed(1)}%</b></div>`;
     })
     .join('');
-  return shell('名人堂', `${bar}${rows}<div class="fx-caption">上榜默认匿名；统计不含身份信息。</div><div class="fx-actions"><button data-act="open:rank">投稿上榜</button></div>`);
+  const myRank = opts.myNick ? sorted.findIndex((r) => r.nickname === opts.myNick) + 1 : 0;
+  const mineLine = myRank > 0 ? `<div class="fx-caption">我的排名：第 ${myRank} / ${sorted.length}</div>` : '';
+  return shell('名人堂', `${bar}${mineLine}${rows}<div class="fx-caption">上榜默认匿名；统计不含身份信息。</div><div class="fx-actions"><button data-act="open:rank">投稿上榜</button><button data-act="share">生成分享卡</button></div>`);
 }
 
 export function settingsDialog(audio: AudioState): string {

@@ -74,6 +74,8 @@ let bollMult = 2;
 let visibleCount = 48;
 let panOffset = 0;
 let records: RunRecord[] = [];
+const seenAch = new Set<string>();
+let typeTimer: number | null = null;
 const DEV_PASSWORD = 'kurumi-fx';
 let marketSource: 'sim' | 'historical' | 'live' | 'replay' = 'sim';
 let historyFile: string | null = null;
@@ -190,7 +192,7 @@ function resolveEnding(walkaway: boolean): void {
   const result = classifyEnding(state, { walkaway });
   if (result && (result.baseId !== 'walkaway' || walkaway)) {
     applyEnding(state, result);
-    records = pushRecord({ day: state.day, equity: accountMetrics(state).equity, profit: tradingProfit(state), ending: result.variant ?? result.baseId, mode: state.mode, at: Date.now() });
+    records = pushRecord({ day: state.day, equity: accountMetrics(state).equity, profit: tradingProfit(state), ending: result.variant ?? result.baseId, mode: state.mode, seed: state.seed, at: Date.now() });
     audio.playSfx(result.baseId === 'million' || result.baseId === 'walkaway' ? 'majorProfit' : 'majorLoss');
     persist();
   }
@@ -464,6 +466,23 @@ function onAction(act: string): void {
       bollPeriod = 20; bollMult = 2;
       try { localStorage.setItem('kurumi-fx:indicator', JSON.stringify({ bollPeriod, bollMult })); } catch { /* ignore */ }
       notice = '指标参数已恢复默认。';
+    } else if (act.startsWith('market:')) {
+      switchMarket(act.split(':')[1] as string);
+    } else if (act.startsWith('records:replay:')) {
+      const seed = Number(act.split(':')[2]);
+      if (Number.isFinite(seed)) {
+        stopTimer();
+        state = createGame(seed >>> 0, { mode: state.mode });
+        notice = `再战同一盘面：种子 ${seed >>> 0}`;
+        modal = null;
+      }
+    } else if (act.startsWith('ind:preset:')) {
+      const name = act.split(':')[2];
+      if (name === 'short') { bollPeriod = 10; bollMult = 1.5; }
+      else if (name === 'long') { bollPeriod = 40; bollMult = 2.5; }
+      else { bollPeriod = 20; bollMult = 2; }
+      try { localStorage.setItem('kurumi-fx:indicator', JSON.stringify({ bollPeriod, bollMult })); } catch { /* ignore */ }
+      notice = `指标预设：BOLL ${bollPeriod} × ${bollMult}`;
     } else if (act === 'records:clear') {
       clearRecords(); records = []; notice = '历史战绩已清空。';
     } else if (act.startsWith('rank:sort:')) {
@@ -939,6 +958,31 @@ function watchStorageConflict(): void {
   });
 }
 
+function switchMarket(sym: string): void {
+  const def = NUMERICS.MARKETS.find((m) => m.symbol === sym);
+  if (!def) return;
+  state.symbol = sym;
+  state.price = def.startPrice;
+  state.script = planDay(state.seed, state.day, def.startPrice, NUMERICS.BEATS_PER_DAY, { symbol: sym });
+  state.candles = [];
+  prevQuote = def.startPrice;
+  notice = `已切换到 ${sym}（起始价 ${def.startPrice}）`;
+}
+
+function startTypewriter(): void {
+  const el = document.getElementById('story-line');
+  if (!el) return;
+  const full = el.dataset.full ?? '';
+  if (typeTimer !== null) { clearInterval(typeTimer); typeTimer = null; }
+  let i = 0;
+  el.textContent = '';
+  typeTimer = window.setInterval(() => {
+    i += 1;
+    el.textContent = full.slice(0, i);
+    if (i >= full.length && typeTimer !== null) { clearInterval(typeTimer); typeTimer = null; }
+  }, 26);
+}
+
 function buildModal(): string {
   switch (modal) {
     case 'manga':
@@ -1060,7 +1104,15 @@ function render(): void {
   const debt = debtOf(state);
   const profit = tradingProfit(state);
   const playing = state.phase === 'playing';
-  const unlocked = Object.values(evaluateAchievements(state)).filter((a) => a.unlocked).length;
+  const achMap = evaluateAchievements(state);
+  const unlocked = Object.values(achMap).filter((a) => a.unlocked).length;
+  for (const [id, st] of Object.entries(achMap)) {
+    if (st.unlocked && !seenAch.has(id)) {
+      seenAch.add(id);
+      const def = ACHIEVEMENTS.find((a) => a.id === id);
+      if (def && state.completedDays !== 0) flashToast('news', `🏆 成就解锁：${def.name}`);
+    }
+  }
   const canOpen = !playing && limits.noEntry === false;
   trackNews();
 
@@ -1107,7 +1159,8 @@ function render(): void {
         ${P.pressurePanelHtml(state, Date.now())}
       </section>
       <section class="fx-panel" id="col-market" aria-label="行情终端">
-        <h2>行情终端 · USD/JPY</h2>
+        <h2>行情终端 · ${state.symbol ?? 'USD/JPY'}</h2>
+        <div class="fx-actions wrap">${NUMERICS.MARKETS.map((m) => `<button data-act="market:${m.symbol}" class="${(state.symbol ?? 'USD/JPY') === m.symbol ? 'on' : ''}">${m.symbol}</button>`).join('')}</div>
         <div class="fx-quote-price" id="quote-price" aria-live="polite">${num(state.price, 3)}</div>
         <div class="fx-delta ${profit >= 0 ? 'up' : 'down'}" id="quote-delta">累计 ${profit >= 0 ? '+' : ''}${yen(profit)} · 目标 +${yen(NUMERICS.TARGET_PROFIT)}</div>
         ${P.chartToolbarHtml({ period, ma: maSet, speed, boll: showBoll })}
@@ -1169,6 +1222,7 @@ function render(): void {
     <div class="fx-foot">原创同人小游戏 · 非官方作品 · 虚构行情 · 非投资建议${energyStage(state).active ? ' · ' + energyStage(state).hint : ''}</div>
   `;
   drawChart();
+  if (state.phase === 'resting' && pendingStory(state)) startTypewriter();
 }
 
 function storyOverlay(): string {
@@ -1176,7 +1230,7 @@ function storyOverlay(): string {
   if (!ev) return '';
   return `<div class="fx-panel" style="margin-bottom:12px" role="dialog" aria-label="剧情事件">
     <h2>${ev.title}${ev.original ? ' · 原作桥段改编' : ''}</h2>
-    ${ev.lines.map(([who, line]) => `<div class="fx-row"><span>${who}</span><b>${line}</b></div>`).join('')}
+    ${ev.lines.map(([who, line], i) => (i === 0 ? `<div class="fx-row"><span>${who}</span><b><span id="story-line" data-full="${line}"></span></b></div>` : `<div class="fx-row"><span>${who}</span><b>${line}</b></div>`)).join('')}
     <div class="fx-actions" style="margin-top:8px">${ev.choices.map((c) => `<button data-act="story:${ev.key}:${c.id}">${c.text}</button>`).join('')}</div>
   </div>`;
 }
