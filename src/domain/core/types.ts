@@ -165,6 +165,9 @@ export interface GameState {
   livingPaid?: number;
   dailySupplies?: DailySupplies;
   itemsUsed?: Record<string, boolean>;
+  lifeActionsToday?: string[];
+  dinner?: boolean;
+  relationship?: number;
   story?: StoryState;
   ending?: EndingState;
   livingDiscount?: number;

@@ -1,23 +1,121 @@
 {
   "jobs": [
-    {"id":"cafe","label":"咖啡店","income":2200,"staminaCost":20,"stressDelta":-1,"rewardId":"cafe","rewardLabel":"咖啡店兼职"},
-    {"id":"convenience","label":"便利店","income":2600,"staminaCost":22,"stressDelta":0,"rewardId":"convenience","rewardLabel":"便利店兼职"},
-    {"id":"proofreading","label":"校对助理","income":5060,"staminaCost":28,"stressDelta":1,"rewardId":"redPen","rewardLabel":"校对助理每次工资提高至 ¥5,060"},
-    {"id":"remoteData","label":"居家数据录入","income":5720,"staminaCost":30,"stressDelta":1,"rewardId":"keyboard","rewardLabel":"居家数据录入每次工资提高至 ¥5,720"},
-    {"id":"translation","label":"翻译助理","income":6380,"staminaCost":32,"stressDelta":2,"rewardId":"wordCards","rewardLabel":"翻译助理每次工资提高至 ¥6,380"},
-    {"id":"radioMonitor","label":"音频标注","income":4488,"staminaCost":26,"stressDelta":1,"rewardId":"headphones","rewardLabel":"音频标注每次工资提高至 ¥4,488"}
+    {
+      "id": "cafe",
+      "label": "咖啡店",
+      "income": 2200,
+      "staminaCost": 20,
+      "stressDelta": -1,
+      "rewardId": "cafe",
+      "rewardLabel": "咖啡店兼职"
+    },
+    {
+      "id": "convenience",
+      "label": "便利店",
+      "income": 2600,
+      "staminaCost": 22,
+      "stressDelta": 0,
+      "rewardId": "convenience",
+      "rewardLabel": "便利店兼职"
+    },
+    {
+      "id": "proofreading",
+      "label": "校对助理",
+      "income": 5060,
+      "staminaCost": 28,
+      "stressDelta": 1,
+      "rewardId": "redPen",
+      "rewardLabel": "校对助理每次工资提高至 ¥5,060"
+    },
+    {
+      "id": "remoteData",
+      "label": "居家数据录入",
+      "income": 5720,
+      "staminaCost": 30,
+      "stressDelta": 1,
+      "rewardId": "keyboard",
+      "rewardLabel": "居家数据录入每次工资提高至 ¥5,720"
+    },
+    {
+      "id": "translation",
+      "label": "翻译助理",
+      "income": 6380,
+      "staminaCost": 32,
+      "stressDelta": 2,
+      "rewardId": "wordCards",
+      "rewardLabel": "翻译助理每次工资提高至 ¥6,380"
+    },
+    {
+      "id": "radioMonitor",
+      "label": "音频标注",
+      "income": 4488,
+      "staminaCost": 26,
+      "stressDelta": 1,
+      "rewardId": "headphones",
+      "rewardLabel": "音频标注每次工资提高至 ¥4,488"
+    }
   ],
   "relax": [
-    {"id":"shrine","label":"神社参拜","cost":0,"stamina":-5,"stress":-6},
-    {"id":"riverbank","label":"河边散步","cost":0,"stamina":-3,"stress":-4},
-    {"id":"park","label":"公园发呆","cost":0,"stamina":-2,"stress":-3},
-    {"id":"cafeRest","label":"咖啡馆坐坐","cost":600,"stamina":-2,"stress":-5},
-    {"id":"onsen","label":"温泉","cost":8000,"stamina":-25,"stress":-10}
+    {
+      "id": "shrine",
+      "label": "神社参拜",
+      "cost": 0,
+      "stamina": -5,
+      "stress": -6
+    },
+    {
+      "id": "riverbank",
+      "label": "河边散步",
+      "cost": 0,
+      "stamina": -3,
+      "stress": -4
+    },
+    {
+      "id": "park",
+      "label": "公园发呆",
+      "cost": 0,
+      "stamina": -2,
+      "stress": -3
+    },
+    {
+      "id": "cafeRest",
+      "label": "咖啡馆坐坐",
+      "cost": 600,
+      "stamina": -2,
+      "stress": -5
+    },
+    {
+      "id": "onsen",
+      "label": "温泉",
+      "cost": 8000,
+      "stamina": 25,
+      "stress": -10
+    }
   ],
   "dinner": [
-    {"id":"cheap","label":"便利店便当","cost":500,"meal":true},
-    {"id":"normal","label":"家常料理","cost":900,"meal":true},
-    {"id":"friendMeal","label":"和朋友一起","cost":2000,"meal":true,"relationship":1}
+    {
+      "id": "cheap",
+      "label": "便利店便当",
+      "cost": 500,
+      "meal": true
+    },
+    {
+      "id": "normal",
+      "label": "家常料理",
+      "cost": 900,
+      "meal": true
+    },
+    {
+      "id": "friendMeal",
+      "label": "和朋友一起",
+      "cost": 2000,
+      "meal": true,
+      "relationship": 1
+    }
   ],
-  "friends": ["萌智子", "安子", "芽吹"]
+  "friends": [
+    "萌智子",
+    "安子",
+    "芽吹"
+  ]
 }
