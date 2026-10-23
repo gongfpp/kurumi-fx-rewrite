@@ -73,3 +73,27 @@ export function movingAverage(candles: Candle[], window: number): (number | null
   }
   return out;
 }
+/** Bollinger bands (mid = SMA, upper/lower = mid ± mult * stddev). */
+export function bollinger(candles: Candle[], period = 20, mult = 2): { mid: (number | null)[]; upper: (number | null)[]; lower: (number | null)[] } {
+  const mid: (number | null)[] = [];
+  const upper: (number | null)[] = [];
+  const lower: (number | null)[] = [];
+  for (let i = 0; i < candles.length; i++) {
+    if (i < period - 1) {
+      mid.push(null);
+      upper.push(null);
+      lower.push(null);
+      continue;
+    }
+    let sum = 0;
+    for (let j = i - period + 1; j <= i; j++) sum += candles[j]!.close;
+    const m = sum / period;
+    let variance = 0;
+    for (let j = i - period + 1; j <= i; j++) variance += (candles[j]!.close - m) ** 2;
+    const sd = Math.sqrt(variance / period);
+    mid.push(m);
+    upper.push(m + mult * sd);
+    lower.push(m - mult * sd);
+  }
+  return { mid, upper, lower };
+}

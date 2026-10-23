@@ -568,3 +568,28 @@ button:active::after { animation: fxRipple .5s ease-out; }
 .fx-chart-wrap { position: relative; }
 .fx-chart-tip { position: absolute; pointer-events: none; background: var(--fx-panel); border: 1px solid var(--fx-grid); border-radius: 6px; padding: 6px 8px; font-size: 11px; line-height: 1.5; color: var(--fx-ink); box-shadow: 0 6px 18px rgba(0,0,0,.45); transform: translate(10px, -50%); z-index: 5; white-space: nowrap; }
 .fx-chart-tip b { color: var(--fx-accent); }
+
+/* Mobile / touch / landscape */
+@media (hover: none) {
+  button, select, input[type='range'] { min-height: 40px; }
+  .fx-top-actions { gap: 6px; }
+}
+@media (orientation: landscape) and (max-height: 560px) {
+  .fx-grid { grid-template-columns: 220px minmax(0,1fr) 260px; }
+  .fx-chart { height: 180px; }
+  .fx-top { position: sticky; top: 0; z-index: 20; }
+}
+@media (max-width: 720px) {
+  .fx-stake-row button { flex: 1 1 30%; }
+  .fx-order-form label { font-size: 13px; }
+  .fx-modal-body { padding: 10px; }
+  .fx-gallery { grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); }
+  .fx-frame { min-height: 120px; }
+}
+
+/* Pixel atlas decoration */
+:root[data-frontend='pixel'] .fx-title::before {
+  content: ''; display: inline-block; width: 22px; height: 22px; margin-right: 6px; vertical-align: -4px;
+  background-image: var(--fx-pixel-icon); background-size: contain; background-repeat: no-repeat; image-rendering: pixelated;
+}
+:root[data-frontend='pixel'] { --fx-pixel-icon: url('/kurumi-fx-rewrite/fx/pixel-assets/ui-icons-transparent.png'); }

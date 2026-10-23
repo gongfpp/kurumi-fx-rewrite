@@ -22,6 +22,8 @@ export function orderExtrasHtml(canOpen: boolean): string {
       <span class="fx-caption">常用金额</span>
       ${AMOUNT_PRESETS.map((v) => `<button data-act="amount:${v}" ${canOpen ? '' : 'disabled'}>${yen(v)}</button>`).join('')}
       <button data-act="amount:random" ${canOpen ? '' : 'disabled'}>🎲 随机</button>
+      <button data-act="amount:-1000" ${canOpen ? '' : 'disabled'}>−1千</button>
+      <button data-act="amount:+1000" ${canOpen ? '' : 'disabled'}>＋1千</button>
     </div>
   </div>`;
 }
@@ -30,6 +32,7 @@ export interface ChartOptions {
   period: number;
   ma: number[];
   speed: number;
+  boll?: boolean;
 }
 
 export function chartToolbarHtml(o: ChartOptions): string {
@@ -41,7 +44,8 @@ export function chartToolbarHtml(o: ChartOptions): string {
     </div>
     <div class="fx-stake-row">
       <span class="fx-caption">均线</span>
-      ${[5, 10, 20].map((m) => `<button data-act="ma:${m}" class="${o.ma.includes(m) ? 'on' : ''}">MA${m}</button>`).join('')}
+      ${[5, 10, 20, 60].map((m) => `<button data-act="ma:${m}" class="${o.ma.includes(m) ? 'on' : ''}">MA${m}</button>`).join('')}
+      <button data-act="boll" class="${o.boll ? 'on' : ''}">BOLL</button>
       <span class="fx-caption">倍速</span>
       ${[1, 2, 4].map((sp) => `<button data-act="speed:${sp}" ${o.speed === sp ? 'disabled' : ''}>${sp}×</button>`).join('')}
     </div>
@@ -178,6 +182,33 @@ export function openingPagerHtml(index: number, pages: { id: string; kind: strin
         <button data-act="opening:prev" ${index <= 0 ? 'disabled' : ''}>← 上一页</button>
         <button data-act="opening:next" ${index >= pages.length - 1 ? 'disabled' : ''}>下一页</button>
         <button data-act="opening:skip">跳过序章</button>
+      </div>
+    </div></section></div>`;
+}
+
+export function rankDialog(state: GameState, info: { nickname: string; anon: boolean; status: string }): string {
+  return `<div class="fx-modal-backdrop"><section class="fx-modal" role="dialog" aria-modal="true" aria-label="投稿上榜">
+    <header class="fx-modal-head"><h2>收手并上榜</h2><button data-act="modal:close" aria-label="关闭">×</button></header>
+    <div class="fx-modal-body">
+      <div class="fx-row"><span>公开昵称</span><b><input type="text" data-field="nickname" value="${info.nickname}" aria-label="公开昵称" /></b></div>
+      <div class="fx-row"><span>匿名上榜</span><b><button data-act="rank:anon">${info.anon ? '开' : '关'}</button></b></div>
+      <div class="fx-row"><span>本局成绩</span><b>存活 ${state.completedDays ?? 0} 天 · 资产 ${yen(state.cash)}</b></div>
+      <div class="fx-actions">
+        <button data-act="rank:submit">公开发送</button>
+        <button data-act="rank:retry">重试上榜</button>
+      </div>
+      <div class="fx-caption">${info.status || '上榜默认匿名；云端未配置时仅保存本地成绩。'}</div>
+    </div></section></div>`;
+}
+
+export function conflictDialog(): string {
+  return `<div class="fx-modal-backdrop"><section class="fx-modal" role="dialog" aria-modal="true" aria-label="存档冲突">
+    <header class="fx-modal-head"><h2>存档冲突</h2><button data-act="modal:close" aria-label="关闭">×</button></header>
+    <div class="fx-modal-body">
+      <div class="fx-caption">检测到另一个标签页写入了更新的存档。请选择保留本页进度，或载入最新存档。</div>
+      <div class="fx-actions">
+        <button data-act="conflict:keep">放下本页进度，载入最新存档</button>
+        <button data-act="conflict:overwrite">保留本页进度并覆盖</button>
       </div>
     </div></section></div>`;
 }

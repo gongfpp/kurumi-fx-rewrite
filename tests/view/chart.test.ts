@@ -39,3 +39,16 @@ describe('chart layout', () => {
     expect(movingAverage(candles, 2)).toEqual([null, 1.5, 2.5]);
   });
 });
+import { bollinger } from '../../src/view/charts/candles';
+
+describe('bollinger bands', () => {
+  it('returns nulls until the window is full, then a mid equal to the SMA', () => {
+    const cs = [1, 2, 3, 4, 5].map((v) => candle(v, v, v, v));
+    const b = bollinger(cs, 3, 2);
+    expect(b.mid[0]).toBeNull();
+    expect(b.mid[1]).toBeNull();
+    expect(b.mid[2]).toBeCloseTo(2, 6);
+    expect(b.upper[2]! > b.mid[2]!).toBe(true);
+    expect(b.lower[2]! < b.mid[2]!).toBe(true);
+  });
+});

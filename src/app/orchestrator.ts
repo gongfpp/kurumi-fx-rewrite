@@ -24,8 +24,8 @@ import { OPENING_PAGES, checkStories, chooseStory, pendingStory, queueStory } fr
 import { closeOrders } from '../domain/trading/close';
 import { maxTopUp, topUpMargin } from '../domain/trading/margin';
 import { placeOrder, previewOrder, type OrderType, type StopPips } from '../domain/trading/order';
-import { entryFromState, fetchLeaderboard, type LeaderboardEntry } from './services/leaderboard';
-import { layoutCandles, movingAverage } from '../view/charts/candles';
+import { entryFromState, fetchLeaderboard, submitScore, type LeaderboardEntry } from './services/leaderboard';
+import { layoutCandles, movingAverage, bollinger } from '../view/charts/candles';
 import { createAudio, type AudioController } from '../view/components/audio';
 import * as D from '../view/components/dialogs';
 import * as P from '../view/components/panels';
@@ -40,7 +40,8 @@ import { planDay } from '../domain/market/sources/simulated';
 import { historyCandles } from '../domain/market/history';
 import { currentComments } from '../domain/story/library';
 import { DEFAULT_THEME, THEME_IDS, themeTokens, type ThemeId } from '../view/styles/tokens';
-import { loadGame, saveGame, encodeSave, decodeSave } from './persistence/save';
+import { loadGame, saveGame, encodeSave, decodeSave, saveKeyFor } from './persistence/save';
+import { scopedKey } from './persistence/storage';
 
 const THEME_KEY = 'kurumi-fx:theme';
 
@@ -59,6 +60,11 @@ let pixelFrontend = false;
 let privacyOn = true;
 let devVerified = false;
 let devTainted = false;
+let showBoll = false;
+let rankNick = '匿名交易者';
+let rankAnon = true;
+let rankStatus = '';
+let currentSavedAt = 0;
 const DEV_PASSWORD = 'kurumi-fx';
 let marketSource: 'sim' | 'historical' | 'live' | 'replay' = 'sim';
 let historyFile: string | null = null;
@@ -104,6 +110,7 @@ function stopTimer(): void {
 function persist(): void {
   try {
     saveGame(state);
+    currentSavedAt = Date.now();
   } catch {
     /* ignore */
   }
@@ -221,6 +228,7 @@ export function start(): void {
     const el = e.target as HTMLElement;
     if (el.classList && el.classList.contains('fx-chart')) { hoverIndex = -1; const tip = document.getElementById('chart-tip'); if (tip) tip.hidden = true; drawChart(); }
   });
+  watchStorageConflict();
   const urlReplay = replayFromLocation(globalThis.location?.search ?? '');
   if (urlReplay) applyReplay(encodeReplay(urlReplay));
   document.addEventListener('keydown', (ev) => {
@@ -360,6 +368,29 @@ function onAction(act: string): void {
     } else if (act.startsWith('ma:')) {
       const m = Number(act.split(':')[1]);
       maSet = maSet.includes(m) ? maSet.filter((x) => x !== m) : [...maSet, m];
+    } else if (act === 'boll') {
+      showBoll = !showBoll;
+    } else if (act === 'amount:+1000') {
+      amount = Math.min(amount + 1000, Math.max(100, Math.floor(orderPreviewSafe().maxMargin)));
+    } else if (act === 'amount:-1000') {
+      amount = Math.max(100, amount - 1000);
+    } else if (act === 'rank:anon') {
+      rankAnon = !rankAnon;
+    } else if (act === 'rank:submit' || act === 'rank:retry') {
+      const input = document.querySelector('[data-field="nickname"]') as HTMLInputElement | null;
+      if (input && input.value) rankNick = input.value;
+      void submitRank();
+    } else if (act === 'conflict:keep') {
+      try {
+        const loaded = loadGame(state.mode);
+        if (loaded.state) state = loaded.state;
+        notice = '已载入最新存档。';
+      } catch { notice = '载入失败。'; }
+      modal = null;
+    } else if (act === 'conflict:overwrite') {
+      persist();
+      notice = '已保留本页进度并覆盖存档。';
+      modal = null;
     } else if (act.startsWith('speed:')) {
       speed = Number(act.split(':')[1]);
       if (state.phase === 'playing') startTimer();
@@ -782,6 +813,32 @@ function applyReplay(code: string): boolean {
   return true;
 }
 
+
+async function submitRank(): Promise<void> {
+  try {
+    const entry = entryFromState(state, { nickname: rankNick, anon: rankAnon });
+    const res = await submitScore(entry);
+    rankStatus = res.status === 'ok' ? '已上榜。' : res.status === 'service-unconfigured' ? '云端未配置，已保存本地成绩。' : '上榜失败，可重试。';
+    if (!leaderboard) leaderboard = [entry];
+    log.unshift(rankStatus);
+  } catch {
+    rankStatus = '上榜失败，可重试。';
+  }
+  persist();
+  render();
+}
+
+function watchStorageConflict(): void {
+  window.addEventListener('storage', (ev) => {
+    if (!ev.key || ev.key !== scopedKey(saveKeyFor(state.mode))) return;
+    const meta = decodeSave(ev.newValue ?? null);
+    if (meta.savedAt && meta.savedAt > currentSavedAt) {
+      modal = 'conflict';
+      render();
+    }
+  });
+}
+
 function buildModal(): string {
   switch (modal) {
     case 'manga':
@@ -844,6 +901,10 @@ function buildModal(): string {
       return L.developerDialog(state, { active: devVerified, verified: devVerified, tainted: devTainted, password: '', note: devTainted ? '本局已被标记：不计入排行榜与成就。' : '开发者模式会话限时，修改会永久标记。' });
     case 'save':
       return L.saveDialog();
+    case 'rank':
+      return P.rankDialog(state, { nickname: rankNick, anon: rankAnon, status: rankStatus });
+    case 'conflict':
+      return P.conflictDialog();
     default:
       return '';
   }
@@ -936,7 +997,7 @@ function render(): void {
         <h2>行情终端 · USD/JPY</h2>
         <div class="fx-quote-price" id="quote-price" aria-live="polite">${num(state.price, 3)}</div>
         <div class="fx-delta ${profit >= 0 ? 'up' : 'down'}" id="quote-delta">累计 ${profit >= 0 ? '+' : ''}${yen(profit)} · 目标 +${yen(NUMERICS.TARGET_PROFIT)}</div>
-        ${P.chartToolbarHtml({ period, ma: maSet, speed })}
+        ${P.chartToolbarHtml({ period, ma: maSet, speed, boll: showBoll })}
         <div class="fx-chart-wrap"><canvas class="fx-chart" width="760" height="260" role="img" aria-label="交易K线" tabindex="0"></canvas><div id="chart-tip" class="fx-chart-tip" hidden></div></div>
         <div class="fx-caption" data-act="open:news" style="cursor:pointer">📣 ${ev ? `${ev.title} · ${ev.copy}` : '等待行情'}（点击查看快讯记录）</div>
         ${L.commentsRow(state)}
@@ -1184,7 +1245,23 @@ function drawChart(): void {
     }
     ctx.restore();
   }
-  const colors: Record<number, string> = { 5: '#f2c14e', 10: '#7fd4a0', 20: '#f16f9f' };
+  if (showBoll) {
+    const b = bollinger(candles, 20, 2);
+    ctx.strokeStyle = 'rgba(124,159,255,0.9)';
+    ctx.lineWidth = 1;
+    for (const series of [b.upper, b.mid, b.lower]) {
+      ctx.beginPath();
+      let started = false;
+      series.forEach((v, i) => {
+        if (v === null) return;
+        const x = vp.padding + ((w - vp.padding * 2) * (i + 0.5)) / candles.length;
+        const y = toY(v);
+        if (!started) { ctx.moveTo(x, y); started = true; } else ctx.lineTo(x, y);
+      });
+      ctx.stroke();
+    }
+  }
+  const colors: Record<number, string> = { 5: '#f2c14e', 10: '#7fd4a0', 20: '#f16f9f', 60: '#7c9fff' };
   for (const m of maSet) {
     const values = movingAverage(candles, m);
     ctx.strokeStyle = colors[m] ?? t.accent;
