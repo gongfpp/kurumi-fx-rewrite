@@ -11,11 +11,19 @@
     <title>FX韭留美 · 今天也要回本</title>
       <link rel="icon" type="image/png" href="/kurumi-fx-rewrite/fx/pixel-assets/ui-icons-transparent.png" />
     <link rel="apple-touch-icon" href="/kurumi-fx-rewrite/fx/pixel-assets/ui-icons-transparent.png" />
-    <script type="module" crossorigin src="/kurumi-fx-rewrite/assets/index-CxO5c4Tt.js"></script>
-    <link rel="stylesheet" crossorigin href="/kurumi-fx-rewrite/assets/index-CXipCwD0.css">
+    <script type="module" crossorigin src="/kurumi-fx-rewrite/assets/index-DXgqhBUr.js"></script>
+    <link rel="stylesheet" crossorigin href="/kurumi-fx-rewrite/assets/index-DrKYCwOA.css">
   </head>
   <body>
     <div id="app"></div>
+    <footer class="site-visitor-footer" data-site-count="kurumi-rewrite">网站累计访问人数：—</footer>
+    <script>
+      window.siteVisitorCountDisabled = function () {
+        try { return localStorage.getItem('kurumi-fx:telemetry') === 'off'; }
+        catch (_) { return true; }
+      };
+    </script>
+    <script defer src="/kurumi-fx-rewrite/site-visitor-count.js"></script>
       <style>
       #boot{position:fixed;inset:0;display:grid;place-items:center;background:#151e25;color:#f16f9f;font:600 16px system-ui;z-index:200;transition:opacity .4s}
       #boot.hide{opacity:0;pointer-events:none}
