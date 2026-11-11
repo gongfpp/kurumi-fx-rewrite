@@ -14,6 +14,14 @@
   </head>
   <body>
     <div id="app"></div>
+    <footer class="site-visitor-footer" data-site-count="kurumi-rewrite">网站累计访问人数：—</footer>
+    <script>
+      window.siteVisitorCountDisabled = function () {
+        try { return localStorage.getItem('kurumi-fx:telemetry') === 'off'; }
+        catch (_) { return true; }
+      };
+    </script>
+    <script defer src="%BASE_URL%site-visitor-count.js"></script>
     <script type="module" src="/src/app/bootstrap.ts"></script>
       <style>
       #boot{position:fixed;inset:0;display:grid;place-items:center;background:#151e25;color:#f16f9f;font:600 16px system-ui;z-index:200;transition:opacity .4s}
